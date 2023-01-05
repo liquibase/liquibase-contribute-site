@@ -1,18 +1,12 @@
 ---
-layout: default
-title: Liquibase Extensions
+title: Overview
 ---
+
+# Extensions Overview
 
 Liquibase is built with extensibility in mind. From generic changelog file handling to database-specific logic, 
 almost every part of Liquibase can be customized and enhanced through the extension system. 
 In fact, all standard functionality that ships as part of Liquibase is built using the same extension system.
-
-This documentation describes:
-
-- How to build, run, debug, test, and publish an extension
-- How to take advantage of Liquibase's extension API
-- Where to find [guides](guides) to help get you started
-- Our [best practices](best-practices.html) for writing extensions
 
 ## What can extensions do?
 
@@ -30,10 +24,10 @@ refer to the [Extension Guides](guides) for code samples and guides that illustr
 Building a good extension can take a lot of time and effort. 
 Here is what each section of the API docs can help you with:
 
-- [Your First Extension](your-first-extension.html) teaches fundamental concepts for building extensions with the Hello World sample.
-- [Extension Anatomy](extension-anatomy.html) describes how extension code works together.
-- [Extension Guides](guides) includes guides and code samples that explain specific usages of the API.
-- [Best Practices](best-practices.html) showcases best practices for providing a great user experience with your extension.
+- [Your First Extension](/extensions/your-first-extension) teaches fundamental concepts for building extensions with the Hello World sample.
+- [Extension Anatomy](/extensions/extension-anatomy) describes how extension code works together.
+- [Extension Guides](/extensions/guides) includes guides and code samples that explain specific usages of the API.
+- [Best Practices](/extensions/best-practices) showcases best practices for providing a great user experience with your extension.
 
 ## Looking for help?
 

@@ -1,5 +1,5 @@
 ---
-layout: default
+title: Overview
 ---
 
 # Additional Support for Additional Databases
@@ -9,6 +9,7 @@ Therefore, the overall process of adding support for a new database is finding a
 doesn't work with your database.
 
 This work is broken up into two milestones:
+
 1. [Compatible/Foundational Support](#compatible) which configures Liquibase to understand your database and get basic update/rollback logic working
 2. [Advanced Support](#advanced) which ensures change and snapshot based functionality works correctly
 
@@ -38,6 +39,7 @@ Basically "you can run update and rollback using [Formatted SQL](https://docs.li
 the [sql change type](https://docs.liquibase.com/change-types/sql.html) in xml/yaml/json.
 
 The overall steps in this milestone are:
+
 1. Create a new `liquibase.database.Database` implementation
 2. Test that Liquibase works with sql-based changelog files
 3. (If needed) Iteratively failures from step 2 until there are no more

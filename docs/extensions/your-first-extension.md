@@ -1,7 +1,4 @@
----
-layout: default
-title: Your first extension
----
+# Your First Extension
 
 This page will teach you the fundamental concepts for building extensions.
 
@@ -11,6 +8,7 @@ Java-friendly IDE and a build tool like [Maven](https://maven.apache.org/) or [G
 For a starting Maven-based project, you can create a personal repository based on the [example extension template](https://github.com/liquibase/liquibase-extension-example).
 
 The example extension defines:
+
 - A new `clearPasswords` change type
 - A new `prefix` attribute for `createTable` 
 - A new `hasPasswordColumn` precondition
@@ -73,9 +71,10 @@ Finally, add a new changeset to your changelog file like:
 and when you run `liquibase update` you will now have a table named `hello` with a column named `world`. 
 
 **Here are some ideas for things you can try:**
+
 - Change the name of the table created by `helloWorld`
 - Add a "dataType" parameter to `helloWorld`
 
 ## Next Steps
 
-In the next topic, [Extension Anatomy](extension-anatomy.html), we look closer at teh source code of the helloWorld extension and explain key concepts.
+In the next topic, [Extension Anatomy](/extensions/extension-anatomy), we look closer at the source code of the helloWorld extension and explain key concepts.

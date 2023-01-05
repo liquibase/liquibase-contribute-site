@@ -1,7 +1,8 @@
 ---
-layout: default
-title: Liquibase Extension Best Practices
+title: Best Practices
 ---
+
+# Extension Best Practices
 
 ## Play Nicely With Others
 

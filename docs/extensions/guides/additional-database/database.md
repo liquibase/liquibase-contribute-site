@@ -1,8 +1,8 @@
 ---
-layout: default
+title: liquibase.database.Database
 ---
 
-## Defining a New liquibase.database.Database Implementation
+# Defining a New liquibase.database.Database Implementation
 
 ### Overview
 
