@@ -1,0 +1,963 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../database/">
+      
+      
+        <link rel="next" href="../sql-generator/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.2">
+    
+    
+      
+        <title>Snapshot generator - contribute.liquibase.com</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.f56500e0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#defining-a-new-liquibasesnapshotsnapshotgenerator-implementation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="contribute.liquibase.com" class="md-header__button md-logo" aria-label="contribute.liquibase.com" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            contribute.liquibase.com
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Snapshot generator
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../.." class="md-tabs__link">
+      Welcome
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../development/" class="md-tabs__link">
+        Development
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        Extensions
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="contribute.liquibase.com" class="md-nav__button md-logo" aria-label="contribute.liquibase.com" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    contribute.liquibase.com
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Development
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Development" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Development
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../development/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Extensions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Extensions" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Extensions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../best-practices/" class="md-nav__link">
+        Best Practices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../extension-anatomy/" class="md-nav__link">
+        Extension Anatomy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../your-first-extension/" class="md-nav__link">
+        Your First Extension
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5">
+          Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Guides" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Extension Guides
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5_2" type="checkbox" id="__nav_3_5_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5_2">
+          Additional database
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Additional database" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Additional database
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        liquibase.database.Database
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Snapshot generator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Snapshot generator
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-a-new-liquibasesnapshotsnapshotgenerator-implementation" class="md-nav__link">
+    Defining a New liquibase.snapshot.SnapshotGenerator Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="Defining a New liquibase.snapshot.SnapshotGenerator Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing" class="md-nav__link">
+    Implementing
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#empty-constructor" class="md-nav__link">
+    Empty Constructor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getprioritydatabasetype-database-and-replacesclass" class="md-nav__link">
+    getPriority(DatabaseType, Database) and replaces(Class)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshotdatabaseobject-example-databasesnapshot-snapshot-snapshotgeneratorchain-chain" class="md-nav__link">
+    snapshot(DatabaseObject example, DatabaseSnapshot snapshot, SnapshotGeneratorChain chain)
+  </a>
+  
+    <nav class="md-nav" aria-label="snapshot(DatabaseObject example, DatabaseSnapshot snapshot, SnapshotGeneratorChain chain)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-your-class" class="md-nav__link">
+    Register your Class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-code" class="md-nav__link">
+    Example Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-generator/" class="md-nav__link">
+        Sql generator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6">
+          References
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="References" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          References
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../references/priority/" class="md-nav__link">
+        Priority
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-a-new-liquibasesnapshotsnapshotgenerator-implementation" class="md-nav__link">
+    Defining a New liquibase.snapshot.SnapshotGenerator Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="Defining a New liquibase.snapshot.SnapshotGenerator Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing" class="md-nav__link">
+    Implementing
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#empty-constructor" class="md-nav__link">
+    Empty Constructor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getprioritydatabasetype-database-and-replacesclass" class="md-nav__link">
+    getPriority(DatabaseType, Database) and replaces(Class)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshotdatabaseobject-example-databasesnapshot-snapshot-snapshotgeneratorchain-chain" class="md-nav__link">
+    snapshot(DatabaseObject example, DatabaseSnapshot snapshot, SnapshotGeneratorChain chain)
+  </a>
+  
+    <nav class="md-nav" aria-label="snapshot(DatabaseObject example, DatabaseSnapshot snapshot, SnapshotGeneratorChain chain)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-your-class" class="md-nav__link">
+    Register your Class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-code" class="md-nav__link">
+    Example Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Snapshot generator</h1>
+
+<h2 id="defining-a-new-liquibasesnapshotsnapshotgenerator-implementation">Defining a New liquibase.snapshot.SnapshotGenerator Implementation</h2>
+<h3 id="overview">Overview</h3>
+<p>Liquibase defines a database-independent metadata model in <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/DatabaseSnapshot.html">liquibase.snapshot.DatabaseSnapshot</a>
+That model contains standardized <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/structure/DatabaseObject.html">liquibase.structure.DatabaseObject</a> objects such as
+<a href="https://javadocs.liquibase.com/liquibase-core/liquibase/structure/core/Table.html">liquibase.structure.core.Table</a>.</p>
+<p>The snapshot logic used in not just <code>liquibase snapshot</code> but also <code>liquibase diff</code> and <code>liquibase diff-changelog</code> relies on <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/SnapshotGenerator.html">liquibase.snapshot.SnapshotGenerator</a>
+implementations to read the database's metadata and create the corresponding <code>DatabaseObject</code> objects</p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant DatabaseSnapshot
+    participant SnapshotFactory
+    participant SnapshotGenerator
+    participant Database
+    DatabaseSnapshot-&gt;&gt;SnapshotFactory: Snapshot the DatabaseObjects
+    SnapshotFactory-&gt;&gt;SnapshotGenerator: Snapshot a particular type
+    SnapshotGenerator-&gt;&gt;Database: Executes Query
+    SnapshotGenerator--&gt;&gt;DatabaseSnapshot: Returns DatabaseObject
+</code></pre>
+<p>For example, to snapshot a Column SnapshotFactory will go through all the available <code>SnapshotGenerators</code> that say they support <code>Column</code> for the given database and use the one with the
+highest priority.</p>
+<p>Defining database-specific functionality tends to be writing <code>if (database instanceof ExampleDatabase)</code> blocks
+around the non-standard calls. Using "instanceof" means the block will apply to any subclasses of the given database.
+For example, if your database is PostgreSQL compatible and therefore your Database class extensions <code>PostgresDatabase</code> then all the
+<code>if (database instanceof PostgresDatabase)</code> checks will be used for your database as well.</p>
+<h3 id="implementing">Implementing</h3>
+<p>When adding support for a new Database, there will be existing <code>SnapshotGenerator</code> implementations for all <code>DatabaseObject</code> types.
+It is usually easiest to subclass the existing SnapshotGenerator to leverage the standard logic, but it's not necessary.</p>
+<p>The naming pattern tends to be "ObjectType" + "SnapshotGenerator". For example, Column -&gt; ColumnSnapshotGenerator.
+Database-specific classes append the database name to the end, like <code>ColumnSnapshotGeneratorOracle</code>.</p>
+<h4 id="empty-constructor">Empty Constructor</h4>
+<p>Like all Liquibase extensions, your SnapshotGenerator must have an empty constructor.</p>
+<h4 id="getprioritydatabasetype-database-and-replacesclass">getPriority(DatabaseType, Database) and replaces(Class)</h4>
+<p>The <code>getPriority</code> works a bit different than other extensions in that it's not used to choose the single "best" implementation to use, but rather to choose the order to run SnapshotGenerators in. </p>
+<p>Like other getPriority methods, if your implementation does not apply for the given type/database combination, return <code>liquibase.snapshot.PRIORITY_NONE</code>.</p>
+<p>However, Liquibase will use ALL instances that return a priority &gt; 0 to snapshot an object. 
+Therefore, if your extension is replacing a base SnapshotGenerator you override the <code>replaces()</code> function rather than returning a higher value from <code>getPriority()</code>.
+The <code>replaces()</code> function lets you say "use this class in the snapshot logic instead of another one".</p>
+<p>A good example implementation for a class that replaces the default ColumnSnapshotGenerator is:</p>
+<pre><code class="language-java">    @Override
+    public int getPriority(Class&lt;? extends DatabaseObject&gt; objectType, Database database) {
+        if (database instanceof ExampleDatabase) {
+            return super.getPriority(objectType, database);
+        } else {
+            return PRIORITY_NONE;
+        }
+    }
+
+    @Override
+    public Class&lt;? extends SnapshotGenerator&gt;[] replaces() {
+        return new Class[] {
+                ColumnSnapshotGenerator.class
+        };
+    }
+</code></pre>
+<p>which relies on the superclass's "should I be part of the snapshot process for the given type" logic but only for ExampleDatabase while also taking the place of ColumnSnapshotGenerator when it's used.</p>
+<h3 id="snapshotdatabaseobject-example-databasesnapshot-snapshot-snapshotgeneratorchain-chain">snapshot(DatabaseObject example, DatabaseSnapshot snapshot, SnapshotGeneratorChain chain)</h3>
+<p>This is the function which is called by the snapshot system to either lookup the information about the given <code>example</code> object, OR add additional information to it.
+Multiple SnapshotGenerator instances will work together to build up the final snapshot of the object.</p>
+<p>The overall flow is:
+1. The calling code defines the "example" object it wants. </p>
+<p>For example, if they want to snapshot a Table with the name "address" they construct a <code>liquibase.structure.core.Table</code> object and set the name to be "address". 
+To look up the table in a different schema, they set the schema attribute on Table to the desired schema.
+The "example" object will contain the fields set that should be used to identify the actual object to snapshot. </p>
+<ol>
+<li>The snapshot system will collect up all the SnapshotGenerators that say they should participate in the snapshot and call the <code>snapshot</code> method in <code>getPriority()</code> order.</li>
+</ol>
+<p>For example, when snapshotting an example Table, the <code>TableSnapshotGenerator.snapshot()</code> call will run first which captures the table name, schema, etc.<br />
+Then the ColumnSnapshotGenerator.snapshot() will run which snapshots all the columns associated with the table and adds those columns to the Table object.</p>
+<ol>
+<li>After all the SnapshotGenerators have added their information to the Table object, it's returned to the calling code.</li>
+</ol>
+<p>There is a <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/jvm/JdbcSnapshotGenerator.html">liquibase.snapshot.jvm.JdbcSnapshotGenerator</a> convenience base class that is used for all the standard <code>DatabaseObject</code> SnapshotGenerators which
+separates the "create the base object" logic from the "add to an object" logic plus has caching built into it. </p>
+<p>The standard SnapshotGenerators tend to have overridable functions for commonly variable portions of the snapshot logic, so you generally shouldn't override
+snapshot itself but more targeted methods instead.</p>
+<h4 id="register-your-class">Register your Class</h4>
+<p>Like all extensions, your SnapshotGenerator must be registered by adding your class name to <code>META-INF/services/liquibase.snapshot.SnapshotGenerator</code></p>
+<h3 id="example-code">Example Code</h3>
+<pre><code class="language-java">package com.example.snapshot;
+
+import com.example.database.ExampleDatabase;
+import liquibase.database.Database;
+import liquibase.snapshot.CachedRow;
+import liquibase.snapshot.SnapshotGenerator;
+import liquibase.snapshot.jvm.ColumnSnapshotGenerator;
+import liquibase.structure.DatabaseObject;
+import liquibase.structure.core.Column;
+
+public class SnapshotColumnGeneratorExample extends ColumnSnapshotGenerator {
+
+    @Override
+    public int getPriority(Class&lt;? extends DatabaseObject&gt; objectType, Database database) {
+        if (database instanceof ExampleDatabase) {
+            return super.getPriority(objectType, database);
+        } else {
+            return PRIORITY_NONE;
+        }
+    }
+
+    @Override
+    public Class&lt;? extends SnapshotGenerator&gt;[] replaces() {
+        return new Class[] {
+                ColumnSnapshotGenerator.class
+        };
+    }
+
+    @Override
+    protected Object readDefaultValue(CachedRow columnMetadataResultSet, Column columnInfo, Database database) {
+        if (columnInfo.getType().getTypeName().equalsIgnoreCase(&quot;json&quot;)) {
+            return columnMetadataResultSet.get(&quot;default_value_json&quot;);
+        } else {
+            return super.readDefaultValue(columnMetadataResultSet, columnInfo, database);
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.sections"], "search": "../../../../assets/javascripts/workers/search.12658920.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.5cf534bf.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1000 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="database/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.2">
+    
+    
+      
+        <title>Overview - contribute.liquibase.com</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.f56500e0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#additional-support-for-additional-databases" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="contribute.liquibase.com" class="md-header__button md-logo" aria-label="contribute.liquibase.com" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            contribute.liquibase.com
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Welcome
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../development/" class="md-tabs__link">
+        Development
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
+        Extensions
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="contribute.liquibase.com" class="md-nav__button md-logo" aria-label="contribute.liquibase.com" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    contribute.liquibase.com
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Development
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Development" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Development
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../development/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Extensions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Extensions" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Extensions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../best-practices/" class="md-nav__link">
+        Best Practices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extension-anatomy/" class="md-nav__link">
+        Extension Anatomy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../your-first-extension/" class="md-nav__link">
+        Your First Extension
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5">
+          Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Guides" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Extension Guides
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5_2" type="checkbox" id="__nav_3_5_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5_2">
+          Additional database
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Additional database" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Additional database
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Overview
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-0-project-setup" class="md-nav__link">
+    Milestone 0: Project Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-1-compatible-support" class="md-nav__link">
+    Milestone 1: Compatible Support
+  </a>
+  
+    <nav class="md-nav" aria-label="Milestone 1: Compatible Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1" class="md-nav__link">
+    Step 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2" class="md-nav__link">
+    Step 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3" class="md-nav__link">
+    Step 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-2-foundational-support" class="md-nav__link">
+    Milestone 2: Foundational Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-3-advanced-support" class="md-nav__link">
+    Milestone 3: Advanced Support
+  </a>
+  
+    <nav class="md-nav" aria-label="Milestone 3: Advanced Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1_1" class="md-nav__link">
+    Step 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2_1" class="md-nav__link">
+    Step 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="database/" class="md-nav__link">
+        liquibase.database.Database
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="snapshot-generator/" class="md-nav__link">
+        Snapshot generator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql-generator/" class="md-nav__link">
+        Sql generator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6">
+          References
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="References" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          References
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/priority/" class="md-nav__link">
+        Priority
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-0-project-setup" class="md-nav__link">
+    Milestone 0: Project Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-1-compatible-support" class="md-nav__link">
+    Milestone 1: Compatible Support
+  </a>
+  
+    <nav class="md-nav" aria-label="Milestone 1: Compatible Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1" class="md-nav__link">
+    Step 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2" class="md-nav__link">
+    Step 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3" class="md-nav__link">
+    Step 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-2-foundational-support" class="md-nav__link">
+    Milestone 2: Foundational Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-3-advanced-support" class="md-nav__link">
+    Milestone 3: Advanced Support
+  </a>
+  
+    <nav class="md-nav" aria-label="Milestone 3: Advanced Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1_1" class="md-nav__link">
+    Step 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2_1" class="md-nav__link">
+    Step 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="additional-support-for-additional-databases">Additional Support for Additional Databases</h1>
+<p>Liquibase is designed to be cross-database and therefore separates the database-specific logic from the overall database-agnostic code.
+Therefore, the overall process of adding support for a new database is finding and fixing the specific places where the default database interaction logic
+doesn't work with your database.</p>
+<p>This work is broken up into two milestones:</p>
+<ol>
+<li><a href="#compatible">Compatible/Foundational Support</a> which configures Liquibase to understand your database and get basic update/rollback logic working</li>
+<li><a href="#advanced">Advanced Support</a> which ensures change and snapshot based functionality works correctly</li>
+</ol>
+<p>In each milestone, you have an end-goal of working functionality and are working with a specific subset of interfaces to implement. </p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Implementing support for additional databases requires an understanding of Java. 
+You will be creating classes, overridding methods, and working with inheritance hierarchies.</p>
+<p>You will also need to understand how to work with the new database.
+As you hit places where Liquibase incorrectly assumes particular SQL will work against your database, you will need to know what the correct SQL is.</p>
+<p>Finally, this section assumes you are adding support for a SQL-based database. 
+NoSQL and non-relational databases use this exact same process, but there will be more changes to make and you will need to re-implement more complex interfaces.
+Therefore, to keep this information more stream-lined it is only focusing on what needs to be done for relational database. </p>
+<h2 id="milestone-0-project-setup">Milestone 0: Project Setup</h2>
+<p>If you have not already created a repository to hold your code, see <a href="../get-started/your-first-extension.html">Your First Extension</a> in the Getting Started guide. </p>
+<h2 id="milestone-1-compatible-support"><a name="compatible"></a>Milestone 1: Compatible Support</h2>
+<p>The end-goal of this milestone is to have Liquibase understand how your database works and be able
+to run any functionality that depends on generated SQL from change tags or snapshot support.
+Basically "you can run update and rollback using <a href="https://docs.liquibase.com/concepts/changelogs/sql-format.html">Formatted SQL</a> or 
+the <a href="https://docs.liquibase.com/change-types/sql.html">sql change type</a> in xml/yaml/json.</p>
+<p>The overall steps in this milestone are:</p>
+<ol>
+<li>Create a new <code>liquibase.database.Database</code> implementation</li>
+<li>Test that Liquibase works with sql-based changelog files</li>
+<li>(If needed) Iteratively failures from step 2 until there are no more</li>
+</ol>
+<h3 id="step-1">Step 1</h3>
+<p>The first step in adding support for your database is <a href="database.html">defining a new liquibase.database.Database implementation</a>.
+Visit that topic for detailed information on creating that class.</p>
+<p>The Database implementation acts as a dialect definition and facade to your database. 
+The standard <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/changelog/ChangeLogHistoryService.html">liquibase.changelog.ChangeLogHistoryService</a>, 
+<a href="https://javadocs.liquibase.com/liquibase-core/liquibase/lockservice/LockService.html">liquibase.lockservice.LockService</a>, and <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/executor/Executor.html">liquibase.executor.Executor</a>
+implementations rely on SQL and JDBC standard statements plus dialect info from your <code>Database</code> class, so will generally not need any updates.</p>
+<h3 id="step-2">Step 2</h3>
+<p>With your Database class defined, Liquibase should be able to run user-defined SQL statements against the database. Give it a try!</p>
+<p>Create a changelog file like:</p>
+<pre><code class="language-sql">-- liquibase formatted sql
+
+--changeset example:1
+create table person (id int not null primary key, name varchar(255))
+--rollback drop table person
+
+--changeset example:2
+create table company (id int not null primary key, name varchar(255))
+--rollback drop table company
+</code></pre>
+<p>and run <code>liquibase update</code> against your database using that changelog file. 
+If there are any failures with creating the databasechangelog table, managing the lock, marking the change sets ran, etc. GOTO step 3.</p>
+<p>Once update works, any Liquibase functionality that doesn't rely on modeled changes or snapshot should work. For example, all of this should work:</p>
+<ul>
+<li><code>liquibase rollback-count 2</code></li>
+<li><code>liquibase history</code></li>
+<li><code>liquibase status</code></li>
+<li><code>liquibase tag</code></li>
+<li>Using xml/yaml/json changelog files with only <code>&lt;sql&gt;</code> and <code>&lt;sqlFile&gt;</code> tags</li>
+</ul>
+<h3 id="step-3">Step 3</h3>
+<p>For this milestone, database interactions primarily consists of:</p>
+<ul>
+<li>Creates and populates <code>databasechangeloglock</code> table using very basic/standard SQL</li>
+<li>Creates and populates <code>databasechangelog</code> table using very basic/standard SQL</li>
+<li>Executes user-specified SQL</li>
+</ul>
+<p>If you run into any problems with those, the most likely fix is overriding additional <code>liquibase.database.Database</code> methods to more correctly
+describe how your database works. </p>
+<p>For example, if the <code>databasechangeloglock</code> table isn't being created correctly because your database quotes object names in a special way, override the <code>escapeObjectName</code> function.
+Exactly what you need to override will depend on the actual problems you hit.</p>
+<p>In rare cases, you may need to <a href="sql-generator.html">override one or more</a> of the following SQLGenerators:
+- <code>liquibase.sqlgenerator.core.ClearDatabaseChangeLogTableGenerator</code>
+- <code>liquibase.sqlgenerator.core.CreateDatabaseChangeLogLockTableGenerator</code>
+- <code>liquibase.sqlgenerator.core.CreateDatabaseChangeLogTableGenerator</code>
+- <code>liquibase.sqlgenerator.core.InitializeDatabaseChangeLogLockTableGenerator</code>
+- <code>liquibase.sqlgenerator.core.MarkChangeSetRanGenerator</code></p>
+<h2 id="milestone-2-foundational-support">Milestone 2: Foundational Support</h2>
+<p>If you'd like your database support to included in the main Liquibase documentation and a more official part of Liquibase, contact the Liquibase team and we can work
+with you to bring it more officially into the fold.</p>
+<h2 id="milestone-3-advanced-support"><a name="advanced"></a>Milestone 3: Advanced Support</h2>
+<p>At the end of "milestone 1", Liquibase works against your database in a large variety of use cases, but it does not supporting everything Liquibase can do. </p>
+<p>By default, the change and snapshot logic uses standard SQL and JDBC calls so <strong><em>many</em></strong> will work out of the box, but not enough to advertise support for them until you have ensured they work.</p>
+<p>The overall steps in this phase are:
+1. Test that all the change types work correctly and all object types can be snapshotted
+2. (If needed) Iteratively failures from step 1 until there are no more</p>
+<h3 id="step-1_1">Step 1</h3>
+<p>Ensuring snapshot and changes work requires going through each specific change type and through each specific object type, then ensuring they execute correctly for all the different argument permutations that are valid for your database.</p>
+<p>To automate this process, Liquibase provides a <a href="https://github.com/liquibase/liquibase-test-harness/blob/main/README.extensions.html">Test Harness</a> to find everywhere the default logic isn't compatible with your database.
+Configure your project using the steps <a href="https://github.com/liquibase/liquibase-test-harness/blob/main/README.extensions.html">in the Test Harness repository</a> and run the tests.</p>
+<h3 id="step-2_1">Step 2</h3>
+<p>Fixing the failing tests will entail creating custom <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/sqlgenerator/SqlGenerator.html">liquibase.sqlgenerator.SqlGenerator</a>
+and <a href="https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/SnapshotGenerator.html">liquibase.snapshot.SnapshotGenerator</a> extension classes. </p>
+<p>The general pattern for both is to create a new class which returns a higher priority <strong><em>if and only if</em></strong> Liquibase is using the <code>Database</code> class you defined in milestone 1.</p>
+<p>You will likely have a number of failures across the two types of functionality:</p>
+<ul>
+<li>Failing Change calls, which require you to <a href="sql-generator.html">define new SqlGenerator implementations</a> </li>
+<li>Failing Snapshot calls, which require you to <a href="snapshot-generator.html">define a new SnapshotGenerator implementations</a></li>
+</ul>
+<p>Once all the Test Harness tests are passing, you will be able to use change types in XML/YAML/JSON changelogs as well as any snapshot based functionality.
+For example, all of this should now work:</p>
+<ul>
+<li><code>liquibase update</code> with <code>&lt;createTable...</code> in the changelog</li>
+<li><code>liquibase update</code> with <code>&lt;tableExists...</code> preconditions in the changelog</li>
+<li><code>liquibase snapshot</code></li>
+<li><code>liquibase diff</code></li>
+<li><code>liquibase diff-changelog</code></li>
+<li><code>liquibase generate-changelog</code></li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<p>Congratulations! You can certainly stop here and use all the standard Liquibase functionality against your database. </p>
+<p>However, if there is new and unique functionality your database supports, you can always expand beyond Liquibase's standard logic to 
+work with it.</p>
+<p>Perhaps your database supports different object types? Add new <code>DatabaseObject</code> classes to your extension and snapshot in order to see them in diff operations.</p>
+<p>Does your database has statements or operations which you would like to wrap in custom Change functions? Add add new <code>Change</code> classes to your extension and the <code>SqlGenerator</code> for it.</p>
+<p>Any other new functionality can be bundled into your extension, but also think about the scope of the functionality you are adding. 
+If it is truly unique to this database you can certainly add it to this extension, but if it is something that can be used beyond your database it is likely best packaged as an independent exception.  </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections"], "search": "../../../assets/javascripts/workers/search.12658920.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.5cf534bf.min.js"></script>
+      
+    
+  </body>
+</html>
