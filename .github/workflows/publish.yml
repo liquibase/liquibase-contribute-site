@@ -31,7 +31,9 @@ jobs:
       - run: pip install mkdocs-material
       - run: mkdocs build -s -d ../_site
 
-  # Deployment job
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+
   deploy:
     environment:
       name: github-pages
