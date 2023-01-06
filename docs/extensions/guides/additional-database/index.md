@@ -29,7 +29,7 @@ Therefore, to keep this information more stream-lined it is only focusing on wha
 
 ## Milestone 0: Project Setup
 
-If you have not already created a repository to hold your code, see [Your First Extension](../get-started/your-first-extension.html) in the Getting Started guide. 
+If you have not already created a repository to hold your code, see [Your First Extension](/extensions/get-started/your-first-extension) in the Getting Started guide. 
 
 ## <a name="compatible"></a>Milestone 1: Compatible Support
 
@@ -46,7 +46,7 @@ The overall steps in this milestone are:
 
 ### Step 1
 
-The first step in adding support for your database is [defining a new liquibase.database.Database implementation](database.html).
+The first step in adding support for your database is [defining a new liquibase.database.Database implementation](database).
 Visit that topic for detailed information on creating that class.
 
 The Database implementation acts as a dialect definition and facade to your database. 
@@ -97,7 +97,7 @@ describe how your database works.
 For example, if the `databasechangeloglock` table isn't being created correctly because your database quotes object names in a special way, override the `escapeObjectName` function.
 Exactly what you need to override will depend on the actual problems you hit.
 
-In rare cases, you may need to [override one or more](sql-generator.html) of the following SQLGenerators:
+In rare cases, you may need to [override one or more](../sql-generator) of the following SQLGenerators:
 - `liquibase.sqlgenerator.core.ClearDatabaseChangeLogTableGenerator`
 - `liquibase.sqlgenerator.core.CreateDatabaseChangeLogLockTableGenerator`
 - `liquibase.sqlgenerator.core.CreateDatabaseChangeLogTableGenerator`
@@ -135,8 +135,8 @@ The general pattern for both is to create a new class which returns a higher pri
 
 You will likely have a number of failures across the two types of functionality:
 
-- Failing Change calls, which require you to [define new SqlGenerator implementations](sql-generator.html) 
-- Failing Snapshot calls, which require you to [define a new SnapshotGenerator implementations](snapshot-generator.html)
+- Failing Change calls, which require you to [define new SqlGenerator implementations](../sql-generator) 
+- Failing Snapshot calls, which require you to [define a new SnapshotGenerator implementations](../snapshot-generator)
 
 Once all the Test Harness tests are passing, you will be able to use change types in XML/YAML/JSON changelogs as well as any snapshot based functionality.
 For example, all of this should now work:
