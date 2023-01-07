@@ -1,9 +1,15 @@
 site_name: contribute.liquibase.com
+
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.tabs
     - navigation.sections
+  logo: https://www.liquibase.com/wp-content/themes/liquibase/assets/img/logo.svg
 
 markdown_extensions:
   - tables
+
+extra_css:
+  - stylesheets/custom.css

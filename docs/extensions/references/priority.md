@@ -1,7 +1,3 @@
----
-layout: default
----
-
 # Priority
 
 Liquibase uses "priority" to determine the correct implementation classes to use at runtime.
