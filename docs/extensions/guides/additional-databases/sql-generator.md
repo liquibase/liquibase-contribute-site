@@ -1,10 +1,16 @@
 ---
-layout: default
+title: "New SqlGenerators"
 ---
 
-## Defining a New liquibase.sqlgenerator.SqlGenerator Implementation
+## New SqlGenerator Implementations
 
 ### Overview
+
+When working through [milestone 2](../milestone2-step2), you will often need to create new [liquibase.sqlgenerator.SqlGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/sqlgenerator/SqlGenerator.html) implementations.
+
+These are what convert the "describe what you want, not how to do it" Change and SqlStatement objects in to the SQL that your database understands.
+
+## Flow
 
 Liquibase defines database-independent requests for an action in [liquibase.change.Change](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html)
 and [liquibase.statement.SqlStatement](https://javadocs.liquibase.com/liquibase-core/liquibase/statement/SqlStatement.html)
@@ -25,22 +31,29 @@ sequenceDiagram
     SqlGenerator-->>Executor: Returns correct SQL for Statement
 ```
 
-For example, when parsing a changelog file, Liquibase creates a `CreateTableChange` object with the table name and column definitions specified in the changelog file.
-When the Change is "executed", it will first create a `CreateTableStatement` object containing the same information and pass that to the `Executor`. 
-Liquibase will then go through all the available `SqlGenerators` that say they support `CreateTableStatement` for the given database and use the one with the
-highest priority to come up with the actual SQL to run in order to create the table.
+!!! example
 
-There will be existing `SqlGenerator` classes for all `SqlStatement`, and they will try to be database-generic, but sometimes the SQL is not valid for your database.
+    When parsing a changelog file, Liquibase creates a `CreateTableChange` object with the table name and column definitions specified in the changelog file.
+    When the Change is "executed", it will first create a `CreateTableStatement` object containing the same information and pass that to the `Executor`. 
+    Liquibase will then go through all the available `SqlGenerators` that say they support `CreateTableStatement` for the given database and use the one with the
+    highest priority to come up with the actual SQL to run in order to create the table.
 
-For example, the default `AddColumnGenerator` may return `"alter table "+dialect.quoteName(tableName) + " add column ..."` 
-but for MySQL specifically it must be `"alter table "+dialect.quoteName(tableName) + " modify column ..."`.
+## Implementation Overview
+
+When adding support for a new Database, there will be existing `SqlGenerator` classes for all `SqlStatement` objects. 
+They will try to be database-generic, but sometimes the SQL is not valid for your database. 
+It is usually easiest to subclass the existing SqlGenerator to leverage the standard logic, but it's not necessary.
+
+The naming pattern tends to be "SqlStatementType" + "Generator". For example, AddColumnStatement -> AddColumnGenerator.
+Database-specific classes append the database name to the end, like `AddColumnStatementOracle`.
 
 Defining database-specific functionality tends to be writing `if (database instanceof ExampleDatabase)` blocks
 around the non-standard calls. Using "instanceof" means the block will apply to any subclasses of the given database. 
-For example, if your database is PostgreSQL compatible and therefore your Database class extensions `PostgresDatabase` then all the 
-`if (database instanceof PostgresDatabase)` checks will be used for your database as well.
 
-### Implementing
+!!! example
+
+    The default `AddColumnGenerator` may return `"alter table "+dialect.quoteName(tableName) + " add column ..."`
+    but `AddColumnGeneratorMysql` will override it to be `"alter table "+dialect.quoteName(tableName) + " modify column ..."`.
 
 When adding support for a new Database, there will be existing `SqlGenerator` implementations for all `SqlStatement` types. 
 It is usually easiest to subclass the existing SqlGenerator to leverage the standard logic, but it's not necessary. 
@@ -48,27 +61,29 @@ It is usually easiest to subclass the existing SqlGenerator to leverage the stan
 The naming pattern tends to be "StatementName" + "Generator". For example, AddColumnStatement -> AddColumnGenerator.
 Database-specific classes append the database name to the end, like `AddColumnGeneratorOracle` 
 
-#### Empty Constructor
+## Implementation Details
+
+### Empty Constructor
 
 Like all Liquibase extensions, your SqlGenerator must have an empty constructor.
 
-#### supports(SqlStatement, Database)
+### supports(SqlStatement, Database)
 
 The supports function returns whether this SqlGenerator should be used for the given SqlStatement and Database combination.
 
 If you define your SqlGenerator class using generics, Liquibase will know the SqlStatement type you can support and not bother calling `supports()`
-unless the SqlStatement class is correct. Therefore you only have to check that the Database object is correct. 
+unless the SqlStatement class is correct. Therefore, you only have to check that the Database object is correct. 
 
-You can normally check this with instanceof, but you can call methods on the Database object to check versions or whatever else may decide whether this class generates the correct SQL or not. 
+You can normally check this with `instanceof`, but you can call methods on the Database object to check versions or whatever else is needed to determine if this class needs to generate custom SQL or not. 
 
-#### getPriority()
+### getPriority()
 
 You **_must_** override getPriority() so it will be picked over the base implementation you are extending. If you do not override this function they will both 
 return the same priority and which is chosen is random.
 
 To ensure a higher value is returned, use something like `return super.getPriority() + 5`.
 
-#### validate(SqlStatement, Database, SqlGeneratorChange) and warn
+### validate(SqlStatement, Database, SqlGeneratorChange) and warn
 
 The validate method is used to check that the configuration of the SqlStatement is correct. It's the job of this function to ensure any required settings are set and
 any invalid settings are not used. 
@@ -82,7 +97,7 @@ If you have no additional validation to perform vs. the base logic there is no n
 
 The `warn(SqlStatement, Database, SqlGeneratorChange)` is similar to `validate` but returns non-fatal warnings to the user. 
 
-#### generateSql(SqlStatement, Database, SqlGeneratorChain)
+### generateSql(SqlStatement, Database, SqlGeneratorChain)
 
 This is the method that generates the SQL for your particular database. It returns an array of [liquibase.sql.Sql](https://javadocs.liquibase.com/liquibase-core/liquibase/sql/Sql.html)
 objects and so a single `SqlStatement` class can create multiple underlying SQL statements. For example, `AddPrimaryKeyGenerator` may return a SQL call to add the primary key and another to reorganize the table.
@@ -94,17 +109,16 @@ argument handling logic that already exists in the parent.
 Also remember to always check your parent class's method signature for settings it defines. It may have methods like `nullComesBeforeType()` which it uses to determine
 the final SQL and you simply have to override that method to return a different value.
 
-[liquibase.sql.UnparsedSql](https://javadocs.liquibase.com/liquibase-core/liquibase/sql/UnparsedSql.html) is the implementation of `Sql` you will almost always want to use in your `Sql[]` array.
+[liquibase.sql.UnparsedSql](https://javadocs.liquibase.com/liquibase-core/liquibase/sql/UnparsedSql.html) is the implementation of `liquibase.sql.Sql` you will almost always want to use in your `Sql[]` array.
 
-When generating your SQL you should try as hard as possible to rely purely on the settings in the SqlStatement function to determine the SQL to generate.
-If you have to query the database for more information or check any other external information you must ensure `generateStatementsIsVolatile()` returns true.
-That lets Liquibase know that each run of the SqlStatement may generate different results and therefore can't be used in `update-sql` type operations.
+!!! warning
 
-#### Register your Class
+    When generating your SQL you should try as hard as possible to rely purely on the fields in the `SqlStatement` function to determine the SQL to generate.
+    
+    If you have to query the database for more information or check any other external information you must ensure `generateStatementsIsVolatile()` returns true.
+    That lets Liquibase know that each run of the SqlStatement may generate different results and therefore can't be used in `update-sql` type operations.
 
-Like all extensions, your SqlGenerator must be registered by adding your class name to `META-INF/services/liquibase.sqlgenerator.SqlGenerator`
-
-### Example Code
+## Example Code
 
 ```java
 package com.example.sqlgenerator;
@@ -132,3 +146,8 @@ public class AddColumnGeneratorExample extends AddColumnGenerator {
     }
 }
 ```
+
+## Register your Class
+
+Like all extensions, your SqlGenerator must be registered by adding your class name to `META-INF/services/liquibase.sqlgenerator.SqlGenerator`
+

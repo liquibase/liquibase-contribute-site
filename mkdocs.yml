@@ -6,10 +6,25 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - content.code.copy
   logo: https://www.liquibase.com/wp-content/themes/liquibase/assets/img/logo.svg
 
 markdown_extensions:
   - tables
+  - admonition
+  - attr_list
+  - def_list
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
 
 extra_css:
   - stylesheets/custom.css

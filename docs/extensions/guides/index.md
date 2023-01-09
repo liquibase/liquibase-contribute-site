@@ -17,4 +17,4 @@ Here are the available guides, including the APIs they use
 
 | Guide | Used Extension Points |
 | ---- | ---- |
-| [Additional Database Support](additional-database) | liquibase.database, liquibase.sqlgenerator, liquibase.snapshot |
+| [Additional Database Support](additional-databases) | liquibase.database, liquibase.sqlgenerator, liquibase.snapshot |
