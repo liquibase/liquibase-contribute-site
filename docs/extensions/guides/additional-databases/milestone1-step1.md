@@ -159,4 +159,4 @@ public class ExampleDatabase extends PostgresDatabase {
 
 ## Next Step
 
-After you have created your Database class, it's time to [test it out](milestone1-stepx.md)
+After you have created your Database class, it's time to [test it out](milestone1-step2.md)
