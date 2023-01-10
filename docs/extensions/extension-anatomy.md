@@ -30,7 +30,7 @@ Let's take a closer look at the [HelloWorldChange](../your-first-extension) samp
 This class is your new implementation of the [liquibase.change.Change](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html) interface
 which defines your new logic in the `generateStatements()`
 
-The priority of this implementation is set via the `priority` attribute on the `@DatabaseChange` annotation. 
+The [priority](../references/priority) of this implementation is set via the `priority` attribute on the `@DatabaseChange` annotation. 
 It uses the `PRIORITY_DEFAULT` constant which is "1"
 
 ## META-INF/services

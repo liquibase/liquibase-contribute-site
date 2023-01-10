@@ -61,12 +61,21 @@ com.example.change.HelloWorldChange
 
 then rebuild with `mvn package` and re-copy `target/my-extension-0.0.1.jar` to `LIQUIBASE_HOME/lib`.
 
-Finally, add a new changeset to your changelog file like:
+Finally, create a changelog file like:
 
 ```xml
-    <changeSet id="4" author="example">
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="1" author="example">
         <ext:helloWorld/>
     </changeSet>
+</databaseChangeLog>
 ```
 and when you run `liquibase update` you will now have a table named `hello` with a column named `world`. 
 
