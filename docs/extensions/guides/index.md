@@ -1,6 +1,6 @@
 # Extension Guides
 
-Once you have learned the basics of Liquibase Extensions in the [HelloWorldChange](/extensions/your-first-extension)
+Once you have learned the basics of Liquibase Extensions in the [HelloWorldChange](../your-first-extension.md)
 sample,
 it's time to build some real-world extensions.
 
@@ -15,6 +15,6 @@ In each guide or sample, you can expect to find:
 
 Here are the available guides, including the APIs they use
 
-| Guide | Used Extension Points |
-| ---- | ---- |
-| [Additional Database Support](additional-databases) | liquibase.database, liquibase.sqlgenerator, liquibase.snapshot |
+| Guide                                                        | Used Extension Points |
+|--------------------------------------------------------------| ---- |
+| [Additional Database Support](additional-databases/index.md) | liquibase.database, liquibase.sqlgenerator, liquibase.snapshot |

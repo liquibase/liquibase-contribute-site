@@ -1,13 +1,13 @@
 # Extension Anatomy
 
-In [Your First Extension](/extensions/your-first-extension), you were able to get a basic extension running. How does it work under the hood?
+In [Your First Extension](your-first-extension.md), you were able to get a basic extension running. How does it work under the hood?
 
 Liquibase is implemented in Java and relies on standard Java patterns such as "code to interfaces, dynamically load implementations". 
 
 While the specific methods can vary by extension, the general pattern is:
 
 1. On startup, Liquibase finds all available implementations of extension interfaces
-1. As Liquibase runs, when it needs to use a particular interface it finds and uses the implementation with the highest [priority](/extensions/references/priority/) based on the surrounding context
+1. As Liquibase runs, when it needs to use a particular interface it finds and uses the implementation with the highest [priority](references/priority.md) based on the surrounding context
 
 This pattern means that creating extensions consists of:
 
@@ -15,7 +15,7 @@ This pattern means that creating extensions consists of:
 1. Ensure your new classes return a high enough `priority` value **_in the contexts they should apply_**
 1. Register classes, so they are found at startup time
 
-Let's take a closer look at the [HelloWorldChange](../your-first-extension) sample's source code and see how these concepts apply to it.
+Let's take a closer look at the [HelloWorldChange](your-first-extension.md) sample's source code and see how these concepts apply to it.
 
 ## Extension File Structure
 
@@ -27,10 +27,10 @@ Let's take a closer look at the [HelloWorldChange](../your-first-extension) samp
 
 ## HelloWorldChange.java
 
-This class is your new implementation of the [liquibase.change.Change](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html) interface
+This class is your new implementation of the [liquibase.change.Change](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html){:target="_blank"} interface
 which defines your new logic in the `generateStatements()`
 
-The [priority](../references/priority) of this implementation is set via the `priority` attribute on the `@DatabaseChange` annotation. 
+The [priority](references/priority.md) of this implementation is set via the `priority` attribute on the `@DatabaseChange` annotation. 
 It uses the `PRIORITY_DEFAULT` constant which is "1"
 
 ## META-INF/services

@@ -27,17 +27,16 @@ Finally, this section assumes you are adding support for a SQL-based database.
 NoSQL and non-relational databases use this exact same process, but there will be more changes to make and you will need to re-implement more complex interfaces.
 Therefore, to keep this information more streamlined it is only focusing on what needs to be done for relational database. 
 
-## Milestone 0: Project Setup
+## Project Setup
 
-If you have not already created a repository to hold your code, see [Your First Extension](/extensions/get-started/your-first-extension) in the Getting Started guide. 
+If you have not already created a repository to hold your code, see [Your First Extension](../../your-first-extension.md) in the Getting Started guide. 
 
-## <a name="compatible"></a>Milestone 1: Compatible Support
+## <a name="compatible"></a>Compatible Support
 
-The goal of this milestone is to have Liquibase understand how your database works and be able
-to run any functionality that depends on user-specified SQL.
+The first milestone is to have Liquibase understand how your database works and be able to run any functionality that depends on user-specified SQL.
 
-Basically "you can run update and rollback using [Formatted SQL](https://docs.liquibase.com/concepts/changelogs/sql-format.html) or 
-the [sql change type](https://docs.liquibase.com/change-types/sql.html) in xml/yaml/json. 
+Basically "you can run update and rollback using [Formatted SQL](https://docs.liquibase.com/concepts/changelogs/sql-format.html){:target="_blank"} or 
+the [sql change type](https://docs.liquibase.com/change-types/sql.html){:target="_blank"} in xml/yaml/json. 
 You will not be able to use more complex change types like `createTable` or use `snapshot` or `generateChangelog` functionality until you have finished [milestone 2](#advanced)
 
 There are three steps in this milestone:
@@ -46,9 +45,9 @@ There are three steps in this milestone:
 2. [Test that Liquibase works with sql-based changelog files](milestone1-step2.md)
 3. [(If step 2 fails) Test and fix failures until there are no more](milestone1-step3.md)
 
-## <a name="advanced"></a>Milestone 2: Advanced Support
+## <a name="advanced"></a>Advanced Support
 
-At the end of "milestone 2", Liquibase works against your database in a large variety of use cases, but it does not support everything Liquibase can do. 
+At the end of this second milestone, Liquibase works against your database in a large variety of use cases, but it does not support everything Liquibase can do. 
 
 By default, the change and snapshot logic uses standard SQL and/or JDBC calls so **_many_** will work out of the box, but not enough to advertise support for them until you have ensured they work.
 

@@ -6,7 +6,7 @@ title: "Milestone 1: Test"
 
 ## Overview
 
-With your [new Database class defined](../milestone1-step1), Liquibase should be able to run user-defined SQL statements against the database. Give it a try!
+With your [new Database class defined](milestone1-step1.md), Liquibase should be able to run user-defined SQL statements against the database. Give it a try!
 
 ## Testing
 
@@ -26,7 +26,7 @@ create table company (id int not null primary key, name varchar(255))
 
 and run `liquibase update` against your database using that changelog file.
 
-If there are any failures with creating the databasechangelog table, managing the lock, marking the change sets ran, or anything else. [GOTO step 3](../milestone1-step3).
+If there are any failures with creating the databasechangelog table, managing the lock, marking the change sets ran, or anything else. [GOTO step 3](milestone1-step3.md).
 
 Once `update` works, any Liquibase functionality that doesn't rely on modeled changes or snapshot should work. For example, all of this should work:
 
@@ -38,7 +38,7 @@ Once `update` works, any Liquibase functionality that doesn't rely on modeled ch
 
 ## Next Steps
 
-If you ran into problems when testing, [see step 3](../milestone1-step3).
+If you ran into problems when testing, [see step 3](milestone1-step3.md).
 
 If everything seems to work, Congratulations!! :material-party-popper: Now is a great time to release the first version of your extension
 

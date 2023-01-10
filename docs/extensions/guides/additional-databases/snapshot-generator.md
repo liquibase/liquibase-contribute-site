@@ -6,15 +6,15 @@ title: "New SnapshotGenerators"
 
 ## Overview
 
-When working through [milestone 2](../milestone2-step2), you will often need to create new [liquibase.snapshot.SnapshotGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/SnapshotGenerator.html) implementations.
+When working through [milestone 2](milestone2-step2.md), you will often need to create new [liquibase.snapshot.SnapshotGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/SnapshotGenerator.html){:target="_blank"} implementations.
 
 These are what convert the "describe what you want to snapshot, not how to do it" requests into the driver calls and metadata queries your database understands.
 
 ## Flow 
 
-Liquibase defines a database-independent metadata model in [liquibase.snapshot.DatabaseSnapshot](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/DatabaseSnapshot.html).
-That model contains standardized [liquibase.structure.DatabaseObject](https://javadocs.liquibase.com/liquibase-core/liquibase/structure/DatabaseObject.html) objects such as
-[liquibase.structure.core.Table](https://javadocs.liquibase.com/liquibase-core/liquibase/structure/core/Table.html).
+Liquibase defines a database-independent metadata model in [liquibase.snapshot.DatabaseSnapshot](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/DatabaseSnapshot.html){:target="_blank"}.
+That model contains standardized [liquibase.structure.DatabaseObject](https://javadocs.liquibase.com/liquibase-core/liquibase/structure/DatabaseObject.html){:target="_blank"} objects such as
+[liquibase.structure.core.Table](https://javadocs.liquibase.com/liquibase-core/liquibase/structure/core/Table.html){:target="_blank"}.
 
 The snapshot logic used in `liquibase snapshot`, `liquibase diff`, `liquibase diff-changelog`, and any other "check the current database structure" operations relies on `liquibase.snapshot.SnapshotGenerator`
 implementations to read the database's metadata and create the corresponding `DatabaseObject` objects.
@@ -109,7 +109,7 @@ _3. After all the SnapshotGenerators have added their information to the Table o
 
 !!! tip
 
-    There is a [liquibase.snapshot.jvm.JdbcSnapshotGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/jvm/JdbcSnapshotGenerator.html) convenience base class that is used for all the standard `DatabaseObject` SnapshotGenerators which
+    There is a [liquibase.snapshot.jvm.JdbcSnapshotGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/jvm/JdbcSnapshotGenerator.html){:target="_blank"} convenience base class that is used for all the standard `DatabaseObject` SnapshotGenerators which
     separates the "create the base object" logic from the "add to an object" logic plus has caching built into it. 
     
     The standard SnapshotGenerators tend to have overridable functions for commonly variable portions of the snapshot logic, so you generally shouldn't override

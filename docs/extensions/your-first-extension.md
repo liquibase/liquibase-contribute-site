@@ -3,9 +3,9 @@
 This page will teach you the fundamental concepts for building extensions.
 
 Liquibase extensions are built with Java, so you will likely want a 
-Java-friendly IDE and a build tool like [Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/)
+Java-friendly IDE and a build tool like [Maven](https://maven.apache.org/){:target="_blank"} or [Gradle](https://gradle.org/){:target="_blank"}
 
-For a starting Maven-based project, you can create a personal repository based on the [example extension template](https://github.com/liquibase/liquibase-extension-example).
+For a starting Maven-based project, you can create a personal repository based on the [example extension template](https://github.com/liquibase/liquibase-extension-example){:target="_blank"}.
 
 The example extension defines:
 
@@ -86,4 +86,4 @@ and when you run `liquibase update` you will now have a table named `hello` with
 
 ## Next Steps
 
-In the next topic, [Extension Anatomy](/extensions/extension-anatomy), we look closer at the source code of the helloWorld extension and explain key concepts.
+In the next topic, [Extension Anatomy](extension-anatomy.md), we look closer at the source code of the helloWorld extension and explain key concepts.

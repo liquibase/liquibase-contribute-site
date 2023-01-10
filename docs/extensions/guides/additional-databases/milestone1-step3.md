@@ -6,7 +6,7 @@ title: "Milestone 1: Fix & Retest"
 
 ## Overview
 
-The functionality you [tested for milestone 1](../milestone1-step2) relies on:
+The functionality you [tested for milestone 1](milestone1-step2.md) relies on:
 
 - Create and populate `databasechangeloglock` table
 - Create and populate `databasechangelog` table
@@ -14,8 +14,8 @@ The functionality you [tested for milestone 1](../milestone1-step2) relies on:
 
 ## Improving Your Database Class
 
-The standard [liquibase.changelog.ChangeLogHistoryService](https://javadocs.liquibase.com/liquibase-core/liquibase/changelog/ChangeLogHistoryService.html),
-[liquibase.lockservice.LockService](https://javadocs.liquibase.com/liquibase-core/liquibase/lockservice/LockService.html), and [liquibase.executor.Executor](https://javadocs.liquibase.com/liquibase-core/liquibase/executor/Executor.html)
+The standard [liquibase.changelog.ChangeLogHistoryService](https://javadocs.liquibase.com/liquibase-core/liquibase/changelog/ChangeLogHistoryService.html){:target="_blank"},
+[liquibase.lockservice.LockService](https://javadocs.liquibase.com/liquibase-core/liquibase/lockservice/LockService.html){:target="_blank"}, and [liquibase.executor.Executor](https://javadocs.liquibase.com/liquibase-core/liquibase/executor/Executor.html){:target="_blank"}
 implementations which drive that rely on SQL and/or JDBC standards guided by dialect info from your `Database` class.
 
 If you run into any problems with those standard services, the most likely fix is overriding additional `liquibase.database.Database` methods to more correctly
@@ -25,13 +25,13 @@ For example, if the `databasechangeloglock` table isn't being created correctly 
 
 !!! tip
 
-    Exactly what you need to override will depend on the actual problems you hit. If you have questions on what it takes to fix your problem, ask [on the forum](https://forum.liquibase.org).
+    Exactly what you need to override will depend on the actual problems you hit. If you have questions on what it takes to fix your problem, ask [on the forum](https://forum.liquibase.org){:target="_blank"}.
 
 ## Advanced Fixes
 
 If your database deviates significantly from what the standard services expect, your changes may not be isolated to your new `Database` class.
 
-Instead, you may need to [override one or more](../sql-generator) of the following SQLGenerators:
+Instead, you may need to [override one or more](sql-generator.md) of the following SQLGenerators:
 
 - `liquibase.sqlgenerator.core.ClearDatabaseChangeLogTableGenerator`
 - `liquibase.sqlgenerator.core.CreateDatabaseChangeLogLockTableGenerator`
@@ -51,4 +51,4 @@ After you have made a potential fix to the problem you found, re-run your test a
 
 With Liquibase working against your database, now is a great time to release the first version of your extension and get feedback.
 
-When you are ready to build advanced support, you can move on to [milestone 2](../milestone2-step2)
+When you are ready to build advanced support, you can move on to [milestone 2](milestone2-step2.md)

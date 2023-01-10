@@ -6,14 +6,14 @@ title: "New SqlGenerators"
 
 ### Overview
 
-When working through [milestone 2](../milestone2-step2), you will often need to create new [liquibase.sqlgenerator.SqlGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/sqlgenerator/SqlGenerator.html) implementations.
+When working through [milestone 2](milestone2-step2.md), you will often need to create new [liquibase.sqlgenerator.SqlGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/sqlgenerator/SqlGenerator.html){:target="_blank"} implementations.
 
 These are what convert the "describe what you want, not how to do it" Change and SqlStatement objects in to the SQL that your database understands.
 
 ## Flow
 
-Liquibase defines database-independent requests for an action in [liquibase.change.Change](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html)
-and [liquibase.statement.SqlStatement](https://javadocs.liquibase.com/liquibase-core/liquibase/statement/SqlStatement.html)
+Liquibase defines database-independent requests for an action in [liquibase.change.Change](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html){:target="_blank"}
+and [liquibase.statement.SqlStatement](https://javadocs.liquibase.com/liquibase-core/liquibase/statement/SqlStatement.html){:target="_blank"}
 classes. Change classes are what can be called from changelog files, and SqlStatement classes describe the lower-level calls that translate more directly to SQL statement.
 
 Both `Change` and `SqlStatement` simply _**describe**_ what wants to be done without specifying **_how_** to carry that out.
@@ -89,7 +89,7 @@ The validate method is used to check that the configuration of the SqlStatement 
 any invalid settings are not used. 
 
 When extending a base SqlGenerator, you can call `super.validate(statement, database, sqlGeneratorChain)` as a starting point, and then perform extra checks 
-(or remove not-actually-invalid errors) before returning the [ValidationErrors](https://javadocs.liquibase.com/liquibase-core/liquibase/exception/ValidationErrors.html).
+(or remove not-actually-invalid errors) before returning the [ValidationErrors](https://javadocs.liquibase.com/liquibase-core/liquibase/exception/ValidationErrors.html){:target="_blank"}.
 
 This method is always called, and so you do not need to re-validate settings in other methods.
 
@@ -99,7 +99,7 @@ The `warn(SqlStatement, Database, SqlGeneratorChange)` is similar to `validate` 
 
 ### generateSql(SqlStatement, Database, SqlGeneratorChain)
 
-This is the method that generates the SQL for your particular database. It returns an array of [liquibase.sql.Sql](https://javadocs.liquibase.com/liquibase-core/liquibase/sql/Sql.html)
+This is the method that generates the SQL for your particular database. It returns an array of [liquibase.sql.Sql](https://javadocs.liquibase.com/liquibase-core/liquibase/sql/Sql.html){:target="_blank"}
 objects and so a single `SqlStatement` class can create multiple underlying SQL statements. For example, `AddPrimaryKeyGenerator` may return a SQL call to add the primary key and another to reorganize the table.
 
 Depending on how different your SQL is from the base class, you can either call `super.generateSql()` and modify the objects in the array before returning it, or 
@@ -109,7 +109,7 @@ argument handling logic that already exists in the parent.
 Also remember to always check your parent class's method signature for settings it defines. It may have methods like `nullComesBeforeType()` which it uses to determine
 the final SQL and you simply have to override that method to return a different value.
 
-[liquibase.sql.UnparsedSql](https://javadocs.liquibase.com/liquibase-core/liquibase/sql/UnparsedSql.html) is the implementation of `liquibase.sql.Sql` you will almost always want to use in your `Sql[]` array.
+[liquibase.sql.UnparsedSql](https://javadocs.liquibase.com/liquibase-core/liquibase/sql/UnparsedSql.html){:target="_blank"} is the implementation of `liquibase.sql.Sql` you will almost always want to use in your `Sql[]` array.
 
 !!! warning
 

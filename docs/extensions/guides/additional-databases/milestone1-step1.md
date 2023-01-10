@@ -6,7 +6,7 @@ title: "Milestone 1: New Database"
 
 ## Overview
 
-When adding support for a new database, the first class to create is a new [liquibase.database.Database](https://javadocs.liquibase.com/liquibase-core/liquibase/database/Database.html) implementation.
+When adding support for a new database, the first class to create is a new [liquibase.database.Database](https://javadocs.liquibase.com/liquibase-core/liquibase/database/Database.html){:target="_blank"} implementation.
 Your Database implementation acts as the "dialect" definition and the facade to your database.
 
 The Database interface defines methods for:
@@ -18,7 +18,7 @@ The Database interface defines methods for:
 If your database generally attempts to be compatible with another database, your new Database implementation can extend the existing Database class.
 For example, if your database is PostgreSQL-compatible you can extend `liquibase.database.core.PostgresDatabase` and only override what is special about your database.
 
-If your database is unique, you will likely want to extend from [liquibase.database.AbstractJdbcDatabase](https://javadocs.liquibase.com/liquibase-core/liquibase/database/AbstractJdbcDatabase.html)
+If your database is unique, you will likely want to extend from [liquibase.database.AbstractJdbcDatabase](https://javadocs.liquibase.com/liquibase-core/liquibase/database/AbstractJdbcDatabase.html){:target="_blank"}
 which provides default logic that follows SQL standards.
 
 ## Implementing
@@ -159,4 +159,4 @@ public class ExampleDatabase extends PostgresDatabase {
 
 ## Next Step
 
-After you have created your Database class, it's time to [test it out](../milestone1-step2)
+After you have created your Database class, it's time to [test it out](milestone1-step2.md)

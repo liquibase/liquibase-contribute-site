@@ -18,11 +18,11 @@ When completed, you should have a `harness-config.yml` file that specifies how t
 
 ## Running the Tests
 
-The [Test Harness 'Framework' documentation](https://github.com/liquibase/liquibase-test-harness#framework) describes how the tests work and how to run them.
+The [Test Harness 'Framework' documentation](https://github.com/liquibase/liquibase-test-harness#framework){:target="_blank"} describes how the tests work and how to run them.
 
 At the most basic level, you can run the tests using `mvn test` using the configuration options defined in the test-harness framework documentation such as `-DchangeObjects`. 
 If you are using an IDE, you can run your `ExtensionHarnessTest` class directly and pass along the same settings as system properties.
 
 ## Next Step
 
-The first time you run the tests, you will get failure from missing files. See [Milestone 2: Fix & Restest](../milestone2-step2) to continue.
+The first time you run the tests, you will get failure from missing files. See [Milestone 2: Fix & Restest](milestone2-step2.md) to continue.

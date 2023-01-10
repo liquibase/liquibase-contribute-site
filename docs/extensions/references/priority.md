@@ -14,5 +14,5 @@ We allow a range of priority values to allow more and more specific implementati
     - An implementation for how you specifically use Redshift returns a priority of "15"
     - An implementation for how you specifically use Redshift in production returns a priority of "20"
 
-Extensions allow the existence of other extensions by [leaving gaps](../../best-practices) above and below their priority for other extensions to fit into. 
+Extensions allow the existence of other extensions by [leaving gaps](../best-practices.md) above and below their priority for other extensions to fit into. 
 
