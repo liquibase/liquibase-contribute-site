@@ -1,10 +1,5 @@
-header.md-header {
-    background-color: #FFFFFF;
-    color: #000000;
-}
-
 .global-links li {
-    color: rgba(14,0,51,.7);
+    color: #FFFFFF;
     font-size: 14px;
     font-weight: 400;
     font-family: Lato, Helvetica, Arial, sans-serif;
