@@ -12,23 +12,23 @@ For over a decade, we’ve had people from around the world participate and cont
 
 Answer questions about Liquibase in Discord, our forum, and StackOverflow.
 
-[Answer Questions](answers/index.md)
+[Answer Questions](answers/index.md){ .md-button }
 
 ## Contribute Content
 
 Share articles and videos about Liquibase, or improvements to documentation
 
-[Contribute Content](content/index.md)
+[Contribute Content](content/index.md){ .md-button }
 
 ## Be an Advocate
 
 Give a tech talk, share a case study, or amplify Liquibase on social media.
 
-[Be a Liquibase Advocate](advocate/index.md)
+[Be a Liquibase Advocate](advocate/index.md){ .md-button }
 
 ## Develop Liquibase
 
 Fix a bug, enhance existing features, or build something completely new.
 
-[Develop Liquibase](code/index.md)
+[Develop Liquibase](code/index.md){ .md-button }
 
