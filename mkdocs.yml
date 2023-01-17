@@ -1,4 +1,6 @@
 site_name: contribute.liquibase.com
+repo_url: https://github.com/liquibase/liquibase-contribute-site
+edit_uri: ./edit/main/docs
 
 theme:
   name: material
@@ -6,6 +8,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - content.action.edit
     - content.code.copy
   logo: /images/logo.svg
 
@@ -25,6 +28,11 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - git-revision-date-localized:
+      enable_creation_date: true
+      enabled: !ENV [CI, false] ## Page rebuild is much slower with this enabled, so disabling unless the CI=true env variable is set, like on the build server
 
 extra_css:
   - css/custom.css

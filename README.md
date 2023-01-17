@@ -4,5 +4,5 @@ This contains the source for https://contribute.liquibase.com, written using htt
 
 The source for the site is in `docs`
 
-To run the site locally, run `docker run --rm -it -p 8080:8000 -v ${PWD}:/docs squidfunk/mkdocs-material` 
+To run the site locally, run `docker run --rm -it -p 8080:8000 -v ${PWD}:/docs $(docker build -q .)` 
 in bash or powershell, then go to `http://localhost:8080`
