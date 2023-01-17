@@ -12,7 +12,7 @@ For over a decade, we’ve had people from around the world participate and cont
 
 Answer questions about Liquibase in Discord, our forum, and StackOverflow.
 
-[Answer questions](answers/index.md)
+[Answer Questions](answers/index.md)
 
 ## Contribute Content
 
