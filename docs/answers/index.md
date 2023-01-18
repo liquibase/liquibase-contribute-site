@@ -6,12 +6,15 @@ Provide support to the Liquibase community by sharing your knowledge and experti
 
 ## Liquibase Forum
 
-Ask a question or offer support to users on the [Liquibase Forum](https://forum.liquibase.org/).
+Ask a question or offer support to users on the Liquibase Forum.
+[Answer questions on the Liquibase Forum](https://forum.liquibase.org/){ .md-button }
 
 ## StackOverflow
 
-Answer Liquibase community questions on [StackOverflow](https://stackoverflow.com/questions/tagged/liquibase?tab=newest&page=3&pagesize=15).
+Answer Liquibase community questions on Stack Overflow.
+[Answer questions on StackOverflow](https://stackoverflow.com/questions/tagged/liquibase?tab=newest&page=3&pagesize=15){ .md-button }
 
 ## Chat on Discord
 
-Meet other users and collaborate in real-time [on Discord](https://discord.gg/NVpqM7nNnT).
+Meet other users and collaborate in real-time on Discord.
+[Chat on Discord](https://discord.gg/NVpqM7nNnT){ .md-button }
