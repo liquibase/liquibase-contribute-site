@@ -8,7 +8,7 @@ Choose based on your experience! If you don’t have one in mind already, below 
 
 ## Tutorials
 
-![Image title](images/tutorials.png){ align="left" width="72" }
+![Image title](images/tutorials.svg){ align="left" width="72" }
 Getting started with Liquibase [example](https://medium.com/podiihq/getting-started-with-liquibase-8965897092aa)
 
 Share your step-by-step guide on how you use Liquibase (Include your specific database/integration) [example](https://reflectoring.io/database-migration-spring-boot-liquibase/){ .md-button }
