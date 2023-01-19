@@ -11,7 +11,7 @@ The [Liquibase Documentation website](https://docs.liquibase.com) allows you to 
 
 This feature can be found on any documentation page throughout the website on the right-hand center of the screen. Just click the feedback button and you’ll enter a tool that captures an image of the screen and provides tools and a form for feedback.
 
-![submitting docs feedback](docs-feedback-usersnap.png)
+![submitting docs feedback](images/docs-feedback-usersnap.png)
 
 ## How do the feedback tools work?
 
