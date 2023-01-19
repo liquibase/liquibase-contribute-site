@@ -42,16 +42,18 @@ Each new block of changes that belong in a pull request will need their own bran
 
 After forking and cloning the Liquibase code, you can set up your development environment. 
 
-### 1. [Install Java](https://adoptium.net/)
+### 1. Install Java
 
-Any version or distribution of Java will work, but the current LTS version is usually best. 
+Any version or distribution of Java will work, but the current LTS version is usually best.
 
-### 2. [Install Maven](https://maven.apache.org/download.cgi)
+[Adoptium](https://adoptium.net/) is a good choice
 
-Unzip the archive to a directory on your system. This provides the `mvn` CLI. 
+### 2. Install Maven
 
-This is technically an optional step if you'll eventually use an IDE since most have Maven support built in. 
-But installing it separately allows you to better duplicate the minimal build process if troubleshooting your IDE setup.   
+[Download Maven](https://maven.apache.org/download.cgi) and unzip the archive to a directory on your system. This provides the `mvn` CLI.
+
+This is technically an optional step if you'll eventually use an IDE since most have Maven support built in.
+But installing it separately allows you to better duplicate the minimal build process if troubleshooting your IDE setup.
 
 ### 3. Check Setup
  
