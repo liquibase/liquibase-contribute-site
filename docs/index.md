@@ -12,7 +12,7 @@ For over a decade, we’ve had people from around the world participate and cont
 ![Image title](images/support-logo.png){ align="left" width="72" }
 Answer questions about Liquibase in Discord, our forum, and StackOverflow.
 
-[Answer Questions](answers/index.md){ .md-button }
+[Answer Questions](answer/index.md){ .md-button }
 
 ## Contribute Content
 ![Image title](images/content-logo.png){ align="left" width="72" }
