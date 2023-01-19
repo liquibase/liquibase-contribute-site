@@ -1,10 +1,10 @@
-# Create videos or write about Liquibase
+# Write about Liquibase
 Liquibase works with many different databases and automation tools. We need your expertise to produce content about them! 
-Whether you enjoy blogging, writing an article on Medium or want to promote your YouTube channel, sharing your knowledge makes an impact on our community.
+Whether you enjoy blogging, writing an article on Medium or writing for the Liquibase blog, sharing your knowledge makes an impact on our community.
 
 ## Explore Topics
 
-Choose based on your experience! If you don’t have one in mind already, below are some suggestions to help kick-start your writing or video.
+Choose based on your experience! If you don’t have one in mind already, below are some suggestions to help kick-start your writing.
 
 ## Tutorials
 
