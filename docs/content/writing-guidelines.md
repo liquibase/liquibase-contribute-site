@@ -11,7 +11,7 @@ Choose based on your experience! If you don’t have one in mind already, below 
 ![Image title](images/tutorials.svg){ align="left" width="72" }
 Getting started with Liquibase [example](https://medium.com/podiihq/getting-started-with-liquibase-8965897092aa)
 
-Share your step-by-step guide on how you use Liquibase (Include your specific database/integration) [example](https://reflectoring.io/database-migration-spring-boot-liquibase/){ .md-button }
+Share your step-by-step guide on how you use Liquibase (Include your specific database/integration) [example](https://reflectoring.io/database-migration-spring-boot-liquibase/)
 
 ## Tips & Tricks
 
@@ -24,6 +24,7 @@ Liquibase best practices [example](https://www.liquibase.org/get-started/best-pr
 
 ![Image title](images/use-cases.png){ align="left" width="72" }
 Share how you or your organization are using Liquibase. [example](https://www.liquibase.com/blog/database-change-automation-journey)
+
 
 ## Have your own idea?
 

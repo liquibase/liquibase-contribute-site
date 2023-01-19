@@ -9,5 +9,7 @@ Choose based on your experience! If you don’t have one in mind already, below 
 ## Tutorials
 
 ![Image title](images/tutorials.svg){ align="left" width="72" }
+
 Getting started with Liquibase [example](https://www.liquibase.org/get-started/how-liquibase-works)
+
 
