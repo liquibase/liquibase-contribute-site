@@ -16,7 +16,7 @@ Share your step-by-step guide on how you use Liquibase (Include your specific da
 ## Tips & Tricks
 
 ![Image title](images/tips-and-tricks.png){ align="left" width="72" }
-Share your favorite Liquibase tips & tricks [examples](https://www.liquibase.org/category/tips-tricks)
+Share your favorite Liquibase tips & tricks [examples](https://www.liquibase.com/category/tips-tricks)
 
 Liquibase best practices [example](https://www.liquibase.org/get-started/best-practices)
 
