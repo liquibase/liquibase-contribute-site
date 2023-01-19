@@ -7,14 +7,17 @@ Provide support to the Liquibase community by sharing your knowledge and experti
 ## Liquibase Forum
 ![Image title](answer/forum-logo.png){ align="left" width="72" }
 Ask a question or offer support to users on the Liquibase Forum.
+
 [Answer questions on the Liquibase Forum](https://forum.liquibase.org/){ .md-button }
 
 ## StackOverflow
 ![Image title](answer/stack-overflow-logo.png){ align="left" width="72" }
 Answer Liquibase community questions on Stack Overflow.
+
 [Answer questions on StackOverflow](https://stackoverflow.com/questions/tagged/liquibase?tab=newest&page=3&pagesize=15){ .md-button }
 
 ## Chat on Discord
 ![Image title](answer/discord-logo.png){ align="left" width="72" }
 Meet other users and collaborate in real-time on Discord.
+
 [Chat on Discord](https://discord.gg/NVpqM7nNnT){ .md-button }
