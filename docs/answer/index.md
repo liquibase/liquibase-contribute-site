@@ -17,7 +17,7 @@ Answer Liquibase community questions on Stack Overflow.
 [Answer questions on StackOverflow](https://stackoverflow.com/questions/tagged/liquibase?tab=newest&page=3&pagesize=15){ .md-button }
 
 ## Chat on Discord
-![Image title](images/discord-logo.png){ align="left" width="72" }
+![Image title](images/discord-logo.jpg){ align="left" width="72" }
 Meet other users and collaborate in real-time on Discord.
 
 [Chat on Discord](https://discord.gg/NVpqM7nNnT){ .md-button }
