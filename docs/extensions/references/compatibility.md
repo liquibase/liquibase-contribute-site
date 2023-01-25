@@ -2,6 +2,8 @@
 title: Compatibility
 ---
 
+# Extension Compatibility
+
 ## Functional Compatibility
 
 As your extension grows and evolves, it is important to not break your existing users.
