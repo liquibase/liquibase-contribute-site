@@ -121,7 +121,7 @@ The "Minimal Setup" section builds and tests your local branch, but generally yo
 Both IDEs allow you to import the `pom.xml` file in the base of the repository as your "project". This keeps the libraries and build logic the IDE uses in sync with
 what is defined in the canonical pom.xml that Maven and the CI process uses.
 
-### Running the CLI In your IDE
+### Running the CLI In Your IDE
 
 The maven-built package listed above works, but it's not the most efficient way of working. The build process takes a while, and it's difficult to enable debug support.
 Instead, when using an IDE with more "native" support for running classes, you can run the CLI class more directly.

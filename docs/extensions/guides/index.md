@@ -15,6 +15,7 @@ In each guide or sample, you can expect to find:
 
 Here are the available guides, including the APIs they use
 
-| Guide                                                        | Used Extension Points |
-|--------------------------------------------------------------| ---- |
+| Guide                                                        | Used Extension Points                                          |
+|--------------------------------------------------------------|----------------------------------------------------------------|
 | [Additional Database Support](additional-databases/index.md) | liquibase.database, liquibase.sqlgenerator, liquibase.snapshot |
+| [Additional RunWith Options](run-with/index.md)              | liquibase.executor                                             |
