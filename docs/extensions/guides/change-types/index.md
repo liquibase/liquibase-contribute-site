@@ -1,4 +1,8 @@
-# Overview
+---
+title: Overview
+---
+
+# Creating new Change Types
 
 ## Overview
 
@@ -49,4 +53,4 @@ If you have not already created a repository to hold your code, see [Your First 
 
 ## Next Steps
 
-When you are ready to create your new `Change`, head to the [Create an Change](create.md) page.
+When you are ready to create your new `Change`, head to the [Create a Change](create.md) page.
