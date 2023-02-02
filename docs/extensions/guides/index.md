@@ -18,4 +18,7 @@ Here are the available guides, including the APIs they use
 | Guide                                                        | Used Extension Points                                          |
 |--------------------------------------------------------------|----------------------------------------------------------------|
 | [Additional Database Support](additional-databases/index.md) | liquibase.database, liquibase.sqlgenerator, liquibase.snapshot |
-| [Additional RunWith Options](run-with/index.md)              | liquibase.executor                                             |
+| [New Change Types](change-types/index.md)                    | liquibase.change                                               |
+| [Changelog Formats](changelog-formats/index.md)              | liquibase.parser, liquibase.serializesr                        |
+| [New Preconditions](preconditions/index.md)                  | liquibase.precondition                                         |
+| [RunWith Executors](runwith-executors/index.md)              | liquibase.executor                                             |
