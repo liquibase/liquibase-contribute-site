@@ -22,4 +22,5 @@ Here are the available guides, including the APIs they use
 | [Changelog Formats](changelog-formats/index.md)              | liquibase.parser, liquibase.serializesr     |
 | [New Preconditions](preconditions/index.md)                  | liquibase.precondition                      |
 | [RunWith Executors](runwith-executors/index.md)              | liquibase.executor                          |
+| [Snapshot Generators](snapshot-generators/index.md)          | liquibase.snapshot                          |
 | [SQL Generators](sql-generators/index.md)                    | liquibase.sqlgenerator, liquibase.statement |

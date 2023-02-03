@@ -38,7 +38,7 @@ This allows extensions to either define a new format OR override an existing par
 
 ## Prerequisites
 
-Implementing support for additional databases requires an understanding of Java. You will be creating classes, overridding methods, and working with inheritance hierarchies.
+Implementing support for additional databases requires an understanding of Java. You will be creating classes, overriding methods, and working with inheritance hierarchies.
 
 ## Project Setup
 

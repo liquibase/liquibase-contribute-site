@@ -18,7 +18,7 @@ In each milestone, you have an end-goal of working functionality and have a spec
 ## Prerequisites
 
 Implementing support for additional databases requires an understanding of Java. 
-You will be creating classes, overridding methods, and working with inheritance hierarchies.
+You will be creating classes, overriding methods, and working with inheritance hierarchies.
 
 You will also need to understand how to work with the new database.
 As you hit places where Liquibase incorrectly assumes particular SQL will work against your database, you will need to know what the correct SQL is.
