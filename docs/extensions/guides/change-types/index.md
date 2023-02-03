@@ -36,6 +36,8 @@ sequenceDiagram
     `Change` instances define what "change functions" are available to the end user and the arguments they take. 
     They should only deal with database-agnostic `SqlStatement` and not directly interact with the database.     
 
+    See [the SqlGenerator guide](../sql-generators/index.md) for more information on SqlStatements and SqlGenerators.
+
 ## Change Selection
 
 Each `Change` has a "name", and the ChangeLogParser selects the correct implementation by matching the name in the changelog file with the names defined by Change implementations.
