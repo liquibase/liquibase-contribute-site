@@ -6,7 +6,7 @@ title: Report an Issue
 
 Liquibase Core is the main library for the Liquibase community. 
 
-If you have a question about using the liquibase, please ask on the [Liquibase Forum](http://forum.liquibase.org/){:target="_blank"} or in the [Liquibase Discord](https://discord.gg/9yBwMtj){:target="_blank"}.
+If you have a question about using the liquibase, please ask on the [Liquibase Forum](http://forum.liquibase.org/){:target="_blank"} or in the [Liquibase Discord](https://discord.gg/pDB5DfE){:target="_blank"}.
 
 If you think you have found a bug, or have a new feature idea, please start by making sure it hasn't already been [reported](https://github.com/liquibase/liquibase/issues?utf8=%E2%9C%93&q=is%3Aissue){:target="_blank"}. 
 You can search through existing issues to see if there is a similar one reported. Include closed issues as it may have been closed with a solution.

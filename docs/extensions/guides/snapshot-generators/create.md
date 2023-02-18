@@ -25,7 +25,7 @@ When defining the snapshot logic for a particular `DatabaseObject`, the interfac
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your SqlGenerator must have an empty constructor.
+Like most Liquibase extensions, yourSqlGenerator must have an empty constructor.
 
 ### getPriority and replaces
 

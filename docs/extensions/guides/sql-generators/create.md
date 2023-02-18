@@ -25,7 +25,7 @@ When defining the execution logic for a particular `SqlGenerator`, the interface
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your SqlGenerator must have an empty constructor.
+Like most Liquibase extensions, yourSqlGenerator must have an empty constructor.
 
 ### supports()
 

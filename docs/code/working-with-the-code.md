@@ -26,7 +26,7 @@ For more information on unit testing in Liquibase, see the [unit testing page](u
 
 ## Need help?
 
-Visit our [Developer forum](https://forum.liquibase.org/c/liquibase-development/){:target="_blank"} or reach out [on Discord](https://discord.gg/NVpqM7nNnT){target="_blank"}.
+Visit our [Developer forum](https://forum.liquibase.org/c/liquibase-development/){:target="_blank"} or reach out [on Discord](https://discord.gg/pDB5DfE){target="_blank"}.
 
 ## Next Steps
 

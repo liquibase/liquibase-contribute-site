@@ -8,7 +8,7 @@ When adding support for a new changelog parser, the interface you are going to i
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your parser must have an empty constructor.
+Like most Liquibase extensions, yourparser must have an empty constructor.
 
 ### supports()
 

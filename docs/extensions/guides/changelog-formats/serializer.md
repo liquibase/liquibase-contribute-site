@@ -9,7 +9,7 @@ Support for writing a changelog uses the [liquibase.serializer.ChangeLogSerializ
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your serializer must have an empty constructor.
+Like most Liquibase extensions, yourserializer must have an empty constructor.
 
 ### getValidFileExtensions()
 

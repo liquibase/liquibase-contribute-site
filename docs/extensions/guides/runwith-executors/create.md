@@ -15,7 +15,7 @@ When adding support for a new `runWith` option or replacing the default, the int
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your database must have an empty constructor.
+Like most Liquibase extensions, yourdatabase must have an empty constructor.
 
 ### getName()
 

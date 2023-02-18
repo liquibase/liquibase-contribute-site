@@ -27,7 +27,7 @@ Depending on your base class you will have more or less abstract methods which m
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your database must have an empty constructor.
+Like most Liquibase extensions, yourdatabase must have an empty constructor.
 
 ### getPriority()
 

@@ -15,12 +15,15 @@ In each guide or sample, you can expect to find:
 
 Here are the available guides, including the APIs they use
 
-| Guide                                                        | Used Extension Points                       |
-|--------------------------------------------------------------|---------------------------------------------|
-| [Additional Database Support](additional-databases/index.md) | liquibase.database, liquibase.snapshot      |
-| [New Change Types](change-types/index.md)                    | liquibase.change                            |
-| [Changelog Formats](changelog-formats/index.md)              | liquibase.parser, liquibase.serializesr     |
-| [New Preconditions](preconditions/index.md)                  | liquibase.precondition                      |
-| [RunWith Executors](runwith-executors/index.md)              | liquibase.executor                          |
-| [Snapshot Generators](snapshot-generators/index.md)          | liquibase.snapshot                          |
-| [SQL Generators](sql-generators/index.md)                    | liquibase.sqlgenerator, liquibase.statement |
+| Guide                                                          | Used Extension Points                       |
+|----------------------------------------------------------------|---------------------------------------------|
+| [Additional Database Support](additional-databases/index.md)   | liquibase.database, liquibase.snapshot      |
+| [New Change Types](change-types/index.md)                      | liquibase.change                            |
+| [Changelog Formats](changelog-formats/index.md)                | liquibase.parser, liquibase.serializer      |
+| [Configuration Values](configuration-value-providers/index.md) | liquibase.configuration                     |
+| [Path Handlers](path-handlers/index.md)                        | liquibase.resource                          |
+| [New Preconditions](preconditions/index.md)                    | liquibase.precondition                      |
+| [Resource Accessors](resource-accessors/index.md)              | liquibase.resource                          |
+| [RunWith Executors](runwith-executors/index.md)                | liquibase.executor                          |
+| [Snapshot Generators](snapshot-generators/index.md)            | liquibase.snapshot                          |
+| [SQL Generators](sql-generators/index.md)                      | liquibase.sqlgenerator, liquibase.statement |

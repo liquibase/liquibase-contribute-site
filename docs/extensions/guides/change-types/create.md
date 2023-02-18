@@ -15,7 +15,7 @@ Change implementations do not need to be thread safe.  ChangeFactory will genera
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your change must have an empty constructor.
+Like most Liquibase extensions, yourchange must have an empty constructor.
 
 ### generateStatements()
 

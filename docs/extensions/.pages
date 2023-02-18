@@ -1,0 +1,9 @@
+nav:
+    - index.md
+    - env-setup.md
+    - your-first-extension.md
+    - extension-anatomy.md
+    - best-practices.md
+    - integrations
+    - guides
+    - references

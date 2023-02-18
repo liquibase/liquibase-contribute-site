@@ -20,4 +20,4 @@ Answer Liquibase community questions on Stack Overflow.
 ![Image title](images/discord-logo.jpg){ align="left" width="72" }
 Meet other users and collaborate in real-time on Discord.
 
-[Chat on Discord](https://discord.gg/NVpqM7nNnT){ .md-button }
+[Chat on Discord](https://discord.gg/pDB5DfE){ .md-button }

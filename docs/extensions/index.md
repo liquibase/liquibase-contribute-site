@@ -19,6 +19,10 @@ Here are some examples of what you can achieve through extensions:
 If you'd like to have a more comprehensive overview of the Extension API, 
 refer to the [Extension Guides](guides/index.md) for code samples and guides that illustrate various Extension API usage.
 
+!!! note
+
+    If you are looking to build Liquibase **_into_** something rather than building **_onto_** Liquibase, see [the integrations documentation](integrations/index.md) 
+
 ## How to build extensions?
 
 Building a good extension can take a lot of time and effort. 

@@ -15,7 +15,7 @@ Precondition implementations do not need to be thread safe. Liquibase will gener
 
 ### Empty Constructor
 
-Like all Liquibase extensions, your precondition must have an empty constructor.
+Like most Liquibase extensions, yourprecondition must have an empty constructor.
 
 ### check()
 
