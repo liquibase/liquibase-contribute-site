@@ -22,7 +22,7 @@ Within each submodule, the code is structured following the Maven standard layou
 
 ## Testing
 
-For more information on unit testing in Liquibase, see the [unit testing page](unit-testing.md).
+For more information on unit testing in Liquibase, see the [unit testing page](unit-tests.md).
 
 ## Need help?
 

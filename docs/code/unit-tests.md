@@ -2,9 +2,9 @@
 title: Unit Tests
 ---
 
-# How to write unit tests for Liquibase
+# How to Write Unit Tests for Liquibase
 
-Liquibase code contains both unit tests and integration tests. Here are the basics of creating Unit tests used by the
+Liquibase code contains both unit tests and [integration tests](integration-tests.md). Here are the basics of creating Unit tests used by the
 automated build process to validate Liquibase and reduce regressions.
 
 ## What are unit tests?
@@ -166,18 +166,13 @@ The output will show the tests executing like this:
 [INFO] liquibase-maven-plugin [maven-plugin] 
 [INFO] liquibase-cdi [jar]
 [INFO] liquibase-integration-tests [jar]
-[INFO] liquibase-pro-base [pom]
-[INFO] liquibase-pro [jar]
-[INFO] licensing [pom]
-[INFO] licensing-keymgr [jar]
 [INFO] liquibase-root [pom]
 [INFO] liquibase-dist [jar]
-[INFO] licensing-keygen [jar]
 [INFO]
 [INFO] --------------------< org.liquibase:liquibase-core >--------------------
 [INFO] Building liquibase-core 0-SNAPSHOT [1/11]
 [INFO] --------------------------------[ jar ]---------------------------------
-[INFO] ..........[ skipped output ].....................
+ ..........[ skipped output ].....................
 [INFO] -------------------------------------------------------
 [INFO] T E S T S
 [INFO] -------------------------------------------------------
@@ -200,7 +195,8 @@ The output will show the tests executing like this:
 [INFO] Running liquibase.change.ColumnConfigTest
 [INFO] Tests run: 91, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.246 s - in liquibase.change.ColumnConfigTest
 [INFO] Running liquibase.change.ConstraintsConfigTest
-[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s - in liquibase.change.ConstraintsConfigTest ..........[ skipped output ].....................
+[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s - in liquibase.change.ConstraintsConfigTest
+ ..........[ skipped output ].....................
 [INFO] Reactor Summary for liquibase-root:
 [INFO]
 [INFO] liquibase-core ..................................... SUCCESS [01:09 min]
