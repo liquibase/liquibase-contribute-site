@@ -11,6 +11,7 @@ theme:
     - content.action.edit
     - content.code.copy
   logo: /images/logo.svg
+  favicon: /images/favicon.ico
 
 markdown_extensions:
   - tables
