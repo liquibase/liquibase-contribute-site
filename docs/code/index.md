@@ -24,6 +24,7 @@ Spotted a bug? Follow our process on logging it in GitHub Issues.
 Add code to Liquibase to fix a bug or make an enhancement.
 
 - [Setup your development environment](env-setup.md)
+- [Find a good first issue](first-issues.md)
 - [Learn the code](working-with-the-code.md)
 - [Create a pull request](create-pr.md)
 - [Visit our GitHub repo](https://github.com/liquibase/liquibase){ target="_blank" }
