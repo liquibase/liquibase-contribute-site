@@ -1,5 +1,5 @@
 nav:
-    - home
+    - index.md
     - answer
     - write
     - advocate
