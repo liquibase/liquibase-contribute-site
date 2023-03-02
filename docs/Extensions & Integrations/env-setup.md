@@ -4,7 +4,7 @@ title: Dev Environment Setup
 
 # Development Environment Setup
 
-Setting up a development environment for extension development is similar to [what you do for Liquibase development](../code/Get started/env-setup.md),
+Setting up a development environment for extension development is similar to [what you do for Liquibase development](../code/Get Started/env-setup.md),
 but uses an existing Liquibase installation as the runtime for your extension. 
 
 ## Clone the repository
