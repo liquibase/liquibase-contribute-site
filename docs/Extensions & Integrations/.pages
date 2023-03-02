@@ -4,6 +4,7 @@ nav:
     - your-first-extension.md
     - extension-anatomy.md
     - best-practices.md
+    - Extension Guides
+    - Extension References
     - integrations
-    - guides
-    - references
+    - ...

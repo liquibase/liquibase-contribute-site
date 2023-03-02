@@ -1,0 +1,13 @@
+nav:
+    - index.md
+    - add-a-database
+    - add-a-native-database-executor
+    - add-a-change-type
+    - add-a-changelog-format
+    - add-a-configuration-value-provider
+    - add-a-path-handler
+    - add-a-precondition
+    - add-a-resource-accessor
+    - add-a-snapshot-generator
+    - add-a-sql-generator
+    - ...

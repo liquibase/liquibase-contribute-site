@@ -1,0 +1,7 @@
+nav:
+    - env-setup.md
+    - first-issues.md
+    - working-with-the-code.md
+    - coding-style.md
+    - create-pr.md
+    - ...

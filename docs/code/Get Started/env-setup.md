@@ -1,7 +1,7 @@
 ---
-title: Dev Environment Setup 
+title: Setup Dev Environment 
 ---
-# Development Environment Setup
+# Setup Development Environment
 
 ## Fork and Clone the Repository
 
