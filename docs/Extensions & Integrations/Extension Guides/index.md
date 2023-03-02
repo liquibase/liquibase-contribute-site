@@ -15,15 +15,15 @@ In each guide or sample, you can expect to find:
 
 Here are the available guides, including the APIs they use
 
-| Guide                                                               | Extension Points                            |
-|---------------------------------------------------------------------|---------------------------------------------|
-| [Add New Database Support](add-a-database/index.md)                 | liquibase.database, liquibase.snapshot      |
-| [New Change Types](add-a-change-type/index.md)                      | liquibase.change                            |
-| [Changelog Formats](add-a-changelog-format/index.md)                | liquibase.parser, liquibase.serializer      |
-| [Configuration Values](add-a-configuration-value-provider/index.md) | liquibase.configuration                     |
-| [Path Handlers](add-a-path-handler/index.md)                        | liquibase.resource                          |
-| [New Preconditions](add-a-precondition/index.md)                    | liquibase.precondition                      |
-| [Resource Accessors](add-a-resource-accessor/index.md)              | liquibase.resource                          |
-| [RunWith Executors](add-a-native-database-executor/index.md)        | liquibase.executor                          |
-| [Snapshot Generators](add-a-snapshot-generator/index.md)            | liquibase.snapshot                          |
-| [SQL Generators](add-a-sql-generator/index.md)                      | liquibase.sqlgenerator, liquibase.statement |
+| Guide                                                                              | Extension Points                            |
+|------------------------------------------------------------------------------------|---------------------------------------------|
+| [Add a Database](add-a-database/index.md)                                          | liquibase.database, liquibase.snapshot      |
+| [Add a Native Database Executor](add-a-native-database-executor/index.md)          | liquibase.executor                          |
+| [Add a Change Type](add-a-change-type/index.md)                                    | liquibase.change                            |
+| [Add a Changelog Format](add-a-changelog-format/index.md)                          | liquibase.parser, liquibase.serializer      |
+| [Add a Configuration Value Provider](add-a-configuration-value-provider/index.md)  | liquibase.configuration                     |
+| [Add a Path Handler](add-a-path-handler/index.md)                                  | liquibase.resource                          |
+| [Add a Precondition](add-a-precondition/index.md)                                  | liquibase.precondition                      |
+| [Add a Resource Accessor](add-a-resource-accessor/index.md)                        | liquibase.resource                          |
+| [Add a Snapshot Generator](add-a-snapshot-generator/index.md)                      | liquibase.snapshot                          |
+| [Add a SQL Generator](add-a-sql-generator/index.md)                                | liquibase.sqlgenerator, liquibase.statement |
