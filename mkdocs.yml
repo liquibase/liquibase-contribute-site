@@ -1,0 +1,45 @@
+site_name: contribute.liquibase.com
+repo_url: https://github.com/liquibase/liquibase-contribute-site
+edit_uri: ./edit/main/docs
+
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - navigation.path
+    - navigation.tabs
+    - navigation.sections
+    - content.action.edit
+    - content.code.copy
+  logo: /images/logo.svg
+  favicon: /images/favicon.ico
+
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - def_list
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - git-revision-date-localized:
+      enable_creation_date: true
+      enabled: !ENV [CI, false] ## Page rebuild is much slower with this enabled, so disabling unless the CI=true env variable is set, like on the build server
+  - search
+  - awesome-pages
+
+extra_css:
+  - css/custom.css
+
+extra_javascript:
+  - js/custom.js
