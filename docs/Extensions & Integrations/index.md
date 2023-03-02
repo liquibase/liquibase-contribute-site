@@ -17,7 +17,7 @@ Here are some examples of what you can achieve through extensions:
 - Create new commands or enhance existing commands with new logic
 
 If you'd like to have a more comprehensive overview of the Extension API, 
-refer to the [Extension Guides](guides/index.md) for code samples and guides that illustrate various Extension API usage.
+refer to the [Extension Guides](Extension Guides/index.md) for code samples and guides that illustrate various Extension API usage.
 
 !!! note
 
@@ -31,7 +31,7 @@ Here is what each section of the API docs can help you with:
 - [Your First Extension](your-first-extension.md) teaches fundamental concepts for building extensions with the Hello World sample.
 - [Extension Anatomy](extension-anatomy.md) describes how extension code works together.
 - [Dev Environment Setup](env-setup.md) helps you set up your local environment for development work.
-- [Extension Guides](guides/index.md) includes guides and code samples that explain specific usages of the API.
+- [Extension Guides](Extension Guides/index.md) includes guides and code samples that explain specific usages of the API.
 - [Best Practices](best-practices.md) showcases best practices for providing a great user experience with your extension.
 
 ## Looking for help?

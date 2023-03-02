@@ -18,7 +18,7 @@ Before creating a pull request, please read our requirements that explain the mi
     - A PR for code cleanup/refactoring/quick-bugfixes can be self-contained and not reference a separate issue
 2. PRs must have the description template filled out, describing the changes you are making and why plus the choices and considerations you made
 3. PRs must include tests covering the changed behavior or a description of why tests need not/cannot be written
-    - See the [unit test](unit-tests.md) and [integration test](integration-tests.md) pages for more information 
+    - See the [unit test](../Test Your Code/unit-tests.md) and [integration test](../Test Your Code/integration-tests.md) pages for more information 
 
 !!! Note
     We appreciate you taking the time to contribute! 

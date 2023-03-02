@@ -56,7 +56,7 @@ Scope.getCurrentScope().getSingleton(LiquibaseConfiguration.class)
         .registerProvider(provider);
 ```
 
-If your integration needs to define its own custom value provider, see [the ConfigurationValueProvider guide](../guides/configuration-value-providers/index.md)  
+If your integration needs to define its own custom value provider, see [the ConfigurationValueProvider guide](../Extension Guides/add-a-configuration-value-provider/index.md)  
 
 !!! tip
     

@@ -66,4 +66,4 @@ Scope.child(Scope.Attr.resourceAccessor, resourceAccessor, () -> {
 
 ## Custom ResourceAccessors
 
-If your integration needs to define its own custom value provider, see [the ResourceAccessor guide](../guides/resource-accessors/index.md)
+If your integration needs to define its own custom value provider, see [the ResourceAccessor guide](../Extension Guides/add-a-resource-accessor/index.md)

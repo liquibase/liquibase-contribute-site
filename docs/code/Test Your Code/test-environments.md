@@ -101,7 +101,7 @@ To start and stop test systems manually, you can use the `liquibase sdk system u
 Therefore, to use them you must either:
 
 - Run `mvn package` from the root of the Liquibase repository and copy `liquibase-extension-testing/target/liquibase-extension-testing-0-SNAPSHOT.jar` to your LIQUIBASE_HOME/lib directory 
-- From your IDE, [run](env-setup.md) `liquibase.integration.commandline.LiquibaseLauncher` using the `liquibase-extension-testing` classpath 
+- From your IDE, [run](../Get Started/env-setup.md) `liquibase.integration.commandline.LiquibaseLauncher` using the `liquibase-extension-testing` classpath 
 
 The "up" and "down" commands let you start and top the test environments as needed. 
 

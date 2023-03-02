@@ -24,6 +24,6 @@ Here are the available guides, including the APIs they use
 | [Path Handlers](add-a-path-handler/index.md)                        | liquibase.resource                          |
 | [New Preconditions](add-a-precondition/index.md)                    | liquibase.precondition                      |
 | [Resource Accessors](add-a-resource-accessor/index.md)              | liquibase.resource                          |
-| [RunWith Executors](add-a-rnative-database-executor/index.md)       | liquibase.executor                          |
+| [RunWith Executors](add-a-native-database-executor/index.md)        | liquibase.executor                          |
 | [Snapshot Generators](add-a-snapshot-generator/index.md)            | liquibase.snapshot                          |
 | [SQL Generators](add-a-sql-generator/index.md)                      | liquibase.sqlgenerator, liquibase.statement |

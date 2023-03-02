@@ -42,7 +42,7 @@ Therefore, you only have to check that the Database object is correct.
 
 ### getPriority()
 
-Is used as other [priority](../../references/priority.md) values to control which SqlGenerator implementation to use out of all the ones that support the SqlStatement.
+Is used as other [priority](../../Extension References/priority.md) values to control which SqlGenerator implementation to use out of all the ones that support the SqlStatement.
 
 If unsure, use `PRIORITY_DEFAULT` for default/standard logic and `PRIORITY_DATABASE` for logic unique to a database. 
 

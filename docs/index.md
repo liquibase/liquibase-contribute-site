@@ -18,7 +18,7 @@ Answer questions about Liquibase in Discord, our forum, and StackOverflow.
 ![Image title](images/content-logo.png){ align="left" width="72" }
 Share articles and videos about Liquibase, or improvements to documentation
 
-[Contribute Content](content/index.md){ .md-button }
+[Contribute Content](write/index.md){ .md-button }
 
 ## Be an Advocate
 ![Image title](images/advocate-logo.png){ align="left" width="72" }

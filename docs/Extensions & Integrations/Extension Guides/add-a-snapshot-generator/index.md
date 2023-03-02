@@ -40,7 +40,7 @@ sequenceDiagram
 ## SnapshotGenerator Selection
 
 Each `SnapshotGenerator` has a `getPriority()` method which the `SnapshotGeneratorFactory` uses to determine which implementation best snapshots a type for the given database.
-Of all the supported `SnapshotGenerator` implementations, Liquibase will use the one with the highest [priority](../../references/priority.md).
+Of all the supported `SnapshotGenerator` implementations, Liquibase will use the one with the highest [priority](../../Extension References/priority.md).
 
 ## Prerequisites
 

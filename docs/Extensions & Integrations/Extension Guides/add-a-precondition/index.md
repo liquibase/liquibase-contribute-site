@@ -21,7 +21,7 @@ but extensions can provide **_any_** functionality desired.
 
 Each `Precondition` has a "name", and the ChangeLogParser selects the correct implementation by matching the name in the changelog file with the names defined by Precondition implementations.
 
-`Preconditions` do yet support a [priority](../../references/priority.md) mechanism, so each precondition must have a unique name.
+`Preconditions` do yet support a [priority](../../Extension References/priority.md) mechanism, so each precondition must have a unique name.
 
 ## Prerequisites
 

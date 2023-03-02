@@ -36,13 +36,13 @@ sequenceDiagram
     `Change` instances define what "change functions" are available to the end user and the arguments they take. 
     They should only deal with database-agnostic `SqlStatement` and not directly interact with the database.     
 
-    See [the SqlGenerator guide](../sql-generators/index.md) for more information on SqlStatements and SqlGenerators.
+    See [the SqlGenerator guide](../add-a-sql-generator/index.md) for more information on SqlStatements and SqlGenerators.
 
 ## Change Selection
 
 Each `Change` has a "name", and the ChangeLogParser selects the correct implementation by matching the name in the changelog file with the names defined by Change implementations.
 
-To determine which `Change` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../references/priority.md).
+To determine which `Change` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../Extension References/priority.md).
 This allows extensions to either define a new Change OR override an existing Change with a given name.
 
 ## Prerequisites

@@ -34,7 +34,7 @@ on the Change class.
 This annotation is required, and requires the following attributes to be set:
 
 - `name` is the name used in the changelog file. Example: `createTable`
-- `priority` is used as other [priority](../../references/priority.md) values to control which Change implementation for a given name should be used. If unsure, use `ChangeMetaData.PRIORITY_DEFAULT`
+- `priority` is used as other [priority](../../Extension References/priority.md) values to control which Change implementation for a given name should be used. If unsure, use `ChangeMetaData.PRIORITY_DEFAULT`
 - `description` gives a human-readable description of what the change does
 
 ### Define Configuration Attributes

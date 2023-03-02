@@ -34,7 +34,7 @@ However, extensions can plug in any other database interactions needed. For exam
 
 Each `Executor` has a "name", and the calling code always sends each `SqlStatement` to a particular executor name. By default, the executor name used is `jdbc`, but that can be overridden with the `runWith` attribute on `changeSet`.
 
-To determine which `Executor` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../references/priority.md).
+To determine which `Executor` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../Extension References/priority.md).
 This allows extensions to either define a new name OR override an existing Executor with a given name.
 
 

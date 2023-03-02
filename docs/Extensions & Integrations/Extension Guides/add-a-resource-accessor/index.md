@@ -14,8 +14,8 @@ Liquibase ships with ResourceAccessors that know how to find files in directorie
 
 ## ResourceAccessor Creation
 
-There is no [priority](../../references/priority.md) for ResourceAccessors. They are either created explicitly by the [integrations](../../integrations/index.md) or 
-implicitly by a [PathHandler](../path-handlers/index.md).
+There is no [priority](../../Extension References/priority.md) for ResourceAccessors. They are either created explicitly by the [integrations](../../integrations/index.md) or 
+implicitly by a [PathHandler](../add-a-path-handler/index.md).
 
 ## Prerequisites
 

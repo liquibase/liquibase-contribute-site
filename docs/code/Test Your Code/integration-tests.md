@@ -25,9 +25,9 @@ Integration tests should be written whenever there is new database-interacting b
 Because Liquibase is designed to be cross-database, most of the code is not database dependent and therefore should be tested with [unit tests](unit-tests.md).
 In general, integration tests are needed if and only if you are creating or changing:
 
-- [SqlGenerators](../extensions/guides/sql-generators)
-- [SnapshotGenerators](../extensions/guides/snapshot-generators)
-- [Preconditions](../extensions/guides/preconditions)
+- [SqlGenerators](../Extensions & Integrations/Extension Guides/sql-generators)
+- [SnapshotGenerators](../Extensions & Integrations/Extension Guides/snapshot-generators)
+- [Preconditions](../Extensions & Integrations/Extension Guides/preconditions)
 
 Write Test Harness integration tests when:
 

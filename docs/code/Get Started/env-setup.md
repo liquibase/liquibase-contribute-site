@@ -11,7 +11,7 @@ To be able to eventually contribute changes to the project, you must first creat
 
 ### 1. Browse to the [Liquibase project in GitHub](https://github.com/liquibase/liquibase){:target="_blank"} 
 
-![Liquibase project page](images/project-page.png)
+![Liquibase project page](../images/project-page.png)
 
 ### 2. Click on the Fork button in the top-right corner
 

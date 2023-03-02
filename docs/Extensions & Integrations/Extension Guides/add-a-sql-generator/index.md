@@ -12,7 +12,7 @@ However, they only define the **_what_**, not the **_how_**.
 
 It is the job of the `liquibase.sqlgenerator.SqlGenerator` implementations to know how to actually apply those operations to a given database.
 
-For more information on creating new change types, see the [change types guide](../change-types/index.md).
+For more information on creating new change types, see the [change types guide](../add-a-change-type/index.md).
 
 !!! tip
 
@@ -49,7 +49,7 @@ sequenceDiagram
 
 Each `SqlGenerator` has a `supports()` method which the `SqlGeneratorFactory` uses to determine which implementations can apply the SqlStatement to the given database.
 
-Of all the supported `SqlGenerator` implementations, Liquibase will use the one with the highest [priority](../../references/priority.md).
+Of all the supported `SqlGenerator` implementations, Liquibase will use the one with the highest [priority](../../Extension References/priority.md).
 This allows extensions to either define a default logic for a SqlStatement OR override other SqlGenerators with a better implementation.
 
 ## Prerequisites

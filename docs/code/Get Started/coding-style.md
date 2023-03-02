@@ -41,7 +41,7 @@ Part of readability is consistency. Some specific examples of code styles we gen
         - **One word** in documentation and output strings. Example: `Found 3 changesets`
         - **Two words** in code references. Example: `liquibase.change.ChangeSet` and `CHANGE_LOG_CSV`
         - The Reason for the difference is that the documentation standard changed to one word, but changing the code would be a breaking API change and has not been made yet. We are preserving consistency in naming until we can do a complete code change to the new style. 
-- Tests conventions can be found in the [unit tests](unit-tests.md) and [integration tests](integration-tests.md) sections
+- Tests conventions can be found in the [unit tests](../Test Your Code/unit-tests.md) and [integration tests](../Test Your Code/integration-tests.md) sections
 
 
 

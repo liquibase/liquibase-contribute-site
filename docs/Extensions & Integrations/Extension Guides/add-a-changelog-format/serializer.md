@@ -17,7 +17,7 @@ The method returns the various file extensions that correspond to this changelog
 
 ### getPriority()
 
-Returns the [priority](../../references/priority.md) of the serializer. Of all the serializers that support the changelog file extension, Liquibase will choose the one with the highest priority.
+Returns the [priority](../../Extension References/priority.md) of the serializer. Of all the serializers that support the changelog file extension, Liquibase will choose the one with the highest priority.
 
 ### write()
 

@@ -33,7 +33,7 @@ sequenceDiagram
 
 Each `ChangeLogParser` has a method to has a `supports()` method which determines if it can parse the given file. 
 
-To determine which supported `ChangeLogParser` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../references/priority.md).
+To determine which supported `ChangeLogParser` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../Extension References/priority.md).
 This allows extensions to either define a new format OR override an existing parser.
 
 ## Prerequisites

@@ -33,7 +33,7 @@ If a file already exists at that location, a `java.nio.file.FileAlreadyExistsExc
 
 ### getResourceAccessor()
 
-Constructs a [ResourceAccessor](../resource-accessors/index.md) for the given path. 
+Constructs a [ResourceAccessor](../add-a-resource-accessor/index.md) for the given path. 
 
 Because ResourceAccessors are used to look up files, the passed path should be a directory or some other "multiple-file" type location such as a zip file.    
 

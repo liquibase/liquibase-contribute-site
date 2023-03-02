@@ -8,7 +8,7 @@ title: Overview
 
 `liquibase.resource.PathHandler` implementations allow Liquibase to read files from different physical locations. 
 
-They differ from [ResourceAccessors](../resource-accessors/index.md) in that `ResourceAccesors` are used for looking up file references within changelogs, 
+They differ from [ResourceAccessors](../add-a-resource-accessor/index.md) in that `ResourceAccesors` are used for looking up file references within changelogs, 
 whereas `PathHandlers` are used to look up files referenced outside changelogs. 
 
 !!! note
@@ -28,7 +28,7 @@ sequenceDiagram
 
 ## PathHandler Selection
 
-Each `PathHandler` defines a `getPriority(path)` method which returns the [priority](../../references/priority.md) for handling that particular path.
+Each `PathHandler` defines a `getPriority(path)` method which returns the [priority](../../Extension References/priority.md) for handling that particular path.
 `PathHandlerFactory` will use the `PathHandler` that returns the highest priority value.
 This allows extensions to either define a new way to look up files OR override existing logic.
 
