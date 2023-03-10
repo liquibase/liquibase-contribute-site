@@ -23,10 +23,10 @@ Spotted a bug? Follow our process on logging it in GitHub Issues.
 
 Add code to Liquibase to fix a bug or make an enhancement.
 
-- [Setup your development environment](Get Started/env-setup.md)
-- [Find a good first issue](Get Started/first-issues.md)
-- [Learn the code](Get Started/working-with-the-code.md)
-- [Create a pull request](Get Started/create-pr.md)
+- [Setup your development environment](get-started/env-setup.md)
+- [Find a good first issue](get-started/first-issues.md)
+- [Learn the code](get-started/working-with-the-code.md)
+- [Create a pull request](get-started/create-pr.md)
 - [Visit our GitHub repo](https://github.com/liquibase/liquibase){ target="_blank" }
 
 ## Create an extension
@@ -35,4 +35,4 @@ Add code to Liquibase to fix a bug or make an enhancement.
 
 Modify an existing extension, or create a new one from scratch.
 
-[Create an Extension](../Extensions & Integrations/index.md){ .md-button }
+[Create an Extension](../extensions-integrations/index.md){ .md-button }
