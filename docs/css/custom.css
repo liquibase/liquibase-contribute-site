@@ -1,9 +1,22 @@
-.global-links li {
-    color: #FFFFFF;
+.header-links li {
+    color: #000000;
     font-size: 14px;
     font-weight: 400;
-    font-family: Lato, Helvetica, Arial, sans-serif;
 
     display: inline-block;
     margin: 0 0 0 12px;
+}
+
+.md-header, .md-tabs {
+    background-color: #fff;
+}
+
+.md-tabs, .md-header--shadow {
+    box-shadow: 0 0 20px rgb(41 98 255 / 12%);
+}
+
+.md-tabs__link {
+    font-size: 17px;
+    font-weight: 400;
+    color: #0e0033;
 }

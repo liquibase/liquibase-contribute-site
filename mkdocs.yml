@@ -39,6 +39,7 @@ plugins:
   - awesome-pages
 
 extra_css:
+  - css/shared.css
   - css/custom.css
 
 extra_javascript:

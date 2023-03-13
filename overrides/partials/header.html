@@ -58,39 +58,6 @@
             </div>
         </div>
 
-        <!-- Color palette -->
-        {% if not config.theme.palette is mapping %}
-        <form class="md-header__option" data-md-component="palette">
-            {% for option in config.theme.palette %}
-            {% set scheme = option.scheme | d("default", true) %}
-            <input
-                    class="md-option"
-                    data-md-color-media="{{ option.media }}"
-                    data-md-color-scheme="{{ scheme | replace(' ', '-') }}"
-                    data-md-color-primary="{{ option.primary | replace(' ', '-') }}"
-                    data-md-color-accent="{{ option.accent | replace(' ', '-') }}"
-                    {% if option.toggle %}
-                    aria-label="{{ option.toggle.name }}"
-                    {% else %}
-                    aria-hidden="true"
-                    {% endif %}
-                    type="radio"
-                    name="__palette"
-                    id="__palette_{{ loop.index }}"
-            />
-            {% if option.toggle %}
-            <label
-                    class="md-header__button md-icon"
-                    title="{{ option.toggle.name }}"
-                    for="__palette_{{ loop.index0 or loop.length }}"
-                    hidden
-            >
-                {% include ".icons/" ~ option.toggle.icon ~ ".svg" %}
-            </label>
-            {% endif %}
-            {% endfor %}
-        </form>
-        {% endif %}
 
         <!-- Button to open search modal -->
         {% if "material/search" in config.plugins %}
@@ -98,18 +65,17 @@
             {% include ".icons/material/magnify.svg" %}
         </label>
 
-        <!-- Search interface -->
-        {% include "partials/search.html" %}
-        {% endif %}
+                <!-- Search interface -->
+                {% include "partials/search.html" %}
+                {% endif %}
 
         <div class="global-links">
             <ul class="header-links">
-            <li><a target="_blank" rel="noopener" href="https://hub.liquibase.com">Liquibase Hub</a></li>
                     <li><a href="https://www.liquibase.org">Community</a></li>
                     <li><a target="_blank" rel="noopener" href="https://docs.liquibase.com/">Documentation</a></li>
                     <li><a target="_blank" rel="noopener" href="https://learn.liquibase.com/index">University</a></li>
                     <li><a href="https://liquibase.com/contact">Contact Us</a></li>
-            </ul>
+                </ul>
         </div>
 
         <!-- Repository information -->
