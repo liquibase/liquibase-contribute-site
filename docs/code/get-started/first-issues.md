@@ -25,5 +25,5 @@ If you are looking for sometime to start with, they are a great place to start.
 ## Next Steps
 
 - [Set up your development environment](env-setup.md)
-- [Understand the code](working-with-the-code.md)
+- [Understand the code](../architecture/code-structure.md)
 - [Create a Pull Request](create-pr.md)

@@ -150,6 +150,6 @@ Now that your local environment is set up, you can start making the changes you 
 
 For more information, see:
 
-- [Working with the code](working-with-the-code.md)
+- [Working with the code](../architecture/code-structure.md)
 - [Good First Issues](first-issues.md)
 - [Create a Pull Request](create-pr.md)

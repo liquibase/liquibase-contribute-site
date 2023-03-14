@@ -12,7 +12,7 @@ However, they only define the **_what_**, not the **_how_**.
 
 It is the job of the `liquibase.sqlgenerator.SqlGenerator` implementations to know how to actually apply those operations to a given database.
 
-For more information on creating new change types, see the [change types guide](../add-a-change-type/index.md).
+For more information on change types, see the [change types guide](../../../code/api/change-change.md).
 
 !!! tip
 
