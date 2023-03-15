@@ -7,3 +7,7 @@
     display: inline-block;
     margin: 0 0 0 12px;
 }
+
+.md-sidebar .md-nav__link {
+    color: black !important;
+}
