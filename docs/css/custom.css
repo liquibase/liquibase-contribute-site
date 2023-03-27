@@ -16,7 +16,234 @@
 }
 
 .md-tabs__link {
+    color: #0e0033;
     font-size: 17px;
     font-weight: 400;
+    opacity: 1;
+    padding-bottom: 25px;
+    position: relative;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+}
+
+.md-tabs__link:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff1744;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: bottom right;
+    transform-origin: bottom right;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s,-webkit-transform .3s;
+}
+
+.md-tabs__link--active:after,
+.md-tabs__link:hover:after {
+    -webkit-transform-origin: bottom left;
+    transform-origin: bottom left;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+/* Custom styles */
+a,
+button,
+.button {
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 18px 11px 18px;
+    line-height: 1;
+    font-size: 17px;
+    min-width: 110px;
+    text-align: center;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.com {
+    background-color: #ff1744;
+    color: #fff;
+}
+
+.com:hover {
+    background-color: #dd002b;
+}
+
+.trp {
+    background-color: transparent;
+    color: #2962ff;
+    border: 1px solid #2962ff;
+}
+
+.trp:hover {
+    background-color: #eaefff;
+}
+
+.md-tabs__item {
+    height: auto;
+}
+
+.md-tabs__link:hover {
     color: #0e0033;
+}
+
+.header-btns {
+    display: flex;
+    gap: 15px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-spacebetween {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+header {
+    padding: 10px 40px 0 40px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    z-index: 99999;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 20px rgba(41,98,255,.12);
+    box-shadow: 0 0 20px rgba(41,98,255,.12);
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0
+}
+
+nav.md-tabs {
+    display: none;
+    opacity: 0;
+}
+
+.custom-header-search {
+    justify-content: flex-end;
+}
+
+.md-header .md-search__inner {
+    padding: 0;
+    width: 30px;
+}
+
+.md-header .md-header__button.md-logo {
+    display: block;
+}
+
+.md-header .md-search__input,
+.md-header__button.md-logo {
+    padding: 0;
+    margin: 0;
+}
+
+[data-md-toggle=search]:checked~.md-header .md-search__input {
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
+}
+
+.md-header .md-search {
+    padding: 0;
+}
+
+.md-header .md-header__source {
+    max-width: none;
+    margin: 0;
+    width: auto;
+}
+
+.md-header__nav {
+    min-height: 66px;
+}
+
+.md-header .md-tabs__list {
+    margin: 0;
+}
+
+.md-header__button.md-logo img {
+    height: auto;
+    width: 210px;
+}
+
+.md-header .md-search__form,
+.md-header .md-search__form:hover {
+    background-color: transparent;
+}
+
+.md-header .md-search__form {
+    height: 30px;
+}
+
+.md-search__icon.md-icon {
+    cursor: pointer;
+}
+
+.md-search__icon.md-icon svg {
+    fill: #0e0033;
+}
+
+.header-links .menu {
+    margin: 0;
+    padding: 0;
+}
+
+.header-links a {
+    color: rgba(14,0,51,.7);
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+}
+
+.header-links a:hover {
+    color: #ff1744;
+}
+
+.md-header__button.md-icon svg {
+    fill: #2962ff;
+}
+
+.md-header .md-search__icon[for=__search] {
+    left: 3px;
+    top: 4px;
+}
+
+.md-footer .md-footer-meta {
+    background-color: #1e1041;
+}
+
+.md-header .md-search__output {
+    top: 35px;
+    z-index: 9999;
+}
+
+
+@media screen and (max-width: 1219px) {
+    .header-btns,
+    .md-header__nav {
+        display: none;
+    }
 }
