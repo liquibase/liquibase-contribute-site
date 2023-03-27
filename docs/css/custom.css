@@ -98,11 +98,6 @@ button,
     color: #0e0033;
 }
 
-.header-btns {
-    display: flex;
-    gap: 15px;
-}
-
 .d-flex {
     display: flex;
 }
