@@ -1,4 +1,4 @@
-# Add a native Executor
+# Add a Native Executor
 
 --8<-- "extension-setup.md"
 
