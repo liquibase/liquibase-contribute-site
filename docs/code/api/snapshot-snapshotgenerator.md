@@ -1,31 +1,52 @@
-# Create a SnapshotGenerator
+---
+title: snapshot.SnapshotGenerator
+---
+
+# liquibase.snapshot.SnapshotGenerator Interface
 
 ## Overview
 
-When defining the snapshot logic for a particular `DatabaseObject`, the interface you are going to implement is [liquibase.snapshot.SnapshotGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/SnapshotGenerator.html){:target="_blank"}.
+`liquibase.snapshot.SnapshotGenerator` implementations define how to convert the "describe what you want to snapshot, not how to do it" requests 
+into the driver calls and queries your database understands.
+
+Liquibase defines a database-independent metadata model in [liquibase.snapshot.DatabaseSnapshot](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/DatabaseSnapshot.html){:target="_blank"}.
+That model contains standardized [liquibase.structure.DatabaseObject](https://javadocs.liquibase.com/liquibase-core/liquibase/structure/DatabaseObject.html){:target="_blank"} objects such as
+[liquibase.structure.core.Table](https://javadocs.liquibase.com/liquibase-core/liquibase/structure/core/Table.html){:target="_blank"}.
+
+The snapshot logic used in `liquibase snapshot`, `liquibase diff`, `liquibase diff-changelog`, and any other "check the current database structure" operations rely on `liquibase.snapshot.SnapshotGenerator`
+implementations to read the database's metadata and create the corresponding `DatabaseObject` objects.
+
+```mermaid
+sequenceDiagram
+    participant DatabaseSnapshot
+    participant SnapshotFactory
+    participant SnapshotGenerator
+    participant Database
+    DatabaseSnapshot->>SnapshotFactory: Snapshot the DatabaseObjects
+    SnapshotFactory->>SnapshotGenerator: Snapshot a particular type
+    SnapshotGenerator->>Database: Executes Query
+    SnapshotGenerator-->>DatabaseSnapshot: Returns DatabaseObject
+```
 
 !!! tip
 
-    There is a [liquibase.snapshot.jvm.JdbcSnapshotGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/jvm/JdbcSnapshotGenerator.html){:target="_blank"} convenience base class that is used for all the standard `DatabaseObject` SnapshotGenerators which
-    separates the "create the base object" logic from the "add to an object" logic plus has caching built into it. 
+    The default SnapshotGenerators for a given DatabaseObject are named by adding "SnapshotGenerator" to the DatabaseObject's class name.
+    For example, Column -> ColumnSnapshotGenerator.
 
-!!! tip
-
-    The standard SnapshotGenerators tend to have overridable functions for commonly variable portions of the snapshot logic, so you generally shouldn't override
-    `snapshot()` itself but more targeted methods instead.
+    For SnapshotGenerators that handle specific environments, append a description of what makes it different to the end.
+    For example, ColumnSnapshotGenerator -> ColumnSnapshotGeneratorOracle
 
 
-!!! tip
+## SnapshotGenerator Selection
 
-    Specifying database-specific functionality is best done with `if (database instanceof ExampleDatabase)` blocks around the database-specific logic. 
+Each `SnapshotGenerator` has a `getPriority()` method which the `SnapshotGeneratorFactory` uses to determine which implementation best snapshots a type for the given database.
+Of all the supported `SnapshotGenerator` implementations, Liquibase will use the one with the highest [priority](../../extension-references/priority.md).
 
-    Using "instanceof" rather than "equals" allows the logic to apply to any subclasses (variants) of the given database.
-
-## Implementing
+## API Highlights
 
 ### Empty Constructor
 
-Like most Liquibase extensions, yourSqlGenerator must have an empty constructor.
+Liquibase requires implementations to have an empty constructor.
 
 ### getPriority and replaces
 
@@ -84,48 +105,6 @@ _2. The snapshot system will collect all the SnapshotGenerators that say they sh
 _3. After all the SnapshotGenerators have added their information to the Table object, it's returned to the calling code._
 
 
-## Register your Class
+### Registration
 
-Like all extensions, your SqlGenerator must be registered by adding your class name to `META-INF/services/liquibase.snapshot.SnapshotGenerator`
-
-## Example Code
-
-```java
-package com.example.snapshot;
-
-import com.example.database.ExampleDatabase;
-import liquibase.database.Database;
-import liquibase.snapshot.CachedRow;
-import liquibase.snapshot.SnapshotGenerator;
-import liquibase.snapshot.jvm.ColumnSnapshotGenerator;
-import liquibase.structure.DatabaseObject;
-import liquibase.structure.core.Column;
-
-public class SnapshotColumnGeneratorExample extends ColumnSnapshotGenerator {
-
-    @Override
-    public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
-        if (database instanceof ExampleDatabase) {
-            return super.getPriority(objectType, database);
-        } else {
-            return PRIORITY_NONE;
-        }
-    }
-
-    @Override
-    public Class<? extends SnapshotGenerator>[] replaces() {
-        return new Class[] {
-                ColumnSnapshotGenerator.class
-        };
-    }
-
-    @Override
-    protected Object readDefaultValue(CachedRow columnMetadataResultSet, Column columnInfo, Database database) {
-        if (columnInfo.getType().getTypeName().equalsIgnoreCase("json")) {
-            return columnMetadataResultSet.get("default_value_json");
-        } else {
-            return super.readDefaultValue(columnMetadataResultSet, columnInfo, database);
-        }
-    }
-}
-```
+Implementations are registered by adding it to `META-INF/services/liquibase.snapshot.SnapshotGenerator`

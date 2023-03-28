@@ -1,4 +1,6 @@
-# Create a Precondition
+# Add a Precondition
+
+--8<-- "extension-setup.md"
 
 ## Overview
 
@@ -11,33 +13,9 @@ Precondition implementations do not need to be thread safe. Liquibase will gener
     There is a [liquibase.precondition.AbstractPrecondition](https://javadocs.liquibase.com/liquibase-core/liquibase/precondition/AbstractPrecondition.html){:target="_blank"} base class you can use which limits the number of methods
     you must implement. 
 
-## Implementing
+## API Documentation
 
-### Empty Constructor
-
-Like most Liquibase extensions, yourprecondition must have an empty constructor.
-
-### check()
-
-This function contains your logic to determine if the precondition passes or fails. 
-
-If the precondition fails, throw a `PreconditionFailedException` describing the problem.
-
-If you cannot determine whether the precondition passed or failed, throw a `PreconditionErrorException` describing the problem.
-
-### validate() and warn()
-
-Override these methods to check whether your precondition can be run or not given its configuration and environment.  
-
-### Define Configuration Attributes
-
-If your precondition requires custom attributes to be set (tableName, etc.), create get/set methods for them. 
-
-Any public get/set pairs will be exposed to the end user as attributes on the precondition.
-
-## Register your Class
-
-Like all extensions, your executor must be registered by adding your class name to `META-INF/services/liquibase.precondition.Precondition`
+A complete description of the API, including what methods must be implemented and how is available [on the liquibase.precondition.Precondition API page](../../code/api/precondition-precondition.md).
 
 ## Example Code
 

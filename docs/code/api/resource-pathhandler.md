@@ -1,8 +1,8 @@
 ---
-title: Overview
+title: resource.PathHandler
 ---
 
-# Creating New PathHandlers
+# liquibase.resource.PathHandler Interface
 
 ## Overview
 
@@ -32,14 +32,36 @@ Each `PathHandler` defines a `getPriority(path)` method which returns the [prior
 `PathHandlerFactory` will use the `PathHandler` that returns the highest priority value.
 This allows extensions to either define a new way to look up files OR override existing logic.
 
-## Prerequisites
+## API Highlights
 
-Implementing support for additional databases requires an understanding of Java. You will be creating classes, overriding methods, and working with inheritance hierarchies.
+### Empty Constructor
 
-## Project Setup
+Liquibase requires implementations to have an empty constructor.
 
-If you have not already created a repository to hold your code, see [Your First Extension](../../your-first-extension.md) in the Getting Started guide.
+### getPriority()
 
-## Next Steps
+Returns where the path handler falls in the hierarchy, as described in [the PathHandler overview](#pathhandler-selection).
 
-When you are ready to create your new `PathHandler`, head to the [PathHandler](create.md) page.
+### getResource()
+
+Looks up the given resource and returns it. This method should return a resource even if it does not exist, with callers using the `Resource.exists()` method as needed.
+
+### createResource()
+
+Creates a new resource at the given path and returns a stream for writing to it.
+
+If a file already exists at that location, a `java.nio.file.FileAlreadyExistsException` exception should be thrown.
+
+### getResourceAccessor()
+
+Constructs a [ResourceAccessor](../add-a-resource-accessor/index.md) for the given path.
+
+Because ResourceAccessors are used to look up files, the passed path should be a directory or some other "multiple-file" type location such as a zip file.
+
+### Registration
+
+Implementation classes are registered by adding it to `META-INF/services/liquibase.resource.PathHandler`
+
+## API Details
+
+The complete javadocs for `liquibase.resource.PathHandler` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/PathHandler.html){:target="_blank"}

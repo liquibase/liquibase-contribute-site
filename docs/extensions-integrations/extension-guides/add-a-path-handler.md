@@ -1,8 +1,8 @@
-# Create a PathHandler
+# Add a Path Handler
 
 ## Overview
 
-When adding support for a new path handler, the interface you are going to implement is [liquibase.resource.PathHandler](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/PathHandler.html){:target="_blank"}.
+When adding support for a new path handler, the interface you are going to implement is `liquibase.resource.PathHandler`
 
 PathHandler implementations should be thread-safe.
 
@@ -11,35 +11,6 @@ PathHandler implementations should be thread-safe.
     There is a [liquibase.resource.AbstractPathHandler](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/AbstractPathHandler.html){:target="_blank"}
     base class you can use which limits the number of methods you must implement. 
 
-## Implementing
-
-### Empty Constructor
-
-Like most Liquibase extensions, PathHandler must have an empty constructor.
-
-### getPriority()
-
-Returns where your path handler falls in the hierarchy, as described in [the PathHandler overview](index.md#pathhandler-selection).
-
-### getResource()
-
-Looks up the given resource and returns it. This method should return a resource even if it does not exist, with callers using the `Resource.exists()` method as needed. 
-
-### createResource()
-
-Creates a new resource at the given path and returns a stream for writing to it.
-
-If a file already exists at that location, a `java.nio.file.FileAlreadyExistsException` exception should be thrown.
-
-### getResourceAccessor()
-
-Constructs a [ResourceAccessor](../add-a-resource-accessor/index.md) for the given path. 
-
-Because ResourceAccessors are used to look up files, the passed path should be a directory or some other "multiple-file" type location such as a zip file.    
-
-## Register your Class
-
-Like all extensions, your executor must be registered by adding your class name to `META-INF/services/liquibase.resource.PathHandler`
 
 ## Example Code
 

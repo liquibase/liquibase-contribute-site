@@ -48,10 +48,10 @@ Called during diffChangeLog to add a changeset to an existing file. It is up to 
 impact the rest of the existing file. For example, the XML parser does not read the existing changelog into a DOM and append the new changeset into the DOM before
 re-serializing the entire DOM because that will lose any existing formatting the user wants such as spacing between particular elements, groupings of attributes, etc.
 
-## Register your Class
+## Registration
 
-Like all extensions, your executor must be registered by adding your class name to `META-INF/services/liquibase.serializer.ChangeLogSerializer`
+ChangeLogSerializer classes are registered by adding it to `META-INF/services/liquibase.serializer.ChangeLogSerializer`
 
 ## API Details
 
-The complete javadocs for `liquibase.serializesr.ChangeLogSerializer` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/serializesr/ChangeLogSerializer.html){:target="_blank"}
+The complete javadocs for `liquibase.serializer.ChangeLogSerializer` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/serializesr/ChangeLogSerializer.html){:target="_blank"}

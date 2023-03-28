@@ -1,4 +1,6 @@
-# Create an Executor
+# Add a native Executor
+
+--8<-- "extension-setup.md"
 
 ## Overview
 
@@ -11,61 +13,10 @@ When adding support for a new `runWith` option or replacing the default, the int
 
     If you are wrapping custom logic around a JDBC connection, you can subclass `liquibase.executor.jvm.JdbcExecutor` to further limit what you need to implement.
 
-## Implementing
+## API Documentation
 
-### Empty Constructor
+A complete description of the API, including what methods must be implemented and how is available [on the liquibase.executor.Executor API page](../../code/api/executor-executor.md).
 
-Like most Liquibase extensions, yourdatabase must have an empty constructor.
-
-### getName()
-
-Returns the "name" of the executor to be used, as described in [the overview](index.md) under "Executor Selection". 
-
-Names should be lowercase with no spaces or special characters.
-
-### supports()
-
-Return true if your executor can run statements against the given database. Only executors that return true from this method will be sorted by priority. 
-
-### getPriority()
-
-Returns the priority of the executor, as described in [the overview](index.md) under "Executor Selection".
-
-### validate()
-
-If your executor has unique logic on what it can and cannot support in SqlStatements, validate them in this function. The default implementation does no validation. 
-
-### updatesDatabase()
-
-If your executor does not actually apply changes to the database return `false`. This is used to determine if the current state of the database can be trusted in preconditions during `update` operations.
-
-### execute()
-
-These methods are where the real logic for running the `SqlStatements` go.
-You can rely on `liquibase.sqlgenerator.SqlGeneratorFactory` to generate SQL from the `SqlStatements` if that is something your Executor requires.
-Make sure you take the `sqlVistor` list into account.
-
-!!! tip
-    The two `execute` methods differ only in the arguments, so you can generally call the version that takes a `List<SqlVisitor>` from the other.  
-
-### comment
-
-Generally your executor doesn't have to care about comments because they don't impact your database. Simply sending the comment to FINE level logs is all you normally need to do.
-
-### query and update methods
-
-**_ALL_** database operations in Liquibase go through an executor, not just changeSets. To support all the needed database interactions, the `Executor` interface includes a set of 
-methods that are only called against Executors with the name "jdbc":
-
-- query* methods
-- update*
-
-If you are creating an extension purely for use in changeSets with `runWith`, you can `throw new UnsupportedOperationException()` from all these methods. 
- 
-
-## Register your Class
-
-Like all extensions, your executor must be registered by adding your class name to `META-INF/services/liquibase.executor.Executor`
 
 ## Example Code
 
