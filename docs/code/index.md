@@ -25,7 +25,7 @@ Add code to Liquibase to fix a bug or make an enhancement.
 
 - [Setup your development environment](get-started/env-setup.md)
 - [Find a good first issue](get-started/first-issues.md)
-- [Learn the code](architecture/code-structure.md)
+- [Learn the code](architecture/index.md)
 - [Create a pull request](get-started/create-pr.md)
 - [Visit our GitHub repo](https://github.com/liquibase/liquibase){ target="_blank" }
 

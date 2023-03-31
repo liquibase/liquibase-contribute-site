@@ -62,7 +62,7 @@ sequenceDiagram
 The primary facade for calling Liquibase is through the `liquibase.command` package. The commands provide the pluggable, complete operations that can be performed.
 
 
-For more information, see [the Command API documentation](command-api.md)
+For more information, see [the Command API documentation](../../code/api/command-commandscope.md)
 
 ### Configuration API
 

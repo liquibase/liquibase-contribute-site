@@ -2,39 +2,60 @@
 title: database.Database
 ---
 
-# liquibase.database.Database Interface
+# liquibase.database.Database
 
 ## Overview
 
-### Empty Constructor
+The `liquibase.database.Database` interface acts as the "dialect" definition and facade for interacting with the database. It defines methods for:
 
-Liquibase requires implementations to have an empty constructor.
+- Reading metadata about the database (`getDatabaseMajorVersion()`, `getDefaultPort()`, `getDefaultSchema()`, etc.)
+- Checking capabilities of the database (`isCaseSensitive()`, `supportsInitiallyDeferrableColumns`, `supportsSchemas()`, etc.)
+- Performing common logic (`escapeObjectName()`, `commit()`, `rollback()`, etc.)
+
+Each supported database within Liquibase will have its own Database implementation, such as `liquibase.database.core.MySQLDatabase`.
+
+Databases that are generally compatible with another database should have their Database implementation extend the other Database class. 
+For example, Reshift is PostgreSQL compatible and so the `RedshiftDatabase` class extends `PostgresDatabase`. 
+
+Any code that has to behave differently for different database types, will use a `if (database instanceof PostgresDatabase)` pattern to determine the "dialect". 
+By having compatible databases such as Redshift extend the base class like `PostgresqlDatabase`, all the existing "instanceof PostgresDatabase" checks will continue to work
+and in any cases where Redshift **_does_** work differently, a new `if (database instanceof RedshiftDatabase)` check can be added.
+
+## Database Selection
+
+Liquibase uses the [isCorrectDatabaseImplementation](#iscorrectdatabaseimplementation) method to determine which Database implementation are valid for a given connection.
+
+Generally, the logic in that method will check `getDatabaseProductName()`, but depending on the database other connection metadata may need to be inspected as well.
+
+For all the Database instances that are valid, Liquibase will use the one with the highest [priority](../architecture/service-discovery.md) value. 
+
+## API Highlights
+
+### Auto-Registration
+
+Changes are [dynamically discovered](../architecture/service-discovery.md), so must have a no-arg constructor and be registered in `META-INF/services/liquibase.database.Database`.
 
 ### getPriority()
 
-Generally you should return `liquibase.servicelocator.PrioritizedService.PRIORITY_DEFAULT`, but higher values can be used to replace the Database implementation
-that would otherwise be chosen by Liquibase (see `isCorrectDatabaseImplementation`) below.
+Used in [selecting the instance to use](#database-selection).
 
 ### getShortName()
 
 The "short name" for the database is the unique, all-lowercase alphanumeric identifier for the database. For example `oracle` or `mysql`.
 This is the key used in the `dbms` tag among other places.
 
-### isCorrectDatabaseImplementation(DatabaseConnection)
+### isCorrectDatabaseImplementation()
 
-This is the function used by Liquibase to determine if it is the correct Database class to use for a given connection.
+Used in [selecting the instance to use](#database-selection) for a given connection.
 
-You can check whatever information best identifies the database from the connection. For example, you can check `getDatabaseProductName()` on the `DatabaseConnection`.
+This function can check whatever information best identifies the database from the connection. For example, you can check `getDatabaseProductName()` on the `DatabaseConnection`.
 
 !!! tip
 
     Some "compatible" databases may identify themselves as the "standard" database in `getDatabaseProductName()`. 
-    In those cases, you may need to also check `DatabaseConnection.getDatabaseProductVersion()`, `getURL()`, or whatever other calls can most efficiently identify your database.
+    In those cases, it may need to also check `DatabaseConnection.getDatabaseProductVersion()`, `getURL()`, or whatever other calls can most efficiently identify the database.
 
-When Liquibase connects to a database, it will use the instance of `Database` which returns true from `isCorrectDatabaseImplementation()` AND has the highest
-number returned from `getPriority()`.
-
-### getDefaultDriver(String)
+### getDefaultDriver
 
 Return the class name of the default driver for the given URL string. Specifying your driver's class here allows users to not have to use the `driver` setting whenever they connect to your database.
 
@@ -48,10 +69,12 @@ There are a few dialect settings that do not have a default implementation and t
 
 For other functions where your database differs than assumptions the base class makes, override the corresponding methods.
 
-### Registration
-
-Database classes are registered by adding it to  `META-INF/services/liquibase.database.Database`
-
 ## API Details
 
 The complete javadocs for `liquibase.database.Database` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/database/Database.html){:target="_blank"}
+
+## Extension Guides
+
+The following guides provide relevant examples:
+
+- [Add a Database](../../extensions-integrations/extension-guides/add-a-database/index.md)

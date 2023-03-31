@@ -2,22 +2,17 @@
 title: resource.Resource
 ---
 
-# liquibase.resource.Resource Interface
+# liquibase.resource.Resource
 
 ## Overview
 
-Liquibase ships with a variety of [liquibase.resource.Resource](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/Resource.html){:target="_blank"}
-implementations that your ResourceAccessor can use. The job of the Resources are to wrap the implementation-specific read logic.
-If none meet your needs, you can create your own.
+Instances of the [liquibase.resource.Resource](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/Resource.html){:target="_blank"} interface
+wrap implementation-specific read logic. It provides a standard interface for code to use regardless of whether the underlying file is local, remote, or anywhere else.  
 
-!!! tip
-
-    There is a [liquibase.resource.AbstractResource](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/AbstractResource.html){:target="_blank"}
-    base class you can use which limits the number of methods you must implement. 
+Often times, [PathHandler](resource-pathhandler.md) and/or [ResourceAccessor](resource-resourceaccessor.md) implementations will create custom Resource implementations.
 
 
 ## API Highlights
-
 
 ### Constructor
 
@@ -45,4 +40,11 @@ whereas `resolveSibling` is for finding a path **_next to_** this resource's loc
 
 ## API Details
 
-The complete javadocs for `liquibase.resource.Change` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/Resource.html){:target="_blank"}
+The complete javadocs for `liquibase.resource.Resource` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/Resource.html){:target="_blank"}
+
+## Extension Guides
+
+The following guides provide relevant examples:
+
+- [Add a Path Handler](../../extensions-integrations/extension-guides/add-a-path-handler.md)
+- [Add a Resource Accessor](../../extensions-integrations/extension-guides/add-a-resource-accessor.md)

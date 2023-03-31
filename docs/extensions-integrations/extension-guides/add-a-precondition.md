@@ -4,6 +4,15 @@
 
 ## Overview
 
+Liquibase ships with a large number of standard preconditions such as:
+
+- tableExists
+- columnExists
+- sqlCheck
+- etc.
+
+but extensions can provide **_any_** functionality desired.
+
 When adding support for a new precondition, the interface you are going to implement is [liquibase.precondition.Precondition](https://javadocs.liquibase.com/liquibase-core/liquibase/precondition/Precondition.html){:target="_blank"}.
 
 Precondition implementations do not need to be thread safe. Liquibase will generate a new instance of them each time they are used.

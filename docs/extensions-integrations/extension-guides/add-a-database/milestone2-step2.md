@@ -41,8 +41,8 @@ These files let you manually inspect the SQL being run by a particular change se
 
 For tests that are failing because how Liquibase interacts with the database needs to be customized for your database, you will create one of two type of classes:
 
-- [New SqlGenerator implementations](../add-a-sql-generator/index.md) for Change -> SQL mappings that are wrong
-- [New SnapshotGenerator implementations](../add-a-snapshot-generator/index.md) for snapshot logic that is wrong
+- [New SqlGenerator implementations](../add-a-sql-generator.md) for Change -> SQL mappings that are wrong
+- [New SnapshotGenerator implementations](../add-a-snapshot-generator.md) for snapshot logic that is wrong
 
 The general pattern for both is to create a new class which returns a higher priority **_if and only if_** Liquibase is using the `Database` class you defined in [milestone 1](milestone1-step1.md).
 

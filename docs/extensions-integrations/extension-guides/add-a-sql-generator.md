@@ -23,6 +23,22 @@ When defining the execution logic for a particular `SqlGenerator`, the interface
 
     Using "instanceof" rather than "equals" allows the logic to apply to any subclasses (variants) of the given database.
 
+!!! tip
+
+    If you are looking to define a new operation, create a new `SqlStatement` class and then the `SqlGenerator` for it.
+
+!!! tip
+
+    When extending an existing SqlGenerator class, you **_must_** override getPriority() so it will be picked over the base implementation you are extending. 
+    If you do not override this function they will both return the same priority and one will be chosen at random.
+
+    To ensure a higher value is returned, `return super.getPriority() + 5`.
+
+!!! tip
+
+    Also remember to always check the parent class's signature for methods it defines. It may have methods like `nullComesBeforeType()` which it uses to determine
+    the final SQL and you simply have to override that method to get the correct SQL.
+
 ## API Documentation
 
 A complete description of the API, including what methods must be implemented and how is available [on the liquibase.sqlgenerator.SqlGenerator API page](../../code/api/sqlgenerator-sqlgenerator.md).

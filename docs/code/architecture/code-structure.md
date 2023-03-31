@@ -4,17 +4,16 @@
 
 The Liquibase repository is divided into a series of submodules, including:
 
-- `liquibase-standard` contains the Liquibase engine/API plus standard functionality
-- Modules for extension code that builds on the engine/API that is better split out of the the
-  monolotic `liquibase-standard`
+- `liquibase-core` contains the Liquibase engine/API plus standard functionality
+- Modules for extension code that builds on the engine/API that is better split out of the monolithic `liquibase-dist`
     - `liquibase-snowflake` adds support for Snowflake
-    - Further modules will be extracted from `liquibase-standard` in the future
+    - Further modules will be extracted from `liquibase-dist` in the future
 - Modules for integrations
     - `liquibase-cli` contains the CLI integration
     - `liquibase-maven-plugin` contains the Maven integration
     - `liquibase-cdi` contains the CDI integration
-- `liquibase-core` creates the shipped liquibase-core.jar which is made up of a combination of modules
-  including `liquibase-standard`, `liquibase-cli`, and `liquibase-snowflake`
+- `liquibase-dist` creates the shipped liquibase-core.jar which is made up of a combination of modules
+  including `liquibase-core`, `liquibase-cli`, and `liquibase-snowflake`
 - `liquibase-dist` which contains the distributed CLI tar.gz package
 - Modules for testing
     - `liquibase-integration-tests` which contains [tests that run against databases](../test-your-code/integration-tests.md)
@@ -36,5 +35,5 @@ Within each submodule, the code is structured following the Maven standard layou
 
 ## Further Reading
 
-- Learn about [the major components](components.md)
+- Learn about [the major components](../api/index.md)
 - Read our [coding style guide](../get-started/coding-style.md)

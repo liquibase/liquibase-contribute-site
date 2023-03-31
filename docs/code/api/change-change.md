@@ -2,7 +2,7 @@
 title: change.Change
 ---
 
-# liquibase.change.Change Interface
+# liquibase.change.Change
 
 ## Overview
 
@@ -36,24 +36,24 @@ sequenceDiagram
     `Change` instances define what "change functions" are available to the end user and the arguments they take. 
     They should only deal with database-agnostic `SqlStatement` and not directly interact with the database.     
 
-    See [the SqlGenerator guide](../add-a-sql-generator/index.md) for more information on SqlStatements and SqlGenerators.
+    See [the SqlGenerator API](sqlgenerator-sqlgenerator.md) for more information on SqlStatements and SqlGenerators.
 
 ## Change Selection
 
 Each `Change` has a "name", and the ChangeLogParser selects the correct implementation by matching the name in the changelog file with the names defined by Change implementations.
 
-To determine which `Change` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../extension-references/priority.md).
+To determine which `Change` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../architecture/service-discovery.md).
 This allows extensions to either define a new Change OR override an existing Change with a given name.
 
 ## API Highlights
 
-### Empty Constructor
+### Auto-Registration
 
-Liquibase requires implementations to have an empty constructor.
+Changes are [dynamically discovered](../architecture/service-discovery.md), so must have a no-arg constructor and be registered in `META-INF/services/liquibase.change.Change`. 
 
 ### generateStatements()
 
-Returns an array of [liquibase.statement.SqlStatement](https://javadocs.liquibase.com/liquibase-core/liquibase/statement/SqlStatement.html){:target="_blank"}
+Returns an array of [liquibase.statement.SqlStatement](sqlgenerator-sqlgenerator.md)
 which describes the steps to perform against the database when this change is run during an `update`.
 
 ### getConformationMessage()
@@ -68,7 +68,7 @@ on the Change class.
 This annotation is required, and requires the following attributes to be set:
 
 - `name` is the name used in the changelog file. Example: `createTable`
-- `priority` is used as other [priority](../../extension-references/priority.md) values to control which Change implementation for a given name should be used. If unsure, use `ChangeMetaData.PRIORITY_DEFAULT`
+- `priority` is used as other [priority](../architecture/service-discovery.md) values to control which Change implementation for a given name should be used. If unsure, use `ChangeMetaData.PRIORITY_DEFAULT`
 - `description` gives a human-readable description of what the change does
 
 ### Define Configuration Attributes
@@ -88,10 +88,12 @@ The `createInverse` method specifies rollback by defining it as another Change i
 
 If this method is not overridden, users must specify the rollback logic themselves in their changelog file.
 
-### Registration
-
-Change classes are registered by adding it to `META-INF/services/liquibase.change.Change`
-
 ## API Details
 
 The complete javadocs for `liquibase.change.Change` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html){:target="_blank"}
+
+## Extension Guides
+
+The following guides provide relevant examples:
+
+- [Add a Change Type](../../extensions-integrations/extension-guides/add-a-change-type.md)

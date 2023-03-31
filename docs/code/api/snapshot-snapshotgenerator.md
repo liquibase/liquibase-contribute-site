@@ -2,7 +2,7 @@
 title: snapshot.SnapshotGenerator
 ---
 
-# liquibase.snapshot.SnapshotGenerator Interface
+# liquibase.snapshot.SnapshotGenerator
 
 ## Overview
 
@@ -39,24 +39,13 @@ sequenceDiagram
 
 ## SnapshotGenerator Selection
 
-Each `SnapshotGenerator` has a `getPriority()` method which the `SnapshotGeneratorFactory` uses to determine which implementation best snapshots a type for the given database.
-Of all the supported `SnapshotGenerator` implementations, Liquibase will use the one with the highest [priority](../../extension-references/priority.md).
+The `getPriority` logic works a bit different from other interfaces in that it's not used to choose the single "best" implementation to use, but rather to choose the **_order_** to run SnapshotGenerators in.
 
-## API Highlights
-
-### Empty Constructor
-
-Liquibase requires implementations to have an empty constructor.
-
-### getPriority and replaces
-
-The `getPriority` works a bit different from other extensions in that it's not used to choose the single "best" implementation to use, but rather to choose the order to run SnapshotGenerators in.
-
-Like other getPriority methods, if your implementation does not apply to the given type/database combination, return `liquibase.snapshot.PRIORITY_NONE`.
+Like other getPriority methods, if the implementation does not apply to the given type/database combination, it should return `liquibase.snapshot.PRIORITY_NONE`.
 
 However, Liquibase will use ALL instances that return a priority > 0 to snapshot an object.
-Therefore, if your extension is replacing a base SnapshotGenerator you override the `replaces()` function rather than returning a higher value from `getPriority()`.
-The `replaces()` function lets you say "use this class in the snapshot logic instead of another one".
+Therefore, if an implementation is replacing a base SnapshotGenerator it must override the `replaces()` function rather than returning a higher value from `getPriority()`.
+The `replaces()` function lets it define "use this class in the snapshot logic instead of another one".
 
 A good example implementation for a class that replaces the default ColumnSnapshotGenerator is
 
@@ -79,6 +68,16 @@ A good example implementation for a class that replaces the default ColumnSnapsh
 ```
 
 which relies on the superclass's "should I be part of the snapshot process for the given type" logic but only for ExampleDatabase while also taking the place of ColumnSnapshotGenerator when it's used.
+
+## API Highlights
+
+### Auto-Registration
+
+SnapshotGenerators are [dynamically discovered](../architecture/service-discovery.md), so must have a no-arg constructor and be registered in the `META-INF/services/liquibase.snapshot.SnapshotGenerator` file.
+
+### getPriority and replaces
+
+Used in [selecting the instance(s) to use](#snapshotgenerator-selection)
 
 ### snapshot()
 
@@ -105,6 +104,12 @@ _2. The snapshot system will collect all the SnapshotGenerators that say they sh
 _3. After all the SnapshotGenerators have added their information to the Table object, it's returned to the calling code._
 
 
-### Registration
+## API Details
 
-Implementations are registered by adding it to `META-INF/services/liquibase.snapshot.SnapshotGenerator`
+The complete javadocs for `liquibase.snapshot.SnapshotGenerator` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/snapshot/SnapshotGenerator.html){:target="_blank"}
+
+## Extension Guides
+
+The following guides provide relevant examples:
+
+- [Add a Snapshot Generator](../../extensions-integrations/extension-guides/add-a-snapshot-generator.md)

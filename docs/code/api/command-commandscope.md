@@ -1,6 +1,12 @@
-# Command API
+---
+title: command.CommandScope
+---
 
-The command API in the `liquibase.command` package is the primary high-level facade for running Liquibase operations. 
+# liquibase.command.CommandScope
+
+## Overview
+
+The `liquibase.command.CommandScope` class is the primary high-level facade for running Liquibase operations. 
 The API provides both a way to call individual commands and metadata about each command including human-readable descriptions and argument information. 
 
 The operations available through the command API are end-user facing, complete calls such as "update", "rollback", or "generateChangelog".
@@ -16,7 +22,7 @@ sequenceDiagram
 ```
 
 
-## Executing Commands
+## API Highlights
 
 Commands are executed through the [liquibase.command.CommandScope](https://javadocs.liquibase.com/liquibase-core/liquibase/command/CommandScope.html){:target="_blank"} class.
 
@@ -60,7 +66,7 @@ For example, the `snapshot` command may attach the `liquibase.snapshot.DatabaseS
 Like the argument settings, results can be accessed either by the string name of the result like `result.getResult("snapshot")` 
 or by a pre-defined `CommandResultDefinition` object like `result.getResult(SnapshotCommandStep.SNAPSHOT_RESULT)` to provide type safety.  
 
-## Reading Command Metadata
+### Reading Command Metadata
 
 The command metadata is available through the [liquibase.command.CommandFactory](https://javadocs.liquibase.com/liquibase-core/liquibase/command/CommandFactory.html){:target="_blank"} singleton.
 Like all singletons, you access the instance via `Scope.getSingleton(CommandFactory.class)`.
@@ -80,4 +86,12 @@ Both commands and arguments can be listed as "hidden" which are commands or argu
 
 If you know the specific command you want the `CommandDefinition` for, you can look it up directly via `commandFactory.getCommand(String)`.
 
+## API Details
 
+The complete javadocs for `liquibase.command.CommandScope` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/command/CommandScope.html){:target="_blank"}
+
+## Extension Guides
+
+The following guides provide relevant examples:
+
+- Coming Soon

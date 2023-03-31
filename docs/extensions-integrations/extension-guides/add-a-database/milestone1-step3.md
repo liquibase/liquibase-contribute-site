@@ -31,7 +31,7 @@ For example, if the `databasechangeloglock` table isn't being created correctly 
 
 If your database deviates significantly from what the standard services expect, your changes may not be isolated to your new `Database` class.
 
-Instead, you may need to [override one or more](../add-a-sql-generator/index.md) of the following SQLGenerators:
+Instead, you may need to [override one or more](../add-a-sql-generator.md) of the following SQLGenerators:
 
 - `liquibase.sqlgenerator.core.ClearDatabaseChangeLogTableGenerator`
 - `liquibase.sqlgenerator.core.CreateDatabaseChangeLogLockTableGenerator`

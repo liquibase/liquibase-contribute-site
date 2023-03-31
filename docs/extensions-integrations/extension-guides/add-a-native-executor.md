@@ -13,6 +13,16 @@ When adding support for a new `runWith` option or replacing the default, the int
 
     If you are wrapping custom logic around a JDBC connection, you can subclass `liquibase.executor.jvm.JdbcExecutor` to further limit what you need to implement.
 
+!!! tip
+
+    The two `execute` methods differ only in the arguments, so you can generally call the version that takes a `List<SqlVisitor>` from the other.
+
+!!! tip
+
+    Make sure you take the `sqlVistor` list into account in the execute methods.
+
+
+
 ## API Documentation
 
 A complete description of the API, including what methods must be implemented and how is available [on the liquibase.executor.Executor API page](../../code/api/executor-executor.md).

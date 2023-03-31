@@ -2,7 +2,7 @@
 title: parser.ChangeLogParser
 ---
 
-# liquibase.parser.ChangeLogParser Interface
+# liquibase.parser.ChangeLogParser
 
 ## Overview
 
@@ -15,7 +15,7 @@ For changelog formats that are more custom, the various `add` methods on Databas
 
 ```mermaid
 sequenceDiagram
-    Calling Code->>ChangelogParser: parse(path, parameters, resourceAccessor))
+    Calling Code->>ChangelogParser: parse(path, parameters, resourceAccessor)
     ChangelogParser->>ResourceAccessor: reads file data
     ChangelogParser->>DatabaseChangeLog: constructs
     ChangelogParser->>DatabaseChangeLog: load(ParsedNode) or addChangeSet()
@@ -26,26 +26,25 @@ sequenceDiagram
 
 Each `ChangeLogParser` has a `supports()` method which determines if it can parse the given file. 
 
-To determine which supported `ChangeLogParser` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../../extensions-integrations/extension-references/priority.md).
+To determine which supported `ChangeLogParser` to use, Liquibase will find all the implementations that use the given name and choose the one with the highest [priority](../architecture/service-discovery.md).
 This allows extensions to either define a new format OR override an existing parser.
 
 ## API Highlights
 
-### Empty Constructor
+### Auto-Registration
 
-Liquibase requires implementations to have an empty constructor.
+Parsers are [dynamically discovered](../architecture/service-discovery.md), so must have a no-arg constructor and be registered in the `META-INF/services/liquibase.parser.ChangeLogParser` file.
 
 ### supports()
 
-The supports method is passed the name of the file and the `ResourceAccessor` to look the file up in.
+Used in [selecting the instance to use](#executor-selection) by passed the name of the file and the `ResourceAccessor` to look the file up in.
 
 Often the file extension is enough to know whether the parser will support the file or not, so there is no need to read the contents from the resource accessor.
 However, the resource accessor is there if the actual contents of the file is needed to determine whether the parser is correct or not.
 
 ### getPriority()
 
-Returns the priority of the parser, as described in [the overview](../../../code/api/parser-changelogparser.md) under "Parser Selection".
-Only parsers that return `true` from the `supports` function will have their priority compared.
+Used in [selecting the instance to use](#executor-selection)
 
 ### parse()
 
@@ -55,7 +54,7 @@ There are two ways to populate the DatabaseChangeLog object once it is created: 
 
 #### Parsed Nodes
 
-To simplify parser implementations that are providing a different way of structuring a standard changelog file, you can use a [liquibase.parser.core.ParsedNode](https://javadocs.liquibase.com/liquibase-core/liquibase/parser/core/ParsedNode.html){:target="_blank"}.
+To simplify parser implementations that are providing a different way of structuring a standard changelog file, there is a [liquibase.parser.core.ParsedNode](https://javadocs.liquibase.com/liquibase-core/liquibase/parser/core/ParsedNode.html){:target="_blank"} data structure.
 The ParsedNode structure is a format-neutral way to describe nested nodes of a changelog file, where each node can have attributes and/or values.
 
 For example, the XML, YAML, and JSON parser read their respective formats and create a ParsedNode structure out of them, then pass that to the `DatabaseChangeLog.load()` function.
@@ -71,10 +70,12 @@ For formats that are not mirrors of the XML/YAML/JSON structure, the `DatabaseCh
 
 which can be called as needed based on what is in the file.
 
-## Registration
-
-ChangeLogParser classes are registered by adding it to `META-INF/services/liquibase.parser.ChangeLogParser`
-
 ## API Details
 
 The complete javadocs for `liquibase.parser.ChangeLogParser` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/parser/ChangeLogParser.html){:target="_blank"}
+
+## Extension Guides
+
+The following guides provide relevant examples:
+
+- [Add a Changelog Format](../../extensions-integrations/extension-guides/add-a-changelog-format.md)
