@@ -1,8 +1,4 @@
----
-title: External Integrations
----
-
-## Overview
+# External Integrations
 
 The same underlying Liquibase engine can be called from many different integrations and/or interfaces.
 
@@ -40,4 +36,4 @@ Use the "Edit the Page" icon in the top right to add more.
 
 Looking to create your own integration?
 
-Start with the [overview](../integrations/index.md) today!
+Start with the [overview](../integrations-overview/index.md) today!

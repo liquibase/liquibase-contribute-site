@@ -11,7 +11,7 @@ Examples of custom parsers include:
 - A parser for a custom Liquibase DSL
 - A parser to read database changes stored in a 3rd party system
 
-When adding support for a new changelog parser, the interface you are going to implement is [liquibase.parser.ChangeLogParser](https://javadocs.liquibase.com/liquibase-core/liquibase/parser/ChangeLogParser.html){:target="_blank"}.
+When adding support for a new changelog parser, the interface you are going to implement is [liquibase.parser.ChangeLogParser](../../code/api/parser-changelogparser.md).
 
 If you would like to support generating changelogs in your custom format with `diffChangelog` or `generateChangelog` operations, you need to implement a [Changelog Serializer](../../code/api/parser-changelogparser.md).
 

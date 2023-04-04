@@ -13,7 +13,7 @@ Liquibase ships with a large number of standard preconditions such as:
 
 but extensions can provide **_any_** functionality desired.
 
-When adding support for a new precondition, the interface you are going to implement is [liquibase.precondition.Precondition](https://javadocs.liquibase.com/liquibase-core/liquibase/precondition/Precondition.html){:target="_blank"}.
+When adding support for a new precondition, the interface you are going to implement is [liquibase.precondition.Precondition](../../code/api/precondition-precondition.md).
 
 Precondition implementations do not need to be thread safe. Liquibase will generate a new instance of them each time they are used.
 

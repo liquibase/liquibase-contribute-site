@@ -4,8 +4,6 @@ title: Database Support
 
 # Extended Database Support
 
-## Overview
-
 Liquibase ships with support for a large variety of databases, but extensions can provide enhanced functionality beyond what is in standard Liquibase and/or support for additional databases.
 
 For more information on database support in Liquibase, see [https://www.liquibase.com/supported-databases](https://www.liquibase.com/supported-databases){:target=_blank}
@@ -55,4 +53,4 @@ Use the "Edit the Page" icon in the top right to add more.
 
 Looking to create your own extension?
 
-Start with the [overview](../index.md) today!
+Start with the [overview](../extensions-overview/index.md) today!

@@ -35,4 +35,4 @@ Add code to Liquibase to fix a bug or make an enhancement.
 
 Modify an existing extension, or create a new one from scratch.
 
-[Create an Extension](../extensions-integrations/index.md){ .md-button }
+[Create an Extension](../extensions-integrations/extensions-overview/index.md){ .md-button }

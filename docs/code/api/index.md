@@ -6,7 +6,7 @@ The Liquibase API consists of pluggable interfaces and the driving logic that su
 
 Even the main Liquibase code itself is layered between the API-level code which works purely with interfaces, and the
 implementation-level code which is written and [auto-discovered](../architecture/service-discovery.md) exactly
-like [external extensions](../../extensions-integrations/index.md) are.
+like [external extensions](../../extensions-integrations/extensions-overview/index.md) are.
 
 !!! tip
 
@@ -17,28 +17,29 @@ like [external extensions](../../extensions-integrations/index.md) are.
 The following classes are used to connect the generic Liquibase logic to the environment it is running in.
 They tend to be called from [integrations](../architecture/index.md#integrations-to-engine) prior to executing commands.
 
-| Package                  | Interface                  | Notes                                                                                          |
-|--------------------------|----------------------------|------------------------------------------------------------------------------------------------|
-| liquibase                | Scope                      | Alternative to global variables                                                                |
-|                          | ScopeManager               | Controls Scope creation                                                                        |
-| liquibase.configuration  | LiquibaseConfiguration     | Access [configuration](../../extensions-integrations/integrations/configuration-api.md) values |
-|                          | ConfigurationValueProvider | [Defines new configuration stores](configuration-configurationvalueprovider.md)                |
-|                          | ConfiguredValueModifer     | Modifies configuration values before returing them to code                                     |
-| liquibase.logging        | LogFactory                 | Facade for working with the Logger                                                             |
-|                          | Logger                     | Wraps underlying logging systems in a common API                                               |  
-| liquibase.resource       | ResourceAccessor           | [Defines resource accessors](resource-resourceaccessor.md)                                     |
-|                          | PathHandler                | [Defines path handlers](resource-pathhandler.md)                                               |
-|                          | Resource                   | [Objects returned](resource-resource.md) from resources accessors                              |
-| liquibase.servicelocator | ServiceLocator             | Controls pluggable service infrastructure                                                      |
-| liquibase.ui             | UIService                  | Wraps the underlying user interaction in a common API                                          |
+| Package                  | Interface                  | Notes                                                                                                   |
+|--------------------------|----------------------------|---------------------------------------------------------------------------------------------------------|
+| liquibase                | Scope                      | Alternative to global variables                                                                         |
+|                          | ScopeManager               | Controls Scope creation                                                                                 |
+| liquibase.configuration  | LiquibaseConfiguration     | Access [configuration](configuration-liquibaseconfiguration.md) values                                  |
+|                          | ConfigurationDefinition    | [Defines new configuration options](configuration-configurationdefinition.md)                           |
+|                          | ConfigurationValueProvider | [Defines new configuration stores](configuration-configurationvalueprovider.md)                         |
+|                          | ConfiguredValueModifer     | [Modifies configuration](configuration-configuredvaluemodifier.md) values before returning them to code |
+| liquibase.logging        | LogFactory                 | Facade for working with the Logger                                                                      |
+|                          | Logger                     | Wraps underlying logging systems in a common API                                                        |  
+| liquibase.resource       | ResourceAccessor           | [Defines resource accessors](resource-resourceaccessor.md)                                              |
+|                          | PathHandler                | [Defines path handlers](resource-pathhandler.md)                                                        |
+|                          | Resource                   | [Objects returned](resource-resource.md) from resources accessors                                       |
+| liquibase.servicelocator | ServiceLocator             | Controls pluggable service infrastructure                                                               |
+| liquibase.ui             | UIService                  | Wraps the underlying user interaction in a common API                                                   |
 
 ## Command Facade
 
 The following classes are the main entry points for calling overall Liquibase commands.
 
-| Package           | Interface    | Notes                                                                 |
-|-------------------|--------------|-----------------------------------------------------------------------|
-| liquibase         | Liquibase    | Legacy facade for calling commands                                    |
+| Package           | Interface    | Notes                                                                      |
+|-------------------|--------------|----------------------------------------------------------------------------|
+| liquibase         | Liquibase    | Legacy facade for calling commands                                         |
 | liquibase.command | CommandScope | Facade for [calling commands](command-commandscope.md) from an integration |
 
 ## Business Logic and Data Models
@@ -47,7 +48,7 @@ The following classes contain or coordinate business logic or hold data for tran
 
 | Package           | Interface                | Notes                                                                                |
 |-------------------|--------------------------|--------------------------------------------------------------------------------------|
-| liquibase.command | CommandStep              | Defines a step within a [command pipeline](command-commandscope.md)                       |
+| liquibase.command | CommandStep              | Defines a step within a [command pipeline](command-commandscope.md)                  |
 | liquibase.diff    | DiffGeneratorFactory     | Facade for creating diffs between existing databases                                 |
 |                   | DiffResult               | Holds differences from a database comparison                                         |
 |                   | DatabaseObjectComparator | Determines whether objects from different databases are the same object or different |
@@ -58,7 +59,7 @@ The following classes define functionality available within Liquibase. They tend
 from [business logic](#business-logic-and-data-models), especially `CommandStep` implementations.
 
 Liquibase ships with standard implementations of these interfaces, but they can be extended or replaced
-by [external extensions](../../extensions-integrations/index.md).
+by [external extensions](../../extensions-integrations/extensions-overview/index.md).
 
 | Package                | Interface               | Notes                                                                                                                           |
 |------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------|
@@ -92,4 +93,4 @@ by [external extensions](../../extensions-integrations/index.md).
 
 Ready to contribute your changes? [Send us a pull request!](../get-started/create-pr.md)
 
-Looking to write an extension? [Learn how](../../extensions-integrations/index.md)
+Looking to write an extension? [Learn how](../../extensions-integrations/extensions-overview/index.md)

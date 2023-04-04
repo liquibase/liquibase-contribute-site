@@ -1,6 +1,6 @@
 ## Prerequisites
 
-Implementing support for additional databases requires an understanding of Java. You will be creating classes, overriding methods, and working with inheritance hierarchies.
+Implementing Liquibase extensions requires an understanding of Java. You will be creating classes, overriding methods, and working with inheritance hierarchies.
 
 ## Project Setup
 

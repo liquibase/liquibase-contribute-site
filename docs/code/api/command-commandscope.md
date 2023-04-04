@@ -94,4 +94,4 @@ The complete javadocs for `liquibase.command.CommandScope` [is available at http
 
 The following guides provide relevant examples:
 
-- Coming Soon
+- [Calling Commands](../../extensions-integrations/integration-guides/calling-commands.md)

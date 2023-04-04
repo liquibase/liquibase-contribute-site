@@ -4,7 +4,7 @@
 
 ## Overview
 
-When adding support for a new `runWith` option or replacing the default, the interface you are going to implement is [liquibase.executor.Executor](https://javadocs.liquibase.com/liquibase-core/liquibase/executor/Executor.html){:target="_blank"}.
+When adding support for a new `runWith` option or replacing the default, the interface you are going to implement is [liquibase.executor.Executor](../../code/api/executor-executor.md).
 
 !!! tip
 
@@ -12,15 +12,6 @@ When adding support for a new `runWith` option or replacing the default, the int
     you must implement. 
 
     If you are wrapping custom logic around a JDBC connection, you can subclass `liquibase.executor.jvm.JdbcExecutor` to further limit what you need to implement.
-
-!!! tip
-
-    The two `execute` methods differ only in the arguments, so you can generally call the version that takes a `List<SqlVisitor>` from the other.
-
-!!! tip
-
-    Make sure you take the `sqlVistor` list into account in the execute methods.
-
 
 
 ## API Documentation

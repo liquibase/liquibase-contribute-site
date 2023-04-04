@@ -1,7 +1,3 @@
----
-title: Overview
----
-
 # Integrations Overview
 
 Liquibase's logic is built with no expectation on **_how_** it is run. The same logic can be called from a CLI, from Maven, embedded in a 3rd party application, or from anywhere else.
@@ -71,7 +67,7 @@ Liquibase has an extendable and cascading configuration system.
 Each integration can configure the various places configuration values can be pulled from (arguments, environment variables, configuration files, etc.) and the priority of each
 before running the commands that will look up configuration values.
 
-For more information, see [the Configuration API documentation](configuration-api.md)
+For more information, see [the Configure Configuration Guide](../integration-guides/configure-configuration.md)
 
 ### ResourceAccessor API
 
@@ -80,11 +76,11 @@ This is what is exposed to users as the [search path](https://docs.liquibase.com
 
 Each integration can configure where and how to look up files before running the commands that will read them.
 
-For more information, see [the ResourceAccessor API documentation](resource-accessor-api.md)
+For more information, see [the Configure File Access Guide](../integration-guides/configure-file-access.md)
 
 ## Lower Level Integration Points
 
 If the "command" level facade is too high-level for your needs, you can always drop down to use the lower-level objects instead.
 
-The complete API can be found at [https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/){:target="_blank"}
+The complete API can be found in the ["Code API" section](../../code/api/index.md).
 

@@ -1,11 +1,8 @@
 nav:
     - index.md
-    - env-setup.md
-    - your-first-extension.md
-    - extension-anatomy.md
-    - best-practices.md
     - directory
+    - "Extensions Overview": extensions-overview
+    - "Integrations Overview": integrations-overview
     - "Extension Guides": extension-guides
-    - "Extension References": extension-references
-    - integrations
+    - "Integrations Guides": integration-guides
     - ...

@@ -1,5 +1,5 @@
 ---
-title: configuration.ConfigurationValueProvider
+title: config.ValueProvider
 ---
 
 # liquibase.configuration.ConfigurationValueProvider
@@ -28,7 +28,7 @@ The standard provider precedence is:
 
 ### Auto-Registration
 
-If the value provider should be [dynamically discovered](../architecture/service-discovery.md), it must have a no-arg constructor and be registered in `META-INF/services/liquibase.configuration.ConfigurationValueProvider`.
+If the value provider can be [dynamically discovered](../architecture/service-discovery.md), it must have a no-arg constructor and be registered in `META-INF/services/liquibase.configuration.ConfigurationValueProvider`.
 
 If it will be created programmatically by an integration, it can accept required fields in the constructor and should **_NOT_** be registered.
 

@@ -4,10 +4,10 @@
 
 ## Overview
 
-When adding support for a new resource accessor, the interface you are going to implement is [liquibase.resource.ResourceAccessor](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/ResourceAccessor.html){:target="_blank"}.
+When adding support for a new resource accessor, the interface you are going to implement is [liquibase.resource.ResourceAccessor](../../code/api/resource-resourceaccessor.md).
 
 ResourceAccessors contain and hide the implementation details of how the file references in changelog files are actually found and read. 
-They convert the path names into [liquibase.resource.Resource](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/Resource.html){:target="_blank"}s which can then be used like files normally are.   
+They convert the path names into [liquibase.resource.Resource](../../code/api/resource-resource.md)s which can then be used like files normally are.   
 
 For example, the path `my/file.sql` can be read from a directory, from a zip file, or from the network depending on the configured ResourceAccessors.  
 
@@ -25,6 +25,8 @@ ResourceAccessor should be thread-safe.
 
 
 ## Custom Resources
+
+Depending on the new ResourceAccessor, you may need to define a new [liquibase.resource.Resource](../../code/api/resource-resource.md) implementation. 
 
 !!! tip
 

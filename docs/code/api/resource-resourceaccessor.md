@@ -6,23 +6,43 @@ title: resource.ResourceAccessor
 
 ## Overview
 
-`liquibase.resource.ResourceAccessor` implementations define where and how to look up files referenced in changelog files.
-
 Changelog files need to be runnable in a wide variety of environments, and therefore exactly where a file lives cannot be written into the changelog.
-To support this, Liquibase defines a ["Search Path"](#searchpathresourceaccessor) which is a set of ResourceAccessors which can each try to find the given file path.
+
+To separate the "where" a file is from "what" file a changelog wants, Liquibase provides a "Search Path".
+The search path follows the same pattern as the "Classpath" or the "sys.path" in Python or the "module.paths" in NodeJS.  
+
+Each integration defines a list of base locations where Liquibase should look for file references. Each base location in the search path is a `liquibase.resource.ResourceAccessor` implementation.
 Liquibase ships with ResourceAccessors that know how to find files in directories and zip files, but ResourceAccessors can be created to read files from anywhere.
 
-## SearchPathResourceAccessor
+When a path like `com/example/file.sql` is referenced in a changelog, Liquibase will check each ResourceAccessor for that path to find the place(s) it can be found.
 
-For integrations that would like to allow users to specify a "search path", create an instance of
-[SearchPathResourceAccessor](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/SearchPathResourceAccessor.html){:target="_blank"} 
-passing along their specified search path and any other ResourceAccessors that should be searched as well. 
+It is up to each integration to correctly set up the search path based on expected defaults and/or the user configuration.  
 
-## CompositeResourceAccessor
+!!! example
 
-ResourceAccessor instances should generally handle a single location, such as a directory or zip file. 
+    A changelog file may `include` a "com/example/child.changelog.xml" file, or have a `<sqlFile>` tag with a path of "custom_proc.sql". 
+    That same changelog file reference may be run:
 
-To search multiple locations, combine the instances together with [CompositeResourceAccessor](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/CompositeResourceAccessor.html){:target="_blank"}  
+    - Via a CLI on Windows-based developer machines which each have their project directories stored in different locations
+    - Via Maven on a Linux build server
+    - Via Spring, reading the files from pre-built jar files
+
+## Compared to PathHandler
+
+There are two styles of file access that Liquibase supports:
+
+- File references **_within_** changelog files which must remain **_consistent across environments_** are handled by the `ResourceAccessor` API
+- File references **_outside_** changelog files which point to **_environment-specific_** paths are handled by the [liquibase.resource.PathHandler](resource-pathhandler.md) API
+
+## Standard Implementations
+
+Liquibase ships with the following ResourceAccessor implementations, which can be used directly or extended as needed:
+
+- `liquibase.resource.DirectoryResourceAccessor` for files stored in a local directory
+- `liquibase.resource.ZipResourceAccessor` for files stored in a zip or jar file
+- `liquibase.resource.ClassLoaderResourceAccessor` for files stored in a Java classpath
+- `liquibase.resource.CompositeResourceAccessor` combines multiple ResourceAccessors
+- `liquibase.resource.SearchPathResourceAccessor` creates a composite ResourceAccessor using paths in the `liquibase.searchPath` setting
 
 ## API Highlights
 
@@ -31,7 +51,7 @@ To search multiple locations, combine the instances together with [CompositeReso
 There is no [priority](../architecture/service-discovery.md) for ResourceAccessors. They are either created explicitly by integrations or
 implicitly by a [PathHandler](resource-pathhandler.md).
 
-Therefore, create constructor(s) as needed taking required and/or common settings.
+Therefore, constructor(s) take required and/or common settings.
 
 ### search()
 
@@ -55,3 +75,4 @@ The complete javadocs for `liquibase.resource.ResourceAccessor` [is available at
 The following guides provide relevant examples:
 
 - [Add a Resource Accessor](../../extensions-integrations/extension-guides/add-a-resource-accessor.md)
+- [Configure File Access](../../extensions-integrations/integration-guides/configure-file-access.md)

@@ -6,7 +6,7 @@ title: "Milestone 1: New Database"
 
 ## Overview
 
-When adding support for a new database, the first class to create is a new [liquibase.database.Database](https://javadocs.liquibase.com/liquibase-core/liquibase/database/Database.html){:target="_blank"} implementation.
+When adding support for a new database, the first class to create is a new [liquibase.database.Database](../../../code/api/database-database.md) implementation.
 Your Database implementation acts as the "dialect" definition and the facade to your database.
 
 The Database interface defines methods for:

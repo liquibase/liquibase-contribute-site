@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Directory List
 ---
 
 # Liquibase Extensions & Integrations Directory
@@ -14,4 +14,4 @@ For a list of publicly available extensions, see:
 
 **Looking to create your own extension or integration?**
 
-Start with the [overview](../index.md) today!
+Start with the [overview](../extensions-overview/index.md) today!

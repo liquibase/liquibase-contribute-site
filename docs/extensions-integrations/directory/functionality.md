@@ -1,7 +1,5 @@
 # Expanded Functionality
 
-## Overview
-
 While Liquibase ships with many features, that functionality can be expanded and/or replaced through extensions.
 
 !!! note
@@ -50,4 +48,4 @@ Use the "Edit the Page" icon in the top right to add more.
 
 Looking to create your own extension?
 
-Start with the [overview](../index.md) today!
+Start with the [overview](../extensions-overview/index.md) today!

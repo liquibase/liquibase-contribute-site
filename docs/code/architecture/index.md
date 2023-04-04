@@ -94,7 +94,23 @@ flowchart LR
 
 For example, the above "update" command is coded against the ChangelogParser interface which exposes a `parse()` method, but nothing about what the format is. When the code asks the parser to parse a file named `my/changelog.xml`, Liquibase will go through all the available implementations of `ChangeLogParser` [to find the version that "best" parses that file and will use that](service-discovery.md).
 
-Liquibase ships with a standard set of implementations for each service in `liquibase-core.jar`. However, extensions can be written to provide additional implementations.
+Liquibase ships with a standard set of implementations for each business logic service in `liquibase-core.jar`, and external extensions can be written to provide additional implementations.
+There is no code differences between what ships in `liquibase-core.jar` and what is provided by an extension. 
+
+## Extensions and Integrations
+
+The difference between [extensions](../../extensions-integrations/extensions-overview/index.md) and [integrations](../../extensions-integrations/integrations-overview/index.md) is whether they are changing the logic **_within_** Liquibase or whether they are **_controlling_** how that logic is triggered.
+
+```mermaid
+flowchart LR
+
+    integrations[Calling Code / Integrations] --> engine[Liquibase Engine] --> extensions[Liquibase Logic / Extensions]
+    
+```
+
+Extensions allow new functionality to be added or existing functionality changed, and that functionality will consistently be run regardless of the integration.
+
+Integrations allow the same Liquibase functionality to be embedded or driven in whatever ways work best for each user.
 
 
 ## Next Steps

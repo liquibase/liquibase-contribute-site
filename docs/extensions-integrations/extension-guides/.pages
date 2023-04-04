@@ -1,5 +1,5 @@
 nav:
     - index.md
-    - add-a-database
+    - "Add a Database": add-a-database
     - add-a-native-executor.md
     - ...

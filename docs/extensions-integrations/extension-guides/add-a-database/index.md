@@ -29,7 +29,7 @@ Therefore, to keep this information more streamlined it is only focusing on what
 
 ## Project Setup
 
-If you have not already created a repository to hold your code, see [Your First Extension](../../your-first-extension.md) in the Getting Started guide. 
+If you have not already created a repository to hold your code, see [Your First Extension](../../extensions-overview/your-first-extension.md) in the Getting Started guide. 
 
 ## <a name="compatible"></a>Compatible Support
 

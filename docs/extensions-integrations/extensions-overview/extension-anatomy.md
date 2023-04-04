@@ -7,7 +7,7 @@ Liquibase is implemented in Java and relies on standard Java patterns such as "c
 While the specific methods can vary by extension, the general pattern is:
 
 1. On startup, Liquibase finds all available implementations of extension interfaces
-1. As Liquibase runs, when it needs to use a particular interface it finds and uses the implementation with the highest [priority](../code/architecture/service-discovery.md) based on the surrounding context
+1. As Liquibase runs, when it needs to use a particular interface it finds and uses the implementation with the highest [priority](../../code/architecture/service-discovery.md) based on the surrounding context
 
 This pattern means that creating extensions consists of:
 
@@ -30,7 +30,7 @@ Let's take a closer look at the [HelloWorldChange](your-first-extension.md) samp
 This class is your new implementation of the [liquibase.change.Change](https://javadocs.liquibase.com/liquibase-core/liquibase/change/Change.html){:target="_blank"} interface
 which defines your new logic in the `generateStatements()`
 
-The [priority](../code/architecture/service-discovery.md) of this implementation is set via the `priority` attribute on the `@DatabaseChange` annotation. 
+The [priority](../../code/architecture/service-discovery.md) of this implementation is set via the `priority` attribute on the `@DatabaseChange` annotation. 
 It uses the `PRIORITY_DEFAULT` constant which is "1"
 
 ## META-INF/services

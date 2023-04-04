@@ -4,40 +4,39 @@
 
 ## Overview
 
-When defining the execution logic for a particular `SqlGenerator`, the interface you are going to implement is [liquibase.sqlgenerator.SqlGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/sqlgenerator/SqlGenerator.html){:target="_blank"}.
+When defining the execution logic for a particular `SqlGenerator`, the interface you are going to implement is [liquibase.sqlgenerator.SqlGenerator](../../code/api/sqlgenerator-sqlgenerator.md).
 
-!!! tip
+## Best Practices
 
-    There is a [liquibase.sqlgenerator.core.AbstractSqlGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/sqlgenerator/core/AbstractSqlGenerator.html){:target="_blank"} base class you can use which limits the number of methods
-    you must implement.
+### Base Class
 
-!!! tip
+There is a [liquibase.sqlgenerator.core.AbstractSqlGenerator](https://javadocs.liquibase.com/liquibase-core/liquibase/sqlgenerator/core/AbstractSqlGenerator.html){:target="_blank"} base class you can use which limits the number of methods
+you must implement.
 
-    When adding a SqlGenerator that provides database-specific logic, it's often best (but not required) to subclass the default SqlGenerator for that SqlStatement
-    and override and change only the specific parts that need to be different while preserving the rest of the logic. 
+### Subclassing
 
+When adding a SqlGenerator that provides database-specific logic, it's often best (but not required) to subclass the default SqlGenerator for that SqlStatement
+and override and change only the specific parts that need to be different while preserving the rest of the logic. 
 
-!!! tip
+Also remember to always check the parent class's signature for methods it defines. It may have methods like `nullComesBeforeType()` which it uses to determine
+the final SQL and you simply have to override that method to get the correct SQL.
 
-    Specifying database-specific functionality is best done with `if (database instanceof ExampleDatabase)` blocks around the database-specific logic. 
+### Instanceof
 
-    Using "instanceof" rather than "equals" allows the logic to apply to any subclasses (variants) of the given database.
+Specifying database-specific functionality is best done with `if (database instanceof ExampleDatabase)` blocks around the database-specific logic. 
 
-!!! tip
+Using "instanceof" rather than "equals" allows the logic to apply to any subclasses (variants) of the given database.
 
-    If you are looking to define a new operation, create a new `SqlStatement` class and then the `SqlGenerator` for it.
+### New Operations
 
-!!! tip
+If you are looking to define a new operation, create a new `SqlStatement` class and then the `SqlGenerator` for it.
 
-    When extending an existing SqlGenerator class, you **_must_** override getPriority() so it will be picked over the base implementation you are extending. 
-    If you do not override this function they will both return the same priority and one will be chosen at random.
+### Extending SqlGenerator 
 
-    To ensure a higher value is returned, `return super.getPriority() + 5`.
+When extending an existing SqlGenerator class, you **_must_** override getPriority() so it will be picked over the base implementation you are extending. 
+If you do not override this function they will both return the same priority and one will be chosen at random.
 
-!!! tip
-
-    Also remember to always check the parent class's signature for methods it defines. It may have methods like `nullComesBeforeType()` which it uses to determine
-    the final SQL and you simply have to override that method to get the correct SQL.
+To ensure a higher value is returned, `return super.getPriority() + 5`.
 
 ## API Documentation
 
