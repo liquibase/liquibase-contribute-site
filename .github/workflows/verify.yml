@@ -15,6 +15,7 @@ permissions:
 
 jobs:
   build:
+    name: Test mkdocs build
     runs-on: ubuntu-latest
     env:
       CI: true
