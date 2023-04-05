@@ -2,6 +2,12 @@ name: Verify Content
 
 on:
   pulL_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+
   workflow_dispatch:
 
 permissions:
