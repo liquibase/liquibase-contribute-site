@@ -23,6 +23,11 @@ which provides default logic that follows SQL standards.
 
 Depending on your base class you will have more or less abstract methods which must be implemented.
 
+## API Documentation
+
+A complete description of the API, including what methods must be implemented and how is available [on the liquibase.database.Database API page](../../code/api/database-database.md).
+
+
 ## Example Code
 
 ```java

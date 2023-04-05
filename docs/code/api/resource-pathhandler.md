@@ -17,7 +17,7 @@ whereas `PathHandlers` are used to look up files referenced outside changelogs.
     in the `liquibase.searchPath` setting.  
 
 Liquibase ships with [liquibase.resource.DirectoryPathHandler](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/DirectoryPathHandler.html){:target="_blank"}
-which looks up paths without a protocol as a relative or absolute file paths. Other PathHandlers should generally recognize paths they handle through an expected URL-like protocol, such as `ftp://example.com/my/file.sql` 
+which looks up paths without a protocol as relative or absolute file paths. Other PathHandlers should generally recognize paths they handle through an expected URL-like protocol, such as `ftp://example.com/my/file.sql` 
 or through specific file extensions like `*.zip`. 
 
 ```mermaid

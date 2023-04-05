@@ -88,7 +88,7 @@ or the edited example below:
 **1. In the `liquibase-core/src/test/groovy/liquibase/util/` directory, create or edit the StringUtilTest.groovy file
 and add the following new test method.**
 
-The test method name should descriptive of what is being tested. At a minimum it should be the name of the method under
+The test method name should descriptive of what is being tested. At a minimum, it should be the name of the method under
 test, but ideally it should describe what is being tested by the method.
 
 ```groovy
@@ -121,7 +121,7 @@ class StringUtilTest extends Specification {
 
 **3. Refactor and expand your test with more test cases.**
 
-Try to think of test for all the edge cases. Specify the test variations in the where clause.
+Try to think of a test for all the edge cases. Specify the test variations in the where clause.
 
 !!! tip
 

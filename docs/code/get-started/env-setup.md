@@ -35,7 +35,7 @@ Create a new branch by issuing the command:
 git checkout -b <new_branch>
 ```
 
-Each new block of changes that belong in a pull request will need their own branch. 
+Each new block of changes that belongs in a pull request will need its own branch. 
 
 
 ## Minimal Setup
@@ -59,7 +59,7 @@ But installing it separately allows you to better duplicate the minimal build pr
  
 Run `mvn clean install` which compiles Liquibase, runs the tests, and creates the jar/tar.gz packages.
 
-You can tell the build worked successfully, if you see something like:
+You can tell the build worked successfully if you see something like:
 
 ```
 [INFO] ------------------------------------------------------------------------
@@ -113,7 +113,7 @@ or
 
 ## IDE Setup
 
-The "Minimal Setup" section builds and tests your local branch, but generally you will want to use and IDE like [VS Code](https://code.visualstudio.com/),
+The "Minimal Setup" section builds and tests your local branch, but generally you will want to use an IDE like [VS Code](https://code.visualstudio.com/),
 [IntelliJ IDEA](https://www.jetbrains.com/idea/), or your own favorite environment.
 
 ### Project Configuration
@@ -126,7 +126,7 @@ what is defined in the canonical pom.xml that Maven and the CI process uses.
 The maven-built package listed above works, but it's not the most efficient way of working. The build process takes a while, and it's difficult to enable debug support.
 Instead, when using an IDE with more "native" support for running classes, you can run the CLI class more directly.
 
-Exactly how you configure your IDE to run the CLI depend on the IDE version you are using, but the general process is to create a new "Run Configuration" with the following settings:
+Exactly how you configure your IDE to run the CLI depends on the IDE version you are using, but the general process is to create a new "Run Configuration" with the following settings:
 
 - **Class to run:** `liquibase.integration.commandline.LiquibaseLauncher`
 - **Module Classpath:** `liquibase-cli`

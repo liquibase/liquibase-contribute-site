@@ -15,7 +15,7 @@ like [external extensions](../../extensions-integrations/extensions-overview/ind
 ## Environmental Setup
 
 The following classes are used to connect the generic Liquibase logic to the environment it is running in.
-They tend to be called from [integrations](../architecture/index.md#integrations-to-engine) prior to executing commands.
+They tend to be called from [integrations](../architecture/index.md#integrations-to-engine) before executing commands.
 
 | Package                  | Interface                  | Notes                                                                                                   |
 |--------------------------|----------------------------|---------------------------------------------------------------------------------------------------------|
@@ -65,10 +65,10 @@ by [external extensions](../../extensions-integrations/extensions-overview/index
 |------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | liquibase.change       | Change                  | [Defines change types](change-change.md) available to changelog files                                                           |
 | liquibase.changelog    | DatabaseChangeLog       | Format-independent changelog file object                                                                                        |
-|                        | ChangeLogHistoryService | Tracks what changesets have been ran against a database                                                                         | 
+|                        | ChangeLogHistoryService | Tracks what changesets have been run against a database                                                                         | 
 | liquibase.database     | Database                | [Defines a database dialect](database-database.md)                                                                              |
 |                        | DatabaseConnection      | Wraps the underlying connection [to a database](database-database.md)                                                           |
-| liquibase.datatype     | DataTypeFactory         | Translates generic to database specific data types and vice versa                                                               |
+| liquibase.datatype     | DataTypeFactory         | Translates generic to database-specific data types and vice versa                                                               |
 |                        | DatabaseDataType        | Defines mappings for DataTypeFactory                                                                                            |
 |                        | LiquibaseDataType       | Defines generic data types                                                                                                      | 
 | liquibase.executor     | ExecutorService         | Facade for [executing statements](executor-executor.md)                                                                         |

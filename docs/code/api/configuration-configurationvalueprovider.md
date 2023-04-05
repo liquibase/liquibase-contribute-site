@@ -41,7 +41,7 @@ Returns where the value provider falls in the [hierarchy of locations to check f
 Looks up the given configuration key in the source data.
 
 The key(s) passed will be the canonical/standard key for the property (such as `liquibase.shouldRun`) plus any aliases that may apply.
-It is up to implementations to provide any "smoothing" to handles differences in case, word separators, etc. that may be expected from how the data is stored
+It is up to implementations to provide any "smoothing" to handle differences in case, word separators, etc. that may be expected from how the data is stored
 and to check for all passed keys. If multiple passed keys match, return the value from the first key in the array.
 
 If using `AbstractMapConfigurationValueProvider`, override `getMap()` and `keyMatches()` instead of this method.
@@ -52,7 +52,7 @@ If using `AbstractMapConfigurationValueProvider`, `getMap()` and `keyMatches()` 
 
 The `getMap()` method is called _when a value is first requested from the instance._
 
-The `keyMatches()` method is for defining the "smoothing" logic that handle differences in case, word separators, etc. that may be expected from how the data is stored.
+The `keyMatches()` method is for defining the "smoothing" logic that handles differences in case, word separators, etc. that may be expected from how the data is stored.
 For example, EnvironmentVariableValueProvider checks case-insensitively and replaces `.`s with `_`s.
 
 If you are not extending `AbstractMapConfigurationValueProvider` these methods will not exist, so you will have to implement `getProvidedValue()` instead.

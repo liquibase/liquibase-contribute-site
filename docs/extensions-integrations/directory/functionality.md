@@ -33,10 +33,10 @@ While Liquibase ships with many features, that functionality can be expanded and
 | [ModifyColumn](https://github.com/liquibase/liquibase-modify-column){:target="_blank"}                                                        | Adds `<modifyColumn>` change type                                      |
 | [No-op Changelog Lock](https://github.com/liquibase/liquibase-nochangeloglock){:target="_blank"}                                              | Removes "lock" functionality                                           |
 | [No-op ChangeLog History](https://github.com/liquibase/liquibase-nochangelogupdate){:target="_blank"}                                         | Removes changeset tracking functionality                               |
-| [Percona Online Schema Change](https://github.com/liquibase/liquibase-percona){:target="_blank"}                                              | Support `pt-online-schema-change` from Percona Toolkit`                |
+| [Percona Online Schema Change](https://github.com/liquibase/liquibase-percona){:target="_blank"}                                              | Support `pt-online-schema-change` from Percona Toolkit                 |
 | [SessionLock](https://github.com/blagerweij/liquibase-sessionlock){:target="_blank"}                                                          | Use native locks instead of the DATABASECHANGELOGLOCK table            |
 | [SLF4j Logging](https://github.com/mattbertolini/liquibase-slf4j){:target="_blank"}                                                           | Log through SLF4j rather than java.util.Logging                        |
-| [Spatial Datatypes](https://lonnyj.github.io/liquibase-spatial/){:target="_blank"}                                                            | Adds support for spacial indexing and geometric types                  |
+| [Spatial Datatypes](https://lonnyj.github.io/liquibase-spatial/){:target="_blank"}                                                            | Adds support for spatial indexing and geometric types                  |
 
 ## Something Missing?
 

@@ -11,7 +11,7 @@ but uses an existing Liquibase installation as the runtime for your extension.
 
 Each extension will have its own repository. Since extensions can be hosted anywhere, the exact steps will vary.
 
-For extensions on GitHub (including the Liquibase-owned extensions at [github.com/liquibase](https://github.com/liquibase)), the step are:
+For extensions on GitHub (including the Liquibase-owned extensions at [github.com/liquibase](https://github.com/liquibase)), the steps are:
 
 1. Browse to the repository in GitHub
 2. Click on the Fork button in the top-right corner. 
@@ -48,13 +48,13 @@ The best approach is to download the [most recent release](https://github.com/li
 
 !!! tip
 
-    The rest of the guide will refer to the directoy you installed Liquibase to as "LIQUIBASE_HOME"
+    The rest of the guide will refer to the directory you installed Liquibase to as "LIQUIBASE_HOME"
 
 ### 4. Check Setup
  
 From your extension's source directory, run `mvn clean package` which compiles the extension, runs the tests, and creates the jar file.
 
-You can tell the build worked successfully, if you see something like:
+You can tell the build worked successfully if you see something like:
 
 ```
 [INFO] ------------------------------------------------------------------------
@@ -81,20 +81,20 @@ Once the jar has been copied, you can run any Liquibase operation from LIQUIBASE
 
 ## IDE Setup
 
-The "Minimal Setup" section builds and tests your local branch, but generally you will want to use and IDE like [VS Code](https://code.visualstudio.com/),
+The "Minimal Setup" section builds and tests your local branch, but generally you will want to use an IDE like [VS Code](https://code.visualstudio.com/),
 [IntelliJ IDEA](https://www.jetbrains.com/idea/), or your own favorite environment.
 
 ### Project Configuration
 
 Both IDEs allow you to import the `pom.xml` file in the base of the repository as your "project". This keeps the libraries and build logic the IDE uses in sync with
-what is defined in the canonical pom.xml that Maven and the CI process uses.
+what is defined in the canonical pom.xml that Maven and the CI process use.
 
 ### Running the CLI In Your IDE
 
 The maven-built package listed above works, but it's not the most efficient way of working. The build process takes a while, and it's difficult to enable debug support.
 Instead, when using an IDE with more "native" support for running classes, you can run the CLI class more directly.
 
-Exactly how you configure your IDE to run the CLI depend on the IDE version you are using, but the general process is to create a new "Run Configuration" with the following settings:
+Exactly how you configure your IDE to run the CLI depends on the IDE version you are using, but the general process is to create a new "Run Configuration" with the following settings:
 
 - **Class to run:** `liquibase.integration.commandline.LiquibaseLauncher`
 - **Module Classpath:** `<YOUR EXTENSION MODULE>`
@@ -107,7 +107,7 @@ When Liquibase runs, it will use the jars in `lib` and `internal/lib` so you can
 in a production setup.
 
 !!! note
-    The `LIQUIBASE_LAUNCHER_PARENT_CLASSLOADER=thread` environment variable tells Liquibase to use the classes and it's dependencies from your project NOT the ones in `lib` or `internal/lib`.
+    The `LIQUIBASE_LAUNCHER_PARENT_CLASSLOADER=thread` environment variable tells Liquibase to use the classes and its dependencies from your project NOT the ones in `lib` or `internal/lib`.
 
     That includes the version of Liquibase your extension defines as a dependency.
 

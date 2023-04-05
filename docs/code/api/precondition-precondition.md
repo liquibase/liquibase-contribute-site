@@ -30,13 +30,13 @@ If it cannot be determined whether the precondition passed or failed, throw a `P
 
 ### validate() and warn()
 
-These methods to check whether the precondition can be run or not given its configuration and environment.
+These methods check whether the precondition can be run or not given its configuration and environment.
 
 ### Define Configuration Attributes
 
 If the precondition requires custom attributes to be set (tableName, etc.), create get/set methods for them.
 
-Any public get/set pairs will be exposed to the end user as attributes on the precondition.
+Any public get/set pairs will be exposed to the end-user as attributes on the precondition.
 
 ## API Details
 

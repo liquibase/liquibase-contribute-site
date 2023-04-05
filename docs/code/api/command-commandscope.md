@@ -60,10 +60,10 @@ This will run the command's logic and return a `CommandResults` object which can
 
 ### Command Results
 
-Commands are able to attach any objects they would like to the response, which can be accessed via the `result.getResult(...)` methods. 
+Commands can attach any objects they would like to the response, which can be accessed via the `result.getResult(...)` methods. 
 For example, the `snapshot` command may attach the `liquibase.snapshot.DatabaseSnapshot` object it built up as a result. 
 
-Like the argument settings, results can be accessed either by the string name of the result like `result.getResult("snapshot")` 
+Like the argument settings, results can be accessed either by the string name of the result like `result.getResult("snapshot")`, 
 or by a pre-defined `CommandResultDefinition` object like `result.getResult(SnapshotCommandStep.SNAPSHOT_RESULT)` to provide type safety.  
 
 ### Reading Command Metadata
@@ -71,7 +71,7 @@ or by a pre-defined `CommandResultDefinition` object like `result.getResult(Snap
 The command metadata is available through the [liquibase.command.CommandFactory](https://javadocs.liquibase.com/liquibase-core/liquibase/command/CommandFactory.html){:target="_blank"} singleton.
 Like all singletons, you access the instance via `Scope.getSingleton(CommandFactory.class)`.
 
-For integrations that are looking to expose all Liquibase functionality to end users, such as the CLI or Maven integrations, the `CommandFactory` allows you to programmatically and dynamically
+For integrations that are looking to expose all Liquibase functionality to end-users, such as the CLI or Maven integrations, the `CommandFactory` allows you to programmatically and dynamically
 expose everything Liquibase (including installed extensions) supports to your users.    
 
 From the `CommandFactory`, you can call `getCommands()` to list all the available commands. For each command, it returns the [liquibase.command.CommandDefinition](https://javadocs.liquibase.com/liquibase-core/liquibase/command/CommandDefinition.html){:target="_blank"} for it.

@@ -61,7 +61,7 @@ For example, the `testUpdateTwice()` test runs an "update" operation using a com
 - Permutations of different change configurations
 - Already-ran changesets are not re-ran
 
-Within the changelogs, we can use preconditions to check whether specific changes executed successfully but usually rely on the fact that invalid SQL will throw a parse exception from the database.
+Within the changelogs, we can use preconditions to check whether specific changes were executed successfully but usually rely on the fact that invalid SQL will throw a parse exception from the database.
 
 Another example is `testRollbackableChangeLog()` which performs an "update" followed by a "rollback" and then repeats that process to ensure nothing is incorrectly left over after the rollback.
 
@@ -69,7 +69,7 @@ Another example is `testRollbackableChangeLog()` which performs an "update" foll
 
 There is a `src/test/resources/changelogs` directory that contains all the changelogs used by the integration tests. 
 
-For each database, there is a "complete" and a "rollback" changelog. The "complete" changelog is an exhaustive set of change definitions which are used by most of the integration tests. 
+For each database, there is a "complete" and a "rollback" changelog. The "complete" changelog is an exhaustive set of change definitions that are used by most of the integration tests. 
 For tests that require the ability to rollback an update, the "rollback" changelog is available which has a smaller set of changes but ensures all have rollback logic defined.
 
 Each database defines the root changelogs as `changelogs/DB_TYPE/complete/root.changelog.xml` and `changelogs/DB_TYPE/rollback/rollbackable.changelog.xml`, but 

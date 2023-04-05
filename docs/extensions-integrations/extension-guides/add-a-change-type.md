@@ -6,11 +6,11 @@
 
 When adding support for a new change type, the interface you are going to implement is `liquibase.change.Change`. 
 
-Change implementations do not need to be thread safe.  ChangeFactory will generate a new instance of them each time they are used.
+Change implementations do not need to be thread-safe.  ChangeFactory will generate a new instance of them each time they are used.
 
 !!! tip
 
-    There is an [liquibase.change.AbstractChange](https://javadocs.liquibase.com/liquibase-core/liquibase/change/AbstractChange.html){:target="_blank"} base class you can use which limits the number of methods
+    There is a [liquibase.change.AbstractChange](https://javadocs.liquibase.com/liquibase-core/liquibase/change/AbstractChange.html){:target="_blank"} base class you can use which limits the number of methods
     you must implement. 
 
 ## API Documentation

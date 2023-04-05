@@ -12,7 +12,7 @@ For integrations, Liquibase is simply another library dependency you are calling
 
 Each integration will have its own repository. Since integration can be hosted anywhere, the exact steps will vary.
 
-For integration on GitHub (including the Liquibase-owned extensions at [github.com/liquibase](https://github.com/liquibase)), the step are:
+For integration on GitHub (including the Liquibase-owned extensions at [github.com/liquibase](https://github.com/liquibase)), the steps are:
 
 1. Browse to the repository in GitHub
 2. Click on the Fork button in the top-right corner. 
@@ -52,7 +52,7 @@ If your application is using Maven, Gradle or some other build system that manag
 
 ### 4. Check Setup
  
-With the dependency added, you can add a simple reference to a Liquibase class and build your project to ensure everything is configured correctly.
+With the dependency added you can add a simple reference to a Liquibase class and build your project to ensure everything is configured correctly.
 
 !!! example
 

@@ -33,7 +33,7 @@ sequenceDiagram
 
 !!! tip
 
-    `Change` instances define what "change functions" are available to the end user and the arguments they take. 
+    `Change` instances define what "change functions" are available to the end-user and the arguments they take. 
     They should only deal with database-agnostic `SqlStatement` and not directly interact with the database.     
 
     See [the SqlGenerator API](sqlgenerator-sqlgenerator.md) for more information on SqlStatements and SqlGenerators.

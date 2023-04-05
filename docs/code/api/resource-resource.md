@@ -9,7 +9,7 @@ title: resource.Resource
 Instances of the [liquibase.resource.Resource](https://javadocs.liquibase.com/liquibase-core/liquibase/resource/Resource.html){:target="_blank"} interface
 wrap implementation-specific read logic. It provides a standard interface for code to use regardless of whether the underlying file is local, remote, or anywhere else.  
 
-Often times, [PathHandler](resource-pathhandler.md) and/or [ResourceAccessor](resource-resourceaccessor.md) implementations will create custom Resource implementations.
+Oftentimes, [PathHandler](resource-pathhandler.md) and/or [ResourceAccessor](resource-resourceaccessor.md) implementations will create custom Resource implementations.
 
 
 ## API Highlights

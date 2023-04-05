@@ -39,7 +39,7 @@ sequenceDiagram
 
 ## SnapshotGenerator Selection
 
-The `getPriority` logic works a bit different from other interfaces in that it's not used to choose the single "best" implementation to use, but rather to choose the **_order_** to run SnapshotGenerators in.
+The `getPriority` logic works a bit differently from other interfaces in that it's not used to choose the single "best" implementation to use, but rather to choose the **_order_** to run SnapshotGenerators.
 
 Like other getPriority methods, if the implementation does not apply to the given type/database combination, it should return `liquibase.snapshot.PRIORITY_NONE`.
 

@@ -17,13 +17,13 @@ Each supported database within Liquibase will have its own Database implementati
 Databases that are generally compatible with another database should have their Database implementation extend the other Database class. 
 For example, Reshift is PostgreSQL compatible and so the `RedshiftDatabase` class extends `PostgresDatabase`. 
 
-Any code that has to behave differently for different database types, will use a `if (database instanceof PostgresDatabase)` pattern to determine the "dialect". 
+Any code that has to behave differently for different database types, will use an `if (database instanceof PostgresDatabase)` pattern to determine the "dialect". 
 By having compatible databases such as Redshift extend the base class like `PostgresqlDatabase`, all the existing "instanceof PostgresDatabase" checks will continue to work
 and in any cases where Redshift **_does_** work differently, a new `if (database instanceof RedshiftDatabase)` check can be added.
 
 ## Database Selection
 
-Liquibase uses the [isCorrectDatabaseImplementation](#iscorrectdatabaseimplementation) method to determine which Database implementation are valid for a given connection.
+Liquibase uses the [isCorrectDatabaseImplementation](#iscorrectdatabaseimplementation) method to determine which Database implementations are valid for a given connection.
 
 Generally, the logic in that method will check `getDatabaseProductName()`, but depending on the database other connection metadata may need to be inspected as well.
 
@@ -67,7 +67,7 @@ There are a few dialect settings that do not have a default implementation and t
 - **supportsInitiallyDeferrableColumns()** Does your database support initially deferrable constraints?
 - **supportsTablespaces()** Does your database support tablespaces?
 
-For other functions where your database differs than assumptions the base class makes, override the corresponding methods.
+For other functions where your database differs from assumptions the base class makes, override the corresponding methods.
 
 ## API Details
 

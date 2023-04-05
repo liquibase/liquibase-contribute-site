@@ -2,13 +2,13 @@
 
 ## Overview
 
-For many API interfaces, Liquibase will automatically discover and use the "best" implementation based on what is being aske for.
+For many API interfaces, Liquibase will automatically discover and use the "best" implementation based on what is being asked for.
 
 !!! example
     
     - When being asked to parse a changelog file ending in .xml, Liquibase will use `XmlChangeLogParser`
     - When being asked to parse a changelog file ending in .sql, Liquibase will use `SqlChangeLogParser`
-        - UNLESS the file contents starts with `-- liquibase formatted sql` in which case it will use `FormattedSqlChangeLogParser`
+        - UNLESS the file content starts with `-- liquibase formatted sql` in which case it will use `FormattedSqlChangeLogParser`
 
 
 ## Registration

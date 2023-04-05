@@ -5,7 +5,7 @@
 There are two styles of file access that Liquibase supports: 
 
 - File references **_within_** changelog files which must **_remain constant across environments_** are handled by the ["ResourceAccessor"](#resourceaccessor) (also known as the "Search Path")
-- File references **_outside_** changelog files which use **_environment-specific_** paths are handled by the ["PathHandler"](#pathhandler)
+- File references **_outside_** changelog files that use **_environment-specific_** paths are handled by the ["PathHandler"](#pathhandler)
 
 The reason changelog files are handled differently is that the changelog file must be used unchanged across different environments and run through various integrations.
 
@@ -14,7 +14,7 @@ The reason changelog files are handled differently is that the changelog file mu
 The [ResourceAccessor API](../../code/api/resource-resourceaccessor.md) provides the abstraction around how changelog-related files are looked up and read 
 which allows the file references encoded into changelog files to be usable across a wide range of environments without changes.
 
-The final, overall ResourceAccessor is exposed to end users as the "Search Path"
+The final, overall ResourceAccessor is exposed to end-users as the "Search Path"
 
 Each integration needs to configure the `ResourceAccessor` and set it in the `liquibase.Scope`
 
@@ -95,7 +95,7 @@ Scope.child(Scope.Attr.resourceAccessor, resourceAccessor, () -> {
 
 ### CompositeResourceAccessor
 
-If you need complete control over the search path and do not want to expose the `liquibase.searchPath` setting to end users, you can create a `CompositeResourceAccessor` directly:
+If you need complete control over the search path and do not want to expose the `liquibase.searchPath` setting to end-users, you can create a `CompositeResourceAccessor` directly:
 
 ```java
 ResourceAccessor resourceAccessor = new CompositeResourceAccessor(

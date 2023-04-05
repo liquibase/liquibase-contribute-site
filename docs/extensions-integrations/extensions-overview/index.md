@@ -35,12 +35,12 @@ Here is what each section of the API docs can help you with:
 - [Your First Extension](your-first-extension.md) teaches fundamental concepts for building extensions with the Hello World sample.
 - [Extension Anatomy](extension-anatomy.md) describes how extension code works together.
 - [Dev Environment Setup](dev-env-setup.md) helps you set up your local environment for development work.
-- [Extension Guides](../extension-guides/index.md) includes guides and code samples that explain specific usages of the API.
+- [Extension Guides](../extension-guides/index.md) include guides and code samples that explain specific usages of the API.
 - [Best Practices](best-practices.md) showcases best practices for providing a great user experience with your extension.
 
 ## Looking for help?
 
-If you have questions for extension development, try asking on:
+If you have questions about extension development, try asking on:
 
 - [Liquibase Forum](https://forum.liquibase.org){:target="_blank"} Great place to ask questions, discuss, and help other members of the community.
-- [Liquibase Discord](https://discord.com/invite/9yBwMtj){:target="_blank"} For real time questions and discussion
+- [Liquibase Discord](https://discord.com/invite/9yBwMtj){:target="_blank"} For real-time questions and discussion

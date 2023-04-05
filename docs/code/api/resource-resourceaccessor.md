@@ -8,7 +8,7 @@ title: resource.ResourceAccessor
 
 Changelog files need to be runnable in a wide variety of environments, and therefore exactly where a file lives cannot be written into the changelog.
 
-To separate the "where" a file is from "what" file a changelog wants, Liquibase provides a "Search Path".
+To separate the "where" a file is from the "what" file a changelog wants, Liquibase provides a "Search Path".
 The search path follows the same pattern as the "Classpath" or the "sys.path" in Python or the "module.paths" in NodeJS.  
 
 Each integration defines a list of base locations where Liquibase should look for file references. Each base location in the search path is a `liquibase.resource.ResourceAccessor` implementation.
@@ -32,7 +32,7 @@ It is up to each integration to correctly set up the search path based on expect
 There are two styles of file access that Liquibase supports:
 
 - File references **_within_** changelog files which must remain **_consistent across environments_** are handled by the `ResourceAccessor` API
-- File references **_outside_** changelog files which point to **_environment-specific_** paths are handled by the [liquibase.resource.PathHandler](resource-pathhandler.md) API
+- File references **_outside_** changelog files that point to **_environment-specific_** paths are handled by the [liquibase.resource.PathHandler](resource-pathhandler.md) API
 
 ## Standard Implementations
 
@@ -56,7 +56,7 @@ Therefore, constructor(s) take required and/or common settings.
 ### search()
 
 The search method is used by `includeAll` and other code which is looking to find files in a directory.
-The logic must respect the SearchOptions passed, and should return the resources in an order that is expected by the user. Often times this is alphabetical order.
+The logic must respect the SearchOptions passed and should return the resources in an order that is expected by the user. Oftentimes this is in alphabetical order.
 
 ### describeLocations()
 

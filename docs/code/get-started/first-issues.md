@@ -14,7 +14,7 @@ However, they get to be less great if the fix is complex or in code that can eas
 
 !!! tip
 
-    If you have any questions, you can always reach out to us by commenting on the issue itself, on the [Liquibase Forum](http://forum.liquibase.org/){:target="_blank"} or in the [Liquibase Discord](https://discord.gg/pDB5DfE){:target="_blank"}.
+    If you have any questions, you can always reach out to us by commenting on the issue itself, on the [Liquibase Forum](http://forum.liquibase.org/){:target="_blank"}, or in the [Liquibase Discord](https://discord.gg/pDB5DfE){:target="_blank"}.
 
 ## "Good First Issues" Label
 

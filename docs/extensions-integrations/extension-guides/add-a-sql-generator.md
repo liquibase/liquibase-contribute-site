@@ -18,7 +18,7 @@ you must implement.
 When adding a SqlGenerator that provides database-specific logic, it's often best (but not required) to subclass the default SqlGenerator for that SqlStatement
 and override and change only the specific parts that need to be different while preserving the rest of the logic. 
 
-Also remember to always check the parent class's signature for methods it defines. It may have methods like `nullComesBeforeType()` which it uses to determine
+Also, remember to always check the parent class's signature for methods it defines. It may have methods like `nullComesBeforeType()` which it uses to determine
 the final SQL and you simply have to override that method to get the correct SQL.
 
 ### Instanceof

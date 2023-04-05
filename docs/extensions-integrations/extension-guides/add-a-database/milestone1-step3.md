@@ -45,7 +45,7 @@ After you have made a potential fix to the problem you found, re-run your test a
 
 - Sometimes your fix didn't work as well as you hoped. Try a new one
 - Sometimes your fix resolved one issue, but now you have hit another. Fix that up
-- Eventually you will be done. Congratulations!! :material-party-popper: 
+- Eventually, you will be done. Congratulations!! :material-party-popper: 
 
 ## Next Steps
 

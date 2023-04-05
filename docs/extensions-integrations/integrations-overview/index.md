@@ -1,6 +1,6 @@
 # Integrations Overview
 
-Liquibase's logic is built with no expectation on **_how_** it is run. The same logic can be called from a CLI, from Maven, embedded in a 3rd party application, or from anywhere else.
+Liquibase's logic is built with no expectation of **_how_** it is run. The same logic can be called from a CLI, from Maven, embedded in a 3rd party application, or from anywhere else.
 
 Because Liquibase is written in Java, any application running on the JVM can easily integrate with it. 
 
@@ -10,15 +10,15 @@ Integrations can be either a lightweight wrapper adapting all the Liquibase comm
 
 ### Liquibase On Demand
 
-One category of integrations build Liquibase into a tool that exposes all the available Liquibase commands for users to run on demand.
+One category of integrations builds Liquibase into a tool that exposes all the available Liquibase commands for users to run on demand.
 Examples of this type of integration include the Liquibase CLI, Maven plugin, Gradle plugin, Ant plugin, and the NPM plugin. 
 
 These integrations act as a thin wrapper adapting the available Liquibase commands to a way of calling them. 
         
 ### Liquibase Embedded
 
-Another category of integrations build specific Liquibase operations into flows within an application framework
-Examples of this type of integration include Spring, Spring Boot, Quarkus, Micronaut and Servlet Listener support. 
+Another category of integrations builds specific Liquibase operations into flows within an application framework
+Examples of this type of integration include Spring, Spring Boot, Quarkus, Micronaut, and Servlet Listener support. 
 
 These integrations will run `update` automatically against the application's database on startup. 
 Because they are automatically running Liquibase, they do not allow arbitrary commands to be run like the "On Demand" integrations.   
@@ -31,7 +31,7 @@ Examples of this include building Liquibase into your automated test setup, runn
 
 !!! note
 
-    If you are looking to build new functionality **_onto_** Liquibase rather building Liquibase **_into_** something else, see [the extensions documentation](../index.md) 
+    If you are looking to build new functionality **_onto_** Liquibase rather than building Liquibase **_into_** something else, see [the extensions documentation](../index.md) 
 
 ## Primary Integration Points
 
@@ -78,7 +78,7 @@ Each integration can configure where and how to look up files before running the
 
 For more information, see [the Configure File Access Guide](../integration-guides/configure-file-access.md)
 
-## Lower Level Integration Points
+## Lower-Level Integration Points
 
 If the "command" level facade is too high-level for your needs, you can always drop down to use the lower-level objects instead.
 

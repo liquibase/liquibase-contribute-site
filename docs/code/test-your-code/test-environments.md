@@ -9,7 +9,7 @@ title: Test Environments
 To make it easy to spin up standardized test environments for testing, Liquibase has an abstraction around [testcontainers.org](https://testcontainers.org){:target="_blank"}
 at [liquibase/extension/testing/testsystem](https://github.com/liquibase/liquibase/tree/master/liquibase-extension-testing/src/main/java/liquibase/extension/testing/testsystem){:target="_blank"}.
 
-The wrapper around Test Containers allows us to provide a simple configuration system, plus support testing databases which do not have Docker containers such as in-memory and cloud databases.
+The wrapper around Test Containers allows us to provide a simple configuration system, plus support testing databases that do not have Docker containers such as in-memory and cloud databases.
 
 !!! note
 
@@ -19,7 +19,7 @@ The wrapper around Test Containers allows us to provide a simple configuration s
 
 The default test environments and settings are configured in [liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml](https://github.com/liquibase/liquibase/tree/master/liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml){:target="_blank"}.
 
-That file configures the various databases including docker image settings and users to create. Generally each test system will be created with:
+That file configures the various databases including docker image settings and users to create. Generally, each test system will be created with:
 
 - A `lbuser` user with a password `LiquibasePass1`
 - A catalog/database called `lbcat`
@@ -42,7 +42,7 @@ If a configuration is set in multiple locations, it will use the value it finds 
 For example, by default the MysqlIntegrationTest will skip all tests because `liquibase.sdk.testSystem.test` does not include "mysql". To customize that configuration, you could:
 
 - Add a `-Dliquibase.sdk.testSystem.test=mysql` argument to your java call. This works well when running specific tests from your IDE's "test run" configuration which you don't always want to enable
-- Add a `LIQUBASE_SDK_TEST_SYSTEM_TEST=mysql` environment variable. This works like a system property, but may be easier to set depending on how you are working
+- Add a `LIQUBASE_SDK_TEST_SYSTEM_TEST=mysql` environment variable. This works like a system property but may be easier to set depending on how you are working
 - Create a [liquibase.sdk.local.yaml](#example-liquibasesdklocalyaml-file) file in `liquibase-extension-testing/src/main/resources` next to `liquibase.sdk.yaml`. This file is not checked into git, and works well for more permanent/consistent changes you would like to make
 
 ### Configuration Structure
@@ -54,7 +54,7 @@ For each test environment, there is a top-level "key" for it. For example, `liqu
 When code is looking for a particular setting such as `liquibase.sdk.testSystem.mysql.username` it will first look for `liquibase.sdk.testSystem.mysql.username` in all the locations it could be set
 and if none has that setting, it will look for `liquibase.sdk.testSystem.default.username` in those same locations.
 
-This allows common settings such as "username" to be shared across environments, while keeping environment-specific settings like "imageName" separate. 
+This allows common settings such as "username" to be shared across environments while keeping environment-specific settings like "imageName" separate. 
 
 ### Example liquibase.sdk.local.yaml File
 
@@ -79,7 +79,7 @@ This changes what databases are tested against to be only h2, mysql, and postgre
 
 ### In Tests
 
-Tests are able to auto-start databases on demand when they are ran. 
+Tests can auto-start databases on demand when they are run. 
 
 A call to 
 ```
@@ -92,11 +92,11 @@ The `liquibase.sdk.testSystem.test` setting controls which environments to auto-
 
 The `AbstractIntegrationTest` base class contains this logic for the [classic integration tests](integration-tests.md).
 
-### On Demand
+### On-Demand
 
 To start and stop test systems manually, you can use the `liquibase sdk system up` and `liquibase sdk system down` commands.
 
-**_NOTE:_** these commands are part of the `liquibase-extension-testing` module and not currently shipped as published artifacts.
+**_NOTE:_** these commands are part of the `liquibase-extension-testing` module and are not currently shipped as published artifacts.
 
 Therefore, to use them you must either:
 

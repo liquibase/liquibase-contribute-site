@@ -14,7 +14,7 @@ To automate this process, Liquibase provides a [Test Harness](https://github.com
 
 Configure your project using the steps [in the Test Harness 'extension' setup docs](https://github.com/liquibase/liquibase-test-harness/blob/main/README.extensions.md){:target="_blank"}. 
 
-When completed, you should have a `harness-config.yml` file that specifies how to connect to the database and a new `ExtensionHarnessTest` class which will run all the tests.
+When completed, you should have a `harness-config.yml` file that specifies how to connect to the database and a new `ExtensionHarnessTest` class that will run all the tests.
 
 ## Running the Tests
 
@@ -25,4 +25,4 @@ If you are using an IDE, you can run your `ExtensionHarnessTest` class directly 
 
 ## Next Step
 
-The first time you run the tests, you will get failure from missing files. See [Milestone 2: Fix & Restest](milestone2-step2.md) to continue.
+The first time you run the tests, you will get failures from missing files. See [Milestone 2: Fix & Restest](milestone2-step2.md) to continue.

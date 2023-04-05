@@ -27,7 +27,7 @@ The standard Liquibase XSD schema defines only what ships as part of standard Li
 There is an existing `dbchangelog-ext` XML schema at [http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd](http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd) which allows anything.
 It makes for an easy way to get started because does not get in the way of any attributes or elements you want users to use. 
 
-However, the downside with this XSD allowing anything is that it therefore does not provide any intellisense or guidance to users. 
+However, the downside with this XSD allowing anything is that it, therefore, does not provide any intellisense or guidance to users. 
 
 ### Example
 
@@ -69,7 +69,7 @@ For example, if your XSD is stored at `http://example.com/xml/my/custom-extensio
 
 ### Versioning your XSD
 
-Your XSD schema will likely change as your extension grows, and it's important to let your users know which XSD they should be using. Otherwise, it could be providing them with wrong intellisense and validating incorrectly.
+Your XSD schema will likely change as your extension grows, and it's important to let your users know which XSD they should be using. Otherwise, it could be providing them with the wrong intellisense and validating incorrectly.
 
 A good pattern is to provide an explicitly named "latest" XSD which always corresponds to your current version. Users can specify it as `http://example.com/xml/my/custom-extension-latest.xsd` and know they will be up to date.
 

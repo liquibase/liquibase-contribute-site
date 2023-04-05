@@ -28,7 +28,7 @@ and run `liquibase update` against your database using that changelog file.
 
 If there are any failures with creating the databasechangelog table, managing the lock, marking the change sets ran, or anything else. [GOTO step 3](milestone1-step3.md).
 
-Once `update` works, any Liquibase functionality that doesn't rely on modeled changes or snapshot should work. For example, all of this should work:
+Once `update` works, any Liquibase functionality that doesn't rely on modeled changes or snapshot should work. For example, all of these should work:
 
 - `liquibase rollback-count 2`
 - `liquibase history`
@@ -38,11 +38,11 @@ Once `update` works, any Liquibase functionality that doesn't rely on modeled ch
 
 ## Next Steps
 
-If you ran into problems when testing, [see step 3](milestone1-step3.md).
+If you run into problems when testing, [see step 3](milestone1-step3.md).
 
 If everything seems to work, Congratulations!! :material-party-popper: Now is a great time to release the first version of your extension
 
 !!! tip
 
-    If you'd like your database extension to included in the main Liquibase documentation and be a more official part of Liquibase, contact the Liquibase team and we can work
+    If you'd like your database extension to be included in the main Liquibase documentation and be a more official part of Liquibase, contact the Liquibase team and we can work
     with you to bring it more officially into the fold.

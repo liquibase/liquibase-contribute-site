@@ -37,7 +37,7 @@ It uses the `PRIORITY_DEFAULT` constant which is "1"
 
 Because HelloWorldChange is providing a new liquibase.change.Change implementation, we create (or add to) a file named `liquibase.change.Change` in `META-INF/services` and list the class name in there.
 
-This file is used by Liquibase at startup time to know your new implementation exists.
+This file is used by Liquibase at startup time to know that your new implementation exists.
 
 ## pom.xml
 

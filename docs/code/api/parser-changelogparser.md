@@ -37,10 +37,10 @@ Parsers are [dynamically discovered](../architecture/service-discovery.md), so m
 
 ### supports()
 
-Used in [selecting the instance to use](#executor-selection) by passed the name of the file and the `ResourceAccessor` to look the file up in.
+Used in [selecting the instance to use](#executor-selection) by passing the name of the file and the `ResourceAccessor` to look the file up in.
 
 Often the file extension is enough to know whether the parser will support the file or not, so there is no need to read the contents from the resource accessor.
-However, the resource accessor is there if the actual contents of the file is needed to determine whether the parser is correct or not.
+However, the resource accessor is there if the content of the file is needed to determine whether the parser is correct or not.
 
 ### getPriority()
 

@@ -72,7 +72,7 @@ For example, maybe you defined a field on your change type like `dropIfExists` a
 This is a bug in that a user will put `dropIfExists="true"` and it won't actually be dropped as they want. But, there may be people who know it's not supported and are OK with it just being skipped on databases it's not supported on.
 If you leave the behavior, it confuses people. If you change the behavior, it breaks existing users. What do you do?
 
-Another example is a bad default value. Default values should be the most reasonable for the most number of people, but sometimes that ends up not the case.
+Another example is a bad default value. Default values should be the most reasonable for the most number of people, but sometimes that ends up not being the case.
 When you find that a default value needs to be changed it's generally obvious it should be different and causes problems for users, but there are people expecting that "non-obvious" current behavior. What do you do?    
 
 The answer will depend on how many people are impacted and what their recovery path looks like. 
@@ -85,7 +85,7 @@ The fewer the people impacted, or the easier the recovery pattern the closer it 
 
 ## Communicate
 
-When in doubt, over-communicate. Make sure you users know what is going on and why.
+When in doubt, over-communicate. Make sure your users know what is going on and why.
 
 **Release notes** are your first line for communicating changes so make sure you are clear and explicit in anything that could possibly cause problems for users.
 It's usually best to call out a "Breaking Changes" section at the top rather than burying them in the details of feature changes.
@@ -113,7 +113,7 @@ need to start thinking about API compatibility in addition to functional compati
 
 These are some specific examples of what constitutes a breaking change. Use the above strategies to avoid them when possible. 
 
-- Bumped minimum JDK major version. Example: JDK 17 required instead of JDK 8
-- Rename of a serialized change name or any of its child elements. Example: `<cypher>` is renamed to `<query>`
-- Rename of a serialized attribute. Example: `<extractProperty property="foo">` is renamed to `<extractProperty key="foo">`
-- Rename of a serialized Java type serialized in snapshot yaml. Example: `com.example.change.refactoring.RelationshipDirection` is moved to `graph.RelationshipDirection`)<sup>1</sup>
+- Bumped minimum JDK major version. Example: JDK 17 is now required instead of JDK 8
+- Rename a serialized change name or any of its child elements. Example: `<cypher>` is renamed to `<query>`
+- Rename a serialized attribute. Example: `<extractProperty property="foo">` is renamed to `<extractProperty key="foo">`
+- Rename a serialized Java type serialized in snapshot yaml. Example: `com.example.change.refactoring.RelationshipDirection` is moved to `graph.RelationshipDirection`)<sup>1</sup>

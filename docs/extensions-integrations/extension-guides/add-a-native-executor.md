@@ -8,7 +8,7 @@ When adding support for a new `runWith` option or replacing the default, the int
 
 !!! tip
 
-    There is an [liquibase.executor.AbstractExecutor](https://javadocs.liquibase.com/liquibase-core/liquibase/executor/AbstractExecutor.html){:target="_blank"} base class you can use which limits the number of methods
+    There is a [liquibase.executor.AbstractExecutor](https://javadocs.liquibase.com/liquibase-core/liquibase/executor/AbstractExecutor.html){:target="_blank"} base class you can use which limits the number of methods
     you must implement. 
 
     If you are wrapping custom logic around a JDBC connection, you can subclass `liquibase.executor.jvm.JdbcExecutor` to further limit what you need to implement.

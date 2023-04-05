@@ -5,8 +5,8 @@
 End-user interactions with Liquibase always start with some sort of interface/front-end/"integration".
 The different integrations allow Liquibase to cleanly fit into existing tools and workflows. 
 
-Some integrations such as the CLI and Maven allow the user to execute any of Lhe liquibase commands on demand. 
-The Docker, NodeJS and others work the same way as they are simply adapting the CLI to a particular way of running it.  
+Some integrations such as the CLI and Maven allow the user to execute any of the liquibase commands on demand. 
+The Docker, NodeJS, and other integrations work the same way as they are simply adapting the CLI to a particular way of running it.  
 Others, such as Spring and Quarkus embed Liquibase into application logic and automatically call Liquibase commands itself.
 
 However, all integrations are simply wrappers around the core Liquibase engine. They translate the user's request into calls to the same underlying business logic.
@@ -38,7 +38,7 @@ stateDiagram-v2
 
 ## Liquibase Engine
 
-The Primary Facade Class for the Liquibase Engine is [liquibase.command.CommandScope](../api/command-commandscope.md). Each integration will perform initial setup, such as configuring applicable ConfigurationValueProviders and ResourceAccessors 
+The Primary Facade Class for the Liquibase Engine is [liquibase.command.CommandScope](../api/command-commandscope.md). Each integration will perform an initial setup, such as configuring applicable ConfigurationValueProviders and ResourceAccessors, 
 and then execute the requested command through a `CommandScope` object. Internally, each command can be handled by any number of independent steps but that coordination is handled within the CommandScope call. 
 
 ```mermaid
@@ -55,7 +55,7 @@ sequenceDiagram
 
 ## Business Logic
 
-The logic within each CommandStep will call out to the other Liquibase APIs as needed. The commands are coded against the technology-agnostic service interfaces, so that the same business logic will be ran regardless of the changelog format, database type, underlying OS, etc.
+The logic within each CommandStep will call out to the other Liquibase APIs as needed. The commands are coded against the technology-agnostic service interfaces, so that the same business logic will be run regardless of the changelog format, database type, underlying OS, etc.
 
 For example, the "update" command steps include: 
 
@@ -94,8 +94,8 @@ flowchart LR
 
 For example, the above "update" command is coded against the ChangelogParser interface which exposes a `parse()` method, but nothing about what the format is. When the code asks the parser to parse a file named `my/changelog.xml`, Liquibase will go through all the available implementations of `ChangeLogParser` [to find the version that "best" parses that file and will use that](service-discovery.md).
 
-Liquibase ships with a standard set of implementations for each business logic service in `liquibase-core.jar`, and external extensions can be written to provide additional implementations.
-There is no code differences between what ships in `liquibase-core.jar` and what is provided by an extension. 
+Liquibase ships with a standard set of implementations for each business logic service in `liquibase-core.jar` and external extensions can be written to provide additional implementations.
+There are no code differences between what ships in `liquibase-core.jar` and what is provided by an extension. 
 
 ## Extensions and Integrations
 

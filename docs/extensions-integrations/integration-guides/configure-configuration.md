@@ -3,7 +3,7 @@
 ## Overview
 
 The configuration API in the `liquibase.configuration` package provides both the facade for reading configuration settings regardless of where they come from.
-The API provides both a way to look-up individual configuration values and metadata about each available configuration including human-readable descriptions.
+The API provides both a way to look up individual configuration values and metadata about each available configuration including human-readable descriptions.
 
 The available configuration options are a pluggable extension point, and the configuration API provides a consistent and stable way to work with the configurations regardless of what extensions are installed.
 
@@ -134,7 +134,8 @@ public class ExampleIntegration  {
 ## API Documentation
 
 For a complete description of the ConfigurationValueProvider API, including what methods must be implemented, see:
-- [liquibase.configuration.ConfigurationValueProvider](../../code/api/configuration-configurationvalueprovider.md).
-- [liquibase.configuration.ConfigurationDefinition](../../code/api/configuration-configurationdefinition.md).
-- [liquibase.configuration.ConfiguredValueModifier](../../code/api/configuration-configuredvaluemodifier.md).
-- [liquibase.configuration.LiquibaseConfiguration](../../code/api/configuration-liquibaseconfiguration.md).
+
+- [liquibase.configuration.ConfigurationValueProvider](../../code/api/configuration-configurationvalueprovider.md)
+- [liquibase.configuration.ConfigurationDefinition](../../code/api/configuration-configurationdefinition.md)
+- [liquibase.configuration.ConfiguredValueModifier](../../code/api/configuration-configuredvaluemodifier.md)
+- [liquibase.configuration.LiquibaseConfiguration](../../code/api/configuration-liquibaseconfiguration.md)

@@ -24,7 +24,7 @@ Before creating a pull request, please read our requirements that explain the mi
     We appreciate you taking the time to contribute! 
 
     Before submitting a pull request, please take the time to comment on the issue you are wanting to resolve. 
-    This helps us prevent duplicate effort or advise if the team is already addressing the issue.
+    This helps us prevent duplicate efforts or advise if the team is already addressing the issue.
 
 ## Suggestions
 
@@ -51,7 +51,7 @@ The normal flow through this board is:
     - The goal is to ensure the PR is "ready to ship"
     - This review checks:
         - Completeness of the change -- does it fully address the issue including non-happy paths?
-        - Fit and finish -- is functionality, wording, and error messages as people would expect?  
+        - Fit and finish -- are functionality, wording, and error messages as people would expect?  
         - Side effects -- is it incorrectly impacting other areas of the code?
         - Documentation -- are documentation changes needed as part of this change?
         - Correctness -- is it doing what it is supposed to? Are the automated tests complete enough?

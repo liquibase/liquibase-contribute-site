@@ -6,11 +6,11 @@ title: config.ConfigurationDefinition
 
 ## Overview
 
-`liquibase.configuration.ConfigurationDefinition` instances define metadata about available configuration settings, and provide type safety for code looking to read configuration values.
+`liquibase.configuration.ConfigurationDefinition` instances define metadata about available configuration settings and provide type safety for code looking to read configuration values.
 
 Each configuration setting is a dot-separated, "camelCase" key, such as `liquibase.shouldRun` or `liquibase.outputFileEncoding`. 
 
-The beginning of the key acts as a "namespace" for the setting to avoid conflicts between similar settings. Sections within the namespace can be used to group similar settings together for better end-user usability. 
+The beginning of the key acts as a "namespace" for the setting to avoid conflicts between similar settings. Sections within the namespace can be used to group similar settings for better end-user usability. 
 Settings defined in the main liquibase code will start with `liquibase.`, but any meaningful namespace can be used.
 
 ## Building ConfigurationDefinitions
@@ -64,7 +64,7 @@ Begins the definition with the given key and type. The full key for the setting 
 
 ### setDescription()
 
-Sets the description for the setting. This is used in end-user facing documentation for the setting.
+Sets the description for the setting. This is used in end-user-facing documentation for the setting.
 
 ### setDefaultValue()
 
@@ -72,7 +72,7 @@ Configures the default value for the setting.
 
 ### addAliasKey()
 
-Defines an additional key that can be used to look up the setting. This is useful for backwards compatibility with older keys, or for supporting different naming conventions.
+Defines an additional key that can be used to look up the setting. This is useful for backward compatibility with older keys, or for supporting different naming conventions.
 
 ### setValueHandler()
 
@@ -91,9 +91,9 @@ Generally this can be set to `ConfigurationValueObfuscator.STANDARD` which repla
 
 ## ConfigurationDefinition API Highlights
 
-### Geting the Current Value
+### Getting the Current Value
 
-`getCurrentValue()` and `getCurrentValueObfuscated()` returns the "best" value based on all the configured [ConfigurationValueProvider](configuration-configurationvalueprovider.md) instances, or the default value if none are set.
+`getCurrentValue()` and `getCurrentValueObfuscated()` return the "best" value based on all the configured [ConfigurationValueProvider](configuration-configurationvalueprovider.md) instances, or the default value if none are set.
 
 `getCurrentValueObfuscated()` will also return the "raw" value **unless** an [obfuscator](#setvalueobfuscator) is defined, in which case the raw value will be run through the obfuscator before being returned.
 

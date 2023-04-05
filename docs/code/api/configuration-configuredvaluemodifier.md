@@ -6,7 +6,7 @@ title: config.ValueModifier
 
 ## Overview
 
-`liquibase.configuration.ConfiguredValueModifier` allow configuration values to be translated, regardless of the [ConfigurationValueProvider](configuration-configurationvalueprovider.md) which returns them.
+`liquibase.configuration.ConfiguredValueModifier` implementations allow configuration values to be translated, regardless of the [ConfigurationValueProvider](configuration-configurationvalueprovider.md) which returns them.
 
 !!! example
 

@@ -15,7 +15,7 @@ but extensions can provide **_any_** functionality desired.
 
 When adding support for a new precondition, the interface you are going to implement is [liquibase.precondition.Precondition](../../code/api/precondition-precondition.md).
 
-Precondition implementations do not need to be thread safe. Liquibase will generate a new instance of them each time they are used.
+Precondition implementations do not need to be thread-safe. Liquibase will generate a new instance of them each time they are used.
 
 !!! tip
 
