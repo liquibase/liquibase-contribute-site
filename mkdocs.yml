@@ -20,6 +20,8 @@ markdown_extensions:
   - attr_list
   - def_list
   - pymdownx.details
+  - pymdownx.snippets:
+      base_path: snippets
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid

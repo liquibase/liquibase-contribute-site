@@ -1,0 +1,9 @@
+nav:
+    - index.md
+    - dev-env-setup.md
+    - your-first-extension.md
+    - extension-anatomy.md
+    - best-practices.md
+    - compatibility.md
+    - xsd-files.md
+    - ...

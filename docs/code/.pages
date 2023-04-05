@@ -3,4 +3,6 @@ nav:
     - report-an-issue.md
     - "Get Started": get-started
     - "Test Your Code": test-your-code
+    - architecture
+    - API: api
     - ...

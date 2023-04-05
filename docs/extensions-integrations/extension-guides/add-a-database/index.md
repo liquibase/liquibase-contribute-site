@@ -11,9 +11,9 @@ doesn't work with your database.
 This work is broken up into two milestones:
 
 1. [Compatible/Foundational Support](#compatible) which enables Liquibase to understand your database and get basic update/rollback logic working
-2. [Advanced Support](#advanced) which enables "change type" and snapshot based functionality
+2. [Advanced Support](#advanced) which enables "change type" and snapshot-based functionality
 
-In each milestone, you have an end-goal of working functionality and have a specific subset of interfaces to implement. 
+In each milestone, you have an end goal of working functionality and have a specific subset of interfaces to implement. 
 
 ## Prerequisites
 
@@ -25,11 +25,11 @@ As you hit places where Liquibase incorrectly assumes particular SQL will work a
 
 Finally, this section assumes you are adding support for a SQL-based database. 
 NoSQL and non-relational databases use this exact same process, but there will be more changes to make and you will need to re-implement more complex interfaces.
-Therefore, to keep this information more streamlined it is only focusing on what needs to be done for relational database. 
+Therefore, to keep this information more streamlined it is only focusing on what needs to be done for relational databases. 
 
 ## Project Setup
 
-If you have not already created a repository to hold your code, see [Your First Extension](../../your-first-extension.md) in the Getting Started guide. 
+If you have not already created a repository to hold your code, see [Your First Extension](../../extensions-overview/your-first-extension.md) in the Getting Started guide. 
 
 ## <a name="compatible"></a>Compatible Support
 
@@ -63,9 +63,9 @@ Congratulations! You can certainly stop here and use all the standard Liquibase 
 However, if there is new and unique functionality your database supports, you can always expand beyond Liquibase's standard logic to 
 work with it.
 
-Perhaps your database supports different object types? Add new `DatabaseObject` classes to your extension and snapshot in order to see them in diff operations.
+Perhaps your database supports different object types? Add new `DatabaseObject` classes to your extension and snapshot to see them in diff operations.
 
-Does your database has statements or operations which you would like to wrap in custom Change functions? Add add new `Change` classes to your extension and the `SqlGenerator` for it.
+Does your database have statements or operations which you would like to wrap in custom Change functions? Add new `Change` classes to your extension and the `SqlGenerator` for it.
 
 Any other new functionality can be bundled into your extension, but also think about the scope of the functionality you are adding. 
 If it is truly unique to this database you can certainly add it to this extension, but if it is something that can be used beyond your database it is likely best packaged as an independent exception.  

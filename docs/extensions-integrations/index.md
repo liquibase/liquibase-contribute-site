@@ -1,42 +1,30 @@
----
-title: Overview
----
+# Getting Started
 
-# Extensions Overview
+While Liquibase is open source and [always open for improvements](../code/index.md), functionality can be independently expanded through **_extensions_** and **_integrations_**.
 
-Liquibase is built with extensibility in mind. From generic changelog file handling to database-specific logic, 
-almost every part of Liquibase can be customized and enhanced through the extension system. 
-In fact, all standard functionality that ships as part of Liquibase is built using the same extension system.
+## Extensions vs. Integrations
 
-## What can extensions do?
+The difference between [extensions](extensions-overview/index.md) and [integrations](integrations-overview/index.md) is whether they are changing the logic **_within_** Liquibase or whether they are **_controlling_** how that logic is triggered.
 
-Here are some examples of what you can achieve through extensions:
+```mermaid
+flowchart LR
 
-- Modify behavior for specific databases
-- Create custom change types and preconditions
-- Create new commands or enhance existing commands with new logic
+    integrations[Calling Code / Integrations] --> engine[Liquibase Engine] --> extensions[Liquibase Logic / Extensions]
+    
+```
 
-If you'd like to have a more comprehensive overview of the Extension API, 
-refer to the [Extension Guides](extension-guides/index.md) for code samples and guides that illustrate various Extension API usage.
+Extensions allow new functionality to be added or existing functionality changed, and that functionality will consistently be run regardless of the integration.
 
-!!! note
+Integrations allow the same Liquibase functionality to be embedded or driven in whatever ways work best for each user.
 
-    If you are looking to build Liquibase **_into_** something rather than building **_onto_** Liquibase, see [the integrations documentation](integrations/index.md) 
+## Directory
 
-## How to build extensions?
+A list of publicly available extensions and integrations can be found in our [Directory](directory/index.md). 
 
-Building a good extension can take a lot of time and effort. 
-Here is what each section of the API docs can help you with:
+The Directory is great for both finding what you need and for giving ideas on what you can build.  
 
-- [Your First Extension](your-first-extension.md) teaches fundamental concepts for building extensions with the Hello World sample.
-- [Extension Anatomy](extension-anatomy.md) describes how extension code works together.
-- [Dev Environment Setup](env-setup.md) helps you set up your local environment for development work.
-- [Extension Guides](extension-guides/index.md) includes guides and code samples that explain specific usages of the API.
-- [Best Practices](best-practices.md) showcases best practices for providing a great user experience with your extension.
+## Next Steps
 
-## Looking for help?
+- Looking to create your own extension? Start with the [extensions overview](extensions-overview/index.md)
+- Looking to create your own integration? Start with the [integrations overview](integrations-overview/index.md)
 
-If you have questions for extension development, try asking on:
-
-- [Liquibase Forum](https://forum.liquibase.org){:target="_blank"} Great place to ask questions, discuss, and help other members of the community.
-- [Liquibase Discord](https://discord.com/invite/9yBwMtj){:target="_blank"} For real time questions and discussion

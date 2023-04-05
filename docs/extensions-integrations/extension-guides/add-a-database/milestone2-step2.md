@@ -14,7 +14,7 @@ The test harness uses an algorithm of finding the "most correct" version of file
 
 The base search directory is `src/test/resources/liquibase/harness/*` with different subdirectories for each type of test. For example, the "change" tests use a `${base directory}` of `src/test/resources/liquibase/harness/change`.
 
-When searching for file such as `file.ext`, Test Harness checks for the following pattern:
+When searching for a file such as `file.ext`, Test Harness checks for the following pattern:
 
 1. `${base directory}/${db name}/${major version}/{$minor version}/file.ext`
 1. `${base directory}/${db name}/${major version}/file.ext`
@@ -27,9 +27,9 @@ This means that when defining "expectedSql" or changelogs or expectedSnapshots o
 
 !!! tip
 
-    Keep your files as generic as possible. If the expectedSql file file works for all versions of your database, create the file in ${base directory}/${db name}/file.ext`. 
+    Keep your files as generic as possible. If the expectedSql file works for all versions of your database, create the file in ${base directory}/${db name}/file.ext`. 
 
-    Only use major and minor verions when it actually depends on the specific versions.  
+    Only use major and minor versions when it actually depends on the specific versions.  
 
 ## Golden Master Files
 
@@ -39,16 +39,16 @@ These files let you manually inspect the SQL being run by a particular change se
 
 ## Fixing Logic
 
-For tests that are failing because how Liquibase interacts with the database needs to be customized for your database, you will create one of two type of classes:
+For tests that are failing because how Liquibase interacts with the database needs to be customized for your database, you will create one of two types of classes:
 
-- [New SqlGenerator implementations](../add-a-sql-generator/index.md) for Change -> SQL mappings that are wrong
-- [New SnapshotGenerator implementations](../add-a-snapshot-generator/index.md) for snapshot logic that is wrong
+- [New SqlGenerator implementations](../add-a-sql-generator.md) for Change -> SQL mappings that are wrong
+- [New SnapshotGenerator implementations](../add-a-snapshot-generator.md) for snapshot logic that is wrong
 
-The general pattern for both is to create a new class which returns a higher priority **_if and only if_** Liquibase is using the `Database` class you defined in [milestone 1](milestone1-step1.md).
+The general pattern for both is to create a new class that returns a higher priority **_if and only if_** Liquibase is using the `Database` class you defined in [milestone 1](milestone1-step1.md).
 
 ## Next Step
 
-Once all the Test Harness tests are passing, you will be able to use change types in XML/YAML/JSON changelogs as well as any snapshot based functionality.
+Once all the Test Harness tests are passing, you will be able to use change types in XML/YAML/JSON changelogs as well as any snapshot-based functionality.
 For example, all of this should now work:
 
 - `liquibase update` with `<createTable...` in the changelog

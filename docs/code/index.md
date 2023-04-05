@@ -25,7 +25,7 @@ Add code to Liquibase to fix a bug or make an enhancement.
 
 - [Setup your development environment](get-started/env-setup.md)
 - [Find a good first issue](get-started/first-issues.md)
-- [Learn the code](get-started/working-with-the-code.md)
+- [Learn the code](architecture/index.md)
 - [Create a pull request](get-started/create-pr.md)
 - [Visit our GitHub repo](https://github.com/liquibase/liquibase){ target="_blank" }
 
@@ -35,4 +35,4 @@ Add code to Liquibase to fix a bug or make an enhancement.
 
 Modify an existing extension, or create a new one from scratch.
 
-[Create an Extension](../extensions-integrations/index.md){ .md-button }
+[Create an Extension](../extensions-integrations/extensions-overview/index.md){ .md-button }

@@ -14,7 +14,7 @@ However, they get to be less great if the fix is complex or in code that can eas
 
 !!! tip
 
-    If you have any questions, you can always reach out to us by commenting on the issue itself, on the [Liquibase Forum](http://forum.liquibase.org/){:target="_blank"} or in the [Liquibase Discord](https://discord.gg/pDB5DfE){:target="_blank"}.
+    If you have any questions, you can always reach out to us by commenting on the issue itself, on the [Liquibase Forum](http://forum.liquibase.org/){:target="_blank"}, or in the [Liquibase Discord](https://discord.gg/pDB5DfE){:target="_blank"}.
 
 ## "Good First Issues" Label
 
@@ -25,5 +25,5 @@ If you are looking for sometime to start with, they are a great place to start.
 ## Next Steps
 
 - [Set up your development environment](env-setup.md)
-- [Understand the code](working-with-the-code.md)
+- [Understand the code](../architecture/code-structure.md)
 - [Create a Pull Request](create-pr.md)

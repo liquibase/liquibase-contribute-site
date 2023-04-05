@@ -1,0 +1,35 @@
+name: Verify Content
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Test mkdocs build
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 #needed for mkdocs-git-revision-date-localized-plugin
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - run: pip install --no-cache-dir \
+          mkdocs-material \
+          mkdocs-git-revision-date-localized-plugin \
+          mkdocs-awesome-pages-plugin
+
+        # build site with "strict" flag to catch any errors
+      - run: mkdocs build -s -d _site
