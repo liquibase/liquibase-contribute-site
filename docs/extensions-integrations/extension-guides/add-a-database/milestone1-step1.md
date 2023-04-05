@@ -25,7 +25,7 @@ Depending on your base class you will have more or less abstract methods which m
 
 ## API Documentation
 
-A complete description of the API, including what methods must be implemented and how is available [on the liquibase.database.Database API page](../../code/api/database-database.md).
+A complete description of the API, including what methods must be implemented and how is available [on the liquibase.database.Database API page](../../../code/api/database-database.md).
 
 
 ## Example Code
