@@ -1,7 +1,7 @@
 name: Verify Content
 
 on:
-  pulL_request:
+  pull_request:
     types:
       - opened
       - reopened
