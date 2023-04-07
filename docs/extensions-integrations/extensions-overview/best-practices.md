@@ -16,3 +16,7 @@ if that is not a database your code is trying to support.
 Remember that just like you are looking to improve Liquibase, others will want to improve your extension. Be open to extension with both your code and your configuration.
 
 For example, don't return `Integer.MAX_VALUE` in `getPriority()`. Also, consider extracting portions of your logic to protected methods that someone else can subclass and override in their own extensions.
+
+## Dependencies
+
+Carefully consider dependencies using the [guidelines from liquibase-core](../../code/architecture/dependencies.md). 
