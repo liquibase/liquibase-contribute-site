@@ -28,6 +28,8 @@ In making the decision to add a dependency, we use the following guidelines:
     - The more isolated the use of the dependency is, the more comfortable we are with the dependency. Especially if the code using it can gracefully handle differences in versions and/or missing functions.
 - What other dependencies does it bring along?
     - Repeat the review for all transitive dependencies introduced by the new dependency  
+- What is the license of the dependency? 
+    - To avoid roadblocks to using Liquibase, we don't use dependencies licenses with "viral" aspects to them. The GPL license can be problematic for this reason, and even the LGPL can be concerning to users. The more permissive the license, the more comfortable we are with the dependency.  
 
 ## Examples
 
