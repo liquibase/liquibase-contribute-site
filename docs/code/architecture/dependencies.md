@@ -64,5 +64,5 @@ Liquibase avoids this because:
 1. The renaming often causes problems within the dependency code
     - If the dependency uses reflection to find classes, the renaming can break that in ways not easily detected
 2. It obfuscates the libraries users are exposed to
-    - In order to correctly track their own application's security, users need easy and standard ways to see **_all_** the libraries they are using 
+    - In order to correctly track their own application's security, users need easy and standard ways to see **_all_** the libraries they are using in their supply chain 
 

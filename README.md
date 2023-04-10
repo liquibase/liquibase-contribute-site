@@ -10,9 +10,9 @@ This contains the source for https://contribute.liquibase.com, written using htt
 
 ## Contributing Changes
 
-### Use the "Feedback" Button
+### Use the "Rate" Button
 
-The fastest way to contribute changes is to use the red "Feedback" button on the right of each page. 
+The fastest way to contribute changes is to use the "How was your experience?" button on the bottom of each page. 
 This let you suggest changes directly from your browser, and they will be reviewed by the team. 
 
 Suggestions can range from simple "This sentence is confusing" to larger "I'm trying to understand X, and am not able to find the content I need. What I'd really like is...".
