@@ -10,7 +10,7 @@ doesn't work with your database.
 
 This work is broken up into two milestones:
 
-1. [Compatible/Foundational Support](#compatible) which enables Liquibase to understand your database and get basic update/rollback logic working
+1. [Foundational Support](#foundational) which enables Liquibase to understand your database and get basic update/rollback logic working
 2. [Advanced Support](#advanced) which enables "change type" and snapshot-based functionality
 
 In each milestone, you have an end goal of working functionality and have a specific subset of interfaces to implement. 
@@ -31,7 +31,7 @@ Therefore, to keep this information more streamlined it is only focusing on what
 
 If you have not already created a repository to hold your code, see [Your First Extension](../../extensions-overview/your-first-extension.md) in the Getting Started guide. 
 
-## <a name="compatible"></a>Compatible Support
+## <a name="foundational"></a>Foundational Support
 
 The first milestone is to have Liquibase understand how your database works and be able to run any functionality that depends on user-specified SQL.
 
