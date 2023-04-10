@@ -41,7 +41,7 @@ Suggested priority values:
 - `-1` for "does not apply"
 - `1` for "use this if there is nothing better". Example: `UnsupportedDatabase` 
 - `5` for "default implementation". Example: `PostgresDatabase`
-- `10` for "a 'better' implementation than the default". Example: `RedshiftDatabase`
+- `10` for a more targeted or specific implementation than the default. Example: `RedshiftDatabase`
 - Higher values for more specific implementations. 
     - Example: `15` for a custom class for how you specifically use Redshift generally
     - Example: `20` for how you use Redshift in production.
