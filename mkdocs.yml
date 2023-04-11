@@ -40,6 +40,11 @@ plugins:
   - search
   - awesome-pages
 
+extra:
+  analytics:
+    provider: google
+    property: G-SJKPP1K4KR
+
 extra_css:
   - css/shared.css
   - css/custom.css
