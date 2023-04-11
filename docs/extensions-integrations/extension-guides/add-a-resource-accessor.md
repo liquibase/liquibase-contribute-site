@@ -38,86 +38,11 @@ Depending on the new ResourceAccessor, you may need to define a new [liquibase.r
 ## Example Code
 
 ```java
-package com.example;
+--8<-- "src/main/java/com/example/resource/ExampleResourceAccessor.java"
+```
 
-import liquibase.exception.UnexpectedLiquibaseException;
+## ExampleResource Code
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-public class ExampleResourceAccessor extends AbstractResourceAccessor {
-
-    @Override
-    public List<Resource> search(String path, boolean recursive) throws IOException {
-        List<Resource> returnList = new ArrayList<>();
-        returnList.add(get(path + "/1.sql"));
-        returnList.add(get(path + "/2.sql"));
-        if (recursive) {
-            returnList.add(get(path + "/a/3.sql"));
-            returnList.add(get(path + "/b/4.sql"));
-        }
-
-        return returnList;
-    }
-
-    @Override
-    public List<Resource> getAll(String path) throws IOException {
-        return Collections.singletonList(new ExampleResource(path, this));
-    }
-
-    @Override
-    public List<String> describeLocations() {
-        return Collections.singletonList("Random Resource Value");
-    }
-
-    @Override
-    public void close() throws Exception {
-
-    }
-
-    private static class ExampleResource extends AbstractResource {
-
-        private final ExampleResourceAccessor resourceAccessor;
-
-        public ExampleResource(String path, ExampleResourceAccessor resourceAccessor) {
-            super(path, URI.create("example:" + path));
-            this.resourceAccessor = resourceAccessor;
-        }
-
-        @Override
-        public InputStream openInputStream() throws IOException {
-            return new ByteArrayInputStream(("Example content from "+getPath()).getBytes());
-        }
-
-        @Override
-        public boolean exists() {
-            return true;
-        }
-
-        @Override
-        public Resource resolve(String other) {
-            try {
-                return resourceAccessor.get(resolvePath(other));
-            } catch (IOException e) {
-                throw new UnexpectedLiquibaseException(e);
-            }
-        }
-
-        @Override
-        public Resource resolveSibling(String other) {
-            try {
-                return resourceAccessor.get(resolvePath(other));
-            } catch (IOException e) {
-                throw new UnexpectedLiquibaseException(e);
-            }
-        }
-    }
-}
-
-
+```java
+--8<-- "src/main/java/com/example/resource/ExampleResource.java"
 ```

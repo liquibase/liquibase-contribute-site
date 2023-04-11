@@ -11,6 +11,12 @@
     background-color: #fff;
 }
 
+div #rateWidgetContainer {
+    border-top: 1px rgba(33, 43, 55, 0.1) solid;
+    margin-top: 50px !important;
+    padding-top: 15px;
+}
+
 .md-footer {
     background-color: #ffffff;
 }
