@@ -11,6 +11,51 @@
     background-color: #fff;
 }
 
+div #rateWidgetContainer {
+    border-top: 1px rgba(33, 43, 55, 0.1) solid;
+    margin-top: 50px !important;
+    padding-top: 15px;
+}
+
+.md-footer {
+    background-color: #ffffff;
+}
+
+.md-footer-meta {
+    padding: 80px 0 32px 0;
+    background-image: url(/images/footer-bg.svg), url(/images/footer-gradient-bg.png);
+}
+
+.footer-socials a.f-twitter {
+    background-image: url(/images/twitter-icon.svg);
+}
+
+.footer-socials a.f-github {
+    background-image: url(/images/github-icon.svg);
+}
+
+.footer-socials a.f-reddit {
+    background-image: url(/images/reddit-icon.svg);
+}
+
+.footer-socials a.f-linkedin {
+    background-image: url(/images/linkedin-icon.svg);
+}
+
+.footer-socials a.f-youtube {
+    background-image: url(/images/youtube-icon.svg);
+}
+
+.footer-socials a {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    opacity: 0.3;
+    margin: 0 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .md-tabs, .md-header--shadow {
     box-shadow: 0 0 20px rgb(41 98 255 / 12%);
 }

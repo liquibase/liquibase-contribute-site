@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test-mkdocs:
     name: Test mkdocs build
     runs-on: ubuntu-latest
     env:
@@ -33,3 +33,18 @@ jobs:
 
         # build site with "strict" flag to catch any errors
       - run: mkdocs build -s -d _site
+
+  test-code:
+    name: Test snippet code
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - run: cd snippets && mvn -B compile

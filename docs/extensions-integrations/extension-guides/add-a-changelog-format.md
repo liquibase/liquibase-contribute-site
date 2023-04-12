@@ -22,102 +22,10 @@ A complete description of the API, including what methods must be implemented an
 ## Example Parser Code
 
 ```java
-package com.example;
-
-import liquibase.changelog.ChangeLogParameters;
-import liquibase.changelog.DatabaseChangeLog;
-import liquibase.exception.ChangeLogParseException;
-import liquibase.parser.ChangeLogParser;
-import liquibase.resource.ResourceAccessor;
-
-import java.io.InputStream;
-
-public class ExampleParser implements ChangeLogParser {
-
-    @Override
-    public int getPriority() {
-        return PRIORITY_DEFAULT;
-    }
-
-    @Override
-    public boolean supports(String changeLogFile, ResourceAccessor resourceAccessor) {
-        return changeLogFile.toLowerCase().endsWith(".my");
-    }
-
-    @Override
-    public DatabaseChangeLog parse(String physicalChangeLogLocation, ChangeLogParameters changeLogParameters, ResourceAccessor resourceAccessor) throws ChangeLogParseException {
-        try {
-            DatabaseChangeLog changelog = new DatabaseChangeLog(physicalChangeLogLocation);
-            try (InputStream inputStream = resourceAccessor.getExisting(physicalChangeLogLocation).openInputStream()) {
-                //TODO: read the stream, update the changelog
-            }
-
-            return changelog;
-        } catch (Exception e) {
-            throw new ChangeLogParseException(e.getMessage(), e);
-        }
-    }
-}
-
-
+--8<-- "src/main/java/com/example/parser/ExampleParser.java"
 ```
-
 ## Example Serializer Code
 
 ```java
-package com.example;
-
-import liquibase.GlobalConfiguration;
-import liquibase.changelog.ChangeLogChild;
-import liquibase.changelog.ChangeSet;
-import liquibase.serializer.ChangeLogSerializer;
-import liquibase.serializer.LiquibaseSerializable;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
-
-public class ExampleChangeLogSerializer implements ChangeLogSerializer {
-
-    @Override
-    public String[] getValidFileExtensions() {
-        return new String[]{".my"};
-    }
-
-
-    @Override
-    public int getPriority() {
-        return PRIORITY_DEFAULT;
-    }
-
-
-    @Override
-    public <T extends ChangeLogChild> void write(List<T> children, OutputStream out) throws IOException {
-        String outputEncoding = GlobalConfiguration.OUTPUT_FILE_ENCODING.getCurrentValue();
-
-        for (T child : children) {
-            out.write(serialize(child, true).getBytes(outputEncoding));
-        }
-    }
-
-    @Override
-    public String serialize(LiquibaseSerializable object, boolean pretty) {
-        if (object instanceof ChangeSet) {
-            return "my formatted changeset"; //TODO: format changeset
-        } else {
-            return "my formatted " + object.getClass().getName(); //TODO: format other object types
-        }
-    }
-
-    @Override
-    public void append(ChangeSet changeSet, File changeLogFile) throws IOException {
-        String serialized = serialize(changeSet, true);
-
-        //TODO open changelogFile as a stream and append "serialized" 
-    }
-
-}
-
-
+--8<-- "src/main/java/com/example/serializer/ExampleChangeLogSerializer.java"
 ```

@@ -29,20 +29,10 @@ The call to `build()` registers the definition with the `LiquibaseConfiguration`
 ConfigurationDefintions can be created on demand, but generally they get bundled into a "holder" class such as `liquibase.configuration.GlobalConfiguration`.
 If the holder class implements `liquibase.configuration.AutoloadedConfigurations` and is registered in `META-INF/services/liquibase.configuration.AutoloadedConfigurations`, the definitions will be autoloaded when Liquibase starts up.
 
-The above example, refactored to be a 
+The above example, refactored to be an AutoLoadedConfiguration, would look like:
+
 ```java
-public class ExampleConfiguration implements AutoloadedConfigurations {
-
-    public static final ConfigurationDefinition<String> MY_SETTING;
-
-    static {
-        ConfigurationDefinition.Builder builder = new ConfigurationDefinition.Builder("liquibase");
-
-        MY_SETTING = builder.define("mySetting", String.class)
-                .setDescription("A test setting that takes a string")
-                .build();
-    }
-}
+--8<-- "src/main/java/com/example/configuration/ExampleConfiguration.java"
 ```
 
 

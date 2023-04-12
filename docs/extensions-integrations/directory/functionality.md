@@ -12,6 +12,7 @@ While Liquibase ships with many features, that functionality can be expanded and
 
 | Extension                                                                                                                                     | Notes                                                                  |
 |-----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| [Asciidoc Changelog Format](https://florent.biville.net/liquibase-asciidoc/){:target="_blank"}                                                | Write Change log files in Asciidoc format                              |
 | [AWS Secrets Manager](https://docs.liquibase.com/tools-integrations/extensions/secrets-management/aws-secrets-mgr.html){:target="_blank"}     | Read secrets from AWS Secrets Manager                                  |
 | [AWS S3](https://docs.liquibase.com/tools-integrations/extensions/remote-files/s3.html){:target="_blank"}                                     | Access files stored in AWS S3                                          |
 | [Custom Hosts](https://github.com/liquibase/custom-hosts-extension){:target="_blank"}                                                         | Allows configuring hostname to IP mapping as a configuration parameter |
