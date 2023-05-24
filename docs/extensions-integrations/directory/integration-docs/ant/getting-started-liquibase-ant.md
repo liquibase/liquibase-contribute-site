@@ -1,0 +1,142 @@
+---
+title: Getting Started
+---
+
+<h1>Getting Started with Liquibase and Ant</h1>
+<p><a href="https://ant.apache.org/">Apache Ant</a> is a Java library and command-line build tool for Java applications. Liquibase has a set of Ant tasks to automate your database changes at build time.</p>
+<p>Note: Liquibase Ant tasks are implemented on the <code>&lt;database&gt;</code> type. For more information about the attributes you can configure for the <code>&lt;database&gt;</code> type, see <a href="../">Ant</a>.</p>
+<p>To use Liquibase with Ant:</p>
+<ol>
+    <li>Ensure you have <a href="https://ant.apache.org/manual/install.html">installed Ant</a>. To verify that Ant is installed, run <code>ant -version</code> at the command prompt. You will get the output that looks like <code>Apache Ant(TM) version 1.10.11 compiled on July 10 2021</code>. Liquibase Ant tasks require Ant 1.7.1 or later versions.
+    </li>
+    <li>Create a Liquibase project directory to store all Liquibase and Ant files.
+    </li>
+    <li>Create an Ant build file called <code>build.xml</code> to specify your configuration settings with tasks, targets, and dependencies. The <code>build.xml</code> file also lets you define the needed Liquibase properties. See the example of the <a href="#build.xm">build.xml example</a> with a basic configuration.
+    </li>
+    <li>Include Liquibase in your Ant classpath and load it by adding the <code>&lt;taskdef&gt;</code> task in the <code>build.xml</code> file:
+    </li><pre xml:space="preserve"><code class="language-xml" data-lang="xml">&lt;project basedir="the/runtime/location/of/Ant" name="example" xmlns:liquibase="antlib:liquibase.integration.ant"&gt;
+     &lt;taskdef resource="liquibase/integration/ant/antlib.xml" uri="antlib:liquibase.integration.ant"&gt;
+     &lt;classpath path="the/path/to/the/liquibase.jar;the/path/to/the/driver.jar" /&gt;
+     &lt;/taskdef&gt;
+&lt;/project&gt;</code></pre>
+            <p>Tip: You can put the Liquibase JAR in your <code>ANT_HOME/lib</code> folder.</p>
+            <li>Create a text file called <code>changelog.sql</code> in your Liquibase project directory. Liquibase also supports the <code>.xml</code>, <code>.yaml</code>, or <code>.json</code> changelog formats.
+            </li>
+            <li>Add changesets to your changelog file. Use the following examples depending on the format of the changelog you created:
+            </li>
+            <p>XML example:</p><pre xml:space="preserve"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd"&gt;
+    &lt;changeSet id="1" author="Liquibase"&gt;
+    &lt;createTable tableName="test_table"&gt;
+           &lt;column name="test_id" type="int"&gt;
+                 &lt;constraints primaryKey="true"/&gt;
+           &lt;/column&gt;
+           &lt;column name="test_column" type="varchar"/&gt;
+    &lt;/createTable&gt;
+    &lt;/changeSet&gt;
+&lt;/databaseChangeLog&gt;</code></pre>
+            <p>SQL example:</p><pre xml:space="preserve"><code class="language-sql">-- liquibase formatted sql
+
+-- changeset liquibase:1
+CREATE TABLE test_table (test_id INT, test_column VARCHAR, PRIMARY KEY (test_id))</code></pre>
+            <p>YAML example:</p><pre xml:space="preserve"><code class="language-yaml">databaseChangeLog:
+- changeSet:
+    id: 1
+    author: Liquibase
+    changes:
+    - createTable:
+        columns:
+        - column:
+            name: test_column
+            type: INT
+            constraints:  
+                primaryKey:  true  
+                nullable:  false  
+                tableName: test_table</code></pre>
+         <p>JSON example:</p><pre xml:space="preserve"><code class="language-json">{ 
+  "databaseChangeLog": [
+  {
+	"changeSet": {
+	  "id": "1",
+      "author": "Liquibase",
+	  "changes": [
+	    {
+		  "createTable": {
+		    "columns": [
+			{
+			  "column": 
+		      {
+				"name": "test_column",
+				"type": "INT",
+				"constraints": 
+			  {
+				"primaryKey": true,
+				"nullable": false
+				}
+				}
+			  }]
+			,
+			"tableName": "test_table"
+		  }
+		}]
+	  }
+	}]
+  }</code></pre>
+<li>Execute the <code>updateDatabase</code> task by including the values in your Ant <code>build.xml</code> file:
+</li><pre xml:space="preserve"><code class="language-xml">&lt;target name="updateDatabase" depends="prepare"&gt;
+    &lt;liquibase:updateDatabase changeLogFile="com/example/changelog.sql"&gt;
+    &lt;liquibase:database driver="org.postgresql.Driver" 
+        url="${db.url}" 
+        user="${db.user}" 
+        password="${db.pass}"/&gt;
+    &lt;/liquibase:updateDatabase&gt;
+&lt;/target&gt;</code></pre>
+    <li>Run the following in the CLI to implement the task and update your database:
+    </li><pre><code class="language-text">ant -f build.xml updateDatabase</code></pre>
+</ol>
+
+<p>After your first update, you will see a new table along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html">DATABASECHANGELOGLOCK table</a> added to the database.</p>
+<p><code>build.xml</code> example:</p><pre xml:space="preserve"><code class="language-xml">&lt;project name="liquibase-test" basedir="." xmlns:liquibase="antlib:liquibase.integration.ant"&gt;
+&lt;!-- The "prepare" target configures the classpath and properties Liquibase will use during task execution.--&gt;
+&lt;!-- Liquibase targets must include a "depends" attribute to ensure the prepare target executes before the Liquibase task.--&gt;
+    &lt;target name="prepare"&gt;
+
+        &lt;taskdef resource="liquibase/integration/ant/antlib.xml" uri="antlib:liquibase.integration.ant"&gt;
+               &lt;classpath path="lib\liquibase.jar;lib\postgresql-42.2.18.jar"/&gt;
+        &lt;/taskdef&gt;
+
+&lt;!-- set global properties for Liquibase Tasks --&gt;
+&lt;!-- Liquibase properties can be referenced using a "${}" string replacement within a liquibase.database change.--&gt;
+        &lt;property name="db.url" value="jdbc:postgresql://localhost:8080/example"/&gt;
+        &lt;property name="db.user" value="user"/&gt;
+        &lt;property name="db.pass" value="password"/&gt;
+        &lt;property name="db.driver" value="org.postgresql.Driver"/&gt;
+        &lt;!-- Alternatively, a database instance can be created and referenced with databaseref in a Liquibase task.--&gt;
+        &lt;liquibase:database id="my-database" url="${db.url}" user="${db.user}" password="${db.pass}" driver="org.postgresql.Driver"/&gt;
+    &lt;/target&gt;
+
+&lt;!-- Liquibase Tasks --&gt;
+    &lt;!-- The updateDatabase target shows using the individual database connection properties.--&gt;
+        &lt;target name="updateDatabase" depends="prepare"&gt;
+              &lt;liquibase:updateDatabase  changeLogFile="com/example/changelog.sql"&gt;
+              &lt;liquibase:database driver="${db.driver}" url="${db.url}"  user="${db.user}"  password="${db.pass}"/&gt;
+        &lt;/liquibase:updateDatabase&gt;
+    &lt;/target&gt;
+&lt;/project&gt;</code></pre>
+
+<h2>Related links</h2>
+<ul>
+    <li><a href="https://ant.apache.org/manual/index.html">Ant</a>
+    </li>
+    <li>
+        <a href="../commands">Ant Tasks</a>
+    </li>
+</ul>
