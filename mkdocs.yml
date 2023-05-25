@@ -36,10 +36,38 @@ markdown_extensions:
 plugins:
   - git-revision-date-localized:
       enable_creation_date: true
-      enabled: !ENV [CI, false] ## Page rebuild is much slower with this enabled, so disabling unless the CI=true env variable is set, like on the build server
+      enabled: !ENV [ CI, false ] ## Page rebuild is much slower with this enabled, so disabling unless the CI=true env variable is set, like on the build server
   - search
   - awesome-pages
-
+  - redirects:
+      redirect_maps:
+        'extensions-integrations/directory/tutorials/apache-derby.md': 'extensions-integrations/directory/database-tutorials/apache-derby.md'
+        'extensions-integrations/directory/tutorials/bigquery.md': 'extensions-integrations/directory/database-tutorials/bigquery.md'
+        'extensions-integrations/directory/tutorials/cassandra.md': 'extensions-integrations/directory/database-tutorials/cassandra.md'
+        'extensions-integrations/directory/tutorials/cassandra-astra.md': 'extensions-integrations/directory/database-tutorials/cassandra-astra.md'
+        'extensions-integrations/directory/tutorials/cloud-spanner.md': 'extensions-integrations/directory/database-tutorials/cloud-spanner.md'
+        'extensions-integrations/directory/tutorials/cockroachdb.md': 'extensions-integrations/directory/database-tutorials/cockroachdb.md'
+        'extensions-integrations/directory/tutorials/cosmosdb.md': 'extensions-integrations/directory/database-tutorials/cosmosdb.md'
+        'extensions-integrations/directory/tutorials/db2onz.md': 'extensions-integrations/directory/database-tutorials/db2onz.md'
+        'extensions-integrations/directory/tutorials/db2onzdeploy-sql.md': 'extensions-integrations/directory/tutodatabase-tutorialsrials/db2onzdeploy-sql.md'
+        'extensions-integrations/directory/tutorials/firebird.md': 'extensions-integrations/directory/database-tutorials/firebird.md'
+        'extensions-integrations/directory/tutorials/h2.md': 'extensions-integrations/directory/database-tutorials/h2.md'
+        'extensions-integrations/directory/tutorials/hibernate.md': 'extensions-integrations/directory/database-tutorials/hibernate.md'
+        'extensions-integrations/directory/tutorials/hsqldb.md': 'extensions-integrations/directory/database-tutorials/hsqldb.md'
+        'extensions-integrations/directory/tutorials/informix.md': 'extensions-integrations/directory/database-tutorials/informix.md'
+        'extensions-integrations/directory/tutorials/maxdb.md': 'extensions-integrations/directory/database-tutorials/maxdb.md'
+        'extensions-integrations/directory/tutorials/mongo-db-atlas-config.md': 'extensions-integrations/directory/database-tutorials/mongo-db-atlas-config.md'
+        'extensions-integrations/directory/tutorials/mongodb.md': 'extensions-integrations/directory/database-tutorials/mongodb.md'
+        'extensions-integrations/directory/tutorials/neo4j.md': 'extensions-integrations/directory/database-tutorials/neo4j.md'
+        'extensions-integrations/directory/tutorials/percona-xtradb-cluster.md': 'extensions-integrations/directory/database-tutorials/percona-xtradb-cluster.md'
+        'extensions-integrations/directory/tutorials/sap-adaptive-server-enterprise-sap-ase.md': 'extensions-integrations/directory/database-tutorials/sap-adaptive-server-enterprise-sap-ase.md'
+        'extensions-integrations/directory/tutorials/sap-hana.md': 'extensions-integrations/directory/database-tutorials/sap-hana.md'
+        'extensions-integrations/directory/tutorials/sap-sql-anywhere.md': 'extensions-integrations/directory/database-tutorials/sap-sql-anywhere.md'
+        'extensions-integrations/directory/tutorials/singlestore.md': 'extensions-integrations/directory/database-tutorials/singlestore.md'
+        'extensions-integrations/directory/tutorials/sqlite.md': 'extensions-integrations/directory/database-tutorials/sqlite.md'
+        'extensions-integrations/directory/tutorials/teradata.md': 'extensions-integrations/directory/database-tutorials/teradata.md'
+        'extensions-integrations/directory/tutorials/vertica.md': 'extensions-integrations/directory/database-tutorials/vertica.md'
+        'extensions-integrations/directory/tutorials/yugabytedb.md': 'extensions-integrations/directory/database-tutorials/yugabytedb.md'
 extra:
   analytics:
     provider: google
