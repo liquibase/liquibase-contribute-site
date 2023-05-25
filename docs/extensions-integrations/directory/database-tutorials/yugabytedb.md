@@ -6,6 +6,9 @@ title: YugabyteDB
 <p><a href="https://www.yugabyte.com/yugabytedb/yugabytedb.md">YugabyteDB</a> is an open-source, high-performance, distributed SQL database for global, internet-scale apps. It can be run on your local machine as well as a cloud cluster. For more information, see the <a href="https://docs.yugabyte.com/">YugabyteDB documentation page</a>.</p>
 <h2>Supported versions</h2>
 <ul>
+    <li>2.18</li>
+    <li>2.17</li>
+    <li>2.16</li>
     <li>2.14</li>
     <li>2.12</li>
     <li>2.8</li>
