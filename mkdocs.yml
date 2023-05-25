@@ -49,7 +49,7 @@ plugins:
         'extensions-integrations/directory/tutorials/cockroachdb.md': 'extensions-integrations/directory/database-tutorials/cockroachdb.md'
         'extensions-integrations/directory/tutorials/cosmosdb.md': 'extensions-integrations/directory/database-tutorials/cosmosdb.md'
         'extensions-integrations/directory/tutorials/db2onz.md': 'extensions-integrations/directory/database-tutorials/db2onz.md'
-        'extensions-integrations/directory/tutorials/db2onzdeploy-sql.md': 'extensions-integrations/directory/tutodatabase-tutorialsrials/db2onzdeploy-sql.md'
+        'extensions-integrations/directory/tutorials/db2onzdeploy-sql.md': 'extensions-integrations/directory/database-tutorials/db2onzdeploy-sql.md'
         'extensions-integrations/directory/tutorials/firebird.md': 'extensions-integrations/directory/database-tutorials/firebird.md'
         'extensions-integrations/directory/tutorials/h2.md': 'extensions-integrations/directory/database-tutorials/h2.md'
         'extensions-integrations/directory/tutorials/hibernate.md': 'extensions-integrations/directory/database-tutorials/hibernate.md'
