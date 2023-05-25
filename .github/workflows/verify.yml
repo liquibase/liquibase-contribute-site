@@ -29,7 +29,8 @@ jobs:
       - run: pip install --no-cache-dir \
           mkdocs-material \
           mkdocs-git-revision-date-localized-plugin \
-          mkdocs-awesome-pages-plugin
+          mkdocs-awesome-pages-plugin \
+          mkdocs-redirects
 
         # build site with "strict" flag to catch any errors
       - run: mkdocs build -s -d _site
