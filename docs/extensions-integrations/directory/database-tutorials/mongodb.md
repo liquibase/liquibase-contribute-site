@@ -20,7 +20,7 @@ title: MongoDB
     <li value="4"><a href="https://docs.liquibase.com/commands/init/project.html" class="MCXref xref">init project</a> – Create a new Liquibase project folder to store all Liquibase files.</li>
     <li value="5"><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html" class="MCXref xref">How to Apply Your Liquibase Pro License Key</a> – If you use <span class="mc-variable General.LBPro variable">Liquibase Pro</span>, activate your license.</li>
 </ol>
-<p>6. Ensure that your <a href="mongodb-pro-user-roles.html" class="MCXref xref">MongoDB&#160;Pro Extension User Roles</a> are established before continuing.</p>
+
 <h2>Install drivers</h2>
 <p>To use Liquibase and MongoDB, you need four JAR files:</p>
 <ul>
