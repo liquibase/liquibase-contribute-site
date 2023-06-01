@@ -6,4 +6,5 @@ nav:
     - best-practices.md
     - compatibility.md
     - xsd-files.md
+    - upgrade-guides
     - ...
