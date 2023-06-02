@@ -291,3 +291,7 @@ nav.md-tabs {
 .md-sidebar .md-nav__link {
     color: black !important;
 }
+
+.site-header-star {
+    height: 30px;
+}
