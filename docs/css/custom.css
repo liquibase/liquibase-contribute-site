@@ -295,3 +295,9 @@ nav.md-tabs {
 .site-header-star {
     height: 30px;
 }
+
+/* Decrease DB tutorial table header width */
+table#dbtutorials th,
+table#dbtutorials td {
+    padding: .9375em 0.5em;
+}
