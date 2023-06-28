@@ -73,7 +73,7 @@
 &lt;/dependency&gt;</code></pre>
 <p>You need to specify that the scope is <code>system</code> and provide the <code>systemPath</code> in
     <code>pom.xml</code>. In the example, the <code>${basedir}/lib</code> is the location of the driver JAR file.</p>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your Cassandra database is configured. If you have Cassandra tools locally and want to check
         the status of Cassandra, run <code>$ bin/nodetool status</code>. The status column in the output should report

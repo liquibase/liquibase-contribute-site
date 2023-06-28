@@ -20,7 +20,7 @@
     &lt;artifactId&gt;jdbc&lt;/artifactId&gt;
     &lt;version&gt;4.50.8&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your Informix database is configured. Create an Informix database in the ANSI mode to enable implicit transactions by using the following statement:</li><pre><code class="language-text">CREATE DATABASE ansiDatabase WITH LOG MODE ANSI;</code></pre>
     <p>For more information, see <a href="https://www.ibm.com/docs/en/informix-servers/14.10?topic=server-installing">Informix Installation</a> and <a href="https://www.ibm.com/support/knowledgecenter/en/SSGU8G_12.1.0/com.ibm.sqls.doc/ids_sqs_0369.htm">CREATE DATABASE statement: Logging Options</a>.</p>

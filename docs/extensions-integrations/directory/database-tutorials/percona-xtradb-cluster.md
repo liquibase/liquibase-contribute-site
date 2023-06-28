@@ -24,7 +24,7 @@ title: Percona XtraDB Cluster
     &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
     &lt;version&gt;8.0.30&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your Percona XtraDB Cluster database is configured:<ol><li value="1">Check the database status by running the <a href="https://www.percona.com/doc/percona-xtradb-cluster/5.7/wsrep-status-index.html#wsrep_cluster_status">wsrep_cluster_status</a> command or <a href="https://www.percona.com/doc/percona-xtradb-cluster/LATEST/verify.html">verifying replication</a>:</li><li value="2">Run the following SQL script to create Liquibase metatables:</li><pre><code class="language-text">--  Create Database Lock Table
 DROP TABLE IF EXISTS `DATABASECHANGELOGLOCK`;

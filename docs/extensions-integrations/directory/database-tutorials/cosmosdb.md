@@ -336,7 +336,7 @@ endlocal</code></pre>
     &lt;version&gt;2.0.6&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your Cosmos&#160;DB&#160;database is configured. See <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java">Quickstart: Build a Java app to manage Azure Cosmos DB SQL API data</a> for more information.</li>
     <li value="2">

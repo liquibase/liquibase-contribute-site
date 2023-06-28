@@ -50,7 +50,7 @@ title: Apache Derby
     &lt;artifactId&gt;derbytools&lt;/artifactId&gt;
     &lt;version&gt;10.15.2.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your Apache Derby database is configured. As an option, you can run the <code>sysinfo</code>
         command to check the output of Derby system information. For more details, see the <a

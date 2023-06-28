@@ -35,7 +35,7 @@ title: YugabyteDB
     &lt;artifactId&gt;liquibase-yugabytedb&lt;/artifactId&gt;
     &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">
         <p>Ensure your YugabyteDB is configured. You can check its status depending on your cluster setup. Run the <code>yugabyted</code> command:</p><pre xml:space="preserve"><code class="language-text">./bin/yugabyted status</code></pre>

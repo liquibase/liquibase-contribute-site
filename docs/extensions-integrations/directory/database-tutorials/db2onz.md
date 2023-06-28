@@ -34,7 +34,7 @@ title: DB2 on z/OS
     &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your DB2 on z/OS database is configured. You can check the status by running the <a href="https://www.ibm.com/docs/en/db2-for-zos/13?topic=commands-display-database-db2"><code>DISPLAY DATABASE</code> command</a>, which displays status information about DB2 databases.</li>
     <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre xml:space="preserve"><code class="language-text" data-lang="text">url: jdbc:db2://&lt;servername&gt;:&lt;port&gt;/&lt;dbname&gt;</code></pre>
