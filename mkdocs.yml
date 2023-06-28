@@ -56,7 +56,6 @@ plugins:
         'extensions-integrations/directory/tutorials/hsqldb.md': 'extensions-integrations/directory/database-tutorials/hsqldb.md'
         'extensions-integrations/directory/tutorials/informix.md': 'extensions-integrations/directory/database-tutorials/informix.md'
         'extensions-integrations/directory/tutorials/maxdb.md': 'extensions-integrations/directory/database-tutorials/maxdb.md'
-        'extensions-integrations/directory/tutorials/mongo-db-atlas-config.md': 'extensions-integrations/directory/database-tutorials/mongo-db-atlas-config.md'
         'extensions-integrations/directory/tutorials/mongodb.md': 'extensions-integrations/directory/database-tutorials/mongodb.md'
         'extensions-integrations/directory/tutorials/neo4j.md': 'extensions-integrations/directory/database-tutorials/neo4j.md'
         'extensions-integrations/directory/tutorials/percona-xtradb-cluster.md': 'extensions-integrations/directory/database-tutorials/percona-xtradb-cluster.md'
