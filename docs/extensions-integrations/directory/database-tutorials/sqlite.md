@@ -24,7 +24,7 @@ title: SQLite
     &lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;
     &lt;version&gt;3.34.0&lt;/version&gt;
  &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your SQLite database is configured. You can use <a href="https://www.sqlite.org/cli.html">sqlite3</a> commands like <code>.databases</code> and <code>.show</code> to check the status of the database.</li>
     <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre><code class="language-text">url: jdbc:sqlite:example.db</code></pre>

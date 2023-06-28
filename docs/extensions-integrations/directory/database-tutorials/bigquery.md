@@ -60,7 +60,7 @@ If you use Maven,
     &lt;artifactId&gt;liquibase-bigquery&lt;/artifactId&gt;
     &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your BigQuery database is configured. See <a
             href="https://cloud.google.com/bigquery/docs/quickstarts">BigQuery Quickstarts</a> for more information. For

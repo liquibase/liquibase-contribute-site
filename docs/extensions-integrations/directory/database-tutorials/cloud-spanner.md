@@ -32,7 +32,7 @@ title: Cloud Spanner
     &lt;version&gt;4.10.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure you have created the Cloud Spanner <a href="https://cloud.google.com/spanner/docs/quickstart-console#create_an_instance">instance</a> and  <a href="https://cloud.google.com/spanner/docs/quickstart-console#create_a_database">database</a>. Then give the extension temporary use of your own Cloud Spanner user credentials for API access by running the following <code>gcloud</code> command:</li><pre><code class="language-text">gcloud auth application-default login</code></pre>
     <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre xml:space="preserve"><code class="language-text">url: jdbc:cloudspanner:/projects/&lt;project&gt;/instances/&lt;instance&gt;/databases/&lt;database&gt;</code></pre>

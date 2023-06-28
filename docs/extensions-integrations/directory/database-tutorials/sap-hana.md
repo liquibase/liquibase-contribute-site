@@ -34,7 +34,7 @@ title: SAP HANA
     &lt;artifactId&gt;liquibase-hanadb&lt;/artifactId&gt;
     &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your SAP&#160;HANA database is configured. See <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/eb3777d5495d46c5b2fa773206bbfb46/326373b251c14f30b6e7f2f5efd3f6e3.html">Installing SAP&#160;HANA</a> for more information.</li>
     <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre xml:space="preserve"><code class="language-text">url: jdbc:sap://localhost:30013/?databaseName=mydatabase&amp;encrypt=true</code></pre>

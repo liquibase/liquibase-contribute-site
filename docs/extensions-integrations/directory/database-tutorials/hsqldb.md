@@ -24,7 +24,7 @@
     &lt;artifactId&gt;hsqldb&lt;/artifactId&gt;
     &lt;version&gt;2.5.2&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol data-mc-continue="true">
     <li value="6">Ensure your HSQL&#160;database is configured. See <a href="http://www.hsqldb.org/doc/2.0/guide/running-chapt.html">Running and Using HyperSQL</a>&#160;for more information.</li>
     <li value="7">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre xml:space="preserve"><code class="language-text">url: jdbc:hsqldb:hsql://&lt;host&gt;:&lt;port&gt;/&lt;database&gt;</code></pre>

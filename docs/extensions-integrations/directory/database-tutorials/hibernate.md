@@ -18,7 +18,7 @@
 <ul>
 	<li>Download and install <a href="https://maven.apache.org/download.cgi">Maven</a>.</li>
 </ul>
-<h2>Create a new Liquibase project with Hibernate</h2>
+<h2 id="create">Create a new Liquibase project with Hibernate</h2>
 <p>We will be creating a Maven project for this tutorial. To configure a Liquibase project for Hibernate, perform the following steps:</p>
 <ol>
 	<li style="font-style: normal;" value="1">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre><code class="language-text">url=hibernate:ejb3:com.liquibase.hibernate.tutorial.jpa</code></pre>

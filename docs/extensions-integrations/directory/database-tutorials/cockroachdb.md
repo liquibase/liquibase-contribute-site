@@ -27,7 +27,7 @@ title: CockroachDB
     &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
     &lt;version&gt;42.4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<h2>Test your connection</h2>
+<h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your CockroachDB is configured:<ol><li value="1">&#160;You can check its status depending on your cluster setup. For example, you can check basic network connectivity (ping), port connectivity (telnet), and certificate validity. See the <a href="https://www.cockroachlabs.com/docs/v20.2/cluster-setup-troubleshooting.html">Troubleshoot Cluster Setup</a> for more details.</li><li value="2">Generate or check <a href="https://www.cockroachlabs.com/docs/v20.2/cockroach-cert.html">TLS certificates</a> for the user that you created during a <a href="https://www.cockroachlabs.com/docs/v20.2/secure-a-cluster.html">secure CockroachDB cluster setup</a>. Use the <code>cockroach cert</code> command to generate the certificates:</li><pre><code class="language-text">cockroach cert create-client user --certs-dir=certs --ca-key=my-safe-directory/ca.key --also-generate-pkcs8-key</code></pre></ol></li>
     <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li>
