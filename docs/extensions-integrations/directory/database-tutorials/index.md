@@ -162,7 +162,7 @@ title: Database Tutorials
         <b>JDBC URL:</b> <code>jdbc:cloudspanner:/projects/&lt;project&gt;/instances/&lt;instance&gt;/databases/&lt;database&gt;</code><br>
         <b>Download:</b> <a href="https://github.com/liquibase/liquibase-spanner">GitHub: Liquibase Spanner Extension</a><br>
         <b>Extension:</b> <code>liquibase-spanner-version-all.jar</code><br>
-        <p><b>Notes:</b> <p>Includes extension and driver.</p>
+        <p><b>Notes:</b> Includes extension and driver.</p>
       </td>
     </tr>
     <tr>
