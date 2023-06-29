@@ -12,7 +12,7 @@ title: SingleStoreDB
 1. [Introduction to Liquibase](https://docs.liquibase.com/concepts/introduction-to-liquibase.html) – Dive into Liquibase concepts.
 2. [Install Liquibase](https://docs.liquibase.com/start/install/home.html) – Download Liquibase on your machine.
 3. [Get Started with Liquibase](https://docs.liquibase.com/start/home.html) – Learn how to use Liquibase with an example database.
-4. [init project](https://docs.liquibase.com/commands/init/project.html) – Create a new Liquibase project folder to store all Liquibase files.
+4. [Design Your Liquibase Project](https://docs.liquibase.com/start/design-liquibase-project.html) – Create a new Liquibase project folder and organize your changelogs
 5. [How to Apply Your Liquibase Pro License Key](https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html) – If you use Liquibase Pro, activate your license.
 
 ## Install Drivers

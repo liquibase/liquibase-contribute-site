@@ -21,8 +21,8 @@ title: Database Tutorials
   <thead>
     <tr>
       <th>Database</th>
-      <th>Verification level</th>
       <th>Verified Database Versions</th>
+      <th>Verification Level</th>
       <th>Shortname / Driver / Notes</th>
     </tr>
   </thead>
@@ -48,10 +48,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/apache-derby/">Apache Derby</a>
       </td>
       <td>
-        Advanced
+        10.14
       </td>
       <td>
-        10.14
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>derby</code><br>
@@ -66,10 +66,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra/">Apache Cassandra</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>cassandra</code><br>
         <br>
@@ -83,10 +83,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra-astra/">Apache Cassandra on DataStax Astra</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>cassandra</code><br>
         <br>
@@ -116,10 +116,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cosmosdb/">Azure Cosmos DB</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>cosmosdb</code><br>
         <br>
@@ -170,10 +170,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cockroachdb/">CockroachDB (on-premises)</a>
       </td>
       <td>
-        Advanced
+        20, 21, 22
       </td>
       <td>
-        20, 21, 22
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>cockroachdb</code><br>
@@ -190,10 +190,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cockroachdb/">CockroachDB (cloud)</a>
       </td>
       <td>
-        Advanced
+        20, 21, 22
       </td>
       <td>
-        20, 21, 22
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>cockroachdb</code><br>
@@ -210,10 +210,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/firebird/">Firebird RDBMS</a>
       </td>
       <td>
-        Advanced
+        3, 4
       </td>
       <td>
-        3, 4
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>firebird</code><br>
@@ -229,10 +229,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/bigquery/">Google BigQuery</a>
       </td>
       <td>
-        Foundational
+        Cloud
       </td>
       <td>
-        Cloud
+        Foundational
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>bigquery</code><br>
@@ -249,10 +249,10 @@ title: Database Tutorials
         Greenplum Database
       </td>
       <td>
-        Foundational
+        6
       </td>
       <td>
-        6
+        Foundational
       </td>
       <td>
         <b>DBMS/shortname:</b><br>
@@ -268,10 +268,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/h2/">H2 Database Engine</a>
       </td>
       <td>
-        Advanced
+        1.4, 2.1.21
       </td>
       <td>
-        1.4, 2.1.21
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>h2</code><br>
@@ -325,10 +325,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/hsqldb/">HyperSQL</a>
       </td>
       <td>
-        Advanced
+        2.3, 2.4, 2.5, 2.6, 2.7
       </td>
       <td>
-        2.3, 2.4, 2.5, 2.6, 2.7
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>hsqldb</code><br>
@@ -343,10 +343,10 @@ title: Database Tutorials
       <td>
         IBM DB2 for i
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>db2</code><br>
         <br>
@@ -360,10 +360,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/db2onz/">IBM Db2 for Z</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>db2</code><br>
         <br>
@@ -393,10 +393,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/informix/">Informix</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>informix</code><br>
         <br>
@@ -444,10 +444,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/mongodb/">MongoDB Community Extension</a>
       </td>
       <td>
-        Contributed
+        5, 6
       </td>
       <td>
-        5, 6
+        Contributed
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>mongodb</code><br>
@@ -464,10 +464,10 @@ title: Database Tutorials
       <td>
         <a href="https://www.liquibase.com/databases/neo4j-graph-database">Neo4j Graph Database</a>
       </td>
+      <td></td>
       <td>
         Foundational
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>neo4j</code><br>
         <br>
@@ -497,10 +497,10 @@ title: Database Tutorials
       <td>
         Percona Distribution for MySQL
       </td>
+      <td></td>
       <td>
         Foundational
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b><br>
         <br>
@@ -515,10 +515,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/percona-xtradb-cluster/">Percona XtraDB Cluster</a>
       </td>
       <td>
-        Advanced
+        5.7, 8.0
       </td>
       <td>
-        5.7, 8.0
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b><br>
@@ -549,10 +549,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sap-hana/">SAP HANA</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>hana</code><br>
         <br>
@@ -567,10 +567,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/maxdb/">SAP MaxDB</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>maxdb</code><br>
         <br>
@@ -587,10 +587,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sap-sql-anywhere/">SAP SQL Anywhere</a>
       </td>
       <td>
-        Foundational
+        17
       </td>
       <td>
-        17
+        Foundational
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>asany</code><br>
@@ -605,10 +605,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sap-adaptive-server-enterprise-sap-ase/">Sybase (SAP ASE)</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>sybase</code><br>
         <br>
@@ -619,14 +619,27 @@ title: Database Tutorials
       </td>
     </tr>
     <tr>
+      <td><a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/singlestore/">SingleStoreDB</a></td>
+      <td>Cloud</td>
+      <td>Foundational</td>
+      <td>
+        <b>DBMS/shortname:</b> <code></code><br>
+        <br>
+        <b>File:</b> <code></code><br>
+        <b>Class:</b> <code></code><br>
+        <b>JDBC URL:</b> <code></code><br>
+        <b>Download:</b>
+      </td>
+    </tr>
+    <tr>
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sqlite/">SQLite</a>
       </td>
       <td>
-        Advanced
+        3.34
       </td>
       <td>
-        3.34
+        Advanced
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>sqlite</code><br>
@@ -642,10 +655,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/teradata/">Teradata Database</a>
       </td>
       <td>
-        Foundational
+        17.2
       </td>
       <td>
-        17.2
+        Foundational
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>teradata</code><br>
@@ -661,10 +674,10 @@ title: Database Tutorials
       <td>
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/vertica/">Vertica</a>
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b> <code>vertica</code><br>
         <br>
@@ -679,10 +692,10 @@ title: Database Tutorials
       <td>
         VMware vFabric SQLFire
       </td>
+      <td></td>
       <td>
         Contributed
       </td>
-      <td></td>
       <td>
         <b>DBMS/shortname:</b><br>
         <br>
@@ -714,10 +727,10 @@ title: Database Tutorials
         <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/yugabytedb/">YugabyteDB</a>
       </td>
       <td>
-        Foundational
+        2.6, 2.8, 2.12, 2.14
       </td>
       <td>
-        2.6, 2.8, 2.12, 2.14
+        Foundational
       </td>
       <td>
         <b>DBMS/shortname:</b> <code>yugabytedb</code><br>
