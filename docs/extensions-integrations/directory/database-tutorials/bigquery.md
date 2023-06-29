@@ -20,10 +20,7 @@ title: BigQuery
     <li value="3"><a href="https://docs.liquibase.com/start/home.html" class="MCXref xref">Get Started with Liquibase</a> – Learn how to use <span
             class="mc-variable General.Liquibase variable">Liquibase</span> with an example database.
     </li>
-    <li value="4"><a href="https://docs.liquibase.com/commands/init/project.html" class="MCXref xref">init project</a> – Create a new <span
-            class="mc-variable General.Liquibase variable">Liquibase</span> project folder to store all <span
-            class="mc-variable General.Liquibase variable">Liquibase</span> files.
-    </li>
+    <li value="4"><a href="https://docs.liquibase.com/start/design-liquibase-project.html" class="MCXref xref">Design Your Liquibase Project</a> – Create a new <span class="mc-variable General.Liquibase variable">Liquibase</span> project folder and organize your changelogs</li>
     <li value="5"><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html"
                      class="MCXref xref">How to Apply Your Liquibase Pro License Key</a> – If you use <span
             class="mc-variable General.LBPro variable">Liquibase Pro</span>, activate your license.
