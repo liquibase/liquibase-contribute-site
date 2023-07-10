@@ -4,11 +4,11 @@ title: Database Support
 
 # Extended Database Support
 
-Liquibase ships with support for a large variety of databases, but extensions can provide enhanced functionality beyond what is in standard Liquibase and/or support for additional databases.
+Liquibase ships with support for many databases, but extensions can provide enhanced functionality beyond what is in standard Liquibase and/or support for additional databases.
 
 For more information on database support in Liquibase, see [https://www.liquibase.com/supported-databases](https://www.liquibase.com/supported-databases){:target=_blank}.
 
-For tutorials for databases maintained by Liquibase—including databases that Liquibase natively supports as well as database extensions maintained by Liquibase—see [Docs: Liquibase Database Tutorials](https://docs.liquibase.com/start/tutorials/home.html). For a list of community-maintained databases, see [Liquibase Database Tutorials: Community-Maintained](/database-tutorials/directory/index.md).
+For tutorials for databases maintained by Liquibase—including databases that Liquibase natively supports as well as database extensions maintained by Liquibase—see [Docs: Liquibase Database Tutorials](https://docs.liquibase.com/start/tutorials/home.html). For a list of community-maintained databases, see [Liquibase Database Tutorials: Community-Maintained](/directory/database-tutorials/index.md).
 
 !!! note
 
