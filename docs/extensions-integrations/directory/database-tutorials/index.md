@@ -8,8 +8,6 @@ title: Database Tutorials
 <ol>
         <li><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.htm">Introduction to Liquibase</a> – Dive into Liquibase concepts.</li>
         <li><a href="https://docs.liquibase.com/start/install/home.htm">Install Liquibase</a> – Download Liquibase on your machine.</li>
-        <li><a href="https://docs.liquibase.com/start/home.htm">Get Started with Liquibase</a> – Learn how to use Liquibase with an example database.</li>
-        <li><a href="https://docs.liquibase.com/start/design-liquibase-project.htm">Design Your Liquibase Project</a> – Create a new Liquibase project folder and organize your changelogs</li>
         <li><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.htm">How to Apply Your Liquibase Pro License Key</a> – If you use Liquibase Pro, activate your license.</li>
     </ol>
 <h2>Verification levels</h2>
