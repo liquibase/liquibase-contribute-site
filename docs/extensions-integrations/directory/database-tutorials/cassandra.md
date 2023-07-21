@@ -40,7 +40,7 @@
         specify the driver, as follows:
     </li>
     <pre><code class="language-text">driver: com.simba.cassandra.jdbc42.Driver</code></pre>
-    <li value="4">Go to the <a href="https://github.com/liquibase/liquibase-cassandra/releases">liquibase-cassandra</a>
+    <li value="4">Go to the <a href="https://github.com/liquibase/liquibase-cassandra/releases/cassandra.md">liquibase-cassandra</a>
         repository and download the latest released <span
                 class="mc-variable General.Liquibase variable">Liquibase</span> extension JAR file: <code>liquibase-cassandra-version.jar</code>.
     </li>
