@@ -15,7 +15,7 @@ If you are a Liquibase user, there is nothing more you need to do. Liquibase wil
 
 If you are a Liquibase extension or integration creator, this guide is for you. Before you update your extension or integration with this version of Liquibase, review the code examples and understand the changes so you can adapt your practices accordingly.
 
-Liquibase 4.23.0 introduces breaking changes to the Liquibase Java API to support multiple checksums versions. You will need to update your extension or integration as outlined below.
+Liquibase 4.23.0 introduces breaking changes to the Liquibase Java API to support multiple checksums versions. You should update your extension or integration if your code implements any of the services or methods listed below.
 
 The changes were:
 
