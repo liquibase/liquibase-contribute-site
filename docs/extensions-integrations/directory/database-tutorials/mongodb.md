@@ -3,12 +3,12 @@ title: MongoDB
 ---
 
 <h1>Use Liquibase with MongoDB</h1>
-<p><a href="https://www.mongodb.com/mongodb.md">MongoDB</a>&#160;is a document-oriented NoSQL&#160;database. For more information, see <a href="https://www.mongodb.com/docs/mongodb.md">MongoDB&#160;Documentation</a>.</p>
+<p><a href="https://www.mongodb.com">MongoDB</a>&#160;is a document-oriented NoSQL&#160;database. For more information, see <a href="https://www.mongodb.com/docs/">MongoDB&#160;Documentation</a>.</p>
 <h2>Supported versions</h2>
 <ul>
     <li>6.X</li>
     <li>5.X</li>
-    <li><a href="mongo-db-atlas-config.md" class="MCXref xref">MongoDB Atlas</a>
+    <li><a href="https://docs.liquibase.com/start/tutorials/mongo-db-atlas-config.html" class="MCXref xref">MongoDB Atlas</a>
     </li>
 </ul>
 <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>Liquibase does not support the version of MongoDB used with <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/what-is.html">AWS DocumentDB</a> or <a href="https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/mongodb-introduction">Azure Cosmos DB</a> .</p>
@@ -16,9 +16,6 @@ title: MongoDB
 <ol>
     <li value="1"><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html" class="MCXref xref">Introduction to Liquibase</a> – Dive into Liquibase concepts.</li>
     <li value="2"><a href="https://docs.liquibase.com/start/install/home.html" class="MCXref xref">Install Liquibase</a> – Download Liquibase on your machine.</li>
-    <li value="3"><a href="https://docs.liquibase.com/start/home.html" class="MCXref xref">Get Started with Liquibase</a> – Learn how to use Liquibase with an example database.</li>
-    <li value="4"><a href="https://docs.liquibase.com/start/design-liquibase-project.html" class="MCXref xref">Design Your Liquibase Project</a> – Create a new <span class="mc-variable General.Liquibase variable">Liquibase</span> project folder and organize your changelogs</li>
-    <li value="5"><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html" class="MCXref xref">How to Apply Your Liquibase Pro License Key</a> – If you use <span class="mc-variable General.LBPro variable">Liquibase Pro</span>, activate your license.</li>
 </ol>
 
 <h2>Install drivers</h2>
@@ -27,7 +24,7 @@ title: MongoDB
     <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-&lt;version&gt;.jar</code>)</li>
     <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-&lt;version&gt;.jar</code>)</li>
     <li><a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-&lt;version&gt;.jar</code>)</li>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb/releases/mongodb.md">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-&lt;version&gt;.jar</code>)</li>
+    <li><a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-&lt;version&gt;.jar</code>)</li>
 </ul>
 <p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p><p>If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file.</p>
 <p>To include the driver JAR in the pom.xml file, use the following code:</p><pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
@@ -52,11 +49,11 @@ title: MongoDB
 &lt;/dependency&gt;</code></pre>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
-<li value="1">Ensure your MongoDB database is configured. See <a href="https://www.mongodb.com/docs/manual/installation/mongodb.md">Install MongoDB</a> for more information.</li>
+<li value="1">Ensure your MongoDB database is configured. See <a href="https://www.mongodb.com/docs/manual/installation/">Install MongoDB</a> for more information.</li>
 <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre xml:space="preserve">
 <code class="language-html">url: mongodb://hostname:27017/myDatabase</code>
 </pre>
-<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>If you are unsure about how to configure the <code>url</code> property, refer to <a href="https://docs.mongodb.com/manual/reference/connection-string/mongodb.md">Connection String URI Format</a>.</p>
+<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>If you are unsure about how to configure the <code>url</code> property, refer to <a href="https://docs.mongodb.com/manual/reference/connection-string/">Connection String URI Format</a>.</p>
 <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: &lt;paste code here&gt;</code></p>
 <li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>The use of JSON&#160;and YAML <span class="mc-variable General.changelog variable">changelog</span>s is available in  Liquibase version 4.20</p></li>
 <a href="#" >XML&#160;example 1</a>
@@ -91,7 +88,7 @@ title: MongoDB
 </ol>
 <a style="font-size: 18pt;"> MongoDB command examples</a>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.createCollection/mongodb.md#db.createCollection">createCollection</a> creates a collection with the validator.</li>
+    <li><a href="https://docs.mongodb.com/manual/reference/method/db.createCollection#db.createCollection">createCollection</a> creates a collection with the validator.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
     &lt;ext:createCollection collectionName="myCollection"&gt;
         &lt;ext:options&gt;
@@ -119,12 +116,12 @@ title: MongoDB
 	&lt;/ext:createCollection&gt;
 &lt;/changeSet&gt;</code></pre>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.drop/mongodb.md">dropCollection</a> removes a collection or view from the database.</li>
+    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.drop">dropCollection</a> removes a collection or view from the database.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
 &lt;ext:dropCollection collectionName="myCollection"/&gt;
 &lt;/changeSet&gt;</code></pre>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/mongodb.md#db.collection.createIndex">createIndex</a> creates an index for a collection.</li>
+    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.createIndex#db.collection.createIndex">createIndex</a> creates an index for a collection.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
      &lt;ext:createIndex collectionName="createIndexTest"&gt;
           &lt;ext:keys&gt;
@@ -142,7 +139,7 @@ title: MongoDB
     &lt;/ext:createIndex&gt;
 &lt;/changeSet&gt;</code></pre>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.dropIndex/mongodb.md#db.collection.dropIndex">dropIndex</a> drops an index for a collection by keys.</li>
+    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.dropIndex#db.collection.dropIndex">dropIndex</a> drops an index for a collection by keys.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
      &lt;ext:dropIndex collectionName="createIndexTest"&gt;
          &lt;ext:keys&gt;
@@ -160,7 +157,7 @@ title: MongoDB
      &lt;/ext:dropIndex&gt;
 &lt;/changeSet&gt;</code></pre>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany/mongodb.md#db.collection.insertMany">insertMany</a> inserts multiple documents into a collection.</li>
+    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany#db.collection.insertMany">insertMany</a> inserts multiple documents into a collection.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
      &lt;ext:insertMany collectionName="insertManyTest1"&gt;
          &lt;ext:documents&gt;
@@ -174,7 +171,7 @@ title: MongoDB
   	 &lt;/ext:insertMany&gt;
 &lt;/changeSet&gt;</code></pre>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/tutorial/insert-documents/mongodb.md">insertOne</a> inserts a single document into a collection.</li>
+    <li><a href="https://docs.mongodb.com/manual/tutorial/insert-documents">insertOne</a> inserts a single document into a collection.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
     &lt;ext:insertOne collectionName="insertOneTest1"&gt;
          &lt;ext:document&gt;
@@ -221,7 +218,7 @@ title: MongoDB
     &lt;/ext:insertOne&gt;
 &lt;/changeSet&gt;</code></pre>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.runCommand/mongodb.md">runCommand</a> provides a helper to run specified database commands. This is the preferred method to issue database commands as it provides a consistent interface between the shell and drivers.</li>
+    <li><a href="https://docs.mongodb.com/manual/reference/method/db.runCommand">runCommand</a> provides a helper to run specified database commands. This is the preferred method to issue database commands as it provides a consistent interface between the shell and drivers.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
     &lt;ext:runCommand&gt;
         &lt;ext:command&gt;
@@ -238,7 +235,7 @@ title: MongoDB
    &lt;/ext:adminCommand&gt;
 &lt;/changeSet&gt;</code></pre>
 <ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.adminCommand/mongodb.md#db.adminCommand">adminCommand</a> provides a helper to run specified database commands against the admin database.</li>
+    <li><a href="https://docs.mongodb.com/manual/reference/method/db.adminCommand#db.adminCommand">adminCommand</a> provides a helper to run specified database commands against the admin database.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="2" author="liquibase"&gt;
      &lt;ext:adminCommand&gt;
          &lt;ext:command&gt;
@@ -247,15 +244,10 @@ title: MongoDB
     &lt;/ext:adminCommand&gt;
 &lt;/changeSet&gt;</code></pre>
 
-
 <h2>Related links</h2>
 <ul>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb">Liquibase MongoDB Extension</a>
-    </li>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb/tree/main/src/test/resources/liquibase/ext">Liquibase MongoDB Extension Examples</a>
-    </li>
-    <li><a href="https://docs.liquibase.com/commands/home.html" class="MCXref xref">Liquibase Commands</a>
-    </li>
-    <li><a href="https://docs.liquibase.com/change-types/home.html" class="MCXref xref">Change Types</a>
-    </li>
+    <li><a href="https://github.com/liquibase/liquibase-mongodb">Liquibase MongoDB Extension</a></li>
+    <li><a href="https://github.com/liquibase/liquibase-mongodb/tree/main/src/test/resources/liquibase/ext">Liquibase MongoDB Extension Examples</a></li>
+    <li><a href="https://docs.liquibase.com/commands/home.html" class="MCXref xref">Liquibase Commands</a></li>
+    <li><a href="https://docs.liquibase.com/change-types/home.html" class="MCXref xref">Change Types</a></li>
 </ul>
