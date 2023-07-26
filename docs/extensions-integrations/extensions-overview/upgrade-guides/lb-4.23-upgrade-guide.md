@@ -7,7 +7,15 @@ title: To Liquibase 4.23
 ## Changes introduced in 4.23.0
 
 
-Before version 4.23.0, Liquibase would work only with one checksum version simultaneously. But upgrading checksums was a process that could cause errors and lead to missing execution of some changesets using "runOnchange," "runAlways," etc., plus validation changes would be disabled. 4.23.0 version introduced breaking changes to support multiple checksums versions fixing those issues.
+Before version 4.23.0, Liquibase would only work with the most recent checksum version. Upgrading checksums was a process that could cause errors and lead to missing execution of some changesets using "runOnchange" and "runAlways". Plus, validation changes would be disabled during the upgrade.
+
+Liquibase 4.23.0 significantly enhances checksum handling. By managing multiple checksum versions concurrently, Liquibase provides a seamless checksum upgrade experience that eliminates potential errors and ensures that no changesets are skipped.
+
+If you are a Liquibase user, there is nothing more you need to do. Liquibase will handle the checksum upgrade in the background.
+
+If you are a Liquibase extension or integration creator, this guide is for you. Before you update your extension or integration with this version of Liquibase, review the code examples and understand the changes so you can adapt your practices accordingly.
+
+Liquibase 4.23.0 introduces breaking changes to the Liquibase Java API to support multiple checksums versions. You will need to update your extension or integration as outlined below.
 
 The changes were:
 
@@ -17,7 +25,7 @@ Long answer: this method is used by the `Update` command family to know if there
     1. IF `isDatabaseChecksumsCompatible` returns true and there are NO unrun changesets, it means the database is up-to-date. It won't update the checksums even if they are from a previous version and will exit.
     2. IF `isDatabaseChecksumsCompatible` returns true, and there are unrun changesets, then update will upgrade old checksums versions (if any) and execute the unrun ones as usual.
     3. IF `isDatabaseChecksumsCompatible` returns false, then update will upgrade old checksums versions (if there are any) and execute the unrun ones (if there are any) as usual.
-    4. On core this is done in the `StandardChangelogService.init()` method (select all md5 checksums from null, if any of them is not `latest().getVersion()`, we set the flag and then return it on the method call later on:
+    4. For Liquibase Core this is done in the `StandardChangelogService.init()` method (select all md5 checksums from null, if any of them is not `latest().getVersion()`, we set the flag and then return it on the method call later on:
 ```
 SqlStatement databaseChangeLogStatement = 
     new SelectFromDatabaseChangeLogStatement(
@@ -35,8 +43,8 @@ if (!md5sumRS.isEmpty()) {
                 ChecksumVersion.latest().getVersion() + ":"));
 }
 ``` 
-2. `liquibase.changelog.ChangeLogHistoryService#getRanChangeSets(boolean)`:  FIX: ignore the parameter and return this.getRanChangeSets() . Long answer: this API was created to set MD5sum to null if boolean is true for upgrade purposes, but after some refactoring, we moved the logic to Update commands, and we should removed it as everywhere it is called only with boolean false - and for core, it is the same as `getRanChangeSets()`. It will be deprecated as of the next version. 
-3. `liquibase.changelog.ChangeSet#generateCheckSum` now must take a ChecksumVersion argument. This will calculate the checksum for the current version. So using `ChecksumVersion.latest()` will behave as before (and `latest()`  will always return the latest version - so in the next checksum upgrade, it will return v10).  But if you are loading from the database as in `ChangelogHistoryService`, it's recommended to calculate using the version from the database so you'll get the checksum difference. We use the following code:
+2. `liquibase.changelog.ChangeLogHistoryService#getRanChangeSets(boolean)`:  FIX: ignore the parameter and return this.getRanChangeSets() . Long answer: this API was created to set MD5sum to null if boolean is true for upgrade purposes, but after some refactoring, we moved the logic to Update commands, and we removed it since it is called only with boolean false - and for Liquibase Core, it is the same as `getRanChangeSets()`. It will be deprecated as of the next version. 
+3. `liquibase.changelog.ChangeSet#generateCheckSum` now must take a ChecksumVersion argument. This will calculate the checksum for the current version. So using `ChecksumVersion.latest()` will behave as before (and `latest()` will always return the latest version - so in the next checksum upgrade, it will return v10).  But if you are loading from the database as in `ChangelogHistoryService`, it's recommended to calculate using the version from the database so you'll get the checksum difference. We use the following code:
 
 ```
     ChecksumVersion version = changeSet.getStoredCheckSum() != null ? 
@@ -45,8 +53,5 @@ if (!md5sumRS.isEmpty()) {
         ChecksumVersion.latest();
 ```
 
----
-In conclusion, Liquibase 4.23.0 brings significant enhancements to checksum handling, providing the capability to manage multiple checksum versions concurrently. This eliminates potential errors that occurred during checksum upgrades and ensures that no changesets are skipped. As you integrate this version, be sure to thoroughly review the code examples and understand the changes to adapt your practices accordingly.
-
 ## Questions and Problems
-If you have questions on the API changes or issues with your extension supporting Liquibase 4.23, don't hesitate to contact us by email, on [Discord](https://discord.com/login?redirect_to=%2Fchannels%2F700506481111597066%2F700506481572839505), or on the [Liquibase Forum](https://forum.liquibase.org/).</p>
+If you have questions on the API changes or issues with your extension supporting Liquibase 4.23, don't hesitate to contact us on the [Liquibase Forum](https://forum.liquibase.org/) or [Discord](https://discord.com/login?redirect_to=%2Fchannels%2F700506481111597066%2F700506481572839505).</p>
