@@ -89,32 +89,32 @@ title: MongoDB
 <a style="font-size: 18pt;"> MongoDB command examples</a>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.createCollection#db.createCollection">createCollection</a> creates a collection with the validator.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
-    &lt;ext:createCollection collectionName="myCollection"&gt;
-        &lt;ext:options&gt;
+</ul><pre xml:space="preserve"><code class="language-json"><changeSet id="1" author="liquibase">
+    <ext:createCollection collectionName="myCollection">
+        <ext:options>
         {
-        validator: {
+          validator: {
             $jsonSchema: {
                 bsonType: "object",
                 required: ["name", "address"],
-		 		properties: {
+                properties: {
 	                name: {
-		    	        bsonType: "string",
-		    	        description: "The Name"
-		    		},
-  	    	        address: {
-			           bsonType: "string",
-			           description: "The Address"
-			    	}
-		         }
-		      }
-		  },
-		  validationAction: "warn",
-		  validationLevel: "strict"
-		}
-		&lt;/ext:options&gt;
-	&lt;/ext:createCollection&gt;
-&lt;/changeSet&gt;</code></pre>
+		    	          bsonType: "string",
+		    	          description: "The Name"
+                  },
+                  address: {
+			              bsonType: "string",
+			              description: "The Address"
+                  }
+		            }
+		          }
+		        },
+		      validationAction: "warn",
+		      validationLevel: "strict"
+		    }
+        </ext:options>
+    </ext:createCollection>
+</changeSet></code></pre>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.drop">dropCollection</a> removes a collection or view from the database.</li>
 </ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
