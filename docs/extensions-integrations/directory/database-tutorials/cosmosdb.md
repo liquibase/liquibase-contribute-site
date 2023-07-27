@@ -341,38 +341,32 @@ endlocal</code></pre>
     <li value="1">Ensure your Cosmos&#160;DB&#160;database is configured. See <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java">Quickstart: Build a Java app to manage Azure Cosmos DB SQL API data</a> for more information.</li>
     <li value="2">
         <p>Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</p>
-    </li>
-    <pre xml:space="preserve"><code class="language-text">url: jdbc:cosmosdb://&lt;host&gt;:&lt;accountKey&gt;@&lt;host&gt;:&lt;port&gt;/&lt;databaseName&gt;?&lt;Query Parameters&gt;</code></pre>
+    </li><pre xml:space="preserve"><code class="language-text">url: jdbc:cosmosdb://&lt;host&gt;:&lt;accountKey&gt;@&lt;host&gt;:&lt;port&gt;/&lt;databaseName&gt;?&lt;Query Parameters&gt;</code></pre>
     <table>
         <thead>
             <tr>
                 <th>Type</th>
-                <th>JDBC Example / Notes</th>
+                <th>Example</th>
+                <th>Notes</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>Azure Cosmos DB Emulator</td>
-                <td>
-                    <pre xml:space="preserve"><code class="language-text">jdbc:cosmosdb://
+                <td><pre xml:space="preserve"><code class="language-text">jdbc:cosmosdb://
 localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU
 5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
 @localhost:8080/testdb1</code></pre>
-                    <p>
-                        This example shows the default account key, formatted for readability. For more information, see <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator">Install and use the Azure Cosmos DB Emulator for local development and testing</a>.
-                    </p>
                 </td>
+                <td>This example shows the default account key, formatted for readability. For more information, see <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator">Install and use the Azure Cosmos DB Emulator for local development and testing</a>.</td>
             </tr>
             <tr>
                 <td>Azure Cosmos DB</td>
-                <td>
-                    <pre xml:space="preserve"><code class="language-text">jdbc:cosmosdb://
+                <td><pre xml:space="preserve"><code class="language-text">jdbc:cosmosdb://
 AccountEndpoint=https://&lt;cosmosdb-account-name&gt;.documents.azure.com:443;
 AccountKey=&lt;accountKey&gt;;</code></pre>
-                    <p>
-                        Replace <code>&lt;cosmosdb-account-name&gt;</code>&#160;with the name you chose for your Azure Cosmos DB. Replace <code>&lt;accountKey&gt;</code> with your private account key. For more information, see <a href="https://docs.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-cosmosdb-portal">Tutorial: Connect to an Azure Cosmos account using an Azure Private Endpoint</a>.
-                    </p>
                 </td>
+                <td>Replace <code>&lt;cosmosdb-account-name&gt;</code>&#160;with the name you chose for your Azure Cosmos DB. Replace <code>&lt;accountKey&gt;</code> with your private account key. For more information, see <a href="https://docs.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-cosmosdb-portal">Tutorial: Connect to an Azure Cosmos account using an Azure Private Endpoint</a>.</td>
             </tr>
         </tbody>
     </table>
