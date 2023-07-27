@@ -3,7 +3,7 @@ title: BigQuery
 ---
 
 <h1>Using Liquibase with BigQuery</h1>
-<p><a href="https://cloud.google.com/bigquery/bigquery.md">Google BigQuery</a> is a fully managed analytics data warehouse. For
+<p><a href="https://cloud.google.com/bigquery">Google BigQuery</a> is a fully managed analytics data warehouse. For
     more information, see <a href="https://cloud.google.com/bigquery/docs">BigQuery Documentation</a>.</p>
 <h2>Supported versions</h2>
 <ul>
