@@ -1,5 +1,5 @@
 <h1>Using Liquibase with Firebird</h1>
-<p><a href="https://firebirdsql.org/en/start/">Firebird</a> is an open-source relational database management system.  For more information, see <a href="https://firebirdsql.org/en/firebird-rdbms/firebird.md">Firebird RDBMS Documentation</a>.</p>
+<p><a href="https://firebirdsql.org/en/start/">Firebird</a> is an open-source relational database management system.  For more information, see <a href="https://firebirdsql.org/en/firebird-rdbms/">Firebird RDBMS Documentation</a>.</p>
 <h2>Supported versions</h2>
 <ul>
     <li>4.0.X</li>
@@ -122,7 +122,7 @@ Liquibase command 'update' was executed successfully.</code></pre>
 <p>If you run the <code>update</code> command to deploy your <span class="mc-variable General.changeset variable">changeset</span>s and receive the error message related to the <span class="mc-variable General.databasechangeloglock variable">DATABASECHANGELOGLOCK</span> table issue, manually create the <span class="mc-variable General.databasechangeloglock variable">DATABASECHANGELOGLOCK</span> table using <code>SMALLINT</code> type instead of <code>BOOLEAN</code>:</p><pre><code class="language-sql">CREATE TABLE DATABASECHANGELOGLOCK (ID VARCHAR(255) NOT NULL, LOCKED SMALLINT NOT NULL, LOCKGRANTED TIMESTAMP, LOCKEDBY VARCHAR(255));</code></pre>
 <h2>Related links</h2>
 <ul>
-    <li><a href="https://firebirdsql.org/en/reference-manuals/">Firebird documentation</a>
+    <li><a href="https://firebirdsql.org/en/firebird-rdbms/">Firebird documentation</a>
     </li>
     <li><a href="https://docs.liquibase.com/concepts/home.html" class="MCXref xref">Concepts</a>
     </li>

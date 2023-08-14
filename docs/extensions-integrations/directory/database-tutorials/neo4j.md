@@ -1,5 +1,5 @@
 <h1>Using Liquibase with Neo4j</h1>
-<p><a href="https://neo4j.com/neo4j.md">Neo4j</a> is a property graph database management system with native graph storage and processing. It uses a graph query language called <a href="https://neo4j.com/docs/getting-started/current/cypher-intro/neo4j.md">Cypher</a>. For more information, see <a href="https://neo4j.com/docs/neo4j.md">Neo4j Documentation</a>.</p>
+<p><a href="https://neo4j.com/">Neo4j</a> is a property graph database management system with native graph storage and processing. It uses a graph query language called <a href="https://neo4j.com/docs/getting-started/cypher-intro/">Cypher</a>. For more information, see <a href="https://neo4j.com/docs/">Neo4j Documentation</a>.</p>
 <h2>Supported versions</h2>
 <ul>
     <li>3.5+</li>
@@ -14,13 +14,13 @@
 </ol>
 <p>To access Neo4j, do one of the following:</p>
 <ul>
-    <li><a href="https://neo4j.com/download/neo4j.md">Download Neo4j Desktop locally</a>
+    <li><a href="https://neo4j.com/download/">Download Neo4j Desktop locally</a>
     </li>
     <li><a href="https://hub.docker.com/_/neo4j">Configure Neo4j locally with Docker</a>
     </li>
-    <li><a href="https://neo4j.com/cloud/platform/aura-graph-database/neo4j.md">Create a Neo4j AuraDB&#160;cloud instance</a>
+    <li><a href="https://neo4j.com/cloud/platform/aura-graph-database/">Create a Neo4j AuraDB&#160;cloud instance</a>
     </li>
-    <li><a href="https://neo4j.com/sandbox/neo4j.md">Launch a Neo4j Aura&#160;sandbox instance</a>
+    <li><a href="https://neo4j.com/sandbox/">Launch a Neo4j Aura&#160;sandbox instance</a>
     </li>
 </ul>
 <h2>Install drivers</h2>
@@ -30,17 +30,17 @@
     &lt;artifactId&gt;liquibase-neo4j&lt;/artifactId&gt;
     &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<p>The Neo4j extension has native JDBC connectivity support in version 4.19.0+. If you're using an earlier version, you must also install a third-party <a href="https://github.com/neo4j-contrib/neo4j-jdbc">JDBC driver</a> to connect to Liquibase. For driver configuration information, see <a href="https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-configuration.md">Neo4j Configuration</a>. For additional JARs to integrate Neo4j with your preferred programming language, see <a href="https://neo4j.com/docs/getting-started/current/languages-guides/neo4j.md">Connecting to Neo4j</a>.</p>
+<p>The Neo4j extension has native JDBC connectivity support in version 4.19.0+. If you're using an earlier version, you must also install a third-party <a href="https://github.com/neo4j-contrib/neo4j-jdbc">JDBC driver</a> to connect to Liquibase. For driver configuration information, see <a href="https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-configuration.md">Neo4j Configuration</a>. For additional JARs to integrate Neo4j with your preferred programming language, see <a href="https://neo4j.com/docs/getting-started/current/languages-guides/">Connecting to Neo4j</a>.</p>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
-    <li value="1">Ensure your Neo4j database is configured. See <a href="https://neo4j.com/docs/operations-manual/current/neo4j.md">Neo4j Operations Manual</a> and <a href="https://neo4j.com/docs/aura/auradb/getting-started/create-database/neo4j.md">Neo4j AuraDB: Creating an instance</a> for more information.</li>
+    <li value="1">Ensure your Neo4j database is configured. See <a href="https://neo4j.com/docs/operations-manual/current/">Neo4j Operations Manual</a> and <a href="https://neo4j.com/docs/aura/auradb/getting-started/create-database/">Neo4j AuraDB: Creating an instance</a> for more information.</li>
     <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format: </li><pre xml:space="preserve"><code class="language-text">url: jdbc:neo4j:bolt://&lt;host&gt;:&lt;port&gt;/?username=foo,password=bar</code></pre>
     <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span> The Liquibase extension for Neo4j only supports connections through the Bolt protocol, not HTTP.</p>
-    <p>For more information about the JDBC connection, see <a href="http://neo4j-contrib.github.io/neo4j-jdbc/neo4j.md">Neo4j JDBC Driver Documentation § Technical Reference</a>.</p>
+    <p>For more information about the JDBC connection, see <a href="http://neo4j-contrib.github.io/neo4j-jdbc/">Neo4j JDBC Driver Documentation § Technical Reference</a>.</p>
     <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: &lt;paste code here&gt;</code></p>
 </ol>
 <ol start="3">
-    <li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>, <code>.cypher</code>, <code>.json</code>, or <code>.yaml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>. The <code>&lt;neo4j:cypher&gt;</code>&#160;<span class="mc-variable General.changetypes variable">Change Type</span> has the same behavior as the <code>&lt;<a href="https://docs.liquibase.com/change-types/sql.html" class="MCXref xref">sql</a>&gt;</code>&#160;<span class="mc-variable General.changetypes variable">Change Type</span>. For more information about Cypher syntax, see the <a href="https://neo4j.com/docs/cypher-manual/current/introduction/neo4j.md">Neo4j Cypher Manual</a> (general syntax) the <a href="https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-features.md">Neo4j Extension Cypher Manual</a> (Liquibase syntax).</li>
+    <li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>, <code>.cypher</code>, <code>.json</code>, or <code>.yaml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>. The <code>&lt;neo4j:cypher&gt;</code>&#160;<span class="mc-variable General.changetypes variable">Change Type</span> has the same behavior as the <code>&lt;<a href="https://docs.liquibase.com/change-types/sql.html" class="MCXref xref">sql</a>&gt;</code>&#160;<span class="mc-variable General.changetypes variable">Change Type</span>. For more information about Cypher syntax, see the <a href="https://neo4j.com/docs/cypher-manual/current/introduction/">Neo4j Cypher Manual</a> (general syntax) the <a href="https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-features.md">Neo4j Extension Cypher Manual</a> (Liquibase syntax).</li>
     <a style="font-size: 18pt;"> XML example</a>
         <pre xml:space="preserve"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <code>&lt;databaseChangeLog
@@ -99,10 +99,10 @@ liquibase update --changelog-file=&lt;changelog.xml&gt;</code></pre>
 </ol>
 <h2>Related links</h2>
 <ul>
-    <li><a href="https://neo4j.com/labs/liquibase/docs/neo4j.md">Neo4j documentation: Neo4j Plugin for Liquibase</a>
+    <li><a href="https://neo4j.com/labs/liquibase/docs/">Neo4j documentation: Neo4j Plugin for Liquibase</a>
     </li>
-    <li><a href="https://neo4j.com/docs/getting-started/current/neo4j.md">Neo4j documentation: Welcome to Neo4j</a>
+    <li><a href="https://neo4j.com/docs/getting-started/current/">Neo4j documentation: Welcome to Neo4j</a>
     </li>
-    <li><a href="https://neo4j.com/docs/getting-started/current/appendix/graphdb-concepts/neo4j.md">Neo4j documentation: Graph database concepts</a>
+    <li><a href="https://neo4j.com/docs/getting-started/current/appendix/graphdb-concepts/">Neo4j documentation: Graph database concepts</a>
     </li>
 </ul>
