@@ -6,12 +6,11 @@ title: Directory List
 
 Liquibase is designed to be extensible beyond what ships in the base distribution.
 
-For a list of publicly available extensions, see:
+For a list of publicly available extensions and integrations, see:
 
-- [Extended Database Support](database-support.md)
-- [Expanded Functionality](functionality.md)
-- [External Integrations](integrations.md)
+- Available Extensions: [Database Extensions](database-support.md) & [Additional Extensions](functionality.md)
+- Available Integrations: [Integrations](integrations.md)
 
 **Looking to create your own extension or integration?**
 
-Start with the [overview](../extensions-overview/index.md) today!
+Start with the [extension overview](../extensions-overview/index.md) or [integration overview](../integrations-overview/index.md) today!
