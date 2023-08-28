@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-<h1>Liquibase Extension Upgrade Guides</h1>
+# Liquibase Extension Upgrade Guides
 
 <p>As a platform built around extensibility, Liquibase strives to preserve API-level compatibility from release to release. However, preserving compatibility sometimes comes at a cost of not being able to use new technologies, patterns, and use cases that do not fit well into that original API structure.</p>
 <p>In our quest to balance stability with innovation, Liquibase 4.0 introduces some API breaking changes. To ease the transition, we also included an update compatibility layer to keep existing extensions working, and give everyone time to make the (minor) extension changes required to stay fully Liquibase compatible</p>

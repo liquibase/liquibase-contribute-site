@@ -53,8 +53,8 @@ By default, the change and snapshot logic uses standard SQL and/or JDBC calls so
 
 The steps in this phase are:
 
-1. [Configure test harness to determine what needs to be fixed](milestone2-step1)
-2. [Iteratively failures from step 1 until there are no more](milestone2-step2)
+1. [Configure test harness to determine what needs to be fixed](milestone2-step1.md)
+2. [Iteratively failures from step 1 until there are no more](milestone2-step2.md)
 
 ## Next Steps
 
