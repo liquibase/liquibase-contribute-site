@@ -1,5 +1,5 @@
 <h1>Using Liquibase with Teradata</h1>
-<p><a href="https://www.teradata.com/Products/Software/Database">Teradata</a> Vantage Advanced SQL Engine is an analytic database engine. For more information, see <a href="https://docs.teradata.com/teradata.md">Teradata Documentation</a>.</p>
+<p><a href="https://www.teradata.com/Resources/Datasheets/Teradata-Database">Teradata</a> Vantage Advanced SQL Engine is an analytic database engine. For more information, see <a href="https://docs.teradata.com/">Teradata Documentation</a>.</p>
 <h2>Supported versions</h2>
 <ul>
     <li>17.20</li>
@@ -31,7 +31,7 @@
 &lt;/dependency&gt;</code></pre>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
-    <li value="1">Ensure your Teradata database is configured. See <a href="https://quickstarts.teradata.com/teradata.md">Teradata Quickstarts</a> for more information.</li>
+    <li value="1">Ensure your Teradata database is configured. See <a href="https://quickstarts.teradata.com/">Teradata Quickstarts</a> for more information.</li>
     <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre><code class="language-html">url: jdbc:teradata://hostname/DATABASE=myDatabase</code></pre>
     <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: &lt;paste code here&gt;</code></p>
 </ol>

@@ -1,6 +1,6 @@
 <h1>Using Liquibase with Hibernate</h1>
 <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
-<p><a href="https://hibernate.org/orm/documentation/5.5/hibernate.md">Hibernate</a> is an object-relational mapping (ORM) tool that can be used alongside Liquibase to provide a persistent framework for a relational database.</p>
+<p><a href="https://hibernate.org/orm/">Hibernate</a> is an object-relational mapping (ORM) tool that can be used alongside Liquibase to provide a persistent framework for a relational database.</p>
 <p>The purpose of this document is to guide you through the process of creating a new Liquibase project and integrating it into your Hibernate JPA setup. </p>
 <h2>Reported versions</h2>
 <ul>
@@ -242,9 +242,7 @@ You can move and rename it to <code>src/main/resources/dbchangelog.xml</code>, t
 <p>Source code is available at: <a href="https://github.com/juliuskrah/hibernate-liquibase">https://github.com/juliuskrah/hibernate-liquibase</a></p>
 <h2>Related links</h2>
 <ul>
-	<li><a href="https://hibernate.org/orm/documentation/hibernate.md">Hibernate documentation</a>
-	</li>
-	<li><a href="https://docwiki.embarcadero.com/InterBase/2020/en/Main_Page">InterBase documentation</a>
+	<li><a href="https://hibernate.org/orm/">Hibernate documentation</a>
 	</li>
 	<li><a href="https://docs.liquibase.com/concepts/home.html" class="MCXref xref">Concepts</a>
 	</li>

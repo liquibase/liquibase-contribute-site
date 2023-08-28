@@ -1,6 +1,6 @@
 <h1>Using Liquibase with Vertica</h1>
 <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
-<p><a href="https://www.vertica.com/vertica.md">Vertica</a> is an column-oriented analytic database and query engine. For more information, see <a href="https://www.vertica.com/documentation/vertica/11-1-x-documentation/vertica.md">Vertica Documentation</a>.</p>
+<p><a href="https://www.vertica.com/">Vertica</a> is an column-oriented analytic database and query engine. For more information, see <a href="https://www.vertica.com/documentation/vertica/11-1-x-documentation/">Vertica Documentation</a>.</p>
 <h2>Reported versions</h2>
 <ul>
     <li>12.0.X</li>
@@ -17,7 +17,7 @@
 <h2>Install drivers</h2>
 <p>To use Liquibase and Vertica, you need  two JAR&#160;files:</p>
 <ul>
-    <li>The <a href="https://www.vertica.com/download/vertica/client-drivers/vertica.md">Vertica JDBC driver</a> (<a href="https://mvnrepository.com/artifact/com.vertica.jdbc/vertica-jdbc">Maven download</a>)</li>
+    <li>The <a href="https://www.vertica.com/download/vertica/client-drivers/">Vertica JDBC driver</a> (<a href="https://mvnrepository.com/artifact/com.vertica.jdbc/vertica-jdbc">Maven download</a>)</li>
     <li>The <a href="https://github.com/liquibase/liquibase-vertica/releases">Liquibase extension for Vertica</a></li>
 </ul>
 <p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p><p>If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file.</p><pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
