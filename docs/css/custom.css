@@ -296,6 +296,13 @@ nav.md-tabs {
     height: 30px;
 }
 
+/* Hack to fix the disappearing top-navigation item (when selected) */
+.md-tabs__item--active .md-tabs__link {
+    /* color: inherit; */
+    color: #ff1744 !important;
+    opacity: 1;
+}
+
 /* Decrease DB tutorial table header width */
 table#dbtutorials th,
 table#dbtutorials td {
