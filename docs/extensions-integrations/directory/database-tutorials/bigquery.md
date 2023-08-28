@@ -33,8 +33,9 @@ title: BigQuery
     <li> All the JAR files in the <a href="https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers">BigQuery
         JDBC&#160;ZIP&#160;file</a> (under "Current JDBC driver")
     </li>
-    <li>The <a href="https://github.com/liquibase/liquibase-bigquery"><span
-            class="mc-variable General.Liquibase variable">Liquibase</span> extension for Google BigQuery</a></li>
+    <li>The <a href="https://github.com/liquibase/liquibase-bigquery/releases"><span
+            class="mc-variable General.Liquibase variable">Liquibase</span> extension for Google BigQuery</a> (liquibase-bigquery-{version}.jar)
+    </li>
 </ul>
 <p>
     <a
