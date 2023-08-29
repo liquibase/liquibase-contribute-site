@@ -2,249 +2,287 @@
 title: MongoDB
 ---
 
-<h1>Use Liquibase with MongoDB</h1>
-<p><a href="https://www.mongodb.com">MongoDB</a>&#160;is a document-oriented NoSQL&#160;database. For more information, see <a href="https://www.mongodb.com/docs/">MongoDB&#160;Documentation</a>.</p>
-<h2>Supported versions</h2>
+# Use Liquibase with MongoDB
+<p><a href="https://www.mongodb.com">MongoDB</a>&#160;is a document-oriented NoSQL&#160;database. For more information, see the <a href="https://www.mongodb.com/docs/">MongoDB&#160;Documentation</a>.</p>
+## Supported versions
 <ul>
     <li>6.X</li>
     <li>5.X</li>
     <li><a href="https://docs.liquibase.com/start/tutorials/mongo-db-atlas-config.html" class="MCXref xref">MongoDB Atlas</a>
     </li>
 </ul>
-<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>Liquibase does not support the version of MongoDB used with <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/what-is.html">AWS DocumentDB</a> or <a href="https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/mongodb-introduction">Azure Cosmos DB</a> .</p>
-<h2>Prerequisites</h2>
+
+!!! note
+
+    This community-maintained MongoDB extension supports the MongoDB change types shown in the [MongoDB command examples](mongodb.md/#mongodb-command-examples) section at the bottom of this page.
+    
+    If you need complete MongoDB support, please use the MongoDB “mongosh” implementation as described in [AWS DocumentDB and the MongoDB Pro extension](https://docs.liquibase.com/start/tutorials/mongodb-pro-amazon-documentdb.html){:target=_blank}.
+  
+    If you are looking for information on CosmosDB support, it can be found here: [Using Liquibase with Azure CosmosDB](cosmosdb.md).
+
+## Prerequisites
 <ol>
     <li value="1"><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html" class="MCXref xref">Introduction to Liquibase</a> – Dive into Liquibase concepts.</li>
     <li value="2"><a href="https://docs.liquibase.com/start/install/home.html" class="MCXref xref">Install Liquibase</a> – Download Liquibase on your machine.</li>
 </ol>
 
-<h2>Install drivers</h2>
+## Install drivers
 <p>To use Liquibase and MongoDB, you need four JAR files:</p>
 <ul>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-&lt;version&gt;.jar</code>)</li>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-&lt;version&gt;.jar</code>)</li>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-&lt;version&gt;.jar</code>)</li>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-&lt;version&gt;.jar</code>)</li>
+    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-<version>.jar</code>)</li>
+    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-<version>.jar</code>)</li>
+    <li><a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-<version>.jar</code>)</li>
+    <li><a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-<version>.jar</code>)</li>
 </ul>
 <p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p><p>If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file.</p>
-<p>To include the driver JAR in the pom.xml file, use the following code:</p><pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
-    &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-    &lt;artifactId&gt;mongodb-driver-core&lt;/artifactId&gt;
-    &lt;version&gt;4.9.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-    &lt;artifactId&gt;mongodb-driver-sync&lt;/artifactId&gt;
-    &lt;version&gt;4.9.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-    &lt;artifactId&gt;bson&lt;/artifactId&gt;
-    &lt;version&gt;4.9.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
-    &lt;artifactId&gt;liquibase-mongodb&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-<h2 id="test-your-connection">Test your connection</h2>
+<p>To include the driver JAR in the pom.xml file, use the following code:</p>
+```
+<dependency>
+    <groupId>org.mongodb</groupId>
+    <artifactId>mongodb-driver-core</artifactId>
+    <version>4.9.0</version>
+</dependency>
+<dependency>
+    <groupId>org.mongodb</groupId>
+    <artifactId>mongodb-driver-sync</artifactId>
+    <version>4.9.0</version>
+</dependency>
+<dependency>
+    <groupId>org.mongodb</groupId>
+    <artifactId>bson</artifactId>
+    <version>4.9.0</version>
+</dependency>
+<dependency>
+    <groupId>org.liquibase.ext</groupId>
+    <artifactId>liquibase-mongodb</artifactId>
+    <version><span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span></version>
+</dependency>
+```
+## Test your connection
 <ol>
 <li value="1">Ensure your MongoDB database is configured. See <a href="https://www.mongodb.com/docs/manual/installation/">Install MongoDB</a> for more information.</li>
 <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre xml:space="preserve">
 <code class="language-html">url: mongodb://hostname:27017/myDatabase</code>
 </pre>
-<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>If you are unsure about how to configure the <code>url</code> property, refer to <a href="https://docs.mongodb.com/manual/reference/connection-string/">Connection String URI Format</a>.</p>
-<p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: &lt;paste code here&gt;</code></p>
-<li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>The use of JSON&#160;and YAML <span class="mc-variable General.changelog variable">changelog</span>s is available in  Liquibase version 4.20</p></li>
-<a href="#" >XML&#160;example 1</a>
-        <div class="codeSnippet">
-            <div style="mc-code-lang: XML;" class="codeSnippetBody" data-mc-continue="False" data-mc-line-number-start="1" data-mc-use-line-numbers="False"><pre><code><span style="color: #969896; ">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br /><br /><span style="color: #63a35c; ">&lt;databaseChangeLog</span><br /><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">xmlns</span><span style="color: #df5000; ">="http://www.liquibase.org/xml/ns/dbchangelog"</span></span><br /><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xmlns:<span style="color: #795da3; ">xsi</span><span style="color: #df5000; ">="http://www.w3.org/2001/XMLSchema-instance"</span></span><br /><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xmlns:<span style="color: #795da3; ">pro</span><span style="color: #df5000; ">="http://www.liquibase.org/xml/ns/pro"</span></span><br /><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xsi:<span style="color: #795da3; ">schemaLocation</span><span style="color: #df5000; ">="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd</span></span><br /><span style="color: #63a35c; "><span style="color: #df5000; ">&#160;&#160;&#160;&#160;http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd "</span>&gt;</span><br /><br />&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;changeSet <span style="color: #795da3; ">id</span><span style="color: #df5000; ">="1"</span> <span style="color: #795da3; ">author</span><span style="color: #df5000; ">="your.name"</span> <span style="color: #795da3; ">labels</span><span style="color: #df5000; ">="example-label"</span> <span style="color: #795da3; ">context</span><span style="color: #df5000; ">="example-context"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;comment&gt;</span>example-comment<span style="color: #63a35c; ">&lt;/comment&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;createTable <span style="color: #795da3; ">tableName</span><span style="color: #df5000; ">="person"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="id"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="int"</span> <span style="color: #795da3; ">autoIncrement</span><span style="color: #df5000; ">="true"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;constraints <span style="color: #795da3; ">primaryKey</span><span style="color: #df5000; ">="true"</span> <span style="color: #795da3; ">nullable</span><span style="color: #df5000; ">="false"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/column&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="name"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(50)"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;constraints <span style="color: #795da3; ">nullable</span><span style="color: #df5000; ">="false"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/column&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="address1"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(50)"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="address2"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(50)"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="city"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(30)"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/createTable&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/changeSet&gt;</span><br /><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;changeSet <span style="color: #795da3; ">id</span><span style="color: #df5000; ">="2"</span> <span style="color: #795da3; ">author</span><span style="color: #df5000; ">="your.name"</span> <span style="color: #795da3; ">labels</span><span style="color: #df5000; ">="example-label"</span> <span style="color: #795da3; ">context</span><span style="color: #df5000; ">="example-context"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;comment&gt;</span>example-comment<span style="color: #63a35c; ">&lt;/comment&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;createTable <span style="color: #795da3; ">tableName</span><span style="color: #df5000; ">="company"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="id"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="int"</span> <span style="color: #795da3; ">autoIncrement</span><span style="color: #df5000; ">="true"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;constraints <span style="color: #795da3; ">primaryKey</span><span style="color: #df5000; ">="true"</span> <span style="color: #795da3; ">nullable</span><span style="color: #df5000; ">="false"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/column&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="name"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(50)"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;constraints <span style="color: #795da3; ">nullable</span><span style="color: #df5000; ">="false"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/column&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="address1"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(50)"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="address2"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(50)"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="city"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(30)"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/createTable&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/changeSet&gt;</span><br /><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;changeSet <span style="color: #795da3; ">id</span><span style="color: #df5000; ">="3"</span> <span style="color: #795da3; ">author</span><span style="color: #df5000; ">="other.dev"</span> <span style="color: #795da3; ">labels</span><span style="color: #df5000; ">="example-label"</span> <span style="color: #795da3; ">context</span><span style="color: #df5000; ">="example-context"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;comment&gt;</span>example-comment<span style="color: #63a35c; ">&lt;/comment&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;addColumn <span style="color: #795da3; ">tableName</span><span style="color: #df5000; ">="person"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;column <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="country"</span> <span style="color: #795da3; ">type</span><span style="color: #df5000; ">="varchar(2)"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/addColumn&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/changeSet&gt;</span><br /><span style="color: #63a35c; ">&lt;/databaseChangeLog&gt;</span><br /></code></pre>
-            </div>
-        </div>
-<a style="font-size: 18pt;"> XML example 2</a>
-        <div class="codeSnippet">
-            <div style="mc-code-lang: XML;" class="codeSnippetBody" data-mc-continue="False" data-mc-line-number-start="1" data-mc-use-line-numbers="False"><pre><code><span style="color: #969896; ">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br /><br /><span style="color: #63a35c; ">&lt;databaseChangeLog</span><br /><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; ">xmlns</span><span style="color: #df5000; ">="http://www.liquibase.org/xml/ns/dbchangelog"</span></span><br /><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;xmlns:<span style="color: #795da3; ">xsi</span><span style="color: #df5000; ">="http://www.w3.org/2001/XMLSchema-instance"</span></span><br /><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;xmlns:<span style="color: #795da3; ">mongodb-pro</span><span style="color: #df5000; ">="http://www.liquibase.org/xml/ns/pro-mongodb"</span></span><br /><span style="color: #63a35c; ">xsi:<span style="color: #795da3; ">schemaLocation</span><span style="color: #df5000; ">="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd</span></span><br /><span style="color: #63a35c; "><span style="color: #df5000; ">http://www.liquibase.org/xml/ns/pro-mongodb http://www.liquibase.org/xml/ns/pro-mongodb/liquibase-pro-mongodb-latest.xsd"</span>&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;changeSet <span style="color: #795da3; ">id</span><span style="color: #df5000; ">="1"</span> <span style="color: #795da3; ">author</span><span style="color: #df5000; ">="nvoxland"</span> <span style="color: #795da3; ">runWith</span><span style="color: #df5000; ">="mongosh"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;mongodb-pro:mongo&gt;</span><br />db = db.getSiblingDB( 'mydb' );<br />db.createCollection('person2');<br /><span style="color: #63a35c; ">&lt;/mongodb-pro:mongo&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;rollback&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;mongodb-pro:mongo&gt;</span><br />db = db.getSiblingDB( 'mydb' );<br />db.person2.drop();<br /><span style="color: #63a35c; ">&lt;/mongodb-pro:mongo&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/rollback&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/changeSet&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;changeSet <span style="color: #795da3; ">id</span><span style="color: #df5000; ">="2"</span> <span style="color: #795da3; ">author</span><span style="color: #df5000; ">="nvoxland"</span> <span style="color: #795da3; ">runWith</span><span style="color: #df5000; ">="mongosh"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;mongodb-pro:mongoFile <span style="color: #795da3; ">path</span><span style="color: #df5000; ">="scriptFile.js"</span> <span style="color: #795da3; ">relativeToChangelogFile</span><span style="color: #df5000; ">="true"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;rollback&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;mongodb-pro:mongoFile <span style="color: #795da3; ">path</span><span style="color: #df5000; ">="scriptFile-rollback.js"</span> <span style="color: #795da3; ">relativeToChangelogFile</span><span style="color: #df5000; ">="true"</span>/&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/rollback&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/changeSet&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;changeSet <span style="color: #795da3; ">id</span><span style="color: #df5000; ">="3"</span> <span style="color: #795da3; ">author</span><span style="color: #df5000; ">="nvoxland"</span> <span style="color: #795da3; ">runWith</span><span style="color: #df5000; ">="mongosh"</span>&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;mongodb-pro:mongo&gt;</span><br />db.products.insertMany( [<br />{ item: "card", qty: 15 },<br />{ item: "envelope", qty: 20 },<br />{ item: "stamps" , qty: 30 }<br />] );<br /><span style="color: #63a35c; ">&lt;/mongodb-pro:mongo&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;rollback&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;mongodb-pro:mongo&gt;</span><br />db.products.deleteMany( { } );<br /><span style="color: #63a35c; ">&lt;/mongodb-pro:mongo&gt;</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/rollback&gt;</span><br />&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/changeSet&gt;</span><br /><span style="color: #63a35c; ">&lt;/databaseChangeLog&gt;</span></code></pre>
-            </div>
-        </div>
-<a style="font-size: 18pt;"> YAML example</a>
-        <div class="codeSnippet">
-            <div style="mc-code-lang: JavaScript;" class="codeSnippetBody" data-mc-continue="False" data-mc-line-number-start="1" data-mc-use-line-numbers="False"><pre><code>databaseChangeLog:<br />- changeSet:<br />&#160;&#160;&#160;&#160;&#160;&#160;id:&#160;&#160;<span style="color: #008080; ">1</span><br />&#160;&#160;&#160;&#160;&#160;&#160;author:&#160;&#160;your.name<br />&#160;&#160;&#160;&#160;&#160;&#160;labels: example-label<br />&#160;&#160;&#160;&#160;&#160;&#160;context: example-context<br />&#160;&#160;&#160;&#160;&#160;&#160;comment: example-comment<br />&#160;&#160;&#160;&#160;&#160;&#160;changes:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;- createTable:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tableName:&#160;&#160;person<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;columns:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;id<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;int<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;autoIncrement:&#160;&#160;<span style="color: #008080; ">true</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;constraints:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;primaryKey:&#160;&#160;<span style="color: #008080; ">true</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nullable:&#160;&#160;<span style="color: #008080; ">false</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;name<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">50</span>)<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;constraints:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nullable:&#160;&#160;<span style="color: #008080; ">false</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;address1<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">50</span>)<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;address2<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">50</span>)<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;city<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">30</span>)<br /><br />- changeSet:<br />&#160;&#160;&#160;&#160;&#160;&#160;id:&#160;&#160;<span style="color: #008080; ">2</span><br />&#160;&#160;&#160;&#160;&#160;&#160;author:&#160;&#160;your.name<br />&#160;&#160;&#160;&#160;&#160;&#160;labels: example-label<br />&#160;&#160;&#160;&#160;&#160;&#160;context: example-context<br />&#160;&#160;&#160;&#160;&#160;&#160;comment: example-comment<br />&#160;&#160;&#160;&#160;&#160;&#160;changes:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;- createTable:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tableName:&#160;&#160;company<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;columns:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;id<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;int<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;autoIncrement:&#160;&#160;<span style="color: #008080; ">true</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;constraints:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;primaryKey:&#160;&#160;<span style="color: #008080; ">true</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nullable:&#160;&#160;<span style="color: #008080; ">false</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;name<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">50</span>)<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;constraints:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nullable:&#160;&#160;<span style="color: #008080; ">false</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;address1<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">50</span>)<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;address2<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">50</span>)<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;city<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">30</span>)<br /><br />- changeSet:<br />&#160;&#160;&#160;&#160;&#160;&#160;id:&#160;&#160;<span style="color: #008080; ">3</span><br />&#160;&#160;&#160;&#160;&#160;&#160;author:&#160;&#160;other.dev<br />&#160;&#160;&#160;&#160;&#160;&#160;labels: example-label<br />&#160;&#160;&#160;&#160;&#160;&#160;context: example-context<br />&#160;&#160;&#160;&#160;&#160;&#160;comment: example-comment<br />&#160;&#160;&#160;&#160;&#160;&#160;changes:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;- addColumn:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tableName:&#160;&#160;person<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;columns:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;- column:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name:&#160;&#160;country<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type:&#160;&#160;varchar(<span style="color: #008080; ">2</span>)&#160;<br /></code></pre>
-            </div>
-        </div>
-<a style="font-size: 18pt;"> JSON example</a>
-        <div class="codeSnippet">
-            <div style="mc-code-lang: Python;" class="codeSnippetBody" data-mc-continue="False" data-mc-line-number-start="1" data-mc-use-line-numbers="False"><pre><code>JSON example<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"databaseChangeLog"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;---------------------------CREATE AND DROP COLLECTION---------------------------<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"1"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"labels"</span>: <span style="color: #df5000; ">"test_label"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"context"</span>: <span style="color: #df5000; ">"test_context"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"comment"</span>: <span style="color: #df5000; ">"test_comment"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"createCollection"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"collectionName"</span>: <span style="color: #df5000; ">"countries_json"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"2"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"dropCollection"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"collectionName"</span>: <span style="color: #df5000; ">"towns_json"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;],<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"rollback"</span>: <span style="color: #df5000; ">""</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;---------------------------INSERT ONE---------------------------&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"3"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"insertOne"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"collectionName"</span>: <span style="color: #df5000; ">"towns_json"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"document"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"$rawJson"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span>: <span style="color: #df5000; ">"New York"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"population"</span>: <span style="color: #0086b3; ">222000000</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"famousFor"</span>: [ <span style="color: #df5000; ">"the MOMA"</span>, <span style="color: #df5000; ">"food"</span>, <span style="color: #df5000; ">"Derek Jeter"</span> ],<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"mayor"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span>: <span style="color: #df5000; ">"Bill de Blasio"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"party"</span>: <span style="color: #df5000; ">"D"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;],<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"rollback"</span>: <span style="color: #df5000; ">""</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},&#160;&#160;&#160;&#160;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;---------------------------INSERT MANY---------------------------&#160;&#160;&#160;&#160;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"4"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"insertMany"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"collectionName"</span>: <span style="color: #df5000; ">"countries_json"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"documents"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"$rawJson"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"_id"</span> : <span style="color: #df5000; ">"us"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"United States"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"exports"</span> : {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"foods"</span> : [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"bacon"</span>, <span style="color: #df5000; ">"tasty"</span> : <span style="color: #df5000; ">"true"</span> },<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"burger"</span>}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"_id"</span> : <span style="color: #df5000; ">"ca"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"Canada"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"exports"</span> : {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"foods"</span> : [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"bacon"</span>, <span style="color: #df5000; ">"tasty"</span> : false },<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"syrup"</span>, <span style="color: #df5000; ">"tasty"</span> : true}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"_id"</span> : <span style="color: #df5000; ">"mx"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"Mexico"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"exports"</span> : {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"foods"</span> : [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<span style="color: #df5000; ">"name"</span> : <span style="color: #df5000; ">"salsa"</span>, <span style="color: #df5000; ">"tasty"</span> : true, <span style="color: #df5000; ">"condiment"</span> : true}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;],<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"rollback"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"runCommand"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"command"</span>: <span style="color: #df5000; ">"{ delete: \"countries_json\", deletes: [{q: { }, limit: 0}] }"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;---------------------------CREATE AND DROP INDEX---------------------------&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"5"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"createIndex"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"collectionName"</span>: <span style="color: #df5000; ">"countries_json"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"keys"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"$rawJson"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span>: <span style="color: #0086b3; ">1</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"type"</span>: <span style="color: #0086b3; ">1</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"options"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"$rawJson"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"unique"</span>: true,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span>: <span style="color: #df5000; ">"ui_countries_json"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"6"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"dropIndex"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"collectionName"</span>: <span style="color: #df5000; ">"countries_json"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"keys"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"$rawJson"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span>: <span style="color: #0086b3; ">1</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"type"</span>: <span style="color: #0086b3; ">1</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"options"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"$rawJson"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"unique"</span>: true,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"name"</span>: <span style="color: #df5000; ">"ui_countries_json"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;---------------------------RUN COMMAND---------------------------&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"7"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"runCommand"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"command"</span>: <span style="color: #df5000; ">"{ buildInfo: 1 }"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;],<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"rollback"</span>: <span style="color: #df5000; ">""</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;},<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;---------------------------ADMIN COMMAND---------------------------&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changeSet"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"id"</span>: <span style="color: #df5000; ">"8"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"author"</span>: <span style="color: #df5000; ">"as"</span>,<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"changes"</span>: [<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"adminCommand"</span>: {<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"command"</span>: <span style="color: #df5000; ">"{ buildInfo: 1 }"</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;],<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #df5000; ">"rollback"</span>: <span style="color: #df5000; ">""</span><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;]<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}</code></pre>
-            </div>
-        </div>
-<li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li><pre xml:space="preserve">
-<code class="language-text">liquibase status --username=test --password=test --changelog-file=&lt;changelog.xml&gt;</code>
-</pre>
-<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>You can pass arguments in the CLI or keep them in the Liquibase properties file.</p>
-<li value="5">Make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li><pre xml:space="preserve">
-<code class="language-text">liquibase update --changelog-file=&lt;changelog.xml&gt;</code>
-</pre>
+<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>If you are unsure about how to configure the <code>url</code> property, refer to <a href="https://docs.mongodb.com/manual/reference/connection-string/">Connection String URI Format</a>.</p>
+<p class="tip" data-mc-autonum="<b>Tip: </b>"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: <paste code here></code></p>
+<li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>The use of JSON&#160;and YAML <span class="mc-variable General.changelog variable">changelog</span>s is available in  Liquibase version 4.20</p></li>
+
+<h3>XML example</h3>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mongodb="http://www.liquibase.org/xml/ns/mongodb"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+         http://www.liquibase.org/xml/ns/mongodb
+         http://www.liquibase.org/xml/ns/mongodb/liquibase-mongodb-latest.xsd">
+
+  <changeSet id="1" author="your_name" labels="createCollectionLabel" context="createCollectionContext">
+    <comment>create_collection_comment</comment>
+    <mongodb:createCollection collectionName="towns_xml"/>;
+  </changeSet>
+</databaseChangeLog>
+```
+
+<h3>YAML example</h3>
+```
+databaseChangeLog:
+  - changeSet:
+    id: 2
+    author: your_name
+    labels: createCollectionLabel
+    context: createCollectionContext
+    comment: create_collection_comment
+    changes:
+      - createCollection:
+        collectionName: towns_yaml
+```
+
+<h3>JSON example</h3>
+```
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "3",
+        "author": "your_name",
+        "labels": "createCollectionLabel",
+        "context": "createCollectionContext",
+        "comment": "create_collection_comment",
+        "changes": [
+          {
+            "createCollection": {
+              "collectionName": "towns_json"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+<li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li>
+```
+liquibase status --username=test --password=test --changelog-file=<changelog.xml>
+```
+<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>You can pass arguments in the CLI or keep them in the Liquibase properties file.</p>
+<li value="5">Make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li>
+```
+liquibase update --changelog-file=<changelog.xml>
+```
 <li value="6">From a database UI tool, ensure that your database contains <code>myCollection</code> along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK table</a>.</li>
-<p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>You can use <a href="https://www.mongodb.com/products/compass">MongoDB Compass</a> to easily view collections in your database. For example, run the commands <code>use myDatabase</code> and <code>db.myCollection.find()</code>.</p>
+<p class="tip" data-mc-autonum="<b>Tip: </b>"><span class="autonumber"><span><b>Tip: </b></span></span>You can use <a href="https://www.mongodb.com/products/compass">MongoDB Compass</a> to easily view collections in your database. For example, run the commands <code>use myDatabase</code> and <code>db.myCollection.find()</code>.</p>
 </ol>
-<a style="font-size: 18pt;"> MongoDB command examples</a>
+
+## MongoDB command examples
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.createCollection#db.createCollection">createCollection</a> creates a collection with the validator.</li>
-</ul><pre xml:space="preserve"><code class="language-json"><changeSet id="1" author="liquibase">
-    <ext:createCollection collectionName="myCollection">
-        <ext:options>
-        {
-          validator: {
-            $jsonSchema: {
-                bsonType: "object",
-                required: ["name", "address"],
-                properties: {
-	                name: {
-		    	          bsonType: "string",
-		    	          description: "The Name"
-                  },
-                  address: {
-			              bsonType: "string",
-			              description: "The Address"
-                  }
-		            }
-		          }
-		        },
-		      validationAction: "warn",
-		      validationLevel: "strict"
-		    }
-        </ext:options>
-    </ext:createCollection>
-</changeSet></code></pre>
+</ul>
+```
+<changeSet id="1" author="liquibase">
+  <ext:createCollection collectionName="myCollection">
+    <ext:options>
+      {
+        validator: {
+          $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "address"],
+            properties: {
+              name: {
+                bsonType: "string",
+                description: "The Name"
+              },
+              address: {
+                bsonType: "string",
+                description: "The Address"
+              }
+            }
+          }
+        },
+        validationAction: "warn",
+        validationLevel: "strict"
+      }
+    </ext:options>
+  </ext:createCollection>
+</changeSet>
+```
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.drop">dropCollection</a> removes a collection or view from the database.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
-&lt;ext:dropCollection collectionName="myCollection"/&gt;
-&lt;/changeSet&gt;</code></pre>
+</ul>
+```
+<changeSet id="1" author="liquibase">
+  <ext:dropCollection collectionName="myCollection"/>
+</changeSet>
+```
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.createIndex#db.collection.createIndex">createIndex</a> creates an index for a collection.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
-     &lt;ext:createIndex collectionName="createIndexTest"&gt;
-          &lt;ext:keys&gt;
-               { clientId: 1, type: 1}
-	      &lt;/ext:keys&gt;
-	      &lt;ext:options&gt;
-	           {unique: true, name: "ui_tppClientId"}
-          &lt;/ext:options&gt;
-     &lt;/ext:createIndex&gt;
-
-     &lt;ext:createIndex collectionName="createIndexNoOptionsTest"&gt;
-          &lt;ext:keys&gt;
-               { clientId: 1, type: 1}
-          &lt;/ext:keys&gt;
-    &lt;/ext:createIndex&gt;
-&lt;/changeSet&gt;</code></pre>
+</ul>
+```
+<changeSet id="1" author="liquibase">
+  <ext:createIndex collectionName="createIndexTest">
+    <ext:keys>
+      { clientId: 1, type: 1}
+    </ext:keys>
+    <ext:options>
+      {unique: true, name: "ui_tppClientId"}
+    </ext:options>
+  </ext:createIndex>
+</changeSet>
+```
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.dropIndex#db.collection.dropIndex">dropIndex</a> drops an index for a collection by keys.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
-     &lt;ext:dropIndex collectionName="createIndexTest"&gt;
-         &lt;ext:keys&gt;
-             { clientId: 1, type: 1}
-	     &lt;/ext:keys&gt;
-	     &lt;ext:options&gt;
-	         {unique: true, name: "ui_tppClientId"}
-	     &lt;/ext:options&gt;
-     &lt;/ext:dropIndex&gt;
-
-     &lt;ext:dropIndex collectionName="createIndexNoOptionsTest"&gt;
-	     &lt;ext:keys&gt;
-	         { clientId: 1, type: 1}
-	     &lt;/ext:keys&gt;
-     &lt;/ext:dropIndex&gt;
-&lt;/changeSet&gt;</code></pre>
+</ul>
+```
+<changeSet id="1" author="liquibase">
+  <ext:dropIndex collectionName="createIndexTest">
+    <ext:keys>
+      { clientId: 1, type: 1}
+    </ext:keys>
+    <ext:options>
+      {unique: true, name: "ui_tppClientId"}
+    </ext:options>
+  </ext:dropIndex>
+</changeSet>
+```
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany#db.collection.insertMany">insertMany</a> inserts multiple documents into a collection.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
-     &lt;ext:insertMany collectionName="insertManyTest1"&gt;
-         &lt;ext:documents&gt;
-	  			[
-	  			{ id: 2 },
-	  			{ id: 3,
-	    	  	  address: { nr: 1, ap: 5}
-	  			}
-	  			]
-         &lt;/ext:documents&gt;
-  	 &lt;/ext:insertMany&gt;
-&lt;/changeSet&gt;</code></pre>
+</ul>
+```
+<changeSet id="1" author="liquibase">
+  <ext:insertMany collectionName="insertManyTest1">
+    <ext:documents>
+      [
+        { id: 2 },
+        { id: 3,
+          address: { nr: 1, ap: 5}
+        }
+      ]
+    </ext:documents>
+  </ext:insertMany>
+</changeSet>
+```
 <ul>
     <li><a href="https://docs.mongodb.com/manual/tutorial/insert-documents">insertOne</a> inserts a single document into a collection.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
-    &lt;ext:insertOne collectionName="insertOneTest1"&gt;
-         &lt;ext:document&gt;
-	  		{
-	  			id: 111
-	  		}
-	  	&lt;/ext:document&gt;
-    &lt;/ext:insertOne&gt;
-&lt;/changeSet&gt;
+</ul>
+```
+<changeSet id="1" author="liquibase">
+  <ext:insertOne collectionName="insertOneTest1">
+    <ext:document>
+      {
+        id: 111
+      }
+    </ext:document>
+  </ext:insertOne>
+</changeSet>
 
-&lt;changeSet id="2" author="liquibase"&gt;
-    &lt;ext:insertOne collectionName="insertOneTest2"&gt;
-        &lt;ext:document&gt;
-        	{
-        	    id: 2
-            }
-        &lt;/ext:document&gt;
-    &lt;/ext:insertOne&gt;
-
-    &lt;ext:insertOne collectionName="insertOneTest3"&gt;
-        &lt;ext:document&gt;
-            { 
-            	id: 3
-            }
-        &lt;/ext:document&gt;
-    &lt;/ext:insertOne&gt;
-&lt;/changeSet&gt;
-
-&lt;changeSet id="3" author="liquibase"&gt;
-    &lt;ext:insertOne collectionName="insertOneTest2"&gt;
-        &lt;ext:document&gt;
-	 		{
-	 			id: 21323123
-	 		}
-	 	&lt;/ext:document&gt;
-    &lt;/ext:insertOne&gt;
-    
-    &lt;ext:insertOne collectionName="insertOneTest3"&gt;
-        &lt;ext:document&gt;
-	 		{
-	 			id: 321321313
-	 		}
-	    &lt;/ext:document&gt;
-    &lt;/ext:insertOne&gt;
-&lt;/changeSet&gt;</code></pre>
+<changeSet id="2" author="liquibase">
+  <ext:insertOne collectionName="insertOneTest2">
+    <ext:document>
+      {
+        id: 2
+      }
+    </ext:document>
+  </ext:insertOne>
+</changeSet>
+```
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.runCommand">runCommand</a> provides a helper to run specified database commands. This is the preferred method to issue database commands as it provides a consistent interface between the shell and drivers.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="1" author="liquibase"&gt;
-    &lt;ext:runCommand&gt;
-        &lt;ext:command&gt;
-	           { buildInfo: 1 }
-        &lt;/ext:command&gt;
-    &lt;/ext:runCommand&gt;
-&lt;/changeSet&gt;
+</ul>
+```
+<changeSet id="1" author="liquibase">
+  <ext:runCommand>
+    <ext:command>
+      { buildInfo: 1 }
+    </ext:command>
+  </ext:runCommand>
+</changeSet>
 
-&lt;changeSet id="2" author="liquibase"&gt;
-    &lt;ext:adminCommand&gt;
-        &lt;ext:command&gt;
-               { buildInfo: 1 }
-        &lt;/ext:command&gt;
-   &lt;/ext:adminCommand&gt;
-&lt;/changeSet&gt;</code></pre>
+<changeSet id="2" author="liquibase">
+  <ext:adminCommand>
+    <ext:command>
+      { buildInfo: 1 }
+    </ext:command>
+  </ext:adminCommand>
+</changeSet>
+```
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.adminCommand#db.adminCommand">adminCommand</a> provides a helper to run specified database commands against the admin database.</li>
-</ul><pre xml:space="preserve"><code class="language-json">&lt;changeSet id="2" author="liquibase"&gt;
-     &lt;ext:adminCommand&gt;
-         &lt;ext:command&gt;
-                { buildInfo: 1 }
-         &lt;/ext:command&gt;
-    &lt;/ext:adminCommand&gt;
-&lt;/changeSet&gt;</code></pre>
+</ul>
+```
+<changeSet id="2" author="liquibase">
+  <ext:adminCommand>
+    <ext:command>
+      { buildInfo: 1 }
+    </ext:command>
+  </ext:adminCommand>
+</changeSet>
+```
 
-<h2>Related links</h2>
+## Related links
 <ul>
     <li><a href="https://github.com/liquibase/liquibase-mongodb">Liquibase MongoDB Extension</a></li>
     <li><a href="https://github.com/liquibase/liquibase-mongodb/tree/main/src/test/resources/liquibase/ext">Liquibase MongoDB Extension Examples</a></li>
