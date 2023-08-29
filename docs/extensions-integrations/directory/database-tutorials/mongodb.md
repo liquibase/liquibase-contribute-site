@@ -28,7 +28,7 @@ title: MongoDB
 </ul>
 <p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p><p>If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file.</p>
 <p>To include the driver JAR in the pom.xml file, use the following code:</p>
-```bash
+```
 <dependency>
     <groupId>org.mongodb</groupId>
     <artifactId>mongodb-driver-core</artifactId>
@@ -61,7 +61,7 @@ title: MongoDB
 <li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>The use of JSON&#160;and YAML <span class="mc-variable General.changelog variable">changelog</span>s is available in  Liquibase version 4.20</p></li>
 
 <h3>XML example</h3>
-```bash
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -80,7 +80,7 @@ title: MongoDB
 ```
 
 <h3>YAML example</h3>
-```bash
+```
 databaseChangeLog:
   - changeSet:
     id: 2
@@ -94,7 +94,7 @@ databaseChangeLog:
 ```
 
 <h3>JSON example</h3>
-```bash
+```
 {
   "databaseChangeLog": [
     {
@@ -118,12 +118,12 @@ databaseChangeLog:
 ```
 
 <li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li>
-```bash
+```
 liquibase status --username=test --password=test --changelog-file=<changelog.xml>
 ```
 <p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>You can pass arguments in the CLI or keep them in the Liquibase properties file.</p>
 <li value="5">Make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li>
-```bash
+```
 liquibase update --changelog-file=<changelog.xml>
 ```
 <li value="6">From a database UI tool, ensure that your database contains <code>myCollection</code> along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK table</a>.</li>
@@ -134,7 +134,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.createCollection#db.createCollection">createCollection</a> creates a collection with the validator.</li>
 </ul>
-```bash
+```
 <changeSet id="1" author="liquibase">
   <ext:createCollection collectionName="myCollection">
     <ext:options>
@@ -165,7 +165,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.drop">dropCollection</a> removes a collection or view from the database.</li>
 </ul>
-```bash
+```
 <changeSet id="1" author="liquibase">
   <ext:dropCollection collectionName="myCollection"/>
 </changeSet>
@@ -173,7 +173,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.createIndex#db.collection.createIndex">createIndex</a> creates an index for a collection.</li>
 </ul>
-```bash
+```
 <changeSet id="1" author="liquibase">
   <ext:createIndex collectionName="createIndexTest">
     <ext:keys>
@@ -188,7 +188,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.dropIndex#db.collection.dropIndex">dropIndex</a> drops an index for a collection by keys.</li>
 </ul>
-```bash
+```
 <changeSet id="1" author="liquibase">
   <ext:dropIndex collectionName="createIndexTest">
     <ext:keys>
@@ -203,7 +203,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany#db.collection.insertMany">insertMany</a> inserts multiple documents into a collection.</li>
 </ul>
-```bash
+```
 <changeSet id="1" author="liquibase">
   <ext:insertMany collectionName="insertManyTest1">
     <ext:documents>
@@ -220,7 +220,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/tutorial/insert-documents">insertOne</a> inserts a single document into a collection.</li>
 </ul>
-```bash
+```
 <changeSet id="1" author="liquibase">
   <ext:insertOne collectionName="insertOneTest1">
     <ext:document>
@@ -244,7 +244,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.runCommand">runCommand</a> provides a helper to run specified database commands. This is the preferred method to issue database commands as it provides a consistent interface between the shell and drivers.</li>
 </ul>
-```bash
+```
 <changeSet id="1" author="liquibase">
   <ext:runCommand>
     <ext:command>
@@ -264,7 +264,7 @@ liquibase update --changelog-file=<changelog.xml>
 <ul>
     <li><a href="https://docs.mongodb.com/manual/reference/method/db.adminCommand#db.adminCommand">adminCommand</a> provides a helper to run specified database commands against the admin database.</li>
 </ul>
-```bash
+```
 <changeSet id="2" author="liquibase">
   <ext:adminCommand>
     <ext:command>
