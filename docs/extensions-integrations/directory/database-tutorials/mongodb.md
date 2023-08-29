@@ -3,7 +3,7 @@ title: MongoDB
 ---
 
 # Use Liquibase with MongoDB
-<p><a href="https://www.mongodb.com">MongoDB</a>&#160;is a document-oriented NoSQL&#160;database. For more information, see <a href="https://www.mongodb.com/docs/">MongoDB&#160;Documentation</a>.</p>
+<p><a href="https://www.mongodb.com">MongoDB</a>&#160;is a document-oriented NoSQL&#160;database. For more information, see the <a href="https://www.mongodb.com/docs/">MongoDB&#160;Documentation</a>.</p>
 ## Supported versions
 <ul>
     <li>6.X</li>
@@ -11,7 +11,15 @@ title: MongoDB
     <li><a href="https://docs.liquibase.com/start/tutorials/mongo-db-atlas-config.html" class="MCXref xref">MongoDB Atlas</a>
     </li>
 </ul>
-<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>Liquibase does not support the version of MongoDB used with <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/what-is.html">AWS DocumentDB</a> or <a href="https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/mongodb-introduction">Azure Cosmos DB</a> .</p>
+
+!!! note
+
+    This community-maintained MongoDB extension supports the MongoDB change types shown in the [MongoDB command examples](mongodb.md/#mongodb-command-examples) section at the bottom of this page.
+    
+    If you need complete MongoDB support, please use the MongoDB “mongosh” implementation as described in [AWS DocumentDB and the MongoDB Pro extension](https://docs.liquibase.com/start/tutorials/mongodb-pro-amazon-documentdb.html){:target=_blank}.
+  
+    If you are looking for information on CosmosDB support, it can be found here: [Using Liquibase with Azure CosmosDB](cosmosdb.md).
+
 ## Prerequisites
 <ol>
     <li value="1"><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html" class="MCXref xref">Introduction to Liquibase</a> – Dive into Liquibase concepts.</li>
