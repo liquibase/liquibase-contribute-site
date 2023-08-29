@@ -32,15 +32,3 @@ document.addEventListener("DOMContentLoaded", function(){
     navWrapper.remove();
     headerNavBody.appendChild(navClone);
 });
-
-/* db tutorial scrollbar */
-$(function(){
-    $(".top-scrollbar-wrapper").scroll(function(){
-        $(".table-wrapper")
-            .scrollLeft($(".top-scrollbar-wrapper").scrollLeft());
-    });
-    $(".table-wrapper").scroll(function(){
-        $(".top-scrollbar-wrapper")
-            .scrollLeft($(".table-wrapper").scrollLeft());
-    });
-});
