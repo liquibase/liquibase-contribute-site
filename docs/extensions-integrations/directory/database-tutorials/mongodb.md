@@ -27,15 +27,19 @@ title: MongoDB
 </ol>
 
 ## Install drivers
+
+### All Users
 <p>To use Liquibase and MongoDB, you need four JAR files:</p>
 <ul>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-<version>.jar</code>)</li>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-<version>.jar</code>)</li>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-<version>.jar</code>)</li>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-<version>.jar</code>)</li>
+    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-&lt;version&gt;.jar</code>)</li>
+    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-&lt;version&gt;.jar</code>)</li>
+    <li><a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-&lt;version&gt;.jar</code>)</li>
+    <li><a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-&lt;version&gt;.jar</code>)</li>
 </ul>
-<p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p><p>If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file.</p>
-<p>To include the driver JAR in the pom.xml file, use the following code:</p>
+<p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p>
+
+### Maven Users (additional step)
+<p>If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file using the following code.</p>
 ```
 <dependency>
     <groupId>org.mongodb</groupId>
@@ -55,7 +59,7 @@ title: MongoDB
 <dependency>
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-mongodb</artifactId>
-    <version><span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span></version>
+    <version><span class="mc-variable General.CurrentLiquibaseVersion variable">4.23.1</span></version>
 </dependency>
 ```
 ## Test your connection
@@ -139,13 +143,33 @@ liquibase update --changelog-file=<changelog.xml>
 </ol>
 
 ## MongoDB command examples
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.createCollection#db.createCollection">createCollection</a> creates a collection with the validator.</li>
-</ul>
+
+### Changelog Template
+<p>The MongoDB command examples below assume this default XML changelog.</p>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mongodb="http://www.liquibase.org/xml/ns/mongodb"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+         http://www.liquibase.org/xml/ns/mongodb
+         http://www.liquibase.org/xml/ns/mongodb/liquibase-mongodb-latest.xsd">
+
+  <!-- Changesets from the examples below go here -->
+
+</databaseChangeLog>
+```
+
+### MongoDB Commands
+
+#### <a href="https://docs.mongodb.com/manual/reference/method/db.createCollection#db.createCollection">createCollection</a>
+Create a collection with the validator.
 ```
 <changeSet id="1" author="liquibase">
-  <ext:createCollection collectionName="myCollection">
-    <ext:options>
+  <mongodb:createCollection collectionName="myCollection">
+    <mongodb:options>
       {
         validator: {
           $jsonSchema: {
@@ -166,119 +190,101 @@ liquibase update --changelog-file=<changelog.xml>
         validationAction: "warn",
         validationLevel: "strict"
       }
-    </ext:options>
-  </ext:createCollection>
+    </mongodb:options>
+  </mongodb:createCollection>
 </changeSet>
 ```
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.drop">dropCollection</a> removes a collection or view from the database.</li>
-</ul>
+#### <a href="https://docs.mongodb.com/manual/reference/method/db.collection.drop">dropCollection</a>
+Remove a collection or view from the database.
 ```
 <changeSet id="1" author="liquibase">
-  <ext:dropCollection collectionName="myCollection"/>
+  <mongodb:dropCollection collectionName="myCollection"/>
 </changeSet>
 ```
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.createIndex#db.collection.createIndex">createIndex</a> creates an index for a collection.</li>
-</ul>
+#### <a href="https://docs.mongodb.com/manual/reference/method/db.collection.createIndex#db.collection.createIndex">createIndex</a>
+Create an index for a collection.
 ```
 <changeSet id="1" author="liquibase">
-  <ext:createIndex collectionName="createIndexTest">
-    <ext:keys>
+  <mongodb:createIndex collectionName="createIndexTest">
+    <mongodb:keys>
       { clientId: 1, type: 1}
-    </ext:keys>
-    <ext:options>
+    </mongodb:keys>
+    <mongodb:options>
       {unique: true, name: "ui_tppClientId"}
-    </ext:options>
-  </ext:createIndex>
+    </mongodb:options>
+  </mongodb:createIndex>
 </changeSet>
 ```
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.dropIndex#db.collection.dropIndex">dropIndex</a> drops an index for a collection by keys.</li>
-</ul>
+#### <a href="https://docs.mongodb.com/manual/reference/method/db.collection.dropIndex#db.collection.dropIndex">dropIndex</a>
+Drop an index for a collection by keys.
 ```
 <changeSet id="1" author="liquibase">
-  <ext:dropIndex collectionName="createIndexTest">
-    <ext:keys>
+  <mongodb:dropIndex collectionName="createIndexTest">
+    <mongodb:keys>
       { clientId: 1, type: 1}
-    </ext:keys>
-    <ext:options>
-      {unique: true, name: "ui_tppClientId"}
-    </ext:options>
-  </ext:dropIndex>
+    </mongodb:keys>
+  </mongodb:dropIndex>
 </changeSet>
 ```
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany#db.collection.insertMany">insertMany</a> inserts multiple documents into a collection.</li>
-</ul>
+#### <a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany#db.collection.insertMany">insertMany</a>
+Insert multiple documents into a collection.
 ```
 <changeSet id="1" author="liquibase">
-  <ext:insertMany collectionName="insertManyTest1">
-    <ext:documents>
+  <mongodb:insertMany collectionName="insertManyTest1">
+    <mongodb:documents>
       [
         { id: 2 },
         { id: 3,
           address: { nr: 1, ap: 5}
         }
       ]
-    </ext:documents>
-  </ext:insertMany>
+    </mongodb:documents>
+  </mongodb:insertMany>
 </changeSet>
 ```
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/tutorial/insert-documents">insertOne</a> inserts a single document into a collection.</li>
-</ul>
+#### <a href="https://docs.mongodb.com/manual/tutorial/insert-documents">insertOne</a>
+Insert a single document into a collection.
 ```
 <changeSet id="1" author="liquibase">
-  <ext:insertOne collectionName="insertOneTest1">
-    <ext:document>
+  <mongodb:insertOne collectionName="insertOneTest1">
+    <mongodb:document>
       {
         id: 111
       }
-    </ext:document>
-  </ext:insertOne>
+    </mongodb:document>
+  </mongodb:insertOne>
 </changeSet>
 
 <changeSet id="2" author="liquibase">
-  <ext:insertOne collectionName="insertOneTest2">
-    <ext:document>
+  <mongodb:insertOne collectionName="insertOneTest2">
+    <mongodb:document>
       {
         id: 2
       }
-    </ext:document>
-  </ext:insertOne>
+    </mongodb:document>
+  </mongodb:insertOne>
 </changeSet>
 ```
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.runCommand">runCommand</a> provides a helper to run specified database commands. This is the preferred method to issue database commands as it provides a consistent interface between the shell and drivers.</li>
-</ul>
+#### <a href="https://docs.mongodb.com/manual/reference/method/db.runCommand">runCommand</a>
+Provide a helper to run specified database commands. This is the preferred method to issue database commands as it provides a consistent interface between the shell and drivers.
 ```
 <changeSet id="1" author="liquibase">
-  <ext:runCommand>
-    <ext:command>
+  <mongodb:runCommand>
+    <mongodb:command>
       { buildInfo: 1 }
-    </ext:command>
-  </ext:runCommand>
-</changeSet>
-
-<changeSet id="2" author="liquibase">
-  <ext:adminCommand>
-    <ext:command>
-      { buildInfo: 1 }
-    </ext:command>
-  </ext:adminCommand>
+    </mongodb:command>
+  </mongodb:runCommand>
 </changeSet>
 ```
-<ul>
-    <li><a href="https://docs.mongodb.com/manual/reference/method/db.adminCommand#db.adminCommand">adminCommand</a> provides a helper to run specified database commands against the admin database.</li>
-</ul>
+#### <a href="https://docs.mongodb.com/manual/reference/method/db.adminCommand#db.adminCommand">adminCommand</a>
+Provide a helper to run specified database commands against the admin database.
 ```
 <changeSet id="2" author="liquibase">
-  <ext:adminCommand>
-    <ext:command>
+  <mongodb:adminCommand>
+    <mongodb:command>
       { buildInfo: 1 }
-    </ext:command>
-  </ext:adminCommand>
+    </mongodb:command>
+  </mongodb:adminCommand>
 </changeSet>
 ```
 
