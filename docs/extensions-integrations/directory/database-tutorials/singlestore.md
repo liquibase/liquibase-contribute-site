@@ -33,7 +33,7 @@ If you use Maven, you must include the driver JARs as dependencies in your `pom.
     <dependency>
         <groupId>org.liquibase.ext</groupId>
         <artifactId>liquibase-singlestore</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
 
 ## Test Your Connection
