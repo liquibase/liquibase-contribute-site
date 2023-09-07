@@ -25,6 +25,7 @@ For more information on database support in Liquibase, see [Supported Databases]
 - [Azure Cosmos DB](https://github.com/liquibase/liquibase-cosmosdb){:target=_blank}
 - [Cassandra](https://github.com/liquibase/liquibase-cassandra){:target=_blank}
 - [ClickHouse](https://github.com/MEDIARITHMICS/liquibase-clickhouse){:target=_blank}
+- [Couchbase](https://github.com/liquibase/liquibase-couchbase){:target=_blank}
 - [Google BigQuery](https://github.com/liquibase/liquibase-bigquery){:target=_blank}
 - [Google Spanner](https://github.com/liquibase/liquibase-spanner){:target=_blank}
 - [HarperDB](https://github.com/liquibase/liquibase-harperdb){:target=_blank}
