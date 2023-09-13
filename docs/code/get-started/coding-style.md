@@ -14,7 +14,7 @@ When in doubt, match the style in the rest of the code and/or ask [on the forum]
 
 For information on pull request style, see the [Create a Pull Request](create-pr.md) page.
 
-## Details
+## Guidelines
 
 Part of readability is consistency. Some specific examples of code styles we generally follow:
 
@@ -43,6 +43,20 @@ Part of readability is consistency. Some specific examples of code styles we gen
         - The reason for the difference is that the documentation standard changed to one word, but changing the code would be a breaking API change and has not been made yet. We are preserving consistency in naming until we can do a complete code change to the new style. 
 - Tests conventions can be found in the [unit tests](../test-your-code/unit-tests.md) and [integration tests](../test-your-code/integration-tests.md) sections
 
+## Simplicity
+
+### Lombok
+
+As an ongoing effort to simplify the Liquibase codebase, we are now using [Lombok](https://projectlombok.org){:target="_blank"}. It's available as of Liquibase 4.24.0.
+
+We started with the [`@Data`](https://projectlombok.org/features/Data){:target="_blank"} directive that generates the boilerplate that is normally associated with simple POJOs (Plain Old Java Objects) and beans:
+
+* [`@Getter`](https://projectlombok.org/features/GetterSetter){:target="_blank"}: getters for all fields
+* [`@Setter`](https://projectlombok.org/features/GetterSetter){:target="_blank"}: setters for all non-final fields 
+* [`@ToString`](https://projectlombok.org/features/ToString){:target="_blank"}: appropriate toString, equals and hashCode implementations that involve the fields of the class 
+* [`@RequiredArgsConstructor`](https://projectlombok.org/features/constructor){:target="_blank"}: a constructor that initializes all final fields as well as all non-final fields with no initializer that have been marked with @NonNull (to ensure the field is never null)
+
+Please use the `@Data` directive when you create your own classes to keep the code clean and easily maintainable.
 
 
 
