@@ -4,7 +4,7 @@ title: Database Tutorials
 # Liquibase Database Tutorials: Community-Maintained
 Learn more about using Liquibase with your favorite databases with our in-depth tutorials. These tutorials explain how to install and configure your database with Liquibase Community and Liquibase Pro.
 ## Verification levels
-Liquibase works with 60+ databases including relational, NoSQL, and graph databases. A database's verification level refers to the levels of automated and real-world professional testing and certification it has passed. The levels are:
+Liquibase works with 59 databases including relational, NoSQL, and graph databases. A database's verification level refers to the levels of automated and real-world professional testing and certification it has passed. The levels are:
 
 * Advanced (highest verification)
 * Foundational
