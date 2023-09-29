@@ -3,7 +3,7 @@ title: With Maven
 ---
 
 <h1 id="using-liquibase-with-spring-boot-and-maven-tutorial">Using Liquibase with Spring Boot and Maven Project</h1>
-<p>Tip: To use the <code>liquibase-maven-plugin</code> and Spring Boot, see <a href="https://docs.liquibase.com/maven/workflows/using-liquibase-maven-plugin-and-springboot.htm">Using Liquibase Maven Plugin with Spring Boot</a>.</p>
+<p>Tip: To use the <code>liquibase-maven-plugin</code> and Spring Boot, see <a href="https://docs.liquibase.com/tools-integrations/maven/workflows/using-liquibase-maven-plugin-and-springboot.html">Using Liquibase Maven Plugin with Spring Boot</a>.</p>
 <p>Use Liquibase with <a href="https://spring.io/projects/spring-boot#overview">Spring Boot</a> to create and configure standalone Spring applications and automate your database updates. Spring Boot with build systems like  Maven allows you to create Java applications started by running <code>java -jar</code> or <code>war</code> deployments.</p>
 <p>The Liquibase Spring Boot integration ensures the application database is updated along with the application code by using Spring Boot auto-configuration and features.</p>
 <p>To use Liquibase and Spring Boot:</p>
