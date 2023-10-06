@@ -57,7 +57,7 @@ If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integr
 <dependency>
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-mongodb</artifactId>
-    <version>{{liquibase.current_version}}</version>
+    <version>4.24.0</version>
 </dependency>
 ```
 
