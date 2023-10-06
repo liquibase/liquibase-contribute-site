@@ -43,7 +43,7 @@ To use Liquibase and BigQuery, you need several JAR files.
         <dependency>
           <groupId>org.liquibase.ext</groupId>
           <artifactId>liquibase-bigquery</artifactId>
-          <version>4.24.0</version>
+          <version>{{liquibase.current_version}}</version>
         </dependency>
     ```
 
