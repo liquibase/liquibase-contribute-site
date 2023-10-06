@@ -2,286 +2,274 @@
 title: BigQuery
 ---
 
-<h1>Using Liquibase with BigQuery</h1>
-<p><a href="https://cloud.google.com/bigquery/">Google BigQuery</a> is a fully managed analytics data warehouse. For
-    more information, see <a href="https://cloud.google.com/bigquery/docs">BigQuery Documentation</a>.</p>
-<h2>Supported versions</h2>
-<ul>
-    <li>2.13.6+</li>
-</ul>
-<h2>Prerequisites</h2>
-<ol>
-    <li value="1"><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html" class="MCXref xref">Introduction to
-        Liquibase</a> – Dive into Liquibase concepts.
-    </li>
-    <li value="2"><a href="https://docs.liquibase.com/start/install/home.html" class="MCXref xref">Install Liquibase</a> – Download <span
-            class="mc-variable General.Liquibase variable">Liquibase</span> on your machine.
-    </li>
-    <li value="3"><a href="https://docs.liquibase.com/start/home.html" class="MCXref xref">Get Started with Liquibase</a> – Learn how to use <span
-            class="mc-variable General.Liquibase variable">Liquibase</span> with an example database.
-    </li>
-    <li value="4"><a href="https://docs.liquibase.com/start/design-liquibase-project.html" class="MCXref xref">Design Your Liquibase Project</a> – Create a new <span class="mc-variable General.Liquibase variable">Liquibase</span> project folder and organize your changelogs</li>
-    <li value="5"><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html"
-                     class="MCXref xref">How to Apply Your Liquibase Pro License Key</a> – If you use <span
-            class="mc-variable General.LBPro variable">Liquibase Pro</span>, activate your license.
-    </li>
-</ol>
-<h2>Install drivers</h2>
-<p>To use Liquibase and BigQuery, you need several JAR
-    files:</p>
-<ul>
-    <li> All the JAR files in the <a href="https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers">BigQuery
-        JDBC&#160;ZIP&#160;file</a> (under "Current JDBC driver")
-    </li>
-    <li>The <a href="https://github.com/liquibase/liquibase-bigquery/releases"><span
-            class="mc-variable General.Liquibase variable">Liquibase</span> extension for Google BigQuery</a> (liquibase-bigquery-{version}.jar)
-    </li>
-</ul>
-<p>
-    <a
-            href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR
-        file(s)</a> in the <code>liquibase/lib</code> directory.
-</p><p>
-If you use Maven,
-    you must <a
-            href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in
-        your <code>pom.xml</code> file.
+# Using Liquibase with BigQuery
+The Liquibase BigQuery extension enables efficient version control and database change management for BigQuery schema and application data. This extension gives Google BigQuery users a smooth, streamlined approach to database change management and deployment, fitting effortlessly into Agile development and CI/CD automation practices. 
+
+[Google BigQuery](https://cloud.google.com/bigquery/) is a fully managed analytics data warehouse. For more information, see [BigQuery Documentation](https://cloud.google.com/bigquery/docs).
+
+Read more about [Database DevOps with Liquibase and BigQuery](https://www.liquibase.com/blog/bigquery-schema-management-version-control-database-devops).
+
+## Supported database versions
+* 2.13.6+
+
+## Prerequisites
+1. [Introduction to Liquibase](https://docs.liquibase.com/concepts/introduction-to-liquibase.html) – Dive into Liquibase concepts.
+1. [Install Liquibase](https://docs.liquibase.com/start/install/home.html) – Download Liquibase on your machine.
+1. [How to Apply Your Liquibase Pro License Key](https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html) – If you use Liquibase Pro, activate your license.
+
+## Install drivers
+To use Liquibase and BigQuery, you need several JAR files.
+
+### All users
+
+1. Download the required JAR files
+
+    * All of the JAR files in the [BigQuery JDBC ZIP file](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_jdbc_driver) (under "Current JDBC driver")
+    * The [Liquibase extension for Google BigQuery](https://github.com/liquibase/liquibase-bigquery/releases) (`liquibase-bigquery-{version}.jar` in the Assets section)
+
+1. Copy your JAR files into your Liquibase installation
+
+    [Place your JAR file(s)](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) in the `liquibase/lib` directory.
+
+### Maven users (additional step)
+1. If you use Maven, you must [include the driver JAR as a dependency](https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html) in your `pom.xml` file.
+
+    ``` xml
+        <dependency>
+          <groupId>com.google.cloud</groupId>
+          <artifactId>google-cloud-bigquery</artifactId>
+          <version>2.24.4</version>
+        </dependency>
+        <dependency>
+          <groupId>org.liquibase.ext</groupId>
+          <artifactId>liquibase-bigquery</artifactId>
+          <version>{{liquibase.current_version}}</version>
+        </dependency>
+    ```
+
+## Configure database connection
+1. Ensure your BigQuery database is configured. See [BigQuery Quickstarts](https://cloud.google.com/bigquery/docs/quickstarts) for more information. For example, you can run a query of a sample table in BigQuery using the [`bq` command-line tool](https://cloud.google.com/bigquery/docs/quickstarts/load-data-bq).
+    ```
+    bq show bigquery-public-data:samples.shakespeare
+    ```
+
+1. Specify the JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other Liquibase property default values. Liquibase does not parse the JDBC URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format.
+    ```
+    url: jdbc:bigquery://https://googleapis.com/bigquery/v2:443/<dbname>;ProjectId=<project id string>;OAuthType=<oauth type number>;
+    ```
+    * Specify the name of your database in place of `dbname`.
+    * Specify the ID of your BigQuery project as the value of `ProjectId`.
+    * Specify your BigQuery authentication method as the value of `OAuthType`. Click on the following tabs to see example JDBC URLs for each authentication type.
+
+        ===+ "OAuthType=0"
+
+            **Google Services**
     
-</p>
-<pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
-    &lt;groupId&gt;com.google.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;google-cloud-bigquery&lt;/artifactId&gt;
-    &lt;version&gt;2.24.4&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
-    &lt;artifactId&gt;liquibase-bigquery&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-<h2 id="test-your-connection">Test your connection</h2>
-<ol>
-    <li value="1">Ensure your BigQuery database is configured. See <a
-            href="https://cloud.google.com/bigquery/docs/quickstarts">BigQuery Quickstarts</a> for more information. For
-        example, you can run a query of a sample table in BigQuery using the <a
-                href="https://cloud.google.com/bigquery/docs/quickstarts/load-data-bq"><code>bq</code> command-line tool</a>:
-    </li>
-    <pre><code class="language-text">bq show bigquery-public-data:samples.shakespeare</code></pre>
-    <li value="2">
-        <p>Specify the database URL in the <code><a
-                href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span
-                class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults
-            file), along with other properties you want to set a default value for. <span
-                    class="mc-variable General.Liquibase variable">Liquibase</span> does not parse the URL. You can
-            either specify the full database connection string or specify the URL using your database's standard JDBC
-            format:</p>
-    </li>
-    <pre xml:space="preserve"><code class="language-text">url: jdbc:bigquery://https://googleapis.com/bigquery/v2:443/&lt;dbname&gt;;ProjectId=&lt;STR&gt;;OAuthType=&lt;INT&gt;;</code></pre>
-    <p>Specify the name of your database in place of <code>dbname</code>. Specify the ID of your BigQuery project as the
-        value of <code>ProjectId</code>. Specify your BigQuery authentication method as the value of
-        <code>OAuthType</code>. Click on the following tabs to see example JDBC URLs for each authentication type:</p>
+            Requires the options `OAuthServiceAcctEmail` and `OAuthPvtKeyPath` in your Liquibase `url` property.
+
+            For example:
     
-<a style="font-size: 14pt;" href="#">
-<code>OAuthType=0</code> (Google Services)</a>
-   
-<p>Requires the options <code>OAuthServiceAcctEmail</code> and <code>OAuthPvtKeyPath</code> in your <code>url</code>
-                property. For example:</p>
-            <pre xml:space="preserve"><code class="language-text">jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-ProjectId=myProject;
-OAuthType=0;
-OAuthServiceAcctEmail=lbtest@bq123.iam.gserviceaccount.com;
-OAuthPvtKeyPath=C:\path\serviceKey.p12;</code></pre>
-            <p>For more information, see:</p>
-            <ul>
-                <li><a href="https://cloud.google.com/bigquery/docs/authentication/service-account-file">BigQuery:
-                    Authenticating with a service account key file</a>
-                </li>
-                <li><a href="https://developers.google.com/identity/protocols/oauth2/service-account">Google: Using
-                    OAuth 2.0 for Server to Server Applications</a>
-                </li>
-            </ul>
+            ```
+            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
+            ProjectId=myProject;
+            OAuthType=0;
+            OAuthServiceAcctEmail=lbtest@bq123.iam.gserviceaccount.com;
+            OAuthPvtKeyPath=C:\path\serviceKey.p12;
+            ```
+  
+            For more information, see:
+  
+            * <a href="https://cloud.google.com/bigquery/docs/authentication/service-account-file">BigQuery: Authenticating with a service account key file</a>
+            * <a href="https://developers.google.com/identity/protocols/oauth2/service-account">Google: Using OAuth 2.0 for Server to Server Applications</a>
 
-<a style="font-size: 14pt;"><code>OAuthType=1</code> (Google User Account)</a>
+        === "OAuthType=1"
 
-            <p>Requires your user account credentials. For example:</p>
-            <pre xml:space="preserve"><code class="language-text">jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-ProjectId=myProject;
-OAuthType=1;</code></pre>
-            <p>For more information, see <a href="https://cloud.google.com/docs/authentication/end-user">Google:&#160;Authenticate
-                installed apps with user accounts</a>.</p>
-
-    <a style="font-size: 14pt;">
-<code>OAuthType=2</code> (Google Authorization Server Access Token)</a>
-
-            <p>Requires the options <code>OAuthAccessToken</code>, <code>OAuthRefreshToken</code>,
-                <code>OAuthClientId</code>, and <code>OAuthClientSecret</code> in your <code>url</code> property. For
-                example:</p>
-            <pre xml:space="preserve"><code class="language-text">jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-ProjectId=myProject;
-OAuthType=2;
-OAuthAccessToken=a25c7cfd36214f94a79d;
-OAuthRefreshToken=2kl0Qvuw9qt4abia54qga5t97;
-OAuthClientId=22n6627g243322f7;
-OAuthClientSecret=cDE+F2g3Hcjk4K5lazM;</code></pre>
-            <p>For more information, see:</p>
-            <ul>
-                <li><a href="https://cloud.google.com/bigquery/docs/authorization">BigQuery: Authorizing API
-                    requests</a>
-                </li>
-                <li><a href="https://developers.google.com/identity/protocols/oauth2">Google: Using OAuth 2.0 to Access
-                    Google APIs</a>
-                </li>
-            </ul>
-
-    <a style="font-size: 14pt;"><code>OAuthType=3</code> (Application Default Credentials)</a>
-
-            <p>For example:</p>
-            <pre xml:space="preserve"><code class="language-text">jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-ProjectId=myProject;
-OAuthType=3;</code></pre>
-            <p>For more information, see <a href="https://cloud.google.com/docs/authentication#service-accounts">Google:
-                Authenticating as a service account</a>.</p>
-
-    <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To
-        apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the
-        following property to the Liquibase properties file:
-        <code>licenseKey: &lt;paste code here&gt;</code></p>
-</ol>
-<ol start="3">
-    <li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a>
-        (<code>.xml</code>, <code>.sql</code>, <code>.json</code>, or <code>.yaml</code>) in your project directory and
-        add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.
-    </li>
-    <p>If you already created a <span class="mc-variable General.changelog variable">changelog</span> using the <code><a
-            href="https://docs.liquibase.com/commands/init/project.html" class="MCXref xref">init project</a></code> command, you can use
-        that instead of creating a new file. When adding onto an existing <span
-                class="mc-variable General.changelog variable">changelog</span>, be sure to only add the <span
-                class="mc-variable General.changeset variable">changeset</span> and to not duplicate the <span
-                class="mc-variable General.changelog variable">changelog</span> header.</p>
+            
+            Requires your user account credentials.
     
-<a style="font-size: 18pt;">XML example</a>
-
-        <pre xml:space="preserve"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<code>&lt;databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd"&gt;</code>
-
-    &lt;changeSet id="1" author="Liquibase"&gt;
-        &lt;createTable tableName="test_table"&gt;
-            &lt;column name="test_id" type="int"&gt;
-                &lt;constraints primaryKey="true"/&gt;
-            &lt;/column&gt;
-            &lt;column name="test_column" type="varchar"/&gt;
-        &lt;/createTable&gt;
-    &lt;/changeSet&gt;
-
-&lt;/databaseChangeLog&gt;</code></pre>
-
+            For example:
     
-<a style="font-size: 18pt;">SQL example</a>
+            ```
+            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
+            ProjectId=myProject;
+            OAuthType=1;
+            ```
+    
+            For more information, see [Google: Authenticate installed apps with user accounts](https://cloud.google.com/docs/authentication/end-user)
+
+        === "OAuthType=2"
+
+            **Google Authorization Server Access Token**
+    
+            Requires the options `OAuthAccessToken`, `OAuthRefreshToken`, `OAuthClientId`, and `OAuthClientSecret` in your Liquibase `url` property.
+                
+            For example:
+    
+            ```
+            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
+            ProjectId=myProject;
+            OAuthType=2;
+            OAuthAccessToken=a25c7cfd36214f94a79d;
+            OAuthRefreshToken=2kl0Qvuw9qt4abia54qga5t97;
+            OAuthClientId=22n6627g243322f7;
+            OAuthClientSecret=cDE+F2g3Hcjk4K5lazM;
+            ```
+    
+            For more information, see:
+    
+            * [BigQuery: Authorizing API requests](https://cloud.google.com/bigquery/docs/authorization)
+            * [Google: Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/oauth2/)
+
+        === "OAuthType=3"
+
+            **Application Default Credentials**
+  
+            For example:
+    
+            ```
+            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
+            ProjectId=myProject;
+            OAuthType=3;
+            ```
+    
+            For more information, see [Google: Authenticate installed apps with user accounts](https://cloud.google.com/docs/authentication#service-accounts)
+
+    !!! tip
+        To apply a Liquibase Pro key to your project, add the following property to the Liquibase properties file:
+        ```
+        liquibase.licenseKey: <paste key here>
+        ```
+
+## Test database connection
+1. Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.htmlhttps://docs.liquibase.com/concepts/changelogs/changeset.html).
+
+    If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
+    
+    === "XML example"
+
+        ``` xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <databaseChangeLog
+          xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+          xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+          xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+            http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+            http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+          <changeSet id="1" author="Liquibase">
+            <createTable tableName="test_table">
+              <column name="test_id" type="int">
+                <constraints primaryKey="true"/>
+              </column>
+              <column name="test_column" type="varchar"/>
+            </createTable>
+          </changeSet>
+      
+        </databaseChangeLog>
+        ```
+    
+    === "SQL example"
         
-<pre xml:space="preserve"><code class="language-sql">-- liquibase formatted sql
+        ``` sql
+        -- liquibase formatted sql
 
--- changeset liquibase:1
-CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))</code></pre>
-            <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>Formatted
-                SQL <span class="mc-variable General.changelog variable">changelog</span>s generated from <span
-                        class="mc-variable General.Liquibase variable">Liquibase</span> versions before 4.2 might cause
-                issues because of the lack of space after a double dash ( <code>--</code> ). To fix this, add a space
-                after the double dash. For example: <code>--&#160;liquibase formatted sql</code> instead of <code>--liquibase
-                    formatted sql</code> and <code>--&#160;changeset myname:create-table</code> instead of <code>--changeset
-                    myname:create-table</code>.</p>
-
+        -- changeset liquibase:1
+        CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))
+        ```
     
-<a style="font-size: 18pt;">YAML example</a>
+        !!! tip
+            Formatted SQL changelogs generated from Liquibase versions before 4.2.0 might cause issues because of the lack of space after a double dash ( `--` ). To fix this, add a space after the double dash. For example: ``-- liquibase formatted sql` instead of `--liquibase formatted sql` and `-- changeset myname:create-table` instead of `--changeset myname:create-table`
+    
+    === "YAML example"
         
-<pre xml:space="preserve"><code class="language-yaml">databaseChangeLog:
-   - changeSet:
-       id: 1
-       author: Liquibase
-       changes:
-       - createTable:
-           tableName: test_table
-           columns:
-           - column:
-               name: test_column
-               type: INT
-               constraints:
-                   primaryKey:  true
-                   nullable:  false</code></pre>
+        ``` yaml
+        databaseChangeLog:
+          - changeSet:
+            id: 1
+            author: Liquibase
+            changes:
+            - createTable:
+              tableName: test_table
+              columns:
+              - column:
+                name: test_column
+                  type: INT
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+        ```
 
-<a style="font-size: 18pt;">JSON example</a>
-        <pre><code class="language-json">{
-  "databaseChangeLog": [
-    {
-      "changeSet": {
-        "id": "1",
-        "author": "Liquibase",
-        "changes": [
-          {
-            "createTable": {
-              "tableName": "test_table",
-              "columns": [
-                {
-                  "column": {
-                    "name": "test_column",
-                    "type": "INT",
-                    "constraints": {
-                      "primaryKey": true,
-                      "nullable": false
+    === "JSON example"
+        ``` json
+        {
+          "databaseChangeLog": [
+            {
+              "changeSet": {
+                "id": "1",
+                "author": "Liquibase",
+                "changes": [
+                  {
+                    "createTable": {
+                      "tableName": "test_table",
+                      "columns": [
+                        {
+                          "column": {
+                            "name": "test_column",
+                            "type": "INT",
+                            "constraints": {
+                              "primaryKey": true,
+                              "nullable": false
+                            }
+                          }
+                        }
+                      ]
                     }
                   }
-                }
-              ]
+                ]
+              }
             }
-          }
-        ]
-      }
-    }
-  ]
-}</code></pre>
+          ]
+        }
+        ```
 
-    <li value="4">Navigate to your project folder in the CLI and run the <span
-            class="mc-variable General.Liquibase variable">Liquibase</span>&#160;<a
-            href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the
-        connection is successful:
-    </li>
-    <pre xml:space="preserve"><code class="language-text">liquibase status --username=test --password=test --changelog-file=&lt;changelog.xml&gt;</code></pre>
-    <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span
-            class="autonumber"><span><b>Note: </b></span></span>You can specify arguments in the CLI or keep them in the
-        <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span
-                class="mc-variable General.Liquibase variable">Liquibase</span> properties file</a>.</p>
-    <p>If your connection is successful, you'll see a message like this:</p>
-    <pre xml:space="preserve"><code class="language-text">4 changesets have not been applied to &lt;your_jdbc_url&gt;
-Liquibase command 'status' was executed successfully.</code></pre>
-    <li value="5">Inspect the SQL with the <a href="https://docs.liquibase.com/commands/update/update-sql.html" class="MCXref xref">update-sql</a>
-        command. Then make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html"
-                                                                class="MCXref xref">update</a> command.
-    </li>
-    <pre xml:space="preserve"><code class="language-text">liquibase update-sql --changelog-file=&lt;changelog.xml&gt;
-liquibase update --changelog-file=&lt;changelog.xml&gt;</code></pre>
-    <p>If your <code>update</code> is successful, Liquibase
-        runs each <span class="mc-variable General.changeset variable">changeset</span> and displays a summary message
-        ending with:</p>
-    <pre xml:space="preserve"><code class="language-text">Liquibase: Update has been successful.
-Liquibase command 'update' was executed successfully.</code></pre>
-    <li value="6">From a database UI tool, ensure that your database contains the <code>test_table</code> you added
-        along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG
-            table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK
-            table</a>.
-    </li>
-</ol>
-<p>Now you're ready to start making deployments with <span
-        class="mc-variable General.Liquibase variable">Liquibase</span>!</p>
-<h2>Related links</h2>
-<ul>
-    <li><a href="https://docs.liquibase.com/change-types/home.html" class="MCXref xref">Change Types</a>
-    </li>
-    <li><a href="https://docs.liquibase.com/commands/home.html" class="MCXref xref">Liquibase Commands</a>
-    </li>
-</ul>
+1. Navigate to your project folder in the CLI and run the Liquibase [`status`](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
+
+    ```
+    liquibase status --username=test --password=test --changelog-file=<changelog.xml>
+    ```
+
+    !!! note
+        You can specify arguments in the CLI or keep them in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">Liquibase properties file.
+  
+    If your connection is successful, you'll see a message like this:
+
+    ```
+    4 changesets have not been applied to <your_jdbc_url>
+    Liquibase command 'status' was executed successfully.
+    ```
+
+1. Inspect the SQL with the [`update-sql`](https://docs.liquibase.com/commands/update/update-sql.html) command. Then make changes to your database with the [`update`](https://docs.liquibase.com/commands/update/update.html) command.
+
+    ```
+    liquibase update-sql --changelog-file=<changelog.xml>
+    liquibase update --changelog-file=<changelog.xml>
+    ```
+
+    If your `update` is successful, Liquibase runs each changeset and displays a summary message ending with:
+
+    ```
+    Liquibase: Update has been successful.
+    Liquibase command 'update' was executed successfully.
+    ```
+
+1. From a database UI tool, ensure that your database contains the `test_table` you added along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
+
+Now you're ready to start making deployments with Liquibase!
+
+## Related links
+* [Change Types](https://docs.liquibase.com/change-types/home.html)
+* [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
+
