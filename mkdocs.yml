@@ -10,6 +10,7 @@ theme:
     - navigation.tabs
     - navigation.sections
     - content.action.edit
+    - content.action.view
     - content.code.copy
   logo: /images/logo.svg
   favicon: /images/favicon.ico
@@ -27,11 +28,14 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+
 
 plugins:
   - git-revision-date-localized:
@@ -39,6 +43,7 @@ plugins:
       enabled: !ENV [ CI, false ] ## Page rebuild is much slower with this enabled, so disabling unless the CI=true env variable is set, like on the build server
   - search
   - awesome-pages
+  - macros
   - redirects:
       redirect_maps:
         'extensions-integrations/directory/tutorials/apache-derby.md': 'extensions-integrations/directory/database-tutorials/apache-derby.md'
@@ -71,6 +76,8 @@ extra:
   analytics:
     provider: google
     property: G-SJKPP1K4KR
+  liquibase:
+    current_version: 4.24.0
 
 extra_css:
   - css/shared.css
@@ -78,3 +85,4 @@ extra_css:
 
 extra_javascript:
   - js/custom.js
+  

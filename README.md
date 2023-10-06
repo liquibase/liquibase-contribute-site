@@ -40,9 +40,9 @@ Your first step will be to fork this repository and clone your copy locally. Cre
 
 #### Running the Site Locally
 
-1. Run `docker run --rm -it -p 8080:8000 -v ${PWD}:/docs $(docker build -q .)` 
-in bash or powershell. If successful, you should see `Serving on http://0.0.0.0:8000/` in the output. 
-2. Open a browser to `http://localhost:8080` to view the site 
+1. `cd <contribute site github folder>`
+1. Run `docker run --rm -it -p 8080:8000 -v ${PWD}:/docs $(docker build -q .)` in bash or powershell. If successful, you should see `Serving on http://0.0.0.0:8000/` in the output. 
+1. Open a browser to `http://localhost:8080` to view the site 
 
 #### Editing Content
 

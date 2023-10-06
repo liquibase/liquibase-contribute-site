@@ -21,25 +21,23 @@ title: MongoDB
     If you are looking for information on CosmosDB support, it can be found here: [Using Liquibase with Azure CosmosDB](cosmosdb.md).
 
 ## Prerequisites
-<ol>
-    <li value="1"><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html" class="MCXref xref">Introduction to Liquibase</a> – Dive into Liquibase concepts.</li>
-    <li value="2"><a href="https://docs.liquibase.com/start/install/home.html" class="MCXref xref">Install Liquibase</a> – Download Liquibase on your machine.</li>
-</ol>
+* <a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html">Introduction to Liquibase</a> – Dive into Liquibase concepts.
+* <a href="https://docs.liquibase.com/start/install/home.html">Install Liquibase</a> – Download Liquibase on your machine.
 
 ## Install drivers
 
 ### All Users
-<p>To use Liquibase and MongoDB, you need four JAR files:</p>
-<ul>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-&lt;version&gt;.jar</code>)</li>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-&lt;version&gt;.jar</code>)</li>
-    <li><a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-&lt;version&gt;.jar</code>)</li>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-&lt;version&gt;.jar</code>)</li>
-</ul>
-<p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p>
+1. Download the following four JAR files:
+    * <a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-&lt;version&gt;.jar</code>)
+    * <a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-&lt;version&gt;.jar</code>)
+    * <a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-&lt;version&gt;.jar</code>)
+    * <a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-&lt;version&gt;.jar</code>)
+
+1. <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place the JAR file(s)</a> in the `liquibase/lib` directory.
 
 ### Maven Users (additional step)
-<p>If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file using the following code.</p>
+If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR as a dependency</a> in your `pom.xml` file using the following code.
+
 ```
 <dependency>
     <groupId>org.mongodb</groupId>
@@ -59,93 +57,117 @@ title: MongoDB
 <dependency>
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-mongodb</artifactId>
-    <version><span class="mc-variable General.CurrentLiquibaseVersion variable">4.23.1</span></version>
+    <version>{{liquibase.current_version}}</version>
 </dependency>
 ```
-## Test your connection
-<ol>
-<li value="1">Ensure your MongoDB database is configured. See <a href="https://www.mongodb.com/docs/manual/installation/">Install MongoDB</a> for more information.</li>
-<li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</li><pre xml:space="preserve">
-<code class="language-html">url: mongodb://hostname:27017/myDatabase</code>
-</pre>
-<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>If you are unsure about how to configure the <code>url</code> property, refer to <a href="https://docs.mongodb.com/manual/reference/connection-string/">Connection String URI Format</a>.</p>
-<p class="tip" data-mc-autonum="<b>Tip: </b>"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: <paste code here></code></p>
-<li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>The use of JSON&#160;and YAML <span class="mc-variable General.changelog variable">changelog</span>s is available in  Liquibase version 4.20</p></li>
 
-<h3>XML example</h3>
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog
-  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:mongodb="http://www.liquibase.org/xml/ns/mongodb"
-  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-         http://www.liquibase.org/xml/ns/mongodb
-         http://www.liquibase.org/xml/ns/mongodb/liquibase-mongodb-latest.xsd">
+## Database connection
 
-  <changeSet id="1" author="your_name" labels="createCollectionLabel" context="createCollectionContext">
-    <comment>create_collection_comment</comment>
-    <mongodb:createCollection collectionName="towns_xml"/>;
-  </changeSet>
-</databaseChangeLog>
-```
+### Configure connection
+1. Ensure your MongoDB database is configured. See <a href="https://www.mongodb.com/docs/manual/installation/">Install MongoDB</a> for more information.
 
-<h3>YAML example</h3>
-```
-databaseChangeLog:
-  - changeSet:
-    id: 2
-    author: your_name
-    labels: createCollectionLabel
-    context: createCollectionContext
-    comment: create_collection_comment
-    changes:
-      - createCollection:
-        collectionName: towns_yaml
-```
+1. Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:
 
-<h3>JSON example</h3>
-```
-{
-  "databaseChangeLog": [
-    {
-      "changeSet": {
-        "id": "3",
-        "author": "your_name",
-        "labels": "createCollectionLabel",
-        "context": "createCollectionContext",
-        "comment": "create_collection_comment",
-        "changes": [
-          {
-            "createCollection": {
-              "collectionName": "towns_json"
+    ```
+    url: mongodb://hostname:27017/myDatabase
+    ```
+
+    !!! note
+        If you are unsure about how to configure the `url` property, refer to <a href="https://docs.mongodb.com/manual/reference/connection-string/">Connection String URI Format</a>.
+
+1. (optional) Enable Liquibase Pro capabilities
+
+    To apply a [Liquibase Pro key](https://www.liquibase.com/trial) to your project, add the following property to the Liquibase properties file:
+    
+    ```
+    liquibase.licenseKey: <paste key here>
+    ```
+
+### Test  connection
+1. Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.
+
+    !!! note
+        The use of JSON and YAML changelogs is available as of Liquibase version 4.20
+
+    === "XML example"
+        ```
+        <?xml version="1.0" encoding="UTF-8"?>
+        <databaseChangeLog
+          xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:mongodb="http://www.liquibase.org/xml/ns/mongodb"
+          xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                 http://www.liquibase.org/xml/ns/mongodb
+                 http://www.liquibase.org/xml/ns/mongodb/liquibase-mongodb-latest.xsd">
+
+          <changeSet id="1" author="your_name" labels="createCollectionLabel" context="createCollectionContext">
+            <comment>create_collection_comment</comment>
+            <mongodb:createCollection collectionName="towns_xml"/>;
+          </changeSet>
+        </databaseChangeLog>
+        ```
+
+    === "YAML example"
+        ```
+        databaseChangeLog:
+          - changeSet:
+            id: 2
+            author: your_name
+            labels: createCollectionLabel
+            context: createCollectionContext
+            comment: create_collection_comment
+            changes:
+              - createCollection:
+                collectionName: towns_yaml
+        ```
+
+    === "JSON example"
+        ```
+        {
+          "databaseChangeLog": [
+            {
+              "changeSet": {
+                "id": "3",
+                "author": "your_name",
+                "labels": "createCollectionLabel",
+                "context": "createCollectionContext",
+                "comment": "create_collection_comment",
+                "changes": [
+                  {
+                    "createCollection": {
+                      "collectionName": "towns_json"
+                    }
+                  }
+                ]
+              }
             }
-          }
-        ]
-      }
-    }
-  ]
-}
-```
+          ]
+        }
+        ```
 
-<li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li>
-```
-liquibase status --username=test --password=test --changelog-file=<changelog.xml>
-```
-<p class="note" data-mc-autonum="<b>Note: </b>"><span class="autonumber"><span><b>Note: </b></span></span>You can pass arguments in the CLI or keep them in the Liquibase properties file.</p>
-<li value="5">Make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li>
-```
-liquibase update --changelog-file=<changelog.xml>
-```
-<li value="6">From a database UI tool, ensure that your database contains <code>myCollection</code> along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK table</a>.</li>
-<p class="tip" data-mc-autonum="<b>Tip: </b>"><span class="autonumber"><span><b>Tip: </b></span></span>You can use <a href="https://www.mongodb.com/products/compass">MongoDB Compass</a> to easily view collections in your database. For example, run the commands <code>use myDatabase</code> and <code>db.myCollection.find()</code>.</p>
-</ol>
+1. Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li>
+    ```
+    liquibase status --username=test --password=test --changelog-file=<changelog.xml>
+    ```
+    !!! note
+        You can pass arguments in the CLI or keep them in the Liquibase properties file.
+        
+1. Make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li>
+    ```
+    liquibase update --changelog-file=<changelog.xml>
+    ```
+
+1. From a database UI tool, ensure that your database contains `myCollection` along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html">DATABASECHANGELOGLOCK table</a>.
+
+    !!! tip
+        You can use <a href="https://www.mongodb.com/products/compass">MongoDB Compass</a> to easily view collections in your database. For example, run the commands `use myDatabase` and `db.myCollection.find()`.
 
 ## MongoDB command examples
 
 ### Changelog Template
-<p>The MongoDB command examples below assume this default XML changelog.</p>
+The MongoDB command examples below assume this default XML changelog.
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
