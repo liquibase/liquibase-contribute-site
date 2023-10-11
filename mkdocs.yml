@@ -43,6 +43,7 @@ plugins:
       enabled: !ENV [ CI, false ] ## Page rebuild is much slower with this enabled, so disabling unless the CI=true env variable is set, like on the build server
   - search
   - awesome-pages
+  - macros
   - redirects:
       redirect_maps:
         'extensions-integrations/directory/tutorials/apache-derby.md': 'extensions-integrations/directory/database-tutorials/apache-derby.md'
