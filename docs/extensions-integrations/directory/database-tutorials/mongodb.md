@@ -64,16 +64,16 @@ If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integr
 ## Database connection
 
 ### Configure connection
-1. Ensure your MongoDB database is configured. See <a href="https://www.mongodb.com/docs/manual/installation/">Install MongoDB</a> for more information.
+1. Ensure your MongoDB database is configured. See [Install MongoDB](https://www.mongodb.com/docs/manual/installation/) for more information.
 
-1. Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:
+1. Specify the database URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:
 
     ```
-    url: mongodb://hostname:27017/myDatabase
+    url: mongodb://<hostname>:27017/<database_name>
     ```
 
     !!! note
-        If you are unsure about how to configure the `url` property, refer to <a href="https://docs.mongodb.com/manual/reference/connection-string/">Connection String URI Format</a>.
+        If you are unsure about how to configure the `url` property, refer to the [Connection String URI Format](https://docs.mongodb.com/manual/reference/connection-string/).
 
 1. (optional) Enable Liquibase Pro capabilities
 
@@ -146,22 +146,25 @@ If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integr
         }
         ```
 
-1. Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li>
+1. Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:
+
     ```
     liquibase status --username=test --password=test --changelog-file=<changelog.xml>
     ```
+    
     !!! note
         You can pass arguments in the CLI or keep them in the Liquibase properties file.
         
-1. Make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li>
+1. Make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.
+
     ```
     liquibase update --changelog-file=<changelog.xml>
     ```
 
-1. From a database UI tool, ensure that your database contains `myCollection` along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html">DATABASECHANGELOGLOCK table</a>.
+1. From a database UI tool, ensure that your database contains `myCollection` along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
 
     !!! tip
-        You can use <a href="https://www.mongodb.com/products/compass">MongoDB Compass</a> to easily view collections in your database. For example, run the commands `use myDatabase` and `db.myCollection.find()`.
+        You can use [MongoDB Compass](https://www.mongodb.com/products/compass) to easily view collections in your database. For example, run the commands `use myDatabase` and `db.myCollection.find()`.
 
 ## MongoDB command examples
 
