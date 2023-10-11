@@ -47,7 +47,9 @@ To use Liquibase and BigQuery, you need several JAR files.
         </dependency>
     ```
 
-## Configure database connection
+## Database connection
+
+### Configure connection
 1. Ensure your BigQuery database is configured. See [BigQuery Quickstarts](https://cloud.google.com/bigquery/docs/quickstarts) for more information. For example, you can run a query of a sample table in BigQuery using the [`bq` command-line tool](https://cloud.google.com/bigquery/docs/quickstarts/load-data-bq).
     ```
     bq show bigquery-public-data:samples.shakespeare
@@ -140,7 +142,7 @@ To use Liquibase and BigQuery, you need several JAR files.
         liquibase.licenseKey: <paste key here>
         ```
 
-## Test database connection
+### Test connection
 1. Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.htmlhttps://docs.liquibase.com/concepts/changelogs/changeset.html).
 
     If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
