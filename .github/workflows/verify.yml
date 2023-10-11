@@ -30,7 +30,8 @@ jobs:
           mkdocs-material \
           mkdocs-git-revision-date-localized-plugin \
           mkdocs-awesome-pages-plugin \
-          mkdocs-redirects
+          mkdocs-redirects \
+          mkdocs-macros-plugin
 
         # build site with "strict" flag to catch any errors
       - run: mkdocs build -s -d _site

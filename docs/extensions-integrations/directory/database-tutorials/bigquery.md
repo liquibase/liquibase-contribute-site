@@ -32,20 +32,20 @@ To use Liquibase and BigQuery, you need several JAR files.
     [Place your JAR file(s)](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) in the `liquibase/lib` directory.
 
 ### Maven users (additional step)
-1. If you use Maven, you must [include the driver JAR as a dependency](https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html) in your `pom.xml` file.
+If you use Maven, you must [include the driver JAR as a dependency](https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html) in your `pom.xml` file.
 
-    ``` xml
-        <dependency>
-          <groupId>com.google.cloud</groupId>
-          <artifactId>google-cloud-bigquery</artifactId>
-          <version>2.24.4</version>
-        </dependency>
-        <dependency>
-          <groupId>org.liquibase.ext</groupId>
-          <artifactId>liquibase-bigquery</artifactId>
-          <version>4.24.0</version>
-        </dependency>
-    ```
+```
+<dependency>
+  <groupId>com.google.cloud</groupId>
+  <artifactId>google-cloud-bigquery</artifactId>
+  <version>2.24.4</version>
+</dependency>
+<dependency>
+  <groupId>org.liquibase.ext</groupId>
+  <artifactId>liquibase-bigquery</artifactId>
+  <version>{{liquibase.current_version}}</version>
+</dependency>
+```
 
 ## Database connection
 
