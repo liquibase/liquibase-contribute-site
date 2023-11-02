@@ -47,7 +47,7 @@ That means it works well for small and/or scattered suggestions, but if you are 
   <img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/7373c4a6-4288-446c-893a-b59ce8ebd265" width="50%"/>
   
   - Enter the branch name and press the "Create Branch" button
-   <img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/c3e7e9cb-3f95-4e1b-b026-1231324c906e" width="50%"/>
+   <img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/525f8a0d-d145-4667-ac2a-1e9c0ee7199b" width="50%"/>
 
   - Press the "Publish branch" button
    <img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/21f4977d-94b0-4a6d-b475-d5fb8af65e6a" width="50%"/>
