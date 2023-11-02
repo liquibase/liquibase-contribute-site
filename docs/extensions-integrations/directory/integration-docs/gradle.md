@@ -148,7 +148,7 @@ update.dependsOn(deploy)</code>
     <p>After your first update, you will see a new table along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html">DATABASECHANGELOGLOCK table</a> added to the database.</p>
     <li>[Optional] Do your first rollback by using the <code>rollback-count</code> command:
     </li><pre xml:space="preserve"><code class="language-text">gradle build
-gradle rollback-count -PliquibaseCommandValue=1</code></pre>
+gradle rollbackCount -PliquibaseCommandValue=1</code></pre>
     <p>Note: You can also specify the command value in the <code>build.gradle</code> file or use other <code>rollback</code> commands: <a href="https://docs.liquibase.com/commands/rollback/rollback-by-tag.htm">rollback</a>, <a href="https://docs.liquibase.com/commands/rollback/rollback-to-date.htm">rollback-to-date</a>, <a href="https://docs.liquibase.com/commands/rollback/rollback-one-changeset.html">rollback-one-changeset</a>, <a href="https://docs.liquibase.com/commands/rollback/rollback-one-update.html">rollback-one-update</a>.</p>
     <p>Tip: Automatic rollback is not supported for formatted SQL changesets. You need to add custom rollback statements to formatted SQL changesets if you want to use rollback commands:</p><pre xml:space="preserve"><code class="language-text">-- changeset liquibase:1
 create table test_table ( id int primary key, name varchar(255) );
