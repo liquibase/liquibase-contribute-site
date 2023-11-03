@@ -31,6 +31,14 @@ To use Liquibase and BigQuery, you need several JAR files.
 
     [Place your JAR file(s)](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) in the `liquibase/lib` directory.
 
+1. (optional) Enable Liquibase Pro capabilities
+
+    To apply a [Liquibase Pro key](https://www.liquibase.com/trial) to your project, add the following property to the Liquibase properties file:
+    
+    ```
+    liquibase.licenseKey: <paste key here>
+    ```
+
 ### Maven users (additional step)
 If you use Maven, you must [include the driver JAR as a dependency](https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html) in your `pom.xml` file.
 

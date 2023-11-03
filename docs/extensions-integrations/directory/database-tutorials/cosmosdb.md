@@ -399,6 +399,14 @@ If you use Maven, you must <a href="https://docs.liquibase.com/tools-integration
           ---
 
     For more information, see <a href="https://github.com/liquibase/liquibase-cosmosdb#adjust-connection-string">GitHub: liquibase-cosmosdb § Adjust connection string</a>.
+
+1. (optional) Enable Liquibase Pro capabilities
+
+    To apply a [Liquibase Pro key](https://www.liquibase.com/trial) to your project, add the following property to the Liquibase properties file:
+    
+    ```
+    liquibase.licenseKey: <paste key here>
+    ```
     
 ### Test connection
 

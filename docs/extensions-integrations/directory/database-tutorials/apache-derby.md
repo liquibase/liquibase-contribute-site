@@ -39,21 +39,29 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
 ### Configure connection
 
 1.  Ensure your Apache Derby database is configured. As an option, you can run the `sysinfo` command to check the output of Derby system information. For more details, see the [Install Software](https://db.apache.org/derby/papers/DerbyTut/install_software.html) documentation.
-1.  Specify the database URL in the `[liquibase.properties](https://docs.liquibase.com/concepts/connections/creating-config-properties.html)` file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format:
 
+1.  Specify the database URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format:
+
+    ```
     url: jdbc:derby://localhost:1527/MYDATABASE;create=true
+    ```
 
-!!! note
-    If you created `MYDATABASE`, use `create=false` or remove `create=true` from URL.
+    !!! note
+        If you created `MYDATABASE`, use `create=false` or remove `create=true` from URL.
 
-!!! tip
-    To apply a Liquibase Pro key to your project, add the following property to the Liquibase properties file: `licenseKey: <paste code here>`
+1. (optional) Enable Liquibase Pro capabilities
+
+    To apply a [Liquibase Pro key](https://www.liquibase.com/trial) to your project, add the following property to the Liquibase properties file:
+    
+    ```
+    liquibase.licenseKey: <paste key here>
+    ```
 
 ### Test connection
 
 1.  Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.html).
 
-    If you already created a changelog using the `[init project](https://docs.liquibase.com/commands/init/project.html)` command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
+    If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
 
     === "XML example"
           ```
