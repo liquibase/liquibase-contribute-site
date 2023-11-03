@@ -3,14 +3,13 @@ title: MongoDB
 ---
 
 # Use Liquibase with MongoDB
-<p><a href="https://www.mongodb.com">MongoDB</a>&#160;is a document-oriented NoSQL&#160;database. For more information, see the <a href="https://www.mongodb.com/docs/">MongoDB&#160;Documentation</a>.</p>
+[MongoDB](https://www.mongodb.com) is a document-oriented NoSQL database. For more information, see the [MongoDB Documentation](https://www.mongodb.com/docs/).
+
+
 ## Supported versions
-<ul>
-    <li>6.X</li>
-    <li>5.X</li>
-    <li><a href="https://docs.liquibase.com/start/tutorials/mongo-db-atlas-config.html" class="MCXref xref">MongoDB Atlas</a>
-    </li>
-</ul>
+*   6.X
+*   5.X
+*   [MongoDB Atlas](https://docs.liquibase.com/start/tutorials/mongo-db-atlas-config.html)
 
 !!! note
 
@@ -21,22 +20,22 @@ title: MongoDB
     If you are looking for information on CosmosDB support, it can be found here: [Using Liquibase with Azure CosmosDB](cosmosdb.md).
 
 ## Prerequisites
-* <a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html">Introduction to Liquibase</a> – Dive into Liquibase concepts.
-* <a href="https://docs.liquibase.com/start/install/home.html">Install Liquibase</a> – Download Liquibase on your machine.
+* [Introduction to Liquibase](https://docs.liquibase.com/concepts/introduction-to-liquibase.html) – Dive into Liquibase concepts.
+* [Install Liquibase](https://docs.liquibase.com/start/install/home.html) – Download Liquibase on your machine.
 
 ## Install drivers
 
 ### All Users
 1. Download the following four JAR files:
-    * <a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core">MongoDB Java Driver Core</a> (<code>mongodb-driver-core-&lt;version&gt;.jar</code>)
-    * <a href="https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync">MongoDB Synchronous Driver</a> (<code>mongodb-driver-sync-&lt;version&gt;.jar</code>)
-    * <a href="https://mvnrepository.com/artifact/org.mongodb/bson">MongoDB&#160;BSON</a> (<code>bson-&lt;version&gt;.jar</code>)
-    * <a href="https://github.com/liquibase/liquibase-mongodb/releases/">Liquibase MongoDB extension</a> (<code>liquibase-mongodb-&lt;version&gt;.jar</code>)
+    * [MongoDB Java Driver Core](https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core) (`mongodb-driver-core-<version>.jar`) 
+    * [MongoDB Synchronous Driver](https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync) (`mongodb-driver-sync-<version>.jar`)
+    * [MongoDB BSON](https://mvnrepository.com/artifact/org.mongodb/bson) (`bson-<version>.jar`)
+    * [Liquibase MongoDB extension](https://github.com/liquibase/liquibase-mongodb/releases/) (`liquibase-mongodb-<version>.jar`)
 
-1. <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place the JAR file(s)</a> in the `liquibase/lib` directory.
+1. [Place the JAR file(s)](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) in the `liquibase/lib` directory.
 
 ### Maven Users (additional step)
-If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR as a dependency</a> in your `pom.xml` file using the following code.
+If you use Maven, you must also [include the driver JAR as a dependency](https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html) in your `pom.xml` file using the following code.
 
 ```
 <dependency>
@@ -82,6 +81,7 @@ If you use Maven, you must also <a href="https://docs.liquibase.com/tools-integr
     ```
     liquibase.licenseKey: <paste key here>
     ```
+
 
 ### Test  connection
 1. Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.
@@ -314,9 +314,7 @@ Provide a helper to run specified database commands against the admin database.
 ```
 
 ## Related links
-<ul>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb">Liquibase MongoDB Extension</a></li>
-    <li><a href="https://github.com/liquibase/liquibase-mongodb/tree/main/src/test/resources/liquibase/ext">Liquibase MongoDB Extension Examples</a></li>
-    <li><a href="https://docs.liquibase.com/commands/home.html" class="MCXref xref">Liquibase Commands</a></li>
-    <li><a href="https://docs.liquibase.com/change-types/home.html" class="MCXref xref">Change Types</a></li>
-</ul>
+*   [Liquibase MongoDB Extension](https://github.com/liquibase/liquibase-mongodb)
+*   [Liquibase MongoDB Extension Examples](https://github.com/liquibase/liquibase-mongodb/tree/main/src/test/resources/liquibase/ext)
+*   [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
+*   [Change Types](https://docs.liquibase.com/change-types/home.html)
