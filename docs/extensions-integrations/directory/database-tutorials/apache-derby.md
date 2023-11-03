@@ -82,11 +82,16 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
           ---
 
     === "SQL example"
-          ```
+          ``` sql
           -- liquibase formatted sql
-    
+
           -- changeset liquibase:1
-          CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))
+          CREATE TABLE test_table
+          (
+            test_id INT, 
+            test_column VARCHAR(255), 
+            PRIMARY KEY (test_id)
+          )
           ```
           ---
       
