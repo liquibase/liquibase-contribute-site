@@ -11,7 +11,7 @@ title: Gradle
     <li>Add the following section to your <code>build.gradle</code> file to include the <code>liquibase</code> plugin into Gradle builds:
     </li><pre xml:space="preserve">
 <code class="language-xml">plugins {
-    id 'org.liquibase.gradle' version '2.0.4'
+    id 'org.liquibase.gradle' version '2.2.4'
 }</code></pre>
     <p>The following <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:old_plugin_application">legacy plugin application</a> is also available to use:</p><pre xml:space="preserve">
 <code class="language-text">buildscript {
@@ -19,7 +19,7 @@ title: Gradle
         mavenCentral()
         }
         dependencies {
-            classpath "org.liquibase:liquibase-gradle-plugin:2.0.4"
+            classpath "org.liquibase:liquibase-gradle-plugin:2.2.0"
         }
 }
 apply plugin: 'org.liquibase.gradle'
@@ -27,12 +27,14 @@ apply plugin: 'org.liquibase.gradle'
     <li>Add the <code>dependencies</code> section to include files on which Liquibase will depend to run commands. The plugin needs to find Liquibase when it runs a task, and Liquibase needs to find database drivers, changelog parsers, and other files on the classpath. When adding <code>liquibaseRuntime</code> dependencies to the <code>dependencies</code> section in the <code>build.gradle</code> file, include the Liquibase value along with your database driver:
     </li><pre xml:space="preserve">
 <code class="language-text">dependencies {
-    liquibaseRuntime 'org.liquibase:liquibase-core:4.2.2'
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.24.0'
     liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.1.1'
+    liquibaseRuntime 'info.picocli:picocli:4.7.5'
+    liquibaseRuntime 'org.yaml:snakeyaml:1.33'
     liquibaseRuntime 'mysql:mysql-connector-java:5.1.34'
 }
 apply plugin: "org.liquibase.gradle"</code></pre>
-    <p>Replace <code>org.liquibase:liquibase-core:4.2.2</code> and <code>mysql:mysql-connector-java:5.1.34</code> with your values. If you use Groovy scripts for database changes, the example code includes the <a href="https://github.com/liquibase/liquibase-groovy-dsl">Liquibase Groovy DSL</a> dependency, which parses changelogs written in a Groovy DSL. You do not need to add <code>org.liquibase:liquibase-groovy-dsl:2.1.1</code> if you do not use the Groovy changelog format. For more information, see Step 4.</p>
+    <p>Replace <code>org.liquibase:liquibase-core:4.24.0</code> and <code>mysql:mysql-connector-java:5.1.34</code> with your values. If you use Groovy scripts for database changes, the example code includes the <a href="https://github.com/liquibase/liquibase-groovy-dsl">Liquibase Groovy DSL</a> dependency, which parses changelogs written in a Groovy DSL. You do not need to add <code>org.liquibase:liquibase-groovy-dsl:2.1.1</code> if you do not use the Groovy changelog format. For more information, see Step 4.</p>
     <li>Create a text file in your application directory and name it <code>changelog.sql</code>. Liquibase also supports the XML, YAML, and JSON changelog formats.
 Another way to use Liquibase and Gradle is with the <code>changelog.groovy</code> file.            </li>
     <li>Add changesets to your changelog file. Use the following examples depending on the format of the changelog you created:</li>
@@ -119,7 +121,7 @@ CREATE TABLE test_table (test_id INT, test_column VARCHAR, PRIMARY KEY (test_id)
     </li><pre xml:space="preserve"><code class="language-text">liquibase {
     activities {
         main {
-          changeLogFile "../changelog.sql"
+          changelogFile "../changelog.sql"
           url "mysql://localhost:3306/testdatabase"
           username "username"
           password "password"
