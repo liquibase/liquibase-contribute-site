@@ -64,182 +64,176 @@ If you use Maven, you must [include the driver JAR as a dependency](https://docs
     ```
 
 1. Specify the JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other Liquibase property default values. Liquibase does not parse the JDBC URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format.
+
     ```
-    url: jdbc:bigquery://https://googleapis.com/bigquery/v2:443/<dbname>;ProjectId=<project id string>;OAuthType=<oauth type number>;
+    url: jdbc:bigquery://<Host>:<Port>;ProjectId=<Project>;OAuthType=<AuthValue>;<Property1>=<Value1>;<Property2>=<Value2>;...
     ```
-    * Specify the name of your database in place of `dbname`.
+    
     * Specify the ID of your BigQuery project as the value of `ProjectId`.
-    * Specify your BigQuery authentication method as the value of `OAuthType`. Click on the following tabs to see example JDBC URLs for each authentication type.
+    * Specify your BigQuery authentication method as the value of `OAuthType`.
 
-        ===+ "OAuthType=0"
+    !!! note
+         Detailed information on JDBC Connections for Big Query can be found here: [Simba Google BigQuery JDBC Connector Install and Configuration Guide_1.5.0.1001.pdf](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.5.0.1001.pdf)
 
-            **Google Services**
+    Click on the following tabs to see example JDBC URLs for each authentication type.
     
-            Requires the options `OAuthServiceAcctEmail` and `OAuthPvtKeyPath` in your Liquibase `url` property.
+    ===+ "OAuthType=0"
 
-            For example:
-            ```
-            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-            ProjectId=myProject;
-            OAuthType=0;
-            OAuthServiceAcctEmail=lbtest@bq123.iam.gserviceaccount.com;
-            OAuthPvtKeyPath=C:\path\serviceKey.p12;
-            ```
-            For more information, see:
-            
-            * <a href="https://cloud.google.com/bigquery/docs/authentication/service-account-file">BigQuery: Authenticating with a service account key file</a>
-            * <a href="https://developers.google.com/identity/protocols/oauth2/service-account">Google: Using OAuth 2.0 for Server to Server Applications</a>
-            ---
+        **Google Services**
 
-        === "OAuthType=1"
-  
-            **Google User Account authentication**
+        Requires the options `OAuthServiceAcctEmail` and `OAuthPvtKeyPath` in your Liquibase `url` property.
 
-            Requires your user account credentials.
+        For example:
+        ```
+        jdbc:bigquery://https://googleapis.com/bigquery/v2:443;
+        ProjectId=myProject;
+        OAuthType=0;
+        OAuthServiceAcctEmail=lbtest@bq123.iam.gserviceaccount.com;
+        OAuthPvtKeyPath=C:\path\serviceKey.p12;
+        ```
+        ---
 
-            For example:
-            ```
-            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-            ProjectId=myProject;
-            OAuthType=1;
-            ```
-            For more information, see [Google: Authenticate installed apps with user accounts](https://cloud.google.com/docs/authentication/end-user)
-            ---
+    === "OAuthType=1"
 
-        === "OAuthType=2"
+        **Google User Account authentication**
 
-            **Google Authorization Server Access Token**
+        Requires your user account credentials.
 
-            Requires the options `OAuthAccessToken`, `OAuthRefreshToken`, `OAuthClientId`, and `OAuthClientSecret` in your Liquibase `url` property.
-    
-            For example:
+        For example:
+        ```
+        jdbc:bigquery://https://googleapis.com/bigquery/v2:443;
+        ProjectId=myProject;
+        OAuthType=1;
+        ```
+        ---
 
-            ```
-            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-            ProjectId=myProject;
-            OAuthType=2;
-            OAuthAccessToken=a25c7cfd36214f94a79d;
-            OAuthRefreshToken=2kl0Qvuw9qt4abia54qga5t97;
-            OAuthClientId=22n6627g243322f7;
-            OAuthClientSecret=cDE+F2g3Hcjk4K5lazM;
-            ```
-            For more information, see:
-            
-            * [BigQuery: Authorizing API requests](https://cloud.google.com/bigquery/docs/authorization)
-            * [Google: Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/oauth2/)
-            ---
+    === "OAuthType=2"
 
-        === "OAuthType=3"
+        **Google Authorization Server Access Token**
 
-            **Application Default Credentials**
+        Requires the options `OAuthAccessToken`, `OAuthRefreshToken`, `OAuthClientId`, and `OAuthClientSecret` in your Liquibase `url` property.
 
-            For example:
+        For example:
+        ```
+        jdbc:bigquery://https://googleapis.com/bigquery/v2:443;
+        ProjectId=myProject;
+        OAuthType=2;
+        OAuthAccessToken=a25c7cfd36214f94a79d;
+        OAuthRefreshToken=2kl0Qvuw9qt4abia54qga5t97;
+        OAuthClientId=22n6627g243322f7;
+        OAuthClientSecret=cDE+F2g3Hcjk4K5lazM;
+        ```
+        ---
 
-            ```
-            jdbc:bigquery://https://googleapis.com/bigquery/v2:443/myDatabase;
-            ProjectId=myProject;
-            OAuthType=3;
-            ```
-            For more information, see [Google: Authenticate installed apps with user accounts](https://cloud.google.com/docs/authentication#service-accounts)
-            ---
+    === "OAuthType=3"
+
+        **Application Default Credentials**
+
+        For example:
+        ```
+        jdbc:bigquery://https://googleapis.com/bigquery/v2:443;
+        ProjectId=myProject;
+        OAuthType=3;
+        ```
+        ---
 
 ### Test connection
 1. Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.htmlhttps://docs.liquibase.com/concepts/changelogs/changeset.html).
 
-    If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
-    
-    === "XML example"
-          ``` xml
-          <?xml version="1.0" encoding="UTF-8"?>
-          <databaseChangeLog
-            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-            xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-            xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-              http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-              http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-              http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
 
-            <changeSet id="1" author="Liquibase">
-              <createTable tableName="test_table">
-                <column name="test_id" type="int">
-                  <constraints primaryKey="true"/>
-                </column>
-                <column name="test_column" type="varchar"/>
-              </createTable>
-            </changeSet>
-      
-          </databaseChangeLog>
-          ```
-          ---
-    
-    === "SQL example"
-          ``` sql
-          -- liquibase formatted sql
+=== "XML example"
+      ``` xml
+      <?xml version="1.0" encoding="UTF-8"?>
+      <databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+          http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+          http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
-          -- changeset liquibase:1
-          CREATE TABLE test_table 
-          (
-            test_id INT, 
-            test_column VARCHAR(255), 
-            PRIMARY KEY (test_id)
-          )
-          ```
-          ---
-        
-    === "YAML example"
-          ``` yaml
-          databaseChangeLog:
-            - changeSet:
-              id: 1
-              author: Liquibase
-              changes:
-              - createTable:
-                tableName: test_table
-                columns:
-                - column:
-                  name: test_column
-                    type: INT
-                    constraints:
-                      primaryKey:  true
-                      nullable:  false
-          ```
-          ---
+        <changeSet id="1" author="Liquibase">
+          <createTable tableName="test_table">
+            <column name="test_id" type="int">
+              <constraints primaryKey="true"/>
+            </column>
+            <column name="test_column" type="varchar"/>
+          </createTable>
+        </changeSet>
 
-    === "JSON example"
-          ``` json
+      </databaseChangeLog>
+      ```
+      ---
+
+=== "SQL example"
+      ``` sql
+      -- liquibase formatted sql
+
+      -- changeset liquibase:1
+      CREATE TABLE test_table 
+      (
+        test_id INT, 
+        test_column VARCHAR(255), 
+        PRIMARY KEY (test_id)
+      )
+      ```
+      ---
+
+=== "YAML example"
+      ``` yaml
+      databaseChangeLog:
+        - changeSet:
+          id: 1
+          author: Liquibase
+          changes:
+          - createTable:
+            tableName: test_table
+            columns:
+            - column:
+              name: test_column
+                type: INT
+                constraints:
+                  primaryKey:  true
+                  nullable:  false
+      ```
+      ---
+
+=== "JSON example"
+      ``` json
+      {
+        "databaseChangeLog": [
           {
-            "databaseChangeLog": [
-              {
-                "changeSet": {
-                  "id": "1",
-                  "author": "Liquibase",
-                  "changes": [
-                    {
-                      "createTable": {
-                        "tableName": "test_table",
-                        "columns": [
-                          {
-                            "column": {
-                              "name": "test_column",
-                              "type": "INT",
-                              "constraints": {
-                                "primaryKey": true,
-                                "nullable": false
-                              }
-                            }
+            "changeSet": {
+              "id": "1",
+              "author": "Liquibase",
+              "changes": [
+                {
+                  "createTable": {
+                    "tableName": "test_table",
+                    "columns": [
+                      {
+                        "column": {
+                          "name": "test_column",
+                          "type": "INT",
+                          "constraints": {
+                            "primaryKey": true,
+                            "nullable": false
                           }
-                        ]
+                        }
                       }
-                    }
-                  ]
+                    ]
+                  }
                 }
-              }
-            ]
+              ]
+            }
           }
-          ```
-          ---
+        ]
+      }
+      ```
+      ---
 
 1. Navigate to your project folder in the CLI and run the Liquibase [`status`](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
 
@@ -278,4 +272,3 @@ Now you're ready to start making deployments with Liquibase!
 ## Related links
 * [Change Types](https://docs.liquibase.com/change-types/home.html)
 * [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
-
