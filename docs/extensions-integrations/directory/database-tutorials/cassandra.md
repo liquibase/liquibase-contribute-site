@@ -176,32 +176,32 @@ myname:create-table</code>.</p>
 
 <pre><code class="language-json">{
 "databaseChangeLog": [
-{
-"changeSet": {
-"id": "1",
-"author": "Liquibase",
-"changes": [
-{
-"createTable": {
-"tableName": "test_table",
-"columns": [
-{
-"column": {
-"name": "test_column",
-"type": "INT",
-"constraints": {
-"primaryKey": true,
-"nullable": false
-}
-}
-}
-]
-}
-}
-]
-}
-}
-]
+    {
+      "changeSet": {
+        "id": "1",
+        "author": "Liquibase",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "test_table",
+              "columns": [
+                {
+                  "column": {
+                    "name": "test_column",
+                    "type": "INT",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
 }</code></pre>
 
     <li value="4">Navigate to your project folder in the CLI and run the <span

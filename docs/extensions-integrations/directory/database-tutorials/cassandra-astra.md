@@ -111,33 +111,33 @@ CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (tes
 <a style="font-size: 18pt;"> JSON example</a>
 
 <pre><code class="language-json">{
-"databaseChangeLog": [
-{
-"changeSet": {
-"id": "1",
-"author": "Liquibase",
-"changes": [
-{
-"createTable": {
-"tableName": "test_table",
-"columns": [
-{
-"column": {
-"name": "test_column",
-"type": "INT",
-"constraints": {
-"primaryKey": true,
-"nullable": false
-}
-}
-}
-]
-}
-}
-]
-}
-}
-]
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "1",
+        "author": "Liquibase",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "test_table",
+              "columns": [
+                {
+                  "column": {
+                    "name": "test_column",
+                    "type": "INT",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
 }</code></pre>
 
 <li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li><pre xml:space="preserve"><code class="language-text">liquibase status --username=test --password=test --changelog-file=&lt;changelog.xml&gt;</code></pre>
