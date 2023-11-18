@@ -29,47 +29,33 @@
     files: a JDBC driver and the Liquibase Cassandra
     extension:</p>
 <ol>
-    <li value="1">Download the <a href="https://downloads.datastax.com/#odbc-jdbc-drivers">Simba JDBC driver JAR
-        file</a> and select <b>Simba JDBC Driver for Apache Cassandra</b> from the dropdown menu. Select the default
-        package option unless you need a specific package. The driver downloads as a ZIP file named <code>SimbaCassandraJDBC42-x.x.x.zip</code>.
+    <li value="1">Download the latest version of <a href="https://github.com/ing-bank/cassandra-jdbc-wrapper/releases/latest">JDBC wrapper of the Java Driver for Apache Cassandra JAR file</a>.
     </li>
-    <li value="2">Extract the <code>CassandraJDBCxx.jar</code> file and place it in the <code>liquibase/lib</code>
-        directory.
+    <li value="2">Move the downloaded <code>cassandra-jdbc-wrapper-x.x.x-bundle.jar</code> file to the <code>liquibase/lib</code> directory.
     </li>
-    <li value="3">Open the Liquibase properties file and
-        specify the driver, as follows:
+    <li value="3">Open the Liquibase properties file and specify the driver, as follows:
     </li>
-    <pre><code class="language-text">driver: com.simba.cassandra.jdbc42.Driver</code></pre>
-    <li value="4">Go to the <a href="https://github.com/liquibase/liquibase-cassandra/releases/cassandra.md">liquibase-cassandra</a>
-        repository and download the latest released <span
-                class="mc-variable General.Liquibase variable">Liquibase</span> extension JAR file: <code>liquibase-cassandra-version.jar</code>.
+    <pre><code class="language-text">driver: com.ing.data.cassandra.jdbc.CassandraDriver</code></pre>
+    <li value="4">Go to the <a href="https://github.com/liquibase/liquibase-cassandra/releases/cassandra.md">liquibase-cassandra</a> repository and download the latest released 
+    <span class="mc-variable General.Liquibase variable">Liquibase</span> extension JAR file: <code>liquibase-cassandra-version.jar</code>.
     </li>
 </ol>
 <p>
-    <a
-            href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR
-        file(s)</a> in the <code>liquibase/lib</code> directory.
+    <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.
     </p><p>
     If you use Maven,
-    note that this database does not
-        provide its driver JAR&#160;on a public Maven repository, so you must install a local copy and <a
-                href="https://docs.liquibase.com/tools-integrations/maven/using-liquibase-and-maven-pom-file.html">add it as a dependency</a>
-        to your <code>pom.xml</code> file.
+     <a href="https://docs.liquibase.com/tools-integrations/maven/using-liquibase-and-maven-pom-file.html">add the driver JAR as a dependency</a> to your <code>pom.xml</code> file.
 </p>
 <pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
-    &lt;groupId&gt;com.datastax.jdbc&lt;/groupId&gt;
-    &lt;artifactId&gt;CassandraJDBC42&lt;/artifactId&gt;
-    &lt;version&gt;4.2&lt;/version&gt;
-    &lt;scope&gt;system&lt;/scope&gt;
-    &lt;systemPath&gt;${basedir}/lib/CassandraJDBC42.jar&lt;/systemPath&gt;
+    &lt;groupId&gt;com.ing.data&lt;/groupId&gt;
+    &lt;artifactId&gt;cassandra-jdbc-wrapper&lt;/artifactId&gt;
+    &lt;version&gt;4.10.2&lt;/version&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
     &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
     &lt;artifactId&gt;liquibase-cassandra&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
+    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.25.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
-<p>You need to specify that the scope is <code>system</code> and provide the <code>systemPath</code> in
-    <code>pom.xml</code>. In the example, the <code>${basedir}/lib</code> is the location of the driver JAR file.</p>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your Cassandra database is configured. If you have Cassandra tools locally and want to check
@@ -110,11 +96,12 @@ Status=Up/Down
             href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span
             class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults
         file), along with other properties you want to set a default value for. <span
-                class="mc-variable General.Liquibase variable">Liquibase</span> does not parse the URL. You can either
-        specify the full database connection string or specify the URL using your database's standard JDBC format:
+                class="mc-variable General.Liquibase variable">Liquibase</span> does not parse the URL. Please specify the URL using your database's standard JDBC format:
     </li>
     <pre><code
-            class="language-text">url: jdbc:cassandra://localhost:9042/myKeyspace;DefaultKeyspace=myKeyspace</code></pre>
+            class="language-text">url: jdbc:cassandra://localhost:9042/myKeyspace?compliancemode=Liquibase</code></pre>
+    <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>Be careful to always specify the <code>compliancemode</code> parameter with the value <code>Liquibase</code> to avoid any unexpected behaviour when running the changelog.</p>
+    <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>For more information about the available options regarding the JDBC connection string, please check <a href="https://github.com/ing-bank/cassandra-jdbc-wrapper#usage">the driver documentation</a>.</p>
     <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To
         apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the
         following property to the Liquibase properties file:
@@ -159,59 +146,62 @@ Status=Up/Down
 
 -- changeset liquibase:1
 CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))</code></pre>
-            <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>Formatted
-                SQL <span class="mc-variable General.changelog variable">changelog</span>s generated from <span
+
+<p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>Formatted
+SQL <span class="mc-variable General.changelog variable">changelog</span>s generated from <span
                         class="mc-variable General.Liquibase variable">Liquibase</span> versions before 4.2 might cause
-                issues because of the lack of space after a double dash ( <code>--</code> ). To fix this, add a space
-                after the double dash. For example: <code>--&#160;liquibase formatted sql</code> instead of <code>--liquibase
-                    formatted sql</code> and <code>--&#160;changeset myname:create-table</code> instead of <code>--changeset
-                    myname:create-table</code>.</p>
+issues because of the lack of space after a double dash ( <code>--</code> ). To fix this, add a space
+after the double dash. For example: <code>--&#160;liquibase formatted sql</code> instead of <code>--liquibase
+formatted sql</code> and <code>--&#160;changeset myname:create-table</code> instead of <code>--changeset
+myname:create-table</code>.</p>
 
     <a style="font-size: 18pt;">YAML example</a>
         <pre xml:space="preserve"><code class="language-yaml">databaseChangeLog:
-   - changeSet:
-       id: 1
-       author: Liquibase
-       changes:
-       - createTable:
-           tableName: test_table
-           columns:
-           - column:
-               name: test_column
-               type: INT
-               constraints:
-                   primaryKey:  true
-                   nullable:  false</code></pre>
+
+- changeSet:
+  id: 1
+  author: Liquibase
+  changes:
+  - createTable:
+    tableName: test_table
+    columns:
+    - column:
+      name: test_column
+      type: INT
+      constraints:
+      primaryKey: true
+      nullable: false</code></pre>
 
 <a style="font-size: 18pt;">JSON example</a>
-        <pre><code class="language-json">{
-  "databaseChangeLog": [
-    {
-      "changeSet": {
-        "id": "1",
-        "author": "Liquibase",
-        "changes": [
-          {
-            "createTable": {
-              "tableName": "test_table",
-              "columns": [
-                {
-                  "column": {
-                    "name": "test_column",
-                    "type": "INT",
-                    "constraints": {
-                      "primaryKey": true,
-                      "nullable": false
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
+
+<pre><code class="language-json">{
+"databaseChangeLog": [
+{
+"changeSet": {
+"id": "1",
+"author": "Liquibase",
+"changes": [
+{
+"createTable": {
+"tableName": "test_table",
+"columns": [
+{
+"column": {
+"name": "test_column",
+"type": "INT",
+"constraints": {
+"primaryKey": true,
+"nullable": false
+}
+}
+}
+]
+}
+}
+]
+}
+}
+]
 }</code></pre>
 
     <li value="4">Navigate to your project folder in the CLI and run the <span
@@ -226,23 +216,26 @@ CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (tes
                 class="mc-variable General.Liquibase variable">Liquibase</span> properties file</a>.</p>
     <p>If your connection is successful, you'll see a message like this:</p>
     <pre xml:space="preserve"><code class="language-text">4 changesets have not been applied to &lt;your_jdbc_url&gt;
+
 Liquibase command 'status' was executed successfully.</code></pre>
-    <li value="5">Inspect the SQL with the <a href="https://docs.liquibase.com/commands/update/update-sql.html" class="MCXref xref">update-sql</a>
-        command. Then make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html"
+
+<li value="5">Inspect the SQL with the <a href="https://docs.liquibase.com/commands/update/update-sql.html" class="MCXref xref">update-sql</a>
+command. Then make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html"
                                                                 class="MCXref xref">update</a> command.
-    </li>
-    <pre xml:space="preserve"><code class="language-text">liquibase update-sql --changelog-file=&lt;changelog.xml&gt;
+</li>
+<pre xml:space="preserve"><code class="language-text">liquibase update-sql --changelog-file=&lt;changelog.xml&gt;
 liquibase update --changelog-file=&lt;changelog.xml&gt;</code></pre>
-    <p>If your <code>update</code> is successful, Liquibase
-        runs each <span class="mc-variable General.changeset variable">changeset</span> and displays a summary message
-        ending with:</p>
-    <pre xml:space="preserve"><code class="language-text">Liquibase: Update has been successful.
+<p>If your <code>update</code> is successful, Liquibase
+runs each <span class="mc-variable General.changeset variable">changeset</span> and displays a summary message
+ending with:</p>
+<pre xml:space="preserve"><code class="language-text">Liquibase: Update has been successful.
 Liquibase command 'update' was executed successfully.</code></pre>
-    <li value="6">From a database UI tool, ensure that your database contains the <code>test_table</code> you added
-        along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG
-            table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK
-            table</a>.
-    </li>
+<li value="6">From a database UI tool, ensure that your database contains the <code>test_table</code> you added
+along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG
+table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK
+table</a>.
+</li>
+
 </ol>
 <p>Now you're ready to start making deployments with <span
         class="mc-variable General.Liquibase variable">Liquibase</span>!</p>

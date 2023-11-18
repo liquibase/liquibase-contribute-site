@@ -20,37 +20,40 @@ title: Cassandra Astra
 <h2>Install drivers</h2>
 <p>To use Liquibase and Cassandra on DataStax Astra, you need two JAR files: a JDBC driver and the Liquibase Cassandra extension:</p>
 <ol>
-    <li value="1">Download the <a href="https://downloads.datastax.com/#odbc-jdbc-drivers">Simba JDBC driver JAR file</a> and select <b>Simba JDBC Driver for Apache Cassandra</b> from the dropdown menu. Select the default package option unless you need a specific package. The driver downloads as a ZIP file named <code>SimbaCassandraJDBC42-x.x.x.zip</code>.</li>
-    <li value="2">Extract the <code>CassandraJDBCxx.jar</code> file and place it in the <code>liquibase/lib</code> directory.</li>
-    <li value="3">Open the Liquibase properties file and specify the driver, as follows:</li><pre><code class="language-text">driver: com.simba.cassandra.jdbc42.Driver</code></pre>
+    <li value="1">Download the latest version of <a href="https://github.com/ing-bank/cassandra-jdbc-wrapper/releases/latest">JDBC wrapper of the Java Driver for Apache Cassandra JAR file</a>.
+    </li>
+    <li value="2">Move the downloaded <code>cassandra-jdbc-wrapper-x.x.x-bundle.jar</code> file to the <code>liquibase/lib</code> directory.
+    </li>
+    <li value="3">Open the Liquibase properties file and specify the driver, as follows:</li><pre><code class="language-text">driver: com.ing.data.cassandra.jdbc.CassandraDriver</code></pre>
     <li value="4">Go to the <a href="https://github.com/liquibase/liquibase-cassandra/releases/">liquibase-cassandra</a> repository and download the latest released Liquibase extension JAR file: <code>liquibase-cassandra-version.jar</code>.</li>
 </ol>
 <p> 
 <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.
 </p><p>
-If you use Maven,  note that this database does not provide its driver JAR&#160;on a public Maven repository, so you must install a local copy and <a href="https://docs.liquibase.com/tools-integrations/maven/using-liquibase-and-maven-pom-file.html">add it as a dependency</a> to your <code>pom.xml</code> file.
+ If you use Maven,
+     <a href="https://docs.liquibase.com/tools-integrations/maven/using-liquibase-and-maven-pom-file.html">add the driver JAR as a dependency</a> to your <code>pom.xml</code> file.
 </p><pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
-    &lt;groupId&gt;com.datastax.jdbc&lt;/groupId&gt;
-    &lt;artifactId&gt;CassandraJDBC42&lt;/artifactId&gt;
-    &lt;version&gt;4.2&lt;/version&gt;
-    &lt;scope&gt;system&lt;/scope&gt;
-    &lt;systemPath&gt;${basedir}/lib/CassandraJDBC42.jar&lt;/systemPath&gt;
+    &lt;groupId&gt;com.ing.data&lt;/groupId&gt;
+    &lt;artifactId&gt;cassandra-jdbc-wrapper&lt;/artifactId&gt;
+    &lt;version&gt;4.10.2&lt;/version&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
     &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
     &lt;artifactId&gt;liquibase-cassandra&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
+    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.25.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 
-<p>You need to specify that the scope is <code>system</code> and provide the <code>systemPath</code> in <code>pom.xml</code>. In the example, the <code>${basedir}/lib</code> is the location of the driver JAR file.</p>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
     <li value="1">Ensure your Cassandra on DataStax Astra database is configured:
-<ol><li value="1">Log into your <a href="https://astra.datastax.com/">DataStax Astra account</a>. From <b>Dashboard</b>, select the needed database, and then go to the <b>Connect</b> tab. Under <b>Connect using an API</b>, select <b>Java</b> and download the <b>Connect Bundle</b> by following the link in step 1 under <b>Prerequisites</b>.</li><li value="2">Once the <code>secure-connect-&lt;dbname&gt;.zip</code> file is fully downloaded, place it  in a secure place in your file system.</li><li value="3">Unzip the <code>secure-connect-&lt;dbname&gt;.zip</code> file. Open the <code>config.json</code> file in a text editor. We will use the information from the file in the next step.</li><li value="4">Clone the <a href="https://github.com/datastax/cql-proxy">cql-proxy repository</a> to set up CQL-Proxy, which is a sidecar that enables unsupported CQL drivers to work with DataStax Astra.						<ol><li value="1">You need your <b>Astra Token</b> and <b>Astra Database ID</b> to use CQL-Proxy.</li><li value="2">Follow the steps in the repository to spin up CQL-Proxy using your command prompt. Once successfully running, you should see the following output:</li><code>{"level":"info","ts":1651012815.176512,"caller":"proxy/proxy.go:222","msg":"proxy is listening","address":"[::]:9042"}</code></ol></li></ol></li>
+<ol><li value="1">Log into your <a href="https://astra.datastax.com/">DataStax Astra account</a>. From <b>Dashboard</b>, select the needed database, and then go to the <b>Connect</b> tab. Under <b>Connect using an API</b>, select <b>Java</b> and download the <b>Connect Bundle</b> by following the link in step 1 under <b>Prerequisites</b>.</li><li value="2">Once the <code>secure-connect-&lt;dbname&gt;.zip</code> file is fully downloaded, place it  in a secure place in your file system.</li></ol></li>
     <li value="2">
-        <p>Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</p><pre xml:space="preserve"><code class="language-text">url: jdbc:cassandra://localhost:9042/test;DefaultKeyspace=test;TunableConsistency=6</code></pre>
-        <p>Replace <code>test</code> with your own keyspace name.</p>
+        <p>Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. Please specify the URL using your database's standard JDBC format:</p><pre xml:space="preserve"><code class="language-text">url: jdbc:cassandra:dbaas:///test?secureconnectbundle=/path/to/location/secure-connect-&lt;dbname&gt;.zip&user=token&password=&lt;token&gt;&compliancemode=Liquibase
+</code></pre>
+        <p>Replace <code>test</code> with your own keyspace name, the value of <code>secureconnectbunndle</code> by the real location of your secure connect bundle, and the value of <code>password</code> by your Astra DB token.</p>
     </li>
+     <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>Be careful to always specify the <code>compliancemode</code> parameter with the value <code>Liquibase</code> to avoid any unexpected behaviour when running the changelog.</p>
+    <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>For more information about the available options regarding the JDBC connection string for Astra DB, please check <a href="https://github.com/ing-bank/cassandra-jdbc-wrapper#connecting-to-dbaas">the driver documentation</a>.</p>
     <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: &lt;paste code here&gt;</code></p>
 </ol>
 <ol start="3">
@@ -80,13 +83,16 @@ If you use Maven,  note that this database does not provide its driver JAR&#160;
 &lt;/databaseChangeLog&gt;</code></pre>
 
 <a style="font-size: 18pt;">SQL example</a>
+
 <pre xml:space="preserve"><code class="language-sql">-- liquibase formatted sql
 
 -- changeset liquibase:1
 CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))</code></pre>
+
         <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>Formatted SQL <span class="mc-variable General.changelog variable">changelog</span>s generated from Liquibase versions before 4.2 might cause issues because of the lack of space after a double dash ( <code>--</code> ). To fix this, add a space after the double dash. For example: <code>--&#160;liquibase formatted sql</code> instead of <code>--liquibase formatted sql</code> and <code>--&#160;changeset myname:create-table</code> instead of <code>--changeset myname:create-table</code>.</p>
 
 <a style="font-size: 18pt;">YAML example</a>
+
 <pre xml:space="preserve"><code class="language-yaml">databaseChangeLog:
    - changeSet:
        id: 1
@@ -101,35 +107,37 @@ CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (tes
                constraints:
                    primaryKey:  true
                    nullable:  false</code></pre>
+
 <a style="font-size: 18pt;"> JSON example</a>
-    <pre><code class="language-json">{
-  "databaseChangeLog": [
-    {
-      "changeSet": {
-        "id": "1",
-        "author": "Liquibase",
-        "changes": [
-          {
-            "createTable": {
-              "tableName": "test_table",
-              "columns": [
-                {
-                  "column": {
-                    "name": "test_column",
-                    "type": "INT",
-                    "constraints": {
-                      "primaryKey": true,
-                      "nullable": false
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
+
+<pre><code class="language-json">{
+"databaseChangeLog": [
+{
+"changeSet": {
+"id": "1",
+"author": "Liquibase",
+"changes": [
+{
+"createTable": {
+"tableName": "test_table",
+"columns": [
+{
+"column": {
+"name": "test_column",
+"type": "INT",
+"constraints": {
+"primaryKey": true,
+"nullable": false
+}
+}
+}
+]
+}
+}
+]
+}
+}
+]
 }</code></pre>
 
 <li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li><pre xml:space="preserve"><code class="language-text">liquibase status --username=test --password=test --changelog-file=&lt;changelog.xml&gt;</code></pre>
