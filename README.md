@@ -34,17 +34,34 @@ The button will open a web editor for the page you are on, allowing you to make 
 It requires no local setup, but only allows you to include a single page's changes in your PR and you can't really see the final content as you work.
 That means it works well for small and/or scattered suggestions, but if you are making larger changes that cross pages and/or add significant content you will likely want to make and test the changes locally.
 
-### Edit and Test Changes Locally
+## How to Edit and Test Changes Locally
 
-Your first step will be to fork this repository and clone your copy locally. Create a branch for your changes and switch to it.
+### Clone the repo to your local machine
+1. [Download GitHub Desktop](https://desktop.github.com)
 
-#### Running the Site Locally
+2. Clone this repository to your local machine
+<img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/2bb707f0-a0b2-41cd-9f23-96bc76324b23" width="50%"/>
+
+3. Create a branch for your changes
+  - Select the "Current Branch" dropdown
+  <img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/7373c4a6-4288-446c-893a-b59ce8ebd265" width="50%"/>
+  
+  - Enter the branch name and press the "Create Branch" button
+   <img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/525f8a0d-d145-4667-ac2a-1e9c0ee7199b" width="50%"/>
+
+  - Press the "Publish branch" button
+   <img src="https://github.com/liquibase/liquibase-contribute-site/assets/5502833/21f4977d-94b0-4a6d-b475-d5fb8af65e6a" width="50%"/>
+
+4. You should be on the new branch and are ready to start making changes.
+
+### Run the Site Locally
 
 1. `cd <contribute site github folder>`
-1. Run `docker run --rm -it -p 8080:8000 -v ${PWD}:/docs $(docker build -q .)` in bash or powershell. If successful, you should see `Serving on http://0.0.0.0:8000/` in the output. 
+1. In bash or powershell, type `docker run --rm -it -p 8080:8000 -v ${PWD}:/docs $(docker build -q .)`
+1. If successful, you should see `Serving on http://0.0.0.0:8000/` in the output. 
 1. Open a browser to `http://localhost:8080` to view the site 
 
-#### Editing Content
+### Edit Content
 
 Edit the markdown files in the `docs` directory using whatever editor your prefer. Generally one with spelling and grammar check is good. Markdown syntax highlighting is helpful, but it does not need "markdown preview" support.
 
@@ -52,7 +69,7 @@ Each time you save a file, the site will automatically rebuild and refresh in yo
 
 Commit your changes and push them to your fork as you work.
 
-#### Submitting Changes
+### Submit Your Changes
 
 When you are ready for the team to review your changes, open a pull request from your fork's branch to this repository's `master` branch. 
 

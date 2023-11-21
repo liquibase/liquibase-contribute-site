@@ -1,76 +1,83 @@
 ---
 title: CosmosDB
 ---
-<h1>Using Liquibase with Cosmos DB</h1>
-<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
-<p><a href="https://azure.microsoft.com/en-us/services/cosmos-db/">Azure Cosmos DB</a> is a multi-model NoSQL&#160;database developed by Microsoft. For more information, see <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/">Azure Cosmos DB Documentation</a> and <a href="https://docs.microsoft.com/en-us/rest/api/cosmos-db/">Azure Cosmos DB: REST API Reference</a>.</p>
-<h2>Reported versions</h2>
-<ul>
-    <li>4.35.1</li>
-</ul>
-<h2>Prerequisites</h2>
-<ol>
-    <li value="1"><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html" class="MCXref xref">Introduction to Liquibase</a> – Dive into Liquibase concepts.</li>
-    <li value="2"><a href="https://docs.liquibase.com/start/install/home.html" class="MCXref xref">Install Liquibase</a> – Download Liquibase on your machine.</li>
-    <li value="3"><a href="https://docs.liquibase.com/start/home.html" class="MCXref xref">Get Started with Liquibase</a> – Learn how to use Liquibase with an example database.</li>
-    <li value="4"><a href="https://docs.liquibase.com/start/design-liquibase-project.html" class="MCXref xref">Design Your Liquibase Project</a> – Create a new <span class="mc-variable General.Liquibase variable">Liquibase</span> project folder and organize your changelogs</li>
-    <li value="5"><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html" class="MCXref xref">How to Apply Your Liquibase Pro License Key</a> – If you use <span class="mc-variable General.LBPro variable">Liquibase Pro</span>, activate your license.</li>
-</ol>
-<p>To access Cosmos DB, do one of the following:</p>
-<ul>
-    <li>Install the <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator">Azure Cosmos DB&#160;Emulator</a> locally, and <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator-export-ssl-certificates">export the Azure Cosmos DB Emulator TLS/SSL certificate</a> for use with Liquibase</li>
-    <li>Create an <a href="https://azure.microsoft.com/en-us/free/">Azure account with a subscription</a></li>
-    <li>Use&#160;<a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java?tabs=sync">Cosmos DB without an Azure subscription</a></li>
-</ul>
-<h2>Install drivers</h2>
-<p>To use Liquibase and Cosmos DB, you need several JAR files:</p>
-<a style="font-size: 18px;">List of JARs</a>
-<ul>
-    <li><a href="https://github.com/liquibase/liquibase-cosmosdb/releases">Liquibase extension for Cosmos DB</a>: <code>liquibase-cosmosdb-<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/com.azure/azure-core">Azure Core</a>: <code>azure-core-1.37.0.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/com.azure/azure-cosmos">Azure Cosmos</a>: <code>azure-cosmos-4.41.0.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-core">Dropwizard Metrics</a>: <code>metrics-core-4.2.17.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations">Jackson Annotations</a>: <code>jackson-annotations-2.14.2.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core">Jackson Core</a>: <code>jackson-core-2.14.2.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind">Jackson Databind</a>: <code>jackson-databind-2.14.2.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310">Jackson Datatype</a>: <code>jackson-datatype-jsr310-2.14.2.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-afterburner">Jackson Afterburner</a>: <code>jackson-module-afterburner-2.14.2.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.micrometer/micrometer-core">Micrometer Core</a>: <code>micrometer-core-1.10.5.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.micrometer/micrometer-observation">Micrometer Observation</a>: <code>micrometer-observation-1.10.5.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-buffer">Netty Buffer</a>: <code>netty-buffer-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-codec">Netty Codec</a>: <code>netty-codec-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-codec-dns">Netty Codec DNS</a>: <code>netty-codec-dns-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-codec-http">Netty Codec HTTP</a>: <code>netty-codec-http-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-codec-http2">Netty Codec HTTP2</a>: <code>netty-codec-http2-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-codec-socks">Netty Codec Socks</a>: <code>netty-codec-socks-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-common">Netty Common</a>: <code>netty-common-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-handler">Netty Handler</a>: <code>netty-handler-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-handler-proxy">Netty Handler Proxy</a>: <code>netty-handler-proxy-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-resolver">Netty Resolver</a>: <code>netty-resolver-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-resolver-dns">Netty Resolver DNS</a>: <code>netty-resolver-dns-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-tcnative">Netty TC Native</a>: <code>netty-tcnative-2.0.59.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-tcnative-boringssl-static">Netty TC Native SSL</a>: <code>netty-tcnative-boringssl-static-2.0.59.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-tcnative-classes">Netty TC&#160;Classes</a>: <code>netty-tcnative-classes-2.0.59.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-transport">Netty Transport</a>: <code>netty-transport-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-transport-classes-epoll">Netty Transport Classes Epoll</a>: <code>netty-transport-classes-epoll-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-transport-classes-kqueue">Netty Transport Classes Kqueue</a>: <code>netty-transport-classes-kqueue-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-transport-native-epoll">Netty Transport Native Epoll:</a> <code>netty-transport-native-epoll-4.1.90.Final-linux-x86_64.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-transport-native-kqueue">Netty Transport Native Kqueue</a>: <code>netty-transport-native-kqueue-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.netty/netty-transport-native-unix-common">Netty Transport UNIX</a>: <code>netty-transport-native-unix-common-4.1.90.Final.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams">Reactive Streams</a>: <code>reactive-streams-1.0.4.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.projectreactor/reactor-core">Reactor Core</a>: <code>reactor-core-3.5.4.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty">Reactor Netty</a>: <code>reactor-netty-1.1.5.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-core">Reactor Netty Core</a>: <code>reactor-netty-core-1.1.5.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-http">Reactor Netty HTTP</a>: <code>reactor-netty-http-1.1.5.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/org.slf4j/slf4j-api">SLF4J</a>: <code>slf4j-api-2.0.6.jar</code></li>
-    <li><a href="https://mvnrepository.com/artifact/org.slf4j/slf4j-simple">SLF4J Simple</a>: <code>slf4j-simple-2.0.6.jar</code></li>
-</ul>
+# Using Liquibase with Cosmos DB
 
-<p>You can use this BAT script to download the files quickly:</p>
+<a href="https://azure.microsoft.com/en-us/services/cosmos-db/">Azure Cosmos DB</a> is a multi-model NoSQL database developed by Microsoft. For more information, see <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/">Azure Cosmos DB Documentation</a> and <a href="https://docs.microsoft.com/en-us/rest/api/cosmos-db/">Azure Cosmos DB: REST API Reference</a>.
 
-<a style="font-size: 18px;">get_dependencies.bat</a>
-<pre xml:space="preserve"><code class="language-shell">setlocal
-SET LIQUIBASE_COSMOSDB="<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>"
+!!! note
+    This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the Liquibase support team. Best-effort support is provided through our community forums.
+
+    For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>
+
+## Reported versions
+- 4.35.1
+
+## Prerequisites
+1. [Introduction to Liquibase](https://docs.liquibase.com/concepts/introduction-to-liquibase.html) – Dive into Liquibase concepts.
+1. [Install Liquibase](https://docs.liquibase.com/start/install/home.html) – Download Liquibase on your machine.
+1. [How to Apply Your Liquibase Pro License Key](https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html) – If you use Liquibase Pro, activate your license.
+
+To access Cosmos DB, do one of the following:
+
+- Install the <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator">Azure Cosmos DB&#160;Emulator</a> locally, and <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator-export-ssl-certificates">export the Azure Cosmos DB Emulator TLS/SSL certificate</a> for use with Liquibase
+- Create an <a href="https://azure.microsoft.com/en-us/free/">Azure account with a subscription</a>
+- Use <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java?tabs=sync">Cosmos DB without an Azure subscription</a>
+
+## Install drivers
+
+### All Users
+
+#### List of JARs
+
+To use Liquibase and Cosmos DB, you need several JAR files:
+
+* [Liquibase extension for Cosmos DB](https://github.com/liquibase/liquibase-cosmosdb/releases): `liquibase-cosmosdb-4.20.0.jar`
+* [Azure Core](https://mvnrepository.com/artifact/com.azure/azure-core): `azure-core-1.37.0.jar`
+* [Azure Cosmos](https://mvnrepository.com/artifact/com.azure/azure-cosmos): `azure-cosmos-4.41.0.jar`
+* [Dropwizard Metrics](https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-core): `metrics-core-4.2.17.jar`
+* [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations): `jackson-annotations-2.14.2.jar`
+* [Jackson Core](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core): `jackson-core-2.14.2.jar`
+* [Jackson Databind](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind): `jackson-databind-2.14.2.jar`
+* [Jackson Datatype](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310): `jackson-datatype-jsr310-2.14.2.jar`
+* [Jackson Afterburner](https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-afterburner): `jackson-module-afterburner-2.14.2.jar`
+* [Micrometer Core](https://mvnrepository.com/artifact/io.micrometer/micrometer-core): `micrometer-core-1.10.5.jar`
+* [Micrometer Observation](https://mvnrepository.com/artifact/io.micrometer/micrometer-observation): `micrometer-observation-1.10.5.jar`
+* [Netty Buffer](https://mvnrepository.com/artifact/io.netty/netty-buffer): `netty-buffer-4.1.90.Final.jar`
+* [Netty Codec](https://mvnrepository.com/artifact/io.netty/netty-codec): `netty-codec-4.1.90.Final.jar`
+* [Netty Codec DNS](https://mvnrepository.com/artifact/io.netty/netty-codec-dns): `netty-codec-dns-4.1.90.Final.jar`
+* [Netty Codec HTTP](https://mvnrepository.com/artifact/io.netty/netty-codec-http): `netty-codec-http-4.1.90.Final.jar`
+* [Netty Codec HTTP2](https://mvnrepository.com/artifact/io.netty/netty-codec-http2): `netty-codec-http2-4.1.90.Final.jar`
+* [Netty Codec Socks](https://mvnrepository.com/artifact/io.netty/netty-codec-socks): `netty-codec-socks-4.1.90.Final.jar`
+* [Netty Common](https://mvnrepository.com/artifact/io.netty/netty-common): `netty-common-4.1.90.Final.jar`
+* [Netty Handler](https://mvnrepository.com/artifact/io.netty/netty-handler): `netty-handler-4.1.90.Final.jar`
+* [Netty Handler Proxy](https://mvnrepository.com/artifact/io.netty/netty-handler-proxy): `netty-handler-proxy-4.1.90.Final.jar`
+* [Netty Resolver](https://mvnrepository.com/artifact/io.netty/netty-resolver): `netty-resolver-4.1.90.Final.jar`
+* [Netty Resolver DNS](https://mvnrepository.com/artifact/io.netty/netty-resolver-dns): `netty-resolver-dns-4.1.90.Final.jar`
+* [Netty TC Native](https://mvnrepository.com/artifact/io.netty/netty-tcnative): `netty-tcnative-2.0.59.Final.jar`
+* [Netty TC Native SSL](https://mvnrepository.com/artifact/io.netty/netty-tcnative-boringssl-static): `netty-tcnative-boringssl-static-2.0.59.Final.jar`
+* [Netty TC Classes](https://mvnrepository.com/artifact/io.netty/netty-tcnative-classes): `netty-tcnative-classes-2.0.59.Final.jar`
+* [Netty Transport](https://mvnrepository.com/artifact/io.netty/netty-transport): `netty-transport-4.1.90.Final.jar`
+* [Netty Transport Classes Epoll](https://mvnrepository.com/artifact/io.netty/netty-transport-classes-epoll): `netty-transport-classes-epoll-4.1.90.Final.jar`
+* [Netty Transport Classes Kqueue](https://mvnrepository.com/artifact/io.netty/netty-transport-classes-kqueue): `netty-transport-classes-kqueue-4.1.90.Final.jar`
+* [Netty Transport Native Epoll:](https://mvnrepository.com/artifact/io.netty/netty-transport-native-epoll) `netty-transport-native-epoll-4.1.90.Final-linux-x86_64.jar`
+* [Netty Transport Native Kqueue](https://mvnrepository.com/artifact/io.netty/netty-transport-native-kqueue): `netty-transport-native-kqueue-4.1.90.Final.jar`
+* [Netty Transport UNIX](https://mvnrepository.com/artifact/io.netty/netty-transport-native-unix-common): `netty-transport-native-unix-common-4.1.90.Final.jar`
+* [Reactive Streams](https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams): `reactive-streams-1.0.4.jar`
+* [Reactor Core](https://mvnrepository.com/artifact/io.projectreactor/reactor-core): `reactor-core-3.5.4.jar`
+* [Reactor Netty](https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty): `reactor-netty-1.1.5.jar`
+* [Reactor Netty Core](https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-core): `reactor-netty-core-1.1.5.jar`
+* [Reactor Netty HTTP](https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-http): `reactor-netty-http-1.1.5.jar`
+* [SLF4J](https://mvnrepository.com/artifact/org.slf4j/slf4j-api): `slf4j-api-2.0.6.jar`
+* [SLF4J Simple](https://mvnrepository.com/artifact/org.slf4j/slf4j-simple): `slf4j-simple-2.0.6.jar`
+
+#### get_dependencies.bat
+
+You can use this BAT script to download the files quickly:
+
+``` shell
+setlocal
+SET LIQUIBASE_COSMOSDB="{{liquibase.current_version}}"
 SET AZURE_COSMOS_VERSION="4.41.0"
 SET AZURE_CORE_VERSION="1.37.0"
 SET JACKSON_CORE="2.14.2"
@@ -145,343 +152,408 @@ curl -L  https://repo1.maven.org/maven2/io/netty/netty-transport-classes-epoll/%
 curl -L  https://repo1.maven.org/maven2/io/netty/netty-transport-native-kqueue/%NETTY_TRANSPORT%.Final/netty-transport-native-kqueue-%NETTY_TRANSPORT%.Final.jar --output netty-transport-native-kqueue-%NETTY_TRANSPORT%.Final.jar
 curl -L  https://repo1.maven.org/maven2/io/micrometer/micrometer-observation/%MICROMETER_OBSERVATION%/micrometer-observation-%MICROMETER_OBSERVATION%.jar --output micrometer-observation-%MICROMETER_OBSERVATION%.jar
 curl -L  https://repo1.maven.org/maven2/io/micrometer/micrometer-commons/%MICROMETER_COMMONS%/micrometer-commons-%MICROMETER_COMMONS%.jar --output micrometer-commons-%MICROMETER_COMMONS%.jar
-endlocal</code></pre>
+endlocal
+```
 
-<p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p>
-<p>If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file.</p>
-<a style="font-size: 18px;"><code>pom.xml</code> file</a>
-<pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
-    &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
-    &lt;artifactId&gt;liquibase-cosmosdb&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.azure&lt;/groupId&gt;
-    &lt;artifactId&gt;azure-core&lt;/artifactId&gt;
-    &lt;version&gt;1.37.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.azure&lt;/groupId&gt;
-    &lt;artifactId&gt;azure-cosmos&lt;/artifactId&gt;
-    &lt;version&gt;4.41.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.dropwizard.metrics&lt;/groupId&gt;
-    &lt;artifactId&gt;metrics-core&lt;/artifactId&gt;
-    &lt;version&gt;4.2.17&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-    &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;
-    &lt;version&gt;2.14.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-    &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
-    &lt;version&gt;2.14.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-    &lt;version&gt;2.14.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.fasterxml.jackson.datatype&lt;/groupId&gt;
-    &lt;artifactId&gt;jackson-datatype-jsr310&lt;/artifactId&gt;
-    &lt;version&gt;2.14.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;
-    &lt;artifactId&gt;jackson-module-afterburner&lt;/artifactId&gt;
-    &lt;version&gt;2.14.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-    &lt;artifactId&gt;micrometer-core&lt;/artifactId&gt;
-    &lt;version&gt;1.10.5&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-    &lt;artifactId&gt;micrometer-observation&lt;/artifactId&gt;
-    &lt;version&gt;1.10.5&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-buffer&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-codec&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-codec-dns&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-codec-http&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-codec-http2&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-codec-socks&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-common&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-handler&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-handler-proxy&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-resolver&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-resolver-dns&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-tcnative&lt;/artifactId&gt;
-    &lt;version&gt;2.0.59.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-tcnative-boringssl-static&lt;/artifactId&gt;
-    &lt;version&gt;2.0.59.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-transport&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-transport-classes-epoll&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-transport-classes-kqueue&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-transport-native-epoll&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-transport-native-kqueue&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;netty-transport-native-unix-common&lt;/artifactId&gt;
-    &lt;version&gt;4.1.90.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.reactivestreams&lt;/groupId&gt;
-    &lt;artifactId&gt;reactive-streams&lt;/artifactId&gt;
-    &lt;version&gt;1.0.4&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.projectreactor&lt;/groupId&gt;
-    &lt;artifactId&gt;reactor-core&lt;/artifactId&gt;
-    &lt;version&gt;3.5.4&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.projectreactor.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;reactor-netty&lt;/artifactId&gt;
-    &lt;version&gt;1.1.5&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.projectreactor.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;reactor-netty-core&lt;/artifactId&gt;
-    &lt;version&gt;1.1.5&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.projectreactor.netty&lt;/groupId&gt;
-    &lt;artifactId&gt;reactor-netty-http&lt;/artifactId&gt;
-    &lt;version&gt;1.1.5&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
-    &lt;version&gt;2.0.6&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;slf4j-simple&lt;/artifactId&gt;
-    &lt;version&gt;2.0.6&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+<a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the `liquibase/lib` directory.
 
-<h2 id="test-your-connection">Test your connection</h2>
-<ol>
-    <li value="1">Ensure your Cosmos&#160;DB&#160;database is configured. See <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java">Quickstart: Build a Java app to manage Azure Cosmos DB SQL API data</a> for more information.</li>
-    <li value="2">
-        <p>Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:</p>
-    </li><pre xml:space="preserve"><code class="language-text">url: jdbc:cosmosdb://&lt;host&gt;:&lt;accountKey&gt;@&lt;host&gt;:&lt;port&gt;/&lt;databaseName&gt;?&lt;Query Parameters&gt;</code></pre>
-    <table>
-        <thead>
-            <tr>
-                <th>Type</th>
-                <th>Example</th>
-                <th>Notes</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Azure Cosmos DB Emulator</td>
-                <td><pre xml:space="preserve"><code class="language-text">jdbc:cosmosdb://
-localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU
-5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
-@localhost:8080/testdb1</code></pre>
-                </td>
-                <td>This example shows the default account key, formatted for readability. For more information, see <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator">Install and use the Azure Cosmos DB Emulator for local development and testing</a>.</td>
-            </tr>
-            <tr>
-                <td>Azure Cosmos DB</td>
-                <td><pre xml:space="preserve"><code class="language-text">jdbc:cosmosdb://
-AccountEndpoint=https://&lt;cosmosdb-account-name&gt;.documents.azure.com:443;
-AccountKey=&lt;accountKey&gt;;</code></pre>
-                </td>
-                <td>Replace <code>&lt;cosmosdb-account-name&gt;</code>&#160;with the name you chose for your Azure Cosmos DB. Replace <code>&lt;accountKey&gt;</code> with your private account key. For more information, see <a href="https://docs.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-cosmosdb-portal">Tutorial: Connect to an Azure Cosmos account using an Azure Private Endpoint</a>.</td>
-            </tr>
-        </tbody>
-    </table>
-    <p>For more information, see <a href="https://github.com/liquibase/liquibase-cosmosdb#adjust-connection-string">GitHub:&#160;liquibase-cosmosdb § Adjust connection string</a>.</p>
-    <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: &lt;paste code here&gt;</code></p>
-</ol>
-<ol start="3">
-    <li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>, <code>.sql</code>, <code>.json</code>, or <code>.yaml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.</li>
-    <p>If you already created a <span class="mc-variable General.changelog variable">changelog</span> using the <code><a href="https://docs.liquibase.com/commands/init/project.html" class="MCXref xref">init project</a></code> command, you can use that instead of creating a new file. When adding onto an existing <span class="mc-variable General.changelog variable">changelog</span>, be sure to only add the <span class="mc-variable General.changeset variable">changeset</span> and to not duplicate the <span class="mc-variable General.changelog variable">changelog</span> header.</p>
-    <a style="font-size: 18pt;">XML example</a>
-        <code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<code>&lt;databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd"&gt;</code>
+### Maven Users (additional step)
 
-    &lt;changeSet id="1" author="Liquibase"&gt;
-        &lt;createTable tableName="test_table"&gt;
-            &lt;column name="test_id" type="int"&gt;
-                &lt;constraints primaryKey="true"/&gt;
-            &lt;/column&gt;
-            &lt;column name="test_column" type="varchar"/&gt;
-        &lt;/createTable&gt;
-    &lt;/changeSet&gt;
+If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR as a dependency</a> in your `pom.xml` file.
 
-&lt;/databaseChangeLog&gt;</code></pre>
+#### Maven pom.xml file
+```
+<dependency>
+	<groupId>org.liquibase.ext</groupId>
+	<artifactId>liquibase-cosmosdb</artifactId>
+	<version>{{liquibase.current_version}}</version>
+</dependency>
+<dependency>
+	<groupId>com.azure</groupId>
+	<artifactId>azure-core</artifactId>
+	<version>1.37.0</version>
+</dependency>
+<dependency>
+	<groupId>com.azure</groupId>
+	<artifactId>azure-cosmos</artifactId>
+	<version>4.41.0</version>
+</dependency>
+<dependency>
+	<groupId>io.dropwizard.metrics</groupId>
+	<artifactId>metrics-core</artifactId>
+	<version>4.2.17</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-annotations</artifactId>
+	<version>2.14.2</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-core</artifactId>
+	<version>2.14.2</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-databind</artifactId>
+	<version>2.14.2</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.datatype</groupId>
+	<artifactId>jackson-datatype-jsr310</artifactId>
+	<version>2.14.2</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.module</groupId>
+	<artifactId>jackson-module-afterburner</artifactId>
+	<version>2.14.2</version>
+</dependency>
+<dependency>
+	<groupId>io.micrometer</groupId>
+	<artifactId>micrometer-core</artifactId>
+	<version>1.10.5</version>
+</dependency>
+<dependency>
+	<groupId>io.micrometer</groupId>
+	<artifactId>micrometer-observation</artifactId>
+	<version>1.10.5</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-buffer</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-codec</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-codec-dns</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-codec-http</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-codec-http2</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-codec-socks</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-common</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-handler</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-handler-proxy</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-resolver</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-resolver-dns</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-tcnative</artifactId>
+	<version>2.0.59.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-tcnative-boringssl-static</artifactId>
+	<version>2.0.59.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-transport</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-transport-classes-epoll</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-transport-classes-kqueue</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-transport-native-epoll</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-transport-native-kqueue</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-transport-native-unix-common</artifactId>
+	<version>4.1.90.Final</version>
+</dependency>
+<dependency>
+	<groupId>org.reactivestreams</groupId>
+	<artifactId>reactive-streams</artifactId>
+	<version>1.0.4</version>
+</dependency>
+<dependency>
+	<groupId>io.projectreactor</groupId>
+	<artifactId>reactor-core</artifactId>
+	<version>3.5.4</version>
+</dependency>
+<dependency>
+	<groupId>io.projectreactor.netty</groupId>
+	<artifactId>reactor-netty</artifactId>
+	<version>1.1.5</version>
+</dependency>
+<dependency>
+	<groupId>io.projectreactor.netty</groupId>
+	<artifactId>reactor-netty-core</artifactId>
+	<version>1.1.5</version>
+</dependency>
+<dependency>
+	<groupId>io.projectreactor.netty</groupId>
+	<artifactId>reactor-netty-http</artifactId>
+	<version>1.1.5</version>
+</dependency>
+<dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-api</artifactId>
+	<version>2.0.6</version>
+</dependency>
+<dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-simple</artifactId>
+	<version>2.0.6</version>
+</dependency>
+```
 
-<a style="font-size: 18pt;">SQL example</a>
-<pre xml:space="preserve"><code class="language-sql">-- liquibase formatted sql
+## Database connection
 
--- changeset liquibase:1
-CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))</code></pre>
-                                                    <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>Formatted SQL <span class="mc-variable General.changelog variable">changelog</span>s generated from Liquibase versions before 4.2 might cause issues because of the lack of space after a double dash ( <code>--</code> ). To fix this, add a space after the double dash. For example: <code>--&#160;liquibase formatted sql</code> instead of <code>--liquibase formatted sql</code> and <code>--&#160;changeset myname:create-table</code> instead of <code>--changeset myname:create-table</code>.</p>
+### Configure connection
 
-<a style="font-size: 18pt;">YAML example</a>
-<pre xml:space="preserve"><code class="language-yaml">databaseChangeLog:
-   - changeSet:
-       id: 1
-       author: Liquibase
-       changes:
-       - createTable:
-           tableName: test_table
-           columns:
-           - column:
-               name: test_column
-               type: INT
-               constraints:
-                   primaryKey:  true
-                   nullable:  false</code></pre>
+1. Ensure your Cosmos DB database is configured. See <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java">Quickstart: Build a Java app to manage Azure Cosmos DB SQL API data</a> for more information.
 
-<a style="font-size: 18pt;">JSON example</a>
-<pre><code class="language-json">{
-  "databaseChangeLog": [
-    {
-      "changeSet": {
-        "id": "1",
-        "author": "Liquibase",
-        "changes": [
+1. Specify the database URL in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">`liquibase.properties`</a> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:
+
+    Connection String Examples
+
+    ===+ "Azure Cosmos DB"
+
+          Syntax
+
+          ```
+          cosmosdb://<cosmosdb-account-name>.documents.azure.com:<AccountKey>@<cosmosdb-account-name>.documents.azure.com:<port>/<database>
+          ```
+
+          Example
+
+          ```
+          url: cosmosdb://amalik.documents.azure.com:Pza0RV29y...CDbOjTZjg==@amalik.documents.azure.com:443/SampleDB
+          ```
+
+          Replace `<cosmosdb-account-name>` with the name you chose for your Azure Cosmos DB. 
+          Replace `<accountKey>` with your private account key. 
+          
+          For more information, see <a href="https://docs.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-cosmosdb-portal">Tutorial: Connect to an Azure Cosmos account using an Azure Private Endpoint</a>.
+          ---
+
+    === "Azure Cosmos DB Emulator"
+
+          Syntax
+
+          ```
+          cosmosdb://AccountEndpoint=https://<cosmosdb-account-name>.documents.azure.com:443;AccountKey=<accountKey>;
+          ```
+
+          Example
+
+          ```
+          url: cosmosdb://AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R...IZnqyMsEcaGQy67XIw/Jw==;
+          ```
+
+          This example shows the default account key, formatted for readability. 
+          For more information, see <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator">Install and use the Azure Cosmos DB Emulator for local development and testing</a>.
+          ---
+
+    For more information, see <a href="https://github.com/liquibase/liquibase-cosmosdb#adjust-connection-string">GitHub: liquibase-cosmosdb § Adjust connection string</a>.
+
+1. (optional) Enable Liquibase Pro capabilities
+
+    To apply a [Liquibase Pro key](https://www.liquibase.com/trial) to your project, add the following property to the Liquibase properties file:
+    
+    ```
+    liquibase.licenseKey: <paste key here>
+    ```
+    
+### Test connection
+
+1. Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>.
+
+    If you already created a changelog using the <a href="https://docs.liquibase.com/commands/init/project.html">`init project`</a> command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
+      
+    === "XML example"
+          ``` xml
+          <?xml version="1.0" encoding="UTF-8"?>
+          <databaseChangeLog
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+            xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+            xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+              <changeSet id="1" author="Liquibase">
+                  <createTable tableName="test_table">
+                      <column name="test_id" type="int">
+                          <constraints primaryKey="true"/>
+                      </column>
+                      <column name="test_column" type="varchar"/>
+                  </createTable>
+              </changeSet>
+
+          </databaseChangeLog>
+          ```
+          ---
+        
+    === "SQL example"
+          ``` sql
+          -- liquibase formatted sql
+
+          -- changeset liquibase:1
+          CREATE TABLE test_table
+          (
+            test_id INT, 
+            test_column VARCHAR(255), 
+            PRIMARY KEY (test_id)
+          )
+          ```
+          ---
+        
+    === "YAML example"
+          ```  yaml
+          databaseChangeLog:
+             - changeSet:
+                 id: 1
+                 author: Liquibase
+                 changes:
+                 - createTable:
+                     tableName: test_table
+                     columns:
+                     - column:
+                         name: test_column
+                         type: INT
+                         constraints:
+                             primaryKey:  true
+                             nullable:  false
+          ```
+          ---
+        
+    === "JSON example"
+          ``` json
           {
-            "createTable": {
-              "tableName": "test_table",
-              "columns": [
-                {
-                  "column": {
-                    "name": "test_column",
-                    "type": "INT",
-                    "constraints": {
-                      "primaryKey": true,
-                      "nullable": false
+            "databaseChangeLog": [
+              {
+                "changeSet": {
+                  "id": "1",
+                  "author": "Liquibase",
+                  "changes": [
+                    {
+                      "createTable": {
+                        "tableName": "test_table",
+                        "columns": [
+                          {
+                            "column": {
+                              "name": "test_column",
+                              "type": "INT",
+                              "constraints": {
+                                "primaryKey": true,
+                                "nullable": false
+                              }
+                            }
+                          }
+                        ]
+                      }
                     }
-                  }
+                  ]
                 }
-              ]
-            }
+              }
+            ]
           }
-        ]
-      }
-    }
-  ]
-}</code></pre>
+          ```
+          ---
 
-    <li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li><pre xml:space="preserve"><code class="language-text">liquibase status --username=test --password=test --changelog-file=&lt;changelog.xml&gt;</code></pre>
-    <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>You can specify arguments in the CLI or keep them in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">Liquibase properties file</a>.</p>
-    <p>If your connection is successful, you'll see a message like this:</p><pre xml:space="preserve"><code class="language-text">4 changesets have not been applied to &lt;your_jdbc_url&gt;
-Liquibase command 'status' was executed successfully.</code></pre>
-    <li value="5">Inspect the SQL with  the <a href="https://docs.liquibase.com/commands/update/update-sql.html" class="MCXref xref">update-sql</a> command. Then make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li><pre xml:space="preserve"><code class="language-text">liquibase update-sql --changelog-file=&lt;changelog.xml&gt;
-liquibase update --changelog-file=&lt;changelog.xml&gt;</code></pre>
-    <p>If your <code>update</code> is successful, Liquibase runs each <span class="mc-variable General.changeset variable">changeset</span> and displays a summary message ending with:</p><pre xml:space="preserve"><code class="language-text">Liquibase: Update has been successful.
-Liquibase command 'update' was executed successfully.</code></pre>
-    <li value="6">From a database UI tool, ensure that your database contains the <code>test_table</code> you added along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK table</a>.</li>
-</ol>
-<p>Now you're ready to start making deployments with Liquibase!</p>
-<h2>Related links</h2>
-<ul>
-    <li><a href="https://docs.liquibase.com/change-types/home.html" class="MCXref xref">Change Types</a>
-    </li>
-    <li><a href="https://docs.liquibase.com/commands/home.html" class="MCXref xref">Liquibase Commands</a>
-    </li>
-    <li><a href="https://docs.microsoft.com/en-us/azure/cosmos-db/">Azure Cosmos DB&#160;Documentation</a>
-    </li>
-    <li><a href="https://docs.microsoft.com/en-us/rest/api/cosmos-db/">Azure Cosmos DB: REST API Reference</a>
-    </li>
-    <li><a href="https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator">Install and use the Azure Cosmos DB Emulator for local development and testing</a>
-    </li>
-    <li><a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java">Quickstart: Build a Java app to manage Azure Cosmos DB SQL API data</a>
-    </li>
-    <li><a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-sdk-java-v4">Azure Cosmos DB Java SDK v4 for Core (SQL) API: release notes and resources</a>
-    </li>
-    <li><a href="https://docs.microsoft.com/en-us/rest/api/cosmos-db/cosmosdb-resource-uri-syntax-for-rest">Azure Cosmos DB Resource URI Syntax for REST</a>
-    </li>
-    <li><a href="https://docs.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-cosmosdb-portal">Tutorial: Connect to an Azure Cosmos account using an Azure Private Endpoint</a>
-    </li>
-</ul>
+1. Navigate to your project folder in the CLI and run the Liquibase <a href="https://docs.liquibase.com/commands/change-tracking/status.html">status</a> command to see whether the connection is successful:
+
+    ```
+    liquibase status --username=test --password=test --changelog-file=<changelog.xml>
+    ```
+
+    !!! note
+        You can specify arguments in the CLI or keep them in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">Liquibase properties file</a>.
+        
+    If your connection is successful, you'll see a message like this:
+
+    ```
+    4 changesets have not been applied to <your_jdbc_url>
+    Liquibase command 'status' was executed successfully.
+    ```
+
+1. Inspect the SQL with  the <a href="https://docs.liquibase.com/commands/update/update-sql.html">update-sql</a> command. 
+    ```
+    liquibase update-sql --changelog-file=<changelog.xml>
+    ```
+    
+    Then make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html">update</a> command.
+    
+    ```
+    liquibase update --changelog-file=<changelog.xml>
+    ```
+    
+    If your `update` is successful, Liquibase runs each changeset and displays a summary message ending with:
+    
+    ```
+    Liquibase: Update has been successful.
+    Liquibase command 'update' was executed successfully.
+    ```
+
+1. From a database UI tool, ensure that your database contains the <code>test_table</code> you added along with the <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html" class="MCXref xref">DATABASECHANGELOG table</a> and <a href="https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html" class="MCXref xref">DATABASECHANGELOGLOCK table</a>.</li>
+
+
+Now you're ready to start making deployments with Liquibase!
+
+## Related links
+
+*   [Change Types](https://docs.liquibase.com/change-types/home.html)
+*   [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
+*   [Azure Cosmos DB Documentation](https://docs.microsoft.com/en-us/azure/cosmos-db/)
+*   [Azure Cosmos DB: REST API Reference](https://docs.microsoft.com/en-us/rest/api/cosmos-db/)
+*   [Install and use the Azure Cosmos DB Emulator for local development and testing](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator)
+*   [Quickstart: Build a Java app to manage Azure Cosmos DB SQL API data](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java)
+*   [Azure Cosmos DB Java SDK v4 for Core (SQL) API: release notes and resources](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-sdk-java-v4)
+*   [Azure Cosmos DB Resource URI Syntax for REST](https://docs.microsoft.com/en-us/rest/api/cosmos-db/cosmosdb-resource-uri-syntax-for-rest)
+*   [Tutorial: Connect to an Azure Cosmos account using an Azure Private Endpoint](https://docs.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-cosmosdb-portal)
