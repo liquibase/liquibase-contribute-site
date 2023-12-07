@@ -9,8 +9,7 @@ title: DataStax Astra DB
 
 ## Supported database versions
 
-*   4.X
-*   3.11.X
+* DataStax Enterprise (5.0+)
 
 --8<-- "database-tutorial-prerequisites.md"
 
@@ -84,7 +83,7 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
     For example, using the dedicated protocol `jdbc:cassandra:dbaas:`
 
     ```
-    url: jdbc:cassandra:dbaas:///<keyspace>?compliancemode=Liquibase&consistency=LOCAL_QUORUM&user=<my_user>&password=<my_password>&secureconnectbundle=</path/to/location/secure-connect-bundle-cluster.zip>
+    url: jdbc:cassandra:dbaas:///<keyspace>?compliancemode=Liquibase&consistency=LOCAL_QUORUM&user=<user_name>&password=<password>&secureconnectbundle=</path/to/location/secure-connect-bundle-cluster.zip>
     ```
     
     !!! note

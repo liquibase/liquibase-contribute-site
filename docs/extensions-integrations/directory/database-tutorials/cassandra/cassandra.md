@@ -15,7 +15,6 @@ For more information, see the [Apache Cassandra](https://cassandra.apache.org) p
 The extension's JDBC wrapper uses the Java Driver for Apache Cassandra® 4.4.0 or greater which is designed for
 
 * Apache Cassandra® 2.1+
-* DataStax Enterprise (5.0+)
 
 It will throw "unsupported feature" exceptions if used against an older version of Cassandra cluster.
 
@@ -102,7 +101,7 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
 1.  Specify the database JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
 
     ```
-    url: jdbc:cassandra://host1[:port1][--host2[:port2]...--hostN[:portN]]/<keyspace>[?compliancemode=Liquibase&localdatacenter=<DC1>]
+    url: jdbc:cassandra://host1[:port1][--host2[:port2]...--hostN[:portN]]/<keyspace>[?compliancemode=Liquibase&localdatacenter=<datacenter_name>]
     ```
  
     !!! note
