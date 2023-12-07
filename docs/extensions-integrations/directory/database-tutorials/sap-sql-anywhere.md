@@ -4,7 +4,7 @@ title: SAP SQL Anywhere
 
 <h1> Using Liquibase with SAP SQL Anywhere</h1>
 <p><a href="https://www.sap.com/products/sql-anywhere.html">SAP SQL Anywhere</a> (formerly Sybase SQL Anywhere/Sybase ASA) is a relational database management system. For more information, see <a href="https://help.sap.com/docs/SAP_SQL_Anywhere">SAP SQL Anywhere Documentation</a>.</p>
-<h2>Supported versions</h2>
+<h2>Supported database versions</h2>
 <ul>
     <li>17.0</li>
 </ul>

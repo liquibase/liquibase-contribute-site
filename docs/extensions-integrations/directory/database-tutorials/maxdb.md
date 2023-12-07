@@ -4,7 +4,7 @@ title: MaxDB
 
 <h1>Using Liquibase with MaxDB</h1>
 <p><a href="https://maxdb.sap.com/">SAP MaxDB</a> is a relational database management system  that was developed by SAP SE. For more information, see <a href="https://help.sap.com/docs/SAP_MAXDB">SAP MaxDB Documentation</a>.</p>
-<h2>Supported versions</h2>
+<h2>Supported database versions</h2>
 <ul>
     <li>7.9.10.X</li>
 </ul>

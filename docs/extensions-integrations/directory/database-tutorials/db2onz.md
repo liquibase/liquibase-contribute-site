@@ -4,7 +4,7 @@ title: DB2 on z/OS
 <h1 id="db2-on-zos-tutorial">Using Liquibase with DB2 on z/OS</h1>
 <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
 <p><a href="https://www.ibm.com/docs/en/db2-for-zos">DB2 on z/OS</a> is a relational database management system that runs on the mainframe. For more information, see the <a href="https://www.ibm.com/docs/en/db2-for-zos/13?topic=getting-started-db2-zos">DB2 for z/OS documentation page</a>.</p>
-<h2>Reported versions</h2>
+<h2>Supported database versions</h2>
 <ul>
     <li>11.5.7+</li>
 </ul>

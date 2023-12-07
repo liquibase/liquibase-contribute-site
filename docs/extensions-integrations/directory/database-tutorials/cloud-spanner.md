@@ -6,7 +6,7 @@ title: Cloud Spanner
 <p><a href="https://cloud.google.com/spanner">Cloud Spanner</a> is a fully managed relational database with unlimited scale and strong consistency. It optimizes performance by automatically sharding the data based on request load and size of the data.</p>
 <p>You can use the <a href="https://github.com/cloudspannerecosystem/liquibase-spanner">Cloud Spanner Liquibase Extension</a> to manage database schema changes with Liquibase. With the Cloud Spanner Liquibase extension, you can enable Liquibase to target Cloud Spanner. All Cloud Spanner features, with the exception of some <a href="https://github.com/cloudspannerecosystem/liquibase-spanner/blob/master/limitations.md">limitations</a>, are supported.</p>
 <p>Additionally, the example <a href="https://github.com/cloudspannerecosystem/liquibase-spanner/blob/master/example/changelog.yaml">changelog.yaml</a> included with the Cloud Spanner Liquibase extension demonstrates Liquibase features and how to use them with Cloud Spanner.</p>
-<h2>Supported versions</h2>
+<h2>Supported database versions</h2>
 <ul>
     <li>2.7.3</li>
 </ul>
