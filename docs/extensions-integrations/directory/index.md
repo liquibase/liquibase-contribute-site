@@ -10,7 +10,7 @@ For a list of publicly available extensions and integrations, see:
 
 ## Available Extensions
 
-- [Community-maintained Databases & Tutorials](database-tutorials/)
+- [Community-maintained Databases & Tutorials](database-tutorials/index.md)
 - [Database Extension Repositories](database-support.md)
 - [Additional Extensions (non-database)](functionality.md)
 
