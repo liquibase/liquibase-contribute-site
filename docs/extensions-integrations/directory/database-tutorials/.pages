@@ -1,1 +1,5 @@
 order_by: title
+
+nav:
+  - index.md
+  - ...
