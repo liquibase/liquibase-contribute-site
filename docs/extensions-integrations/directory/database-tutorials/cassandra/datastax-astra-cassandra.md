@@ -72,7 +72,9 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
 
 ### Configure connection
 
-1.  Specify the database JDBC URL in the `[liquibase.properties](https://docs.liquibase.com/concepts/connections/creating-config-properties.html)` file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
+1.  Specify the database JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
+
+    To configure the JDBC URL, you will need the following information:
 
     - `secureconnectbundle`: the fully qualified path of the cloud secure connect bundle file
     - `keyspace`: the keyspace to connect to
@@ -82,7 +84,7 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
     For example, using the dedicated protocol `jdbc:cassandra:dbaas:`
 
     ```
-    jdbc:cassandra:dbaas:///<keyspace>?consistency=LOCAL_QUORUM&user=<my_user>&password=<my_password>&secureconnectbundle=</path/to/location/secure-connect-bundle-cluster.zip>
+    url: jdbc:cassandra:dbaas:///<keyspace>?compliancemode=Liquibase&consistency=LOCAL_QUORUM&user=<my_user>&password=<my_password>&secureconnectbundle=</path/to/location/secure-connect-bundle-cluster.zip>
     ```
     
     !!! note
@@ -91,131 +93,6 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
         For further information about DataStax Astra DB connection strings and connecting to DBaaS, see the [DataStax Astra DB and DBaaS cloud documentation](https://github.com/ing-bank/cassandra-jdbc-wrapper/wiki/JDBC-driver-and-connection-string#connection-to-cloud-databases-dbaas).
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
-
-2.  Specify the database URL in the `[liquibase.properties](https://docs.liquibase.com/concepts/connections/creating-config-properties.html)` file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format:
-    
-        url: jdbc:cassandra://localhost:9042/test;DefaultKeyspace=test;TunableConsistency=6
-    
-    Replace `test` with your own keyspace name.
-    
-
-**Tip:** To apply a Liquibase Pro key to your project, add the following property to the Liquibase properties file: `licenseKey: <paste code here>`
-
-3.  Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.html).
-
-If you already created a changelog using the `[init project](https://docs.liquibase.com/commands/init/project.html)` command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
-
-XML example
-``` xml
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-
-    <changeSet id="1" author="Liquibase">
-        <createTable tableName="test_table">
-            <column name="test_id" type="int">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="test_column" type="varchar"/>
-        </createTable>
-    </changeSet>
-
-</databaseChangeLog>
-```
-
-SQL example
-``` sql
--- liquibase formatted sql
-
--- changeset liquibase:1
-CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))
-```
-
-**Tip:** Formatted SQL changelogs generated from Liquibase versions before 4.2 might cause issues because of the lack of space after a double dash ( `--` ). To fix this, add a space after the double dash. For example: `-- liquibase formatted sql` instead of `--liquibase formatted sql` and `-- changeset myname:create-table` instead of `--changeset myname:create-table`.
-
-
-YAML example
-``` yaml
-databaseChangeLog:
-   - changeSet:
-       id: 1
-       author: Liquibase
-       changes:
-       - createTable:
-           tableName: test_table
-           columns:
-           - column:
-               name: test_column
-               type: INT
-               constraints:
-                   primaryKey:  true
-                   nullable:  false
-```
-
-JSON example
-``` json
-{
-  "databaseChangeLog": [
-    {
-      "changeSet": {
-        "id": "1",
-        "author": "Liquibase",
-        "changes": [
-          {
-            "createTable": {
-              "tableName": "test_table",
-              "columns": [
-                {
-                  "column": {
-                    "name": "test_column",
-                    "type": "INT",
-                    "constraints": {
-                      "primaryKey": true,
-                      "nullable": false
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-}
-```
-
-14.  Navigate to your project folder in the CLI and run the Liquibase [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
-
-    liquibase status --username=test --password=test --changelog-file=<changelog.xml>
-
-**Note:** You can specify arguments in the CLI or keep them in the [Liquibase properties file](https://docs.liquibase.com/concepts/connections/creating-config-properties.html).
-
-If your connection is successful, you'll see a message like this:
-
-    4 changesets have not been applied to <your_jdbc_url>
-    Liquibase command 'status' was executed successfully.
-
-19.  Inspect the SQL with the [update-sql](https://docs.liquibase.com/commands/update/update-sql.html) command. Then make changes to your database with the [update](https://docs.liquibase.com/commands/update/update.html) command.
-
-    liquibase update-sql --changelog-file=<changelog.xml>
-    liquibase update --changelog-file=<changelog.xml>
-
-If your `update` is successful, Liquibase runs each changeset and displays a summary message ending with:
-
-    Liquibase: Update has been successful.
-    Liquibase command 'update' was executed successfully.
-
-23.  From a database UI tool, ensure that your database contains the `test_table` you added along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
-
-Now you're ready to start making deployments with Liquibase!
 
 Related links
 -------------
