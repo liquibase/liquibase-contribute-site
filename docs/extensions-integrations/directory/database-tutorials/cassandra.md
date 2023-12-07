@@ -49,12 +49,12 @@
 <pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
     &lt;groupId&gt;com.ing.data&lt;/groupId&gt;
     &lt;artifactId&gt;cassandra-jdbc-wrapper&lt;/artifactId&gt;
-    &lt;version&gt;4.10.2&lt;/version&gt;
+    &lt;version&gt;4.11.0&lt;/version&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
     &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
     &lt;artifactId&gt;liquibase-cassandra&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.25.0</span>&lt;/version&gt;
+    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.25.0.1</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
