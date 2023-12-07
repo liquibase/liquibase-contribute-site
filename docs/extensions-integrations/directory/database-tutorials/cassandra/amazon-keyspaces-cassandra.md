@@ -1,20 +1,18 @@
 ---
-title: Apache Cassandra
+title: Amazon Keyspaces
 ---
 
-# Using Liquibase with Cassandra
+# Using Liquibase with Amazon Keyspaces (for Apache Cassandra)
 
-<small>Verified on: December 7, 2023</small>
+[Amazon Keyspaces (for Apache Cassandra)](https://aws.amazon.com/keyspaces/) is a scalable, highly available, and managed Apache Cassandra–compatible database service.
 
-[Apache Cassandra](https://cassandra.apache.org/doc/latest/architecture/overview.html) is an open source, distributed, NoSQL database. It presents a partitioned wide column storage model with consistent semantics.
-
-For more information, see the [Apache Cassandra](https://cassandra.apache.org) page.
+For more information, see the [Apache Cassandra Getting Started](https://aws.amazon.com/keyspaces/getting-started/) page.
 
 ## Supported database versions
 
 The extension's JDBC wrapper uses the Java Driver for Apache Cassandra® 4.4.0 or greater which is designed for
 
-* Apache Cassandra® 2.1+
+* Amazon Keyspaces (Apache Cassandra 3.11.2)
 
 It will throw "unsupported feature" exceptions if used against an older version of Cassandra cluster.
 
@@ -24,35 +22,15 @@ For more information, please check the
 
 --8<-- "database-tutorial-prerequisites.md"
 
-1. Configure the Apache Cassandra environment
-
-    1. Ensure your Cassandra database is installed and configured.
+1. Configure the Amazon Keyspaces environment
+    1. Login to AWS and navigate to **Services -> Amazon Keyspaces**.
     
-        For more information, see the [Installing Cassandra](https://cassandra.apache.org/doc/latest/tools/index.html) documentation.
-
-    2. If you have Cassandra tools installed locally, check the status of Cassandra
+    2. In the **Create Resources** section, press the **Create keyspace** button
     
-        ```
-        $ bin/nodetool status
-        ```
-    
-         The status column in the output should report UN, which stands for "Up/Normal":
-
-         ```
-         # nodetool status
-         
-         Datacenter: datacenter1
-         =======================
-         Status=Up/Down
-         | / State=Normal/Leaving/Joining/Moving
-         -- Address    Load        Tokens  Owns (effective)  Host ID                               Rack
-         UN 172.18.0.6 198.61 KiB  276     100.0%            5rtc74d1-237f-87c0-88eb-72643bd0a8t7  rack1
-         ```
-
-    3. Create your Keyspace
-    
-        The Keyspace will be referenced later in the Liquibase changelog as the schema when managing objects in the datastore.
-
+    3. Enter the **Keyspace name**, select any other relevant optional arguments, and press the **Create keyspace** button
+        
+        The **Keyspace name** will be referenced in the connection string.
+        
 
 ## Install drivers
 
@@ -98,20 +76,24 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
 
 ### Configure connection
 
-1.  Specify the database JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
+1.  Specify the database JDBC URL in the `[liquibase.properties](https://docs.liquibase.com/concepts/connections/creating-config-properties.html)` file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
 
     ```
-    url: jdbc:cassandra://host1[:port1][--host2[:port2]...--hostN[:portN]]/<keyspace>[?compliancemode=Liquibase&localdatacenter=<datacenter_name>]
+    url: jdbc:cassandra://<region_endpoint>:9042/<keyspace>?compliancemode=Liquibase&localdatacenter=<datacenter_name>
     ```
- 
+    
+    For more information on Amazon Keyspaces configuration, please review the following documentation
+    
+      * [Amazon Keyspace credentials](https://docs.aws.amazon.com/keyspaces/latest/devguide/programmatic.credentials.html) 
+      * [Amazon Keyspace service region endpoints](https://docs.aws.amazon.com/keyspaces/latest/devguide/programmatic.endpoints.html)
+    
     !!! note
-        For more information, see the [specifying Cassandra JDBC connection strings](https://github.com/ing-bank/cassandra-jdbc-wrapper/wiki/JDBC-driver-and-connection-string) documentation.
+        For more information, see the [specifying Cassandra JDBC connections strings](https://github.com/ing-bank/cassandra-jdbc-wrapper#usage) documentation.
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
 
 ## Related links
 
-*   [Get Up and Running with Liquibase and Apache Cassandra](https://www.liquibase.com/blog/running-liquibase-apache-cassandra)
 *   [Change Types](https://docs.liquibase.com/change-types/home.html)
 *   [Concepts](https://docs.liquibase.com/concepts/home.html)
 *   [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
