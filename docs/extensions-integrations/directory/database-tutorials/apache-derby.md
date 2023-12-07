@@ -6,7 +6,7 @@ title: Apache Derby
 
 [Apache Derby](https://db.apache.org/derby/) is an open-source relational database implemented entirely in Java and available under the Apache License, Version 2.0.
 
-## Supported versions
+## Supported database versions
 
 *   10.16.X
 *   10.15.X

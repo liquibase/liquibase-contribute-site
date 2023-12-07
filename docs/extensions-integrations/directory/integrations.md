@@ -15,14 +15,14 @@ Liquibase ships with support for a CLI, Spring, and Ant but others are available
 - [Docker](https://hub.docker.com/r/liquibase/liquibase){:target="_blank"}
 - [GitHub Actions](https://github.com/liquibase-github-actions){:target="_blank"}
 - [Gradle Plugin](https://github.com/liquibase/liquibase-gradle-plugin){:target="_blank"}
-- [Homebrew](https://formulae.brew.sh/formula/liquibase)
+- [Homebrew](https://formulae.brew.sh/formula/liquibase){:target="_blank"}
 - [Jenkins Runner](https://plugins.jenkins.io/liquibase-runner/){:target="_blank"}
 - [JPA Buddy](https://www.jpa-buddy.com/documentation/database-versioning/#liquibase-support){:target="_blank"}
 - [JRuby on Rails](https://github.com/redbeard/liquibase-rails){:target="_blank"}                                           
-- [Maven Plugin](https://docs.liquibase.com/tools-integrations/maven/home.html){:target="_blank"}                                                              
+- [Maven Plugin](https://docs.liquibase.com/tools-integrations/maven/home.html){:target="_blank"}                                    
 - [Micronaut](https://micronaut-projects.github.io/micronaut-liquibase/latest/guide/){:target="_blank"}
 - [NodeJS](https://www.npmjs.com/package/liquibase){:target="_blank"}
-- [NuGet](https://www.nuget.org/packages/Liquibase.Cli)
+- [NuGet](https://www.nuget.org/packages/Liquibase.Cli){:target="_blank"}
 - [Quarkus](https://quarkus.io/guides/liquibase){:target="_blank"}
 - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization.migration-tool.liquibase){:target="_blank"}
 
