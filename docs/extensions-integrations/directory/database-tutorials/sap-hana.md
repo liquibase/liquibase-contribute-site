@@ -5,7 +5,7 @@ title: SAP HANA
 <h1>Using Liquibase with SAP HANA</h1>
 <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
 <p><a href="https://www.sap.com/products/hana.html">SAP&#160;HANA</a> (High-performance ANalytic Appliance) is an in-memory, column-oriented relational database management system. For more information, see <a href="https://www.sap.com/products/hana/get-started.html?sort=title_asc&amp;tab=documentation#documentation">SAP&#160;HANA&#160;Documentation</a> and <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM">SAP&#160;HANA Help Portal</a>.</p>
-<h2>Supported database versions</h2>
+<h2>Reported versions</h2>
 <ul>
     <li>2.0</li>
 </ul>

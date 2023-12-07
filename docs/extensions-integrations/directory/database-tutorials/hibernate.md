@@ -2,7 +2,7 @@
 <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
 <p><a href="https://hibernate.org/orm/">Hibernate</a> is an object-relational mapping (ORM) tool that can be used alongside Liquibase to provide a persistent framework for a relational database.</p>
 <p>The purpose of this document is to guide you through the process of creating a new Liquibase project and integrating it into your Hibernate JPA setup. </p>
-<h2>Supported database versions</h2>
+<h2>Reported versions</h2>
 <ul>
 	<li><b>6.x:</b> liquibase-hibernate6</li>
 	<li><b>5.x:</b> liquibase-hibernate5</li>

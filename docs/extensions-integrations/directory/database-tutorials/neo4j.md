@@ -1,6 +1,6 @@
 <h1>Using Liquibase with Neo4j</h1>
 <p><a href="https://neo4j.com/">Neo4j</a> is a property graph database management system with native graph storage and processing. It uses a graph query language called <a href="https://neo4j.com/docs/getting-started/cypher-intro/">Cypher</a>. For more information, see <a href="https://neo4j.com/docs/">Neo4j Documentation</a>.</p>
-<h2>Supported database versions</h2>
+<h2>Supported versions</h2>
 <ul>
     <li>3.5+</li>
 </ul>

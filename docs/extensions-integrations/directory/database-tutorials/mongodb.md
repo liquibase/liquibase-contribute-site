@@ -6,7 +6,7 @@ title: MongoDB
 [MongoDB](https://www.mongodb.com) is a document-oriented NoSQL database. For more information, see the [MongoDB Documentation](https://www.mongodb.com/docs/).
 
 
-## Supported database versions
+## Supported versions
 *   6.X
 *   5.X
 *   [MongoDB Atlas](https://docs.liquibase.com/start/tutorials/mongo-db-atlas-config.html)

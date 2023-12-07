@@ -10,7 +10,7 @@ title: CosmosDB
 
     For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>
 
-## Supported database versions
+## Reported versions
 - 4.35.1
 
 ## Prerequisites

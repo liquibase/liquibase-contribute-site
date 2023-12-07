@@ -1,6 +1,6 @@
 <h1>Using Liquibase with Teradata</h1>
 <p><a href="https://www.teradata.com/Resources/Datasheets/Teradata-Database">Teradata</a> Vantage Advanced SQL Engine is an analytic database engine. For more information, see <a href="https://docs.teradata.com/">Teradata Documentation</a>.</p>
-<h2>Supported database versions</h2>
+<h2>Supported versions</h2>
 <ul>
     <li>17.20</li>
     <li>17.10</li>

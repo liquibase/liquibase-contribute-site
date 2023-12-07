@@ -72,20 +72,12 @@ plugins:
         'extensions-integrations/directory/tutorials/teradata.md': 'extensions-integrations/directory/database-tutorials/teradata.md'
         'extensions-integrations/directory/tutorials/vertica.md': 'extensions-integrations/directory/database-tutorials/vertica.md'
         'extensions-integrations/directory/tutorials/yugabytedb.md': 'extensions-integrations/directory/database-tutorials/yugabytedb.md'
-        'extensions-integrations/directory/tutorials/yugabytedb.md': 'extensions-integrations/directory/database-tutorials/yugabytedb.md'
-        'extensions-integrations/directory/database-tutorials/cassandra-astra.md': 'extensions-integrations/directory/database-tutorials/cassandra/datastax-astra-cassandra.md'
-        'extensions-integrations/directory/database-tutorials/cassandra.md': 'extensions-integrations/directory/database-tutorials/cassandra/cassandra.md'
-        
 extra:
   analytics:
     provider: google
     property: G-SJKPP1K4KR
   liquibase:
-    current_version: 4.25.0
-  extension_version:
-    cassandra: 4.25.0.1
-  jdbc_driver_version:
-    cassandra: 4.10.2
+    current_version: 4.24.0
 
 extra_css:
   - css/shared.css

@@ -1,6 +1,6 @@
 <h1>Using Liquibase with HSQLDB</h1>
 <p><a href="http://hsqldb.org/">HyperSQL Database</a> (HSQLDB) is a relational database management system. For more information, see <a href="http://hsqldb.org/web/hsqlDocsFrame.html">HSQLDB&#160;Documentation</a>.</p>
-<h2>Supported database versions</h2>
+<h2>Supported versions</h2>
 <ul>
     <li>2.7.X</li>
     <li>2.6.X</li>

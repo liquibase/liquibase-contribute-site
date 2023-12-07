@@ -1,6 +1,6 @@
 <h1>Using Liquibase with Firebird</h1>
 <p><a href="https://firebirdsql.org/en/start/">Firebird</a> is an open-source relational database management system.  For more information, see <a href="https://firebirdsql.org/en/firebird-rdbms/">Firebird RDBMS Documentation</a>.</p>
-<h2>Supported database versions</h2>
+<h2>Supported versions</h2>
 <ul>
     <li>4.0.X</li>
     <li>3.0.X</li>

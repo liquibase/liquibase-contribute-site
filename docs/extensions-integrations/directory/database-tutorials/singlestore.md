@@ -5,7 +5,7 @@ title: SingleStoreDB
 # Using Liquibase with SingleStoreDB
 [SingleStoreDB](https://www.singlestore.com/) unifies transactions and analytics in a single engine to drive low-latency access to large datasets, simplifying the development of fast, modern enterprise applications.
 
-## Supported database versions
+## Supported Versions
 * SingleStoreDB v8.1+
 
 ## Prerequisites
