@@ -1,5 +1,5 @@
 ---
-title: Database Tutorials
+title: Overview
 ---
 # Liquibase Database Tutorials: Community-Maintained
 Learn more about using Liquibase with your favorite databases with our in-depth tutorials. These tutorials explain how to install and configure your database with Liquibase Community and Liquibase Pro.
@@ -67,7 +67,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra/">Apache Cassandra</a>
+        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra/apache-cassandra/">Apache Cassandra</a>
       </td>
       <td></td>
       <td>
@@ -84,7 +84,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra-astra/">Apache Cassandra on DataStax Astra</a>
+        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra/datastax-astra-db/">Apache Cassandra on DataStax Astra DB</a>
       </td>
       <td></td>
       <td>
