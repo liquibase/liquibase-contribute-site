@@ -85,7 +85,7 @@ extra:
   extension_version:
     cassandra: 4.25.0.1
   jdbc_driver_version:
-    cassandra: 4.10.2
+    cassandra: 4.11.0
 
 extra_css:
   - css/shared.css

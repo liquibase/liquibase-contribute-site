@@ -12,14 +12,15 @@ For more information, see the [Apache Cassandra](https://cassandra.apache.org) p
 
 ## Supported database versions
 
-The extension's JDBC wrapper uses the Java Driver for Apache Cassandra® 4.4.0 or greater which is designed for
+The extension's JDBC wrapper uses the Java Driver for Apache Cassandra® which is designed for:
 
 * Apache Cassandra® 2.1+
+* DataStax Enterprise (5.0+)
 
 It will throw "unsupported feature" exceptions if used against an older version of Cassandra cluster.
 
 For more information, please check the 
-[compatibility matrix](https://docs.datastax.com/en/driver-matrix/doc/driver_matrix/javaDrivers.html) and read the 
+[compatibility matrix](https://docs.datastax.com/en/driver-matrix/docs/java-drivers.html) and read the 
 [driver documentation](https://docs.datastax.com/en/developer/java-driver/latest/).
 
 --8<-- "database-tutorial-prerequisites.md"
