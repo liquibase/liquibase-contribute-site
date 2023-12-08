@@ -91,9 +91,6 @@ If you use Maven, note that this database does not provide its driver JAR on a 
 </dependency>
 ```
 
-You need to specify that the scope is `system` and provide the `systemPath` in `pom.xml`.
-In the example, the `<liquibase_install_dir>/lib` is the location of the driver JAR file.
-
 ## Database connection
 
 ### Configure connection
@@ -101,10 +98,13 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
 1.  Specify the database JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
 
     ```
-    url: jdbc:cassandra://host1[:port1][--host2[:port2]...--hostN[:portN]]/<keyspace>[?compliancemode=Liquibase&localdatacenter=<datacenter_name>]
+    url: jdbc:cassandra://<host1>[:<port1>][...--<hostN>[:<portN>]]/<keyspace>?compliancemode=Liquibase[&localdatacenter=<datacenter_name>]
     ```
  
     !!! note
+        Be careful to always specify the `compliancemode` parameter with the value `Liquibase` to avoid any unexpected behaviour when running the changelog.
+        
+    !!! tip
         For more information, see the [specifying Cassandra JDBC connection strings](https://github.com/ing-bank/cassandra-jdbc-wrapper/wiki/JDBC-driver-and-connection-string) documentation.
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
