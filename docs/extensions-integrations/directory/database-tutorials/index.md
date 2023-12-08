@@ -1,6 +1,7 @@
 ---
 title: Overview
 ---
+
 # Liquibase Database Tutorials: Community-Maintained
 Learn more about using Liquibase with your favorite databases with our in-depth tutorials. These tutorials explain how to install and configure your database with Liquibase Community and Liquibase Pro.
 ## Verification levels
@@ -48,7 +49,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/apache-derby/">Apache Derby</a>
+        <a href="/extensions-integrations/directory/database-tutorials/apache-derby/">Apache Derby</a>
       </td>
       <td>
         10.14
@@ -67,7 +68,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra/apache-cassandra/">Apache Cassandra</a>
+        <a href="/extensions-integrations/directory/database-tutorials/cassandra/apache-cassandra/">Apache Cassandra</a>
       </td>
       <td></td>
       <td>
@@ -76,15 +77,15 @@ Note: Liquibase supports English language databases only. Other languages with s
       <td>
         <b>DBMS/shortname:</b> <code>cassandra</code><br>
         <br>
-        <b>File:</b> <code>CassandraJDBC&lt;version&gt;.jar</code><br>
-        <b>Class:</b> <code>com.simba.cassandra.jdbc42.Driver</code><br>
-        <b>JDBC URL:</b> <code>jdbc:cassandra://localhost:9042/myKeyspace;DefaultKeyspace=myKeyspace</code><br>
-        <b>Download:</b> <a href="https://downloads.datastax.com/#odbc-jdbc-drivers">Datastax: ODBC/JDBC Drivers</a>
+        <b>File:</b> <code>cassandra-jdbc-wrapper-&lt;version&gt;-bundle.jar</code><br>
+        <b>Class:</b> <code>com.ing.data.cassandra.jdbc.CassandraDriver</code><br>
+        <b>JDBC URL:</b> <code>jdbc:cassandra://localhost:9042/myKeyspace?compliancemode=Liquibase&localdatacenter=DC1</code><br>
+        <b>Download:</b> <a href="https://github.com/ing-bank/cassandra-jdbc-wrapper/releases">Cassandra JDBC wrapper</a>
       </td>
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cassandra/datastax-astra-db/">Apache Cassandra on DataStax Astra DB</a>
+        <a href="/extensions-integrations/directory/database-tutorials/cassandra/datastax-astra-db/">Apache Cassandra on DataStax Astra DB</a>
       </td>
       <td></td>
       <td>
@@ -93,10 +94,10 @@ Note: Liquibase supports English language databases only. Other languages with s
       <td>
         <b>DBMS/shortname:</b> <code>cassandra</code><br>
         <br>
-        <b>File:</b> <code>CassandraJDBC&lt;version&gt;.jar</code><br>
-        <b>Class:</b> <code>com.simba.cassandra.jdbc42.Driver</code><br>
-        <b>JDBC URL:</b> <code>jdbc:cassandra://host:port;DefaultKeyspace=keyspace;AuthMech=2;UID=username;PWD=password;SecureConnectionBundlePath=path/to/secure-connect-database_name.zip;TunableConsistency=6</code><br>
-        <b>Download:</b> <a href="https://downloads.datastax.com/#odbc-jdbc-drivers">Datastax: ODBC/JDBC Drivers</a>
+        <b>File:</b> <code>cassandra-jdbc-wrapper-&lt;version&gt;-bundle.jar</code><br>
+        <b>Class:</b> <code>com.ing.data.cassandra.jdbc.CassandraDriver</code><br>
+        <b>JDBC URL:</b> <code>jdbc:cassandra:dbaas:///myKeyspace?compliancemode=Liquibase&consistency=LOCAL_QUORUM&user=myUsername&password=myPassword&secureconnectbundle=&lt;/path/to/location/secure-connect-bundle-cluster.zip&gt;</code><br>
+        <b>Download:</b> <a href="https://github.com/ing-bank/cassandra-jdbc-wrapper/releases">Cassandra JDBC wrapper</a>
       </td>
     </tr>
     <tr>
@@ -117,7 +118,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cosmosdb/">Azure Cosmos DB</a>
+        <a href="/extensions-integrations/directory/database-tutorials/cosmosdb/">Azure Cosmos DB</a>
       </td>
       <td></td>
       <td>
@@ -153,7 +154,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cloud-spanner/">Cloud Spanner</a>
+        <a href="/extensions-integrations/directory/database-tutorials/cloud-spanner/">Cloud Spanner</a>
       </td>
       <td></td>
       <td></td>
@@ -170,7 +171,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cockroachdb/">CockroachDB (on-premises)</a>
+        <a href="/extensions-integrations/directory/database-tutorials/cockroachdb/">CockroachDB (on-premises)</a>
       </td>
       <td>
         20, 21, 22
@@ -190,7 +191,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/cockroachdb/">CockroachDB (cloud)</a>
+        <a href="/extensions-integrations/directory/database-tutorials/cockroachdb/">CockroachDB (cloud)</a>
       </td>
       <td>
         20, 21, 22
@@ -210,7 +211,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/firebird/">Firebird RDBMS</a>
+        <a href="/extensions-integrations/directory/database-tutorials/firebird/">Firebird RDBMS</a>
       </td>
       <td>
         3, 4
@@ -229,7 +230,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/bigquery/">Google BigQuery</a>
+        <a href="/extensions-integrations/directory/database-tutorials/bigquery/">Google BigQuery</a>
       </td>
       <td>
         Cloud
@@ -268,7 +269,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/h2/">H2 Database Engine</a>
+        <a href="/extensions-integrations/directory/tutorials/h2/">H2 Database Engine</a>
       </td>
       <td>
         1.4, 2.1.21
@@ -309,7 +310,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/hibernate/">Hibernate</a>
+        <a href="/extensions-integrations/directory/database-tutorials/hibernate/">Hibernate</a>
       </td>
       <td></td>
       <td></td>
@@ -325,7 +326,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/hsqldb/">HyperSQL</a>
+        <a href="/extensions-integrations/directory/database-tutorials/hsqldb/">HyperSQL</a>
       </td>
       <td>
         2.3, 2.4, 2.5, 2.6, 2.7
@@ -361,7 +362,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/db2onz/">IBM Db2 for Z</a>
+        <a href="/extensions-integrations/directory/database-tutorials/db2onz/">IBM Db2 for Z</a>
       </td>
       <td></td>
       <td>
@@ -394,7 +395,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/informix/">Informix</a>
+        <a href="/extensions-integrations/directory/database-tutorials/informix/">Informix</a>
       </td>
       <td></td>
       <td>
@@ -444,7 +445,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/mongodb/">MongoDB Community Extension</a>
+        <a href="/extensions-integrations/directory/database-tutorials/mongodb/">MongoDB Community Extension</a>
       </td>
       <td>
         5, 6
@@ -515,7 +516,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/percona-xtradb-cluster/">Percona XtraDB Cluster</a>
+        <a href="/extensions-integrations/directory/database-tutorials/percona-xtradb-cluster/">Percona XtraDB Cluster</a>
       </td>
       <td>
         5.7, 8.0
@@ -550,7 +551,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sap-hana/">SAP HANA</a>
+        <a href="/extensions-integrations/directory/database-tutorials/sap-hana/">SAP HANA</a>
       </td>
       <td></td>
       <td>
@@ -568,7 +569,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/maxdb/">SAP MaxDB</a>
+        <a href="/extensions-integrations/directory/database-tutorials/maxdb/">SAP MaxDB</a>
       </td>
       <td></td>
       <td>
@@ -587,7 +588,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sap-sql-anywhere/">SAP SQL Anywhere</a>
+        <a href="/extensions-integrations/directory/database-tutorials/sap-sql-anywhere/">SAP SQL Anywhere</a>
       </td>
       <td>
         17
@@ -606,7 +607,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sap-adaptive-server-enterprise-sap-ase/">Sybase (SAP ASE)</a>
+        <a href="/extensions-integrations/directory/database-tutorials/sap-adaptive-server-enterprise-sap-ase/">Sybase (SAP ASE)</a>
       </td>
       <td></td>
       <td>
@@ -622,7 +623,7 @@ Note: Liquibase supports English language databases only. Other languages with s
       </td>
     </tr>
     <tr>
-      <td><a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/singlestore/">SingleStoreDB</a></td>
+      <td><a href="/extensions-integrations/directory/database-tutorials/singlestore/">SingleStoreDB</a></td>
       <td>Cloud</td>
       <td>Foundational</td>
       <td>
@@ -636,7 +637,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/sqlite/">SQLite</a>
+        <a href="/extensions-integrations/directory/database-tutorials/sqlite/">SQLite</a>
       </td>
       <td>
         3.34
@@ -655,7 +656,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/teradata/">Teradata Database</a>
+        <a href="/extensions-integrations/directory/database-tutorials/teradata/">Teradata Database</a>
       </td>
       <td>
         17.2
@@ -675,7 +676,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/vertica/">Vertica</a>
+        <a href="/extensions-integrations/directory/database-tutorials/vertica/">Vertica</a>
       </td>
       <td></td>
       <td>
@@ -727,7 +728,7 @@ Note: Liquibase supports English language databases only. Other languages with s
     </tr>
     <tr>
       <td>
-        <a href="https://contribute.liquibase.com/extensions-integrations/directory/tutorials/yugabytedb/">YugabyteDB</a>
+        <a href="/extensions-integrations/directory/database-tutorials/yugabytedb/">YugabyteDB</a>
       </td>
       <td>
         2.6, 2.8, 2.12, 2.14
