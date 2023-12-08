@@ -20,12 +20,6 @@ title: DataStax Astra DB
           3. Under **Connect using an API**, select **Java**
           4. Download the **Connect Bundle** by following the link in step 1 under **Prerequisites**.
     2.  Once the `secure-connect-<dbname>.zip` file is fully downloaded, place it in a secure place in your file system.
-    3.  Unzip the `secure-connect-<dbname>.zip` file. Open the `config.json` file in a text editor. We will use the information from the file in the next step.
-    4.  Clone the [cql-proxy repository](https://github.com/datastax/cql-proxy) to set up CQL-Proxy, which is a sidecar that enables unsupported CQL drivers to work with DataStax Astra DB.
-        1.  You need your **Astra DB Token** and **Astra Database ID** to use CQL-Proxy.
-        2.  Follow the steps in the repository to spin up CQL-Proxy using your command prompt. Once successfully running, you should see the following output:
-        `{"level":"info","ts":1651012815.176512,"caller":"proxy/proxy.go:222","msg":"proxy is listening","address":"[::]:9042"}`
-
 
 ## Install drivers
 
@@ -64,9 +58,6 @@ If you use Maven, note that this database does not provide its driver JAR on a 
 </dependency>
 ```
 
-You need to specify that the scope is `system` and provide the `systemPath` in `pom.xml`.
-In the example, the `<liquibase_install_dir>/lib` is the location of the driver JAR file.
-
 ## Database connection
 
 ### Configure connection
@@ -80,16 +71,20 @@ In the example, the `<liquibase_install_dir>/lib` is the location of the driver 
     - `user`: the username
     - `password`: the password (if you are using a token, you can specify it here and set user value to token)
 
-    For example, using the dedicated protocol `jdbc:cassandra:dbaas:`
+    Please specify the URL using this JDBC format:
 
     ```
-    url: jdbc:cassandra:dbaas:///<keyspace>?compliancemode=Liquibase&consistency=LOCAL_QUORUM&user=<user_name>&password=<password>&secureconnectbundle=</path/to/location/secure-connect-bundle-cluster.zip>
+    url: jdbc:cassandra:dbaas:///<keyspace>?compliancemode=Liquibase&secureconnectbundle=<bundle_name>&user=token&password=<token>
     ```
     
+    Replace `<keyspace>` with your own keyspace name, `<bundle_name>` by the real location of your secure connect bundle, and the password `<token>` value with your Astra DB token.
+    
     !!! note
-        Any host(s) specified in the JDBC URL will be ignored. The hosts will be fetched from the cloud secure connect bundle. So, you can leave the host part empty.
+        Be careful to always specify the `compliancemode` parameter with the value `Liquibase` to avoid any unexpected behaviour when running the changelog.
         
-        For further information about DataStax Astra DB connection strings and connecting to DBaaS, see the [DataStax Astra DB and DBaaS cloud documentation](https://github.com/ing-bank/cassandra-jdbc-wrapper/wiki/JDBC-driver-and-connection-string#connection-to-cloud-databases-dbaas).
+    !!! tip
+        For more information about the available options regarding the JDBC connection string for Astra DB, please check [the driver documentation](https://github.com/ing-bank/cassandra-jdbc-wrapper/wiki/JDBC-driver-and-connection-string#connection-to-cloud-databases-dbaas).
+
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
 
