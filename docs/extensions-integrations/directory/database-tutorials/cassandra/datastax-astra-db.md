@@ -4,12 +4,7 @@ title: DataStax Astra DB
 
 # Using Liquibase with DataStax Astra DB (powered by Apache Cassandra)
 
-
 [DataStax Astra DB](https://www.datastax.com/products/datastax-astra) is a multi-cloud DBaaS built on Apache Cassandra. Astra DB simplifies cloud-native Cassandra application development and reduces deployment time from weeks to minutes. For more information, see [DataStax Astra DB Documentation](https://docs.datastax.com/en/astra/docs/index.html).
-
-## Supported database versions
-
-* DataStax Enterprise (5.0+)
 
 --8<-- "database-tutorial-prerequisites.md"
 
