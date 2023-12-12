@@ -186,6 +186,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
 		}
 	
 	}</code></pre>
+ 	<ul><li>This is a simple example of an Entity, with a generated Id value. This class will be used in the next Entity </li></u>
 <li value="5">Create a second file <code>Item.java</code> in the same directory and paste the following:</li>
 <a href="#"><code>Item.java</code></a>
 	<pre><code class="language-java">package com.liquibase;
@@ -227,6 +228,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
 		}
 
 	}</code></pre>
+ <ul><li>This Entity includes a many-to-one relationship: each House can be related to many Items.</li></u>
 	<li value="6">Install the application using the <code>mvnw install</code> command, or <code>mvnw.cmd install</code> for Windows.</li>
 	<li value="7">The generated JAR is what is referenced in the <code><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></code> file: <code class="language-text">classpath=target\\hibernate-liquibase-0.0.1-SNAPSHOT.jar</code></li>
 	<li value="8">Next, generate a <code>dbchangelog.xml</code> file from Hibernate in your project folder:</li><pre xml:space="preserve"><code class="language-text">mvn liquibase:diff</code></pre>
