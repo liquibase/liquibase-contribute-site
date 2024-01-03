@@ -61,6 +61,10 @@ For more information, please check the
 
 To use Apache Cassandra with Liquibase, you need to install two additional JAR files.
 
+!!! note
+    These instructions assume Liquibase Cassandra extension v4.25.0.1 or newer. This extension was updated to replace the previous Simba JDBC driver with the new Cassandra JDBC wrapper.
+
+
 1. Download the jar files
     * Download the [Cassandra JDBC wrapper](https://github.com/ing-bank/cassandra-jdbc-wrapper/releases) (`cassandra-jdbc-wrapper-<version>-bundle.jar`) from GitHub
     * Download the [Liquibase Cassandra extension](https://github.com/liquibase/liquibase-cassandra/releases) (`liquibase-cassandra-<version>.jar`) from GitHub
@@ -113,7 +117,6 @@ If you use Maven, note that this database does not provide its driver JAR on a 
 
 ## Related links
 
-*   [Get Up and Running with Liquibase and Apache Cassandra](https://www.liquibase.com/blog/running-liquibase-apache-cassandra)
 *   [Change Types](https://docs.liquibase.com/change-types/home.html)
 *   [Concepts](https://docs.liquibase.com/concepts/home.html)
 *   [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
