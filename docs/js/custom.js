@@ -1,11 +1,13 @@
-// window.onUsersnapLoad = function(api) {
-//     api.init();
-// }
-// var script = document.createElement('script');
-// script.defer = 1;
-// script.src = 'https://widget.usersnap.com/global/load/632b7a0e-ba7b-4613-ab8a-a34d8edf1097?onload=onUsersnapLoad';
-// document.getElementsByTagName('head')[0].appendChild(script);
+// Usersnap Feedback button (right side of page)
+window.onUsersnapLoad = function(api) {
+   api.init();
+}
+var script = document.createElement('script');
+script.defer = 1;
+script.src = 'https://widget.usersnap.com/global/load/632b7a0e-ba7b-4613-ab8a-a34d8edf1097?onload=onUsersnapLoad';
+document.getElementsByTagName('head')[0].appendChild(script);
 
+// Usersnap Sentiment widget (bottom of page)
 document.addEventListener("DOMContentLoaded", function() {
     var contentWrapper = document.querySelector('article.md-content__inner');
     var rateWidgetContainer = document.createElement("div")
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// ??? - ask Nathan
 document.addEventListener("DOMContentLoaded", function(){
     var headerNavBody = document.querySelector('.md-header__nav');
     var navWrapper = document.querySelector('nav.md-tabs');
