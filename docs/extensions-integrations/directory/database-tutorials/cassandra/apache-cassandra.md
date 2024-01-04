@@ -1,8 +1,9 @@
 ---
-title: Apache Cassandra
+title: Liquibase for Apache Cassandra
+description: Learn how to use Liquibase with Apacha Cassandra to automate database schema migration.
 ---
 
-# Using Liquibase with Cassandra
+# Using Liquibase with Apache Cassandra
 
 <small>Verified on: December 7, 2023</small>
 
