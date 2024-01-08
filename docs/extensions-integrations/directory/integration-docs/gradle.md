@@ -11,7 +11,7 @@ title: Gradle
     <li>Add the following section to your <code>build.gradle</code> file to include the <code>liquibase</code> plugin into Gradle builds:
     </li><pre xml:space="preserve">
 <code class="language-xml">plugins {
-    id 'org.liquibase.gradle' version '2.2.4'
+    id 'org.liquibase.gradle' version '2.2.0'
 }</code></pre>
     <p>The following <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:old_plugin_application">legacy plugin application</a> is also available to use:</p><pre xml:space="preserve">
 <code class="language-text">buildscript {

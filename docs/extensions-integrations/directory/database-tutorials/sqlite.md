@@ -4,7 +4,7 @@ title: SQLite
 
 <h1 id="sqlite-tutorial">Using Liquibase with SQLite</h1>
 <p><a href="https://sqlite.org/index.html">SQlite</a> is a relational database management system that implements a small, fast, and self-contained embedded SQL database engine.</p>
-<h2>Supported versions</h2>
+<h2>Supported database versions</h2>
 <ul>
     <li>3.34.0+</li>
 </ul>

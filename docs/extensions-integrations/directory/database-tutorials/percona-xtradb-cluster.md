@@ -4,7 +4,7 @@ title: Percona XtraDB Cluster
 
 <h1>Using Liquibase with Percona XtraDB Cluster</h1>
 <p><a href="https://www.percona.com/software/mysql-database/percona-xtradb-cluster">Percona XtraDB Cluster</a> is a database clustering solution for MySQL. It integrates Percona Server for MySQL and Percona XtraBackup with the Galera library to enable synchronous multi-source replication. For more information, see <a href="https://www.percona.com/doc/percona-xtradb-cluster/LATEST/intro.html">Percona XtraDB Cluster documentation</a>.</p>
-<h2>Supported versions</h2>
+<h2>Supported database versions</h2>
 <ul>
     <li>8.0.X</li>
     <li>5.7</li>

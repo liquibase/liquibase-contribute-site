@@ -48,8 +48,8 @@ plugins:
       redirect_maps:
         'extensions-integrations/directory/tutorials/apache-derby.md': 'extensions-integrations/directory/database-tutorials/apache-derby.md'
         'extensions-integrations/directory/tutorials/bigquery.md': 'extensions-integrations/directory/database-tutorials/bigquery.md'
-        'extensions-integrations/directory/tutorials/cassandra.md': 'extensions-integrations/directory/database-tutorials/cassandra.md'
-        'extensions-integrations/directory/tutorials/cassandra-astra.md': 'extensions-integrations/directory/database-tutorials/cassandra-astra.md'
+        'extensions-integrations/directory/tutorials/cassandra.md': 'extensions-integrations/directory/database-tutorials/cassandra/apache-cassandra.md'
+        'extensions-integrations/directory/tutorials/cassandra-astra.md': 'extensions-integrations/directory/database-tutorials/cassandra/datastax-astra-db.md'
         'extensions-integrations/directory/tutorials/cloud-spanner.md': 'extensions-integrations/directory/database-tutorials/cloud-spanner.md'
         'extensions-integrations/directory/tutorials/cockroachdb.md': 'extensions-integrations/directory/database-tutorials/cockroachdb.md'
         'extensions-integrations/directory/tutorials/cosmosdb.md': 'extensions-integrations/directory/database-tutorials/cosmosdb.md'
@@ -72,12 +72,20 @@ plugins:
         'extensions-integrations/directory/tutorials/teradata.md': 'extensions-integrations/directory/database-tutorials/teradata.md'
         'extensions-integrations/directory/tutorials/vertica.md': 'extensions-integrations/directory/database-tutorials/vertica.md'
         'extensions-integrations/directory/tutorials/yugabytedb.md': 'extensions-integrations/directory/database-tutorials/yugabytedb.md'
+        'extensions-integrations/directory/tutorials/yugabytedb.md': 'extensions-integrations/directory/database-tutorials/yugabytedb.md'
+        'extensions-integrations/directory/database-tutorials/cassandra-astra.md': 'extensions-integrations/directory/database-tutorials/cassandra/datastax-astra-db.md'
+        'extensions-integrations/directory/database-tutorials/cassandra.md': 'extensions-integrations/directory/database-tutorials/cassandra/apache-cassandra.md'
+        
 extra:
   analytics:
     provider: google
     property: G-SJKPP1K4KR
   liquibase:
-    current_version: 4.24.0
+    current_version: 4.25.0
+  extension_version:
+    cassandra: 4.25.0.1
+  jdbc_driver_version:
+    cassandra: 4.11.0
 
 extra_css:
   - css/shared.css
