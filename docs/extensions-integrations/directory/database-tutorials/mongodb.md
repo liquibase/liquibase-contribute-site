@@ -41,17 +41,17 @@ If you use Maven, you must also [include the driver JAR as a dependency](https:/
 <dependency>
     <groupId>org.mongodb</groupId>
     <artifactId>mongodb-driver-core</artifactId>
-    <version>[4.24.0,)</version>
+    <version>[4.11.1,)</version>
 </dependency>
 <dependency>
     <groupId>org.mongodb</groupId>
     <artifactId>mongodb-driver-sync</artifactId>
-    <version>[4.24.0,)</version>
+    <version>[4.11.1,)</version>
 </dependency>
 <dependency>
     <groupId>org.mongodb</groupId>
     <artifactId>bson</artifactId>
-    <version>[4.24.0,)</version>
+    <version>[4.11.1,)</version>
 </dependency>
 <dependency>
     <groupId>org.liquibase.ext</groupId>
