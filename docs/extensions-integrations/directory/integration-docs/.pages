@@ -1,5 +1,6 @@
 nav:
     - ant
+    - gitlab-ci-cd.md
     - gradle.md
     - jee-cdi.md
     - servlet-listener.md

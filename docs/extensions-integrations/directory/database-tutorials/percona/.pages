@@ -1,0 +1,5 @@
+order_by: title
+
+nav:
+    - "Percona XtraDB Cluster" : percona-xtradb-cluster.md
+    - ...

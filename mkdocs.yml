@@ -63,7 +63,7 @@ plugins:
         'extensions-integrations/directory/tutorials/maxdb.md': 'extensions-integrations/directory/database-tutorials/maxdb.md'
         'extensions-integrations/directory/tutorials/mongodb.md': 'extensions-integrations/directory/database-tutorials/mongodb.md'
         'extensions-integrations/directory/tutorials/neo4j.md': 'extensions-integrations/directory/database-tutorials/neo4j.md'
-        'extensions-integrations/directory/tutorials/percona-xtradb-cluster.md': 'extensions-integrations/directory/database-tutorials/percona-xtradb-cluster.md'
+        'extensions-integrations/directory/tutorials/percona-xtradb-cluster.md': 'extensions-integrations/directory/database-tutorials/percona/percona-xtradb-cluster.md'
         'extensions-integrations/directory/tutorials/sap-adaptive-server-enterprise-sap-ase.md': 'extensions-integrations/directory/database-tutorials/sap-adaptive-server-enterprise-sap-ase.md'
         'extensions-integrations/directory/tutorials/sap-hana.md': 'extensions-integrations/directory/database-tutorials/sap-hana.md'
         'extensions-integrations/directory/tutorials/sap-sql-anywhere.md': 'extensions-integrations/directory/database-tutorials/sap-sql-anywhere.md'
