@@ -3,15 +3,16 @@
 ## Overview
 
 The [liquibase.command.CommandScope](../../code/api/command-commandscope.md) class is the primary high-level facade for running Liquibase operations. 
+
 The API provides both a way to call individual commands and metadata about each command including human-readable descriptions and argument information.
 
 The operations available through the command API are end-user facing, complete calls such as "update", "rollback", or "generateChangelog".
 
-# How to use Command Framework
+## How to use Command Framework
 
-Main components from Command frameworks you need to know before using it are:
+The main components from Command framework are described below.
 
-### - Command Name:
+### Command Name
 
 This is just a constant where we will define the known names for a given command. 
 
@@ -21,9 +22,10 @@ public static String[] COMMAND_NAME = {"update"};
 
 Similarly, for certain commands there could be a legacy command name which can be defined in the same way and be passed to the `CommandBuilder` constructor.
 
-### - Arguments:
-There are required and optional arguments used by a command that are defined in the below way. Either in the code or [documentation](https://docs.liquibase.com) you can see
-what is each command for and whether it's required or not.
+### Arguments
+
+There are required and optional arguments used by a command that are defined in the below way. Either in the code or [documentation](https://docs.liquibase.com) you can see what is each command for and whether it's required or not.
+
 ```java
 static {
 
@@ -61,7 +63,8 @@ updateCommand.setOutput(new WriterOutputStream(output, GlobalConfiguration.OUTPU
 updateCommand.execute();
 ```
 
-### - Dependencies:
+### Dependencies
+
 Dependencies are not useful for calling a command, but they are useful when defining a new command. These specified dependencies are basically part of the different stages of the pipeline execution for a given command.
 ```java
 @Override
@@ -72,8 +75,11 @@ Dependencies are not useful for calling a command, but they are useful when defi
     }
 ```
 What we need to understand here is the above dependencies classes will execute their own `run()` method which is needed to accomplish with the `run()` of the given command, for example update command.
-### - Execution:
+
+### Execution
+
 Each command step class will need to implement their own `run()` method. Basically, this method will have the main business logic of a given command/component.
+
 ```java
 @Override
     public void run(CommandResultsBuilder resultsBuilder) throws Exception {
@@ -89,7 +95,7 @@ CommandScope updateCommand = new CommandScope("update");
         updateCommand.execute();
 ```
 
-# Command Execution examples
+## Command Execution examples
 
 ### Regular use execution example
 
@@ -121,21 +127,25 @@ public class ExampleIntegration  {
 ```
 
 ### Execution in scope example
-A scope refers to an environment where some given set of operations happen. For example, in the context of CLI a Scope refers to the environment where these set of operations will be executed.
-Following with the example of a terminal when we open one it will create a main or parent scope, but we can also create a child scope which will execute some other operations but with the benefit that variables or objects from the parent scope can be accessible. As an example, it could happen the way of accessing files is defined in the parent scope and to make it available to other commands or instructions we can pass it to child scope as shown below:
+
+A scope refers to an environment where a given set of operations happen. For example, in the context of CLI, a Scope refers to the environment where the operations will be executed. The two scopes are parent and child.
+
+In the child scope, we could group and execute additional operations with the benefit that variables or objects from the parent scope are accessible in the child scope.
+
+In this example, the files are defined in the parent scope and are available to the commands in the child scope shown below.
 
 ```java
-  Map<String, Object> scopedSettings = new LinkedHashMap<>();
-  scopedSettings.put(Scope.Attr.resourceAccessor.name(), resourceAccessor);
-  Scope.child(scopeSettings, () {
-    CommandScope commandScope = new CommandScope(UpdateCommandStep.COMMAND_NAME);
-    commandScope.addArgumentValue(DbUrlConnectionCommandStep.URL_ARG, db.getConnectionUrl());
-    commandScope.addArgumentValue(DbUrlConnectionCommandStep.USERNAME_ARG, db.getUsername());
-    commandScope.addArgumentValue(DbUrlConnectionCommandStep.PASSWORD_ARG, db.getPassword());
-    commandScope.addArgumentValue(UpdateCommandStep.CHANGELOG_FILE_ARG, changelogFile);
-    commandScope.addArgumentValue(ShowSummaryArgument.SHOW_SUMMARY, UpdateSummaryEnum.SUMMARY);
-    commandScope.execute();
-  }); 
+Map<String, Object> scopedSettings = new LinkedHashMap<>();
+scopedSettings.put(Scope.Attr.resourceAccessor.name(), resourceAccessor);
+Scope.child(scopeSettings, () {
+  CommandScope commandScope = new CommandScope(UpdateCommandStep.COMMAND_NAME);
+  commandScope.addArgumentValue(DbUrlConnectionCommandStep.URL_ARG, db.getConnectionUrl());
+  commandScope.addArgumentValue(DbUrlConnectionCommandStep.USERNAME_ARG, db.getUsername());
+  commandScope.addArgumentValue(DbUrlConnectionCommandStep.PASSWORD_ARG, db.getPassword());
+  commandScope.addArgumentValue(UpdateCommandStep.CHANGELOG_FILE_ARG, changelogFile);
+  commandScope.addArgumentValue(ShowSummaryArgument.SHOW_SUMMARY, UpdateSummaryEnum.SUMMARY);
+  commandScope.execute();
+}); 
 ```
 
 ## API Documentation
