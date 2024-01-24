@@ -1,10 +1,9 @@
-﻿---
-title: DB2 z/OS
 ---
+title: DB2 iSeries
+---
+# Using Liquibase with IBM DB2 for iSeries
 
-# Using Liquibase with DB2 for z/OS
-
-[DB2 for z/OS](https://www.ibm.com/docs/en/db2-for-zos) is a relational database management system that runs on the mainframe. For more information, see the [DB2 for z/OS documentation page](https://www.ibm.com/docs/en/db2-for-zos/13?topic=getting-started-db2-zos).
+This is a Liquibase DB2 extension for iSeries support. [DB2 for iSeries](https://www.ibm.com/products/db2-database) enables Liquibase to connect to DB2 for iSeries data sources.
 
 !!! note
     This database is supported **at or below the Contributed level**. Functionality may be limited. Databases at the Contributed level are not supported by the Liquibase support team. Best-effort support is provided through our community forums.  
@@ -27,15 +26,10 @@ If you have an update to these instructions, submit feedback so we can improve t
 
 ### All Users
 
-The latest version of Liquibase has a [pre-installed driver](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) for this database in the `liquibase/internal/lib` directory, so you don't need to install it yourself.
-
 1. Download the required JAR files
 
-    * [DB2 JCC JDBC driver JAR file](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads) ([Maven download](https://mvnrepository.com/artifact/com.ibm.db2/jcc))
-    * [license JAR file](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads), which is required when connecting to a mainframe DB2 database
-    
-    !!! note
-        To use the DB2 JCC JDBC driver, you must purchase the DB2 Connect product. The license file is contained within the activation package for it. For more information regarding the license file, see [Location of the db2jcc\_license\_cisuz.jar file](https://www.ibm.com/support/pages/location-db2jcclicensecisuzjar-file).
+    *   [JDBC driver JAR file](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads) ([Maven download](https://mvnrepository.com/artifact/com.ibm.db2/jcc))
+    *   [Liquibase DB2 extension for iSeries support](https://github.com/liquibase/liquibase-db2i/releases)
 
 1. Copy your JAR files into your Liquibase installation
 
@@ -49,8 +43,6 @@ The latest version of Liquibase has a [pre-installed driver](https://docs.liquib
     liquibase.licenseKey: <paste key here>
     ```
 
-
-
 ### Maven Users (additional step)
 
 If you use Maven, you must [include the driver JAR as a dependency](https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html) in your `pom.xml` file.
@@ -61,22 +53,24 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
     <artifactId>jcc</artifactId>
     <version>11.5.7.0</version>
 </dependency>
+<dependency>
+    <groupId>org.liquibase.ext</groupId>
+    <artifactId>liquibase-db2i</artifactId>
+    <version>{{liquibase.current_version}}</version>
+</dependency>
 ```
 
 ## Database connection
 
 ### Configure connection
 
-1.  Ensure your DB2 on z/OS database is configured. You can check the status by running the [`DISPLAY DATABASE` command](https://www.ibm.com/docs/en/db2-for-zos/13?topic=commands-display-database-db2), which displays status information about DB2 databases.
+1. Ensure your IBM DB2 iSeries database is configured. See [Verifying the Installation](https://www.ibm.com/docs/en/db2/11.5?topic=servers-verifying-installation) for more information.
 
-2.  Specify the database URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format:
+1. Specify the JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other Liquibase property default values. Liquibase does not parse the JDBC URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format.
 
     ```
-    url: jdbc:db2://<servername>:<port>/<dbname>
+    url: jdbc:db2://<server_name>:<port>/<db_name>
     ```
-
-    !!! note
-        The URL for DB2 on z/OS may have different formats, such as `jdbc:db2j:net:`, `jdbc:ibmdb:`, and `jdbc:ids:`, depending on your connection type. For more information, see [URL format for IBM Data Server Driver for JDBC and SQLJ type 4 connectivity](https://www.ibm.com/docs/en/db2-for-zos/13?topic=cdsudidsdjs-url-format-data-server-driver-jdbc-sqlj-type-4-connectivity).
 
     !!! tip
         To apply a Liquibase Pro key to your project, add the following property to the Liquibase properties file: `licenseKey: <paste code here>`
@@ -88,7 +82,6 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
     If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
 
     === "XML example"
-
         ```
         <?xml version="1.0" encoding="UTF-8"?>
         <databaseChangeLog
@@ -114,7 +107,6 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
         ```
 
     === "SQL example"
-
         ```
         -- liquibase formatted sql
     
@@ -126,7 +118,6 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
             Formatted SQL changelogs generated from Liquibase versions before 4.2 might cause issues because of the lack of space after a double dash ( `--` ). To fix this, add a space after the double dash. For example: `-- liquibase formatted sql` instead of `--liquibase formatted sql` and `-- changeset myname:create-table` instead of `--changeset myname:create-table`.
 
     === "YAML example"
-
         ```
         databaseChangeLog:
            - changeSet:
@@ -145,7 +136,6 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
         ```
 
     === "JSON example"
-
         ```
         {
           "databaseChangeLog": [
@@ -178,7 +168,7 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
         }
         ```
 
-2.  Navigate to your project folder in the CLI and run the Liquibase [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
+1.  Navigate to your project folder in the CLI and run the Liquibase [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
 
     ```
     liquibase status --username=test --password=test --changelog-file=<changelog.xml>
@@ -194,7 +184,7 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
     Liquibase command 'status' was executed successfully.
     ```
 
-3.  Inspect the SQL with the [update-sql](https://docs.liquibase.com/commands/update/update-sql.html) command. Then make changes to your database with the [update](https://docs.liquibase.com/commands/update/update.html) command.
+1.  Inspect the SQL with the [update-sql](https://docs.liquibase.com/commands/update/update-sql.html) command. Then make changes to your database with the [update](https://docs.liquibase.com/commands/update/update.html) command.
 
     ```
     liquibase update-sql --changelog-file=<changelog.xml>
@@ -208,13 +198,11 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
     Liquibase command 'update' was executed successfully.
     ```
 
-4.  From a database UI tool, ensure that your database contains the `test_table` you added along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
 
+1.  From a database UI tool, ensure that your database contains the `test_table` you added along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
 
 Now you're ready to start making deployments with Liquibase!
 
 ## Related links
 
-*   [Deploying Changes to DB2 on z/OS using SQL Scripts](db2onzdeploy-sql.md)
-*   [Change Types](https://docs.liquibase.com/change-types/home.html)
-*   [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
+*   [DB2 documentation](https://www.ibm.com/support/knowledgecenter/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0059812.html)
