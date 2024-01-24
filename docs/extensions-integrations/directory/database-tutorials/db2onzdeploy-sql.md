@@ -1,8 +1,8 @@
 ---
-title: DB2 on z/OS SQL Scripts
+title: DB2 z/OS SQL Scripts
 ---
 
-# Deploying Changes to DB2 on z/OS using SQL Scripts
+# Deploying Changes to DB2 for z/OS using SQL Scripts
 
 ## Step 1: Create a SQL folder
 
