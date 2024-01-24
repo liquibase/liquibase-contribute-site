@@ -1,4 +1,5 @@
 site_name: contribute.liquibase.com
+site_url: https://contribute.liquibase.com/
 repo_url: https://github.com/liquibase/liquibase-contribute-site
 edit_uri: ./edit/main/docs
 
