@@ -168,14 +168,14 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
         }
         ```
 
-1.  Navigate to your project folder in the CLI and run the Liquibase [status](../../commands/change-tracking/status.html) command to see whether the connection is successful:
+1.  Navigate to your project folder in the CLI and run the Liquibase [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
 
     ```
     liquibase status --username=test --password=test --changelog-file=<changelog.xml>
     ```
 
     !!! note
-        You can specify arguments in the CLI or keep them in the [Liquibase properties file](../../concepts/connections/creating-config-properties.html).
+        You can specify arguments in the CLI or keep them in the [Liquibase properties file](https://docs.liquibase.com/concepts/connections/creating-config-properties.html).
 
     If your connection is successful, you'll see a message like this:
 
@@ -184,15 +184,10 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
     Liquibase command 'status' was executed successfully.
     ```
 
-1.  Inspect the deployment SQL with the [update-sql](../../commands/update/update-sql.html) command:
+1.  Inspect the SQL with the [update-sql](https://docs.liquibase.com/commands/update/update-sql.html) command. Then make changes to your database with the [update](https://docs.liquibase.com/commands/update/update.html) command.
 
     ```
     liquibase update-sql --changelog-file=<changelog.xml>
-    ```
-
-1.  Then make changes to your database with the [update](../../commands/update/update.html) command:
-
-    ```
     liquibase update --changelog-file=<changelog.xml>
     ```
 
@@ -202,6 +197,7 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
     Liquibase: Update has been successful.
     Liquibase command 'update' was executed successfully.
     ```
+
 
 1.  From a database UI tool, ensure that your database contains the `test_table` you added along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
 
