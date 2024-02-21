@@ -143,7 +143,7 @@ CREATE TABLE test_table (test_id INT, test_column VARCHAR, PRIMARY KEY (test_id)
         }
     }
 }
-update.dependsOn(deploy)</code>
+update.dependsOn('deploy changeLog')</code>
 </pre>
     <li>Run the <code>gradle build</code> command, and then run the following:
     </li><pre xml:space="preserve"><code class="language-text">gradle update</code></pre>
