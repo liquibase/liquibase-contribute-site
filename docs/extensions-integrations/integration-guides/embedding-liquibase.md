@@ -2,10 +2,10 @@
 title: Embedding Liquibase
 ---
 
-# Embedding Liquibase in Your Application
+# Embed Liquibase in Your Application
 
-The Java API allows Liquibase to be embedded directly into your application. 
-This allows you to do things such as run Liquibase automatically within your startup process.
+The Java API allows Liquibase to be embedded directly into an application. 
+This allows you to do things such as run Liquibase automatically within an application startup process.
 
 This can be particularly helpful in environments where you have less control over the deployment process or want a simpler deployment process, such as:
 
@@ -17,18 +17,24 @@ or the [Servlet Listener](../directory/integration-docs/servlet-listener.md). Ho
 
 This guide covers running an "update" operation against a changelog packaged in your application, but the same approach can be
 used to perform any Liquibase logic from your custom integration including rolling back changes, generating SQL, or snapshotting the schema. 
-   
 
-## Getting Started
+## Get Started
 
-Your first step will be to [set up your development environment](../integrations-overview/dev-env-setup.md).
+### Step 1: Setup a development environment
 
-You will also need to create a test [changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) within your application's source code to be packaged with your application.
+Follow these instructions to [set up your development environment](../integrations-overview/dev-env-setup.md).
+
+This step is not needed if you are integrating Liquibase into an existing application.
+
+### Step 2: Create a changelog file
+
+Create a [changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) within your application's source code to be packaged with your application.
+
 The remainder of this guide will assume you have the changelog file `com/example/changelog.xml` in your application's classpath.
-Where in your source repository you put your changelog file will depend on your application's build process.
 
+The location of the changelog in your source repository file will depend on your application's build process.
 
-Finally, you will need to create the class that will run Liquibase: 
+### Step 3: Create a class to run Liquibase
 
 ```java
 package com.example;
@@ -42,15 +48,15 @@ public class MyLiquibaseRunner {
 ```
 
 Where you put this class and how you run it will depend on your application's architecture.
+
 For example, if you are using Spring, you would add the `@Service` annotation.
 Or, if you are running a standalone application, you may add a call to that class from within the `main` method.
 
-The above class doesn't actually run Liquibase yet, but if you have integrated it into your application correctly you should see the log messages on startup.  
+The above class doesn't actually run Liquibase yet, but if you have integrated it into your application correctly you should see the log messages during your application startup.
 
+## Configure The ResourceAccessor
 
-## Configuring The ResourceAccessor
-
-Liquibase uses the ["liquibase.resource.ResourceAccessor"](../../code/api/resource-resourceaccessor.md) interface to find and read changelog files. 
+Liquibase uses the [`liquibase.resource.ResourceAccessor`](../../code/api/resource-resourceaccessor.md) interface to find and read changelog files. 
 Because your changelog file is packaged with your application, you will configure Liquibase to use the `liquibase.resource.ClassLoaderResourceAccessor`.
 
 ```java
@@ -76,7 +82,7 @@ The example code now includes a `Scope.child(....)` call, where we set the `Scop
 The `Scope` object lets you define settings as part of Liquibase's [cascading configuration system](configure-configuration.md).
 
 
-## Running the Update Command
+## Run the Update Command
 
 With your connection and ResourceAccessor set up, you can now run the Liquibase update command.
 
@@ -86,9 +92,8 @@ Liquibase provides a [Command API](calling-commands.md) for running commands fro
 2. Set arguments on the CommandScope with `addArgumentValue()`
 3. Execute the command with `execute()`
 
-While there are constants for the command names and argument names within the Liquibase code, they are found in the various [liquibase.command.CommandStep](https://javadocs.liquibase.com/liquibase-core/liquibase/command/CommandStep.html) 
-implementations and can be difficult to find. 
-Therefore, it's generally easiest to use the command names and arguments strings you find in the Liquibase CLI.  
+While there are constants for the command names and argument names within the Liquibase code, they are found in the various [liquibase.command.CommandStep](https://javadocs.liquibase.com/liquibase-core/liquibase/command/CommandStep.html) implementations and can be difficult to find. 
+Therefore, it's generally easiest to use the command name and argument strings you find in the Liquibase CLI.  
   
 ```java
 package com.example;
@@ -119,9 +124,10 @@ public class MyLiquibaseRunner {
 }
 ```
 
-Make sure you replace the url, username, and password arguments with your actual database connection information.
+!!! note
+      Make sure you replace the url, username, and password arguments with your actual database connection information.
 
-## Optional: Reusing an Existing Database Connection
+## Optional: Reuse an Existing Database Connection
 
 The above example passes the url, username, and password that the update command which creates a new connection.
 However, if you already have logic to create a database connection, you can reuse that connection with Liquibase.
@@ -171,7 +177,8 @@ public class MyLiquibaseRunner {
 ```
 
 !!! note
-    Depending on your database security setup, you may need or want different database credentials for the connection Liquibase uses with than what 
-    your application runs with. Often times the schema manipulation permissions required by Liquibase are different
-    from the data manipulation permissions required by your application.
+    Depending on your database security setup, you may need or want different database credentials for the connection Liquibase uses versus what your application runs with.
+    
+    This is primarily because the schema manipulation permissions required by Liquibase are different from the data manipulation 
+    permissions required by your application.
 
