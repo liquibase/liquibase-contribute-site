@@ -129,7 +129,12 @@ CREATE TABLE test_table (test_id INT, test_column VARCHAR, PRIMARY KEY (test_id)
     }
 }</code></pre>
     <p>Note: Replace the values from the example with your values.</p>
+    
+    <p>Note: If you get the following error, this can often be fixed by changing the Java version or deleting IntelliJ caches. (<a href="https://stackoverflow.com/questions/32905270/intellij-idea-and-gradle-cannot-be-applied-to-groovy-lang-closure">source article</a>)
+    <pre xml:space="preserve"><code class="language-text">main in build cannot be applied to (groovy.lang.Closure)</code></pre>
+    
     <p>Tip: To store other Liquibase properties in a file instead of passing them at runtime, you can continue specifying the properties in the <code>build.gradle</code> file or create a new text file called <code>liquibase.properties</code> and set them there. If you create a Liquibase properties file, specify <code>propsFile "../&lt;liquibase.properties&gt;"</code> in the main section of the <code>build.gradle</code> file, where <code>&lt;liquibase.properties&gt;</code> represents the name of the Liquibase properties file. For more information, see <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">Create and Configure a liquibase.properties File</a>.</p>
+    
     <li>Do your first update by adding the task section to the <code>build.gradle</code> file:
     </li><pre xml:space="preserve"><code class="language-text">task('deploy changeLog') {
     doFirst() {
@@ -143,7 +148,7 @@ CREATE TABLE test_table (test_id INT, test_column VARCHAR, PRIMARY KEY (test_id)
         }
     }
 }
-update.dependsOn(deploy)</code>
+update.dependsOn('deploy changeLog')</code>
 </pre>
     <li>Run the <code>gradle build</code> command, and then run the following:
     </li><pre xml:space="preserve"><code class="language-text">gradle update</code></pre>

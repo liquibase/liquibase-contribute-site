@@ -24,7 +24,11 @@ For more information, please check the
 [compatibility matrix](https://docs.datastax.com/en/driver-matrix/docs/java-drivers.html) and read the 
 [driver documentation](https://docs.datastax.com/en/developer/java-driver/latest/).
 
+## Prerequisites
+
 --8<-- "database-tutorial-prerequisites.md"
+
+### Setup Apache Cassandra
 
 1. Configure the Apache Cassandra environment
 
@@ -112,6 +116,8 @@ If you use Maven, note that this database does not provide its driver JAR on a 
         
     !!! tip
         For more information, see the [specifying Cassandra JDBC connection strings](https://github.com/ing-bank/cassandra-jdbc-wrapper/wiki/JDBC-driver-and-connection-string) documentation.
+
+### Test connection
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
 
