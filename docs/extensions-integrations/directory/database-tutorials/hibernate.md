@@ -146,8 +146,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
 	&lt;/persistence-unit&gt;
 &lt;/persistence&gt;</code></pre>
 
-<li value="4">Create the folder <code>src/main/java/com/liquibase</code>, which will be used for entity classes. In this directory, create a file <code>House.java</code> in a text editor and add the following content:</li>
-<a href="#"><code>House.java</code></a>
+<li value="4">Create the folder <code>src/main/java/com/liquibase</code>, which will be used for entity classes.
+<br/><br/>
+In this directory, open a text editor to create a file named <code>House.java</code> and add the content from the following code block.
+<br/><br/>
+This is a simple example of an Entity, with a generated Id value. This class will be used in the next Entity.
+</li>
+  <a href="#"><code>House.java</code></a>
 	<pre><code class="language-java">package com.liquibase;
 	
 	import java.io.Serializable;
@@ -186,7 +191,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
 		}
 	
 	}</code></pre>
-<li value="5">Create a second file <code>Item.java</code> in the same directory and paste the following:</li>
+  
+  <li value="5">Create a second file <code>Item.java</code> in the same directory and add the content from the following code block.
+  <br/><br/>
+  This Entity includes a many-to-one relationship: each House can be related to many Items.
+  </li>
 <a href="#"><code>Item.java</code></a>
 	<pre><code class="language-java">package com.liquibase;
     

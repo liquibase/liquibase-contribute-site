@@ -1,4 +1,5 @@
-## Prerequisites
+
+### Setup Liquibase
 
 1. Dive into Liquibase concepts with an [Introduction to Liquibase](https://docs.liquibase.com/concepts/introduction-to-liquibase.html).
 2. [Download and install Liquibase](https://docs.liquibase.com/start/install/home.html) on your machine.

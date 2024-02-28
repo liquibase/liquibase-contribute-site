@@ -6,7 +6,11 @@ title: DataStax Astra DB
 
 [DataStax Astra DB](https://www.datastax.com/products/datastax-astra) is a multi-cloud DBaaS built on Apache Cassandra. Astra DB simplifies cloud-native Cassandra application development and reduces deployment time from weeks to minutes. For more information, see [DataStax Astra DB Documentation](https://docs.datastax.com/en/astra/docs/index.html).
 
+## Prerequisites
+
 --8<-- "database-tutorial-prerequisites.md"
+
+### Setup DataStax Astra DB
 
 1.  Configure the DataStax Astra DB database environment:
     1.  Log into your [DataStax Astra DB account](https://astra.datastax.com/).
@@ -84,6 +88,7 @@ If you use Maven, note that this database does not provide its driver JAR on a 
     !!! tip
         For more information about the available options regarding the JDBC connection string for Astra DB, please check [the driver documentation](https://github.com/ing-bank/cassandra-jdbc-wrapper/wiki/JDBC-driver-and-connection-string#connection-to-cloud-databases-dbaas).
 
+### Test connection
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
 

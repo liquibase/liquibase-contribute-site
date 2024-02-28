@@ -147,7 +147,7 @@ spring.datasource.password=
 spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.xml</code></pre>
 <ol start="3">
     <li>Create a changelog file: <code>src/main/resources/db/changelog/db.changelog-master.xml</code>. Liquibase also supports the <code>.sql</code>, <code>.yaml</code>, or <code>.json</code> changelog formats.
-For more information, see <a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.htm">Introduction to Liquibase</a> and <a href="https://docs.liquibase.com/start/home.htm">Getting Started with Liquibase</a>.
+For more information, see <a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html">Introduction to Liquibase</a> and <a href="https://docs.liquibase.com/start/home.html">Getting Started with Liquibase</a>.
     </li>
     <li>Add the following code snippet to your changelog file, including  changesets:
     </li>
