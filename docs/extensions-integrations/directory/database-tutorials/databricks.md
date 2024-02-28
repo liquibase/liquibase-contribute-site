@@ -93,9 +93,11 @@ If you use Maven, note that this database does not provide its driver JAR on a 
 
 Run the following command to confirm you have successfully installed everything:
 
-`liquibase --version`
+```
+liquibase --version
+```
 
-Review the libaries listing output for the two newly installed jar files: (`DatabricksJDBC42-<version>.zip` and `liquibase-databricks-<version>.jar`).
+Review the libaries listing output for the two newly installed jar files: `DatabricksJDBC42-<version>.zip` and `liquibase-databricks-<version>.jar`.
 
 ![Databricks Install Verification](../../../images/extensions-integrations/databricks-install-verification.jpg)
 
@@ -106,9 +108,12 @@ Review the libaries listing output for the two newly installed jar files: (`Data
 1.  Specify the database JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
 
     ```
-    liquibase.command.url: jdbc:databricks://<your_workspace_host_name>:443/default;transportMode=http;ssl=1;httpPath=/sql/1.0/warehouses/<your_warehouse_id>;AuthMech=3;ConnCatalog=main;ConnSchema=<your_connection_database/schema>;
+    liquibase.command.url: jdbc:databricks://<your_workspace_host_name>:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/<your_warehouse_id>;ConnCatalog=<your_catalog>;ConnSchema=<your_schema>;
     ```
-    
+     
+    !!! Note
+        Your base JDBC connection string can be found on the **SQL Warehouses -> *your_warehouse* -> Connection details** tab.
+
     !!! Note
         Additional information on specifying the Databricks JDBC connection can be found in the [Databricks JDBC Driver](https://docs.databricks.com/en/integrations/jdbc/index.html) documentation.
 
