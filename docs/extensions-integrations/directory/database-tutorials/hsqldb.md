@@ -51,7 +51,7 @@
             &lt;column name="test_id" type="int"&gt;
                 &lt;constraints primaryKey="true"/&gt;
             &lt;/column&gt;
-            &lt;column name="test_column" type="varchar"/&gt;
+            &lt;column name="test_column" type="INT"/&gt;
         &lt;/createTable&gt;
     &lt;/changeSet&gt;
 
@@ -60,7 +60,7 @@
 <pre xml:space="preserve"><code class="language-sql">-- liquibase formatted sql
 
 -- changeset liquibase:1
-CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))</code></pre>
+CREATE TABLE test_table (test_id INT, test_column INT, PRIMARY KEY (test_id))</code></pre>
     <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>Formatted SQL <span class="mc-variable General.changelog variable">changelog</span>s generated from Liquibase versions before 4.2 might cause issues because of the lack of space after a double dash ( <code>--</code> ). To fix this, add a space after the double dash. For example: <code>--&#160;liquibase formatted sql</code> instead of <code>--liquibase formatted sql</code> and <code>--&#160;changeset myname:create-table</code> instead of <code>--changeset myname:create-table</code>.</p>
 
 <a style="font-size: 18pt;"> YAML example</a>

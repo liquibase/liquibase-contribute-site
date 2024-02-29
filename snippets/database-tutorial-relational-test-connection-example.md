@@ -11,7 +11,7 @@
           CREATE TABLE test_table 
           (
             test_id INT, 
-            test_column VARCHAR(255), 
+            test_column INT, 
             PRIMARY KEY (test_id)
           )
           ```
@@ -35,7 +35,7 @@
                 <column name="test_id" type="int">
                   <constraints primaryKey="true"/>
                 </column>
-                <column name="test_column" type="varchar"/>
+                <column name="test_column" type="INT"/>
               </createTable>
             </changeSet>
 

@@ -5,7 +5,7 @@ description: Learn how to use Liquibase with Databricks SQL Warehouses to automa
 
 # Using Liquibase with Databricks Data Lakehouses
 
-<!-- <small>Verified on: February 28, 2024</small> -->
+<small>Verified on: February 29, 2024</small>
 
 A data lakehouse is a new, open data management architecture that combines the flexibility, cost-efficiency, and scale of data lakes with the data management and ACID transactions of data warehouses, enabling business intelligence (BI) and machine learning (ML) on all data.
 
@@ -139,7 +139,7 @@ Review the libaries listing output for the two newly installed jar files: `Datab
           CREATE TABLE test_table 
           (
             test_id INT, 
-            test_column VARCHAR(255), 
+            test_column INT, 
             PRIMARY KEY (test_id)
           )
           ```
@@ -163,7 +163,7 @@ Review the libaries listing output for the two newly installed jar files: `Datab
                 <column name="test_id" type="int">
                   <constraints primaryKey="true"/>
                 </column>
-                <column name="test_column" type="varchar"/>
+                <column name="test_column" type="INT"/>
               </createTable>
             </changeSet>
 
@@ -236,6 +236,29 @@ Review the libaries listing output for the two newly installed jar files: `Datab
     1 changeset has not been applied to <your_jdbc_url>
     Liquibase command 'status' was executed successfully.
     ```
+    
+    !!! Tip
+    
+        **If you see this error message:**
+    
+        ```
+        Connection could not be created to jdbc:databricks://...; with driver 
+        com.databricks.client.jdbc.Driver.  
+
+        [Databricks][JDBCDriver](500593) Communication link failure. Failed to connect to server. 
+        Reason: javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: 
+        PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: 
+        unable to find valid certification path to requested target.
+        ```
+    
+        **This is the likely problem:**
+    
+        This issue was seen with Java 1.8. The SSL certificate is not available in that version of Java.
+    
+        **This is the suggested resolution:**
+    
+        Upgrade Java to a more recent version.
+    
 
 1. Inspect the SQL with the [`update-sql`](https://docs.liquibase.com/commands/update/update-sql.html) command. Then, make changes to your database with the [`update`](https://docs.liquibase.com/commands/update/update.html) command.
 
