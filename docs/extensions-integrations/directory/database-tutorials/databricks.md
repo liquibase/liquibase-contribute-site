@@ -19,38 +19,29 @@ For more information on Databricks, see the [Databricks](https://www.databricks.
 
 ### Setup Databricks
 
-1. If you don't already have a Databricks account, click the [Try Databricks](https://www.databricks.com) button to sign up. 
+1. Create a Databricks account and workspace
 
-1. Login to Databricks and select Data from the left side navigation
-
-    ![Databricks Data Tab](../../../images/extensions-integrations/databricks-data-tab.jpg)
-
-1. If you don't already have a top level metastore, create one to hold your catalogs, schemas (also called databases), and tables/views.
-
-    1. Click the Create Metastore button on the top right of the screen
-    
-        ![Databricks Create Metastore Button](../../../images/extensions-integrations/databricks-create-metastore-button.jpg)
-    
-    1. Enter your metastore Name and select a Region for your datastore.
-
-        ![Databricks Metastore Setup](../../../images/extensions-integrations/databricks-metastore-setup.jpg)
-    
-    1. Create a Workspace and assign it to the Metastore.
-    
-        ![Databricks Assign Workspace To Metastore](../../../images/extensions-integrations/databricks-assign-workspace-to-metastore.jpg)
+    If you don't already have a Databricks account and workspace, follow the [Databricks Getting Started](https://docs.databricks.com/en/getting-started/index.html) instructions.
 
 1. Navigate to your Workspaces tab and click the Open Workspace button in the upper right of the page.
 
     ![Databricks Open Workspace](../../../images/extensions-integrations/databricks-open-workspace.jpg)
 
+1. Create a SQL Warehouse
+
+    If you don't have a SQL Warehouse set up, follow the Databricks instructions on [Creating a SQL Warehouse](https://docs.databricks.com/en/compute/sql-warehouse/create-sql-warehouse.html)
+
+1. Create a catalog
+
+    If you don't already have a catalog setup, follow the Databricks instructions on [Create and Manage Catalogs](https://docs.databricks.com/en/data-governance/unity-catalog/create-catalogs.html)
+
 1. Click the SQL Editor option in the left navigation, enter your SQL to create your database (also called a schema), and click the Run button
 
-    `CREATE DATABASE IF NOT EXISTS main.liquibase_tutorial_db;`
+    `CREATE DATABASE IF NOT EXISTS <catalog_name>.<database_name>;`
 
     ![Databricks Create Database](../../../images/extensions-integrations/databricks-create-database.jpg)
 
 1. Your database is configured and ready to use.
-
 
 ## Install drivers
 
@@ -93,9 +84,11 @@ If you use Maven, note that this database does not provide its driver JAR on a 
 
 Run the following command to confirm you have successfully installed everything:
 
-`liquibase --version`
+```
+liquibase --version
+```
 
-Review the libaries listing output for the two newly installed jar files: (`DatabricksJDBC42-<version>.zip` and `liquibase-databricks-<version>.jar`).
+Review the libaries listing output for the two newly installed jar files: `DatabricksJDBC42-<version>.zip` and `liquibase-databricks-<version>.jar`.
 
 ![Databricks Install Verification](../../../images/extensions-integrations/databricks-install-verification.jpg)
 
@@ -106,32 +99,161 @@ Review the libaries listing output for the two newly installed jar files: (`Data
 1.  Specify the database JDBC URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL.
 
     ```
-    liquibase.command.url: jdbc:databricks://<your_workspace_host_name>:443/default;transportMode=http;ssl=1;httpPath=/sql/1.0/warehouses/<your_warehouse_id>;AuthMech=3;ConnCatalog=main;ConnSchema=<your_connection_database/schema>;
+    liquibase.command.url: jdbc:databricks://<your_workspace_host_name>:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/<your_warehouse_id>;ConnCatalog=<your_catalog>;ConnSchema=<your_schema>;
     ```
-    
+     
+    !!! Note
+        Your base JDBC connection string can be found on the **SQL Warehouses -> *your_warehouse* -> Connection details** tab.
+
     !!! Note
         Additional information on specifying the Databricks JDBC connection can be found in the [Databricks JDBC Driver](https://docs.databricks.com/en/integrations/jdbc/index.html) documentation.
 
 1. Specify your username and password in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file)
 
-    1. The username, in our case is just “token” for the user or Service Principal you want to manage Liquibase.
+    1. The username, in our case is just “token” for the User or Service Principal you want to manage Liquibase.
 
     ```
     # Enter the username for your Target database.
     liquibase.command.username: token
     ```
     
-    1. This is the user or Service Principal token we want to use to authenticate. This is usually passed in dynamically using frameworks like GitActions + Secrets.
+    1. This is the token for the User or Service Principal we want to authenticate. This is usually passed in dynamically using frameworks like GitActions + Secrets.
     
     ```    
     # Enter the password for your Target database.
     liquibase.command.password: <your_token_here>
     ```
 
-
 ### Test connection
 
---8<-- "database-tutorial-relational-test-connection-example.md"
+
+1. Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.htmlhttps://docs.liquibase.com/concepts/changelogs/changeset.html).
+
+    If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
+
+    === "SQL example"
+          ``` sql
+          -- liquibase formatted sql
+
+          -- changeset my_name:1
+          CREATE TABLE test_table 
+          (
+            test_id INT, 
+            test_column VARCHAR(255), 
+            PRIMARY KEY (test_id)
+          )
+          ```
+          ---
+
+    === "XML example"
+          ``` xml
+          <?xml version="1.0" encoding="UTF-8"?>
+          <databaseChangeLog
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+            xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+            xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+              http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+              http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+              http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+            <changeSet id="1" author="my_name">
+              <createTable tableName="test_table">
+                <column name="test_id" type="int">
+                  <constraints primaryKey="true"/>
+                </column>
+                <column name="test_column" type="varchar"/>
+              </createTable>
+            </changeSet>
+
+          </databaseChangeLog>
+          ```
+          ---
+
+    === "YAML example"
+          ``` yaml
+          databaseChangeLog:
+            - changeSet:
+              id: 1
+              author: my_name
+              changes:
+              - createTable:
+                tableName: test_table
+                columns:
+                - column:
+                  name: test_column
+                    type: INT
+                    constraints:
+                      primaryKey:  true
+                      nullable:  false
+          ```
+          ---
+
+    === "JSON example"
+          ``` json
+          {
+            "databaseChangeLog": [
+              {
+                "changeSet": {
+                  "id": "1",
+                  "author": "my_name",
+                  "changes": [
+                    {
+                      "createTable": {
+                        "tableName": "test_table",
+                        "columns": [
+                          {
+                            "column": {
+                              "name": "test_column",
+                              "type": "INT",
+                              "constraints": {
+                                "primaryKey": true,
+                                "nullable": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+          ```
+          ---
+
+1. Navigate to your project folder in the CLI and run the Liquibase [`status`](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
+
+    ```
+    liquibase status --changelog-file=<changelog.xml>
+    ```
+
+    If your connection is successful, you'll see a message like this:
+
+    ```
+    1 changeset has not been applied to <your_jdbc_url>
+    Liquibase command 'status' was executed successfully.
+    ```
+
+1. Inspect the SQL with the [`update-sql`](https://docs.liquibase.com/commands/update/update-sql.html) command. Then, make changes to your database with the [`update`](https://docs.liquibase.com/commands/update/update.html) command.
+
+    ```
+    liquibase update-sql --changelog-file=<changelog.xml>
+    liquibase update --changelog-file=<changelog.xml>
+    ```
+
+    If your `update` is successful, Liquibase runs each changeset and displays a summary message ending with:
+
+    ```
+    Liquibase: Update has been successful.
+    Liquibase command 'update' was executed successfully.
+    ```
+
+1. From a database UI tool, ensure that your database contains the `test_table` you added along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
+
+Now you're ready to start making deployments with Liquibase!
 
 ## Related links
 

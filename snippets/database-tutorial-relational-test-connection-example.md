@@ -103,7 +103,7 @@
     ```
 
     !!! note
-        You can specify arguments in the CLI or keep them in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">Liquibase properties file.
+        You can specify arguments in the CLI or keep them in the [Liquibase properties file](https://docs.liquibase.com/concepts/connections/creating-config-properties.html).
   
     If your connection is successful, you'll see a message like this:
 
