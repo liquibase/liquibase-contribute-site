@@ -51,7 +51,7 @@ To use Databricks with Liquibase, you need to install two additional JAR file.
 
 1. Download the jar files
     * Download the [Databricks JDBC driver](https://www.databricks.com/spark/jdbc-drivers-download) (`DatabricksJDBC42-<version>.zip`) from driver download site and unzip the folder to locate the `DatabricksJDBC42.jar` file.
-    * Download the [Liquibase Databricks extension](https://github.com/liquibase/liquibase-databricks) (`liquibase-databricks-<version>.jar`) from the GitHub Assets listed at the end of the release.
+    * Download the [Liquibase Databricks extension](https://github.com/liquibase/liquibase-databricks) (`liquibase-databricks-<version>.jar`) from the GitHub Assets listed at the end of the release notes.
 
 1. [Place your JAR file(s)](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) in the `<liquibase_install_dir>/lib` directory.
     * `DatabricksJDBC42.jar`
@@ -123,6 +123,15 @@ Review the libaries listing output for the two newly installed jar files: `Datab
     # Enter the password for your Target database.
     liquibase.command.password: <your_token_here>
     ```
+    
+    !!! tip
+        To find or setup your Databricks user token:
+        
+        1. **Log into your Databricks workspace**.
+        2. **Access the User Settings**. Click on your profile at the bottom left corner of the workspace, then select "User Settings" from the menu.
+        3. **Navigate to the Access Tokens tab**. In the User Settings window, you will find a tab for "Access Tokens."
+        4. **Generate a New Token**. If you haven't already created a token, you can generate a new one by clicking on the "Generate New Token" button. You'll be asked to provide a description for the token and, optionally, set an expiration time for it.
+        5. **Copy the Token**. Once the token is generated, make sure to copy and save it securely. This token will not be shown again, and you'll need it to establish connections to your Databricks SQL Warehouse.
 
 ### Test connection
 
@@ -280,5 +289,8 @@ Now you're ready to start making deployments with Liquibase!
 
 ## Related links
 
-* [Database Change Management on Lakehouse with Databricks SQL and Liquibase](https://medium.com/dbsql-sme-engineering/database-change-management-on-lakehouse-with-databricks-sql-and-liquibase-c3c238781616)
-* [Advanced Schema Management on Databricks with Liquibase](https://medium.com/dbsql-sme-engineering/advanced-schema-management-on-databricks-with-liquibase-1900e9f7b9c0)
+* [Read the Data Warehousing Blog on Databricks](https://medium.com/dbsql-sme-engineering)
+    * [Database Change Management on Lakehouse with Databricks SQL and Liquibase](https://medium.com/dbsql-sme-engineering/database-change-management-on-lakehouse-with-databricks-sql-and-liquibase-c3c238781616)
+    * [Advanced Schema Management on Databricks with Liquibase](https://medium.com/dbsql-sme-engineering/advanced-schema-management-on-databricks-with-liquibase-1900e9f7b9c0)
+* [Databricks GitHub Demo repo](http://github.com/CodyAustinDavis/liquibase_demo)
+* [GitHub extension repo](https://github.com/liquibase/liquibase-databricks)
