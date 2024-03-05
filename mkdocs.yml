@@ -80,6 +80,7 @@ plugins:
         'extensions-integrations/directory/tutorials/springboot.md' : 'extensions-integrations/directory/integration-docs/springboot/springboot.md'
         'extensions-integrations/directory/tutorials/servlet-listener.md' : 'extensions-integrations/directory/integration-docs/servlet-listener.md'
         'extensions-integrations/directory/tutorials/gradle.md' : 'extensions-integrations/directory/integration-docs/gradle.md'
+        'code/api/api-usage.md' : 'extensions-integrations/integration-guides/embedding-liquibase.md'
 
 extra:
   analytics:
