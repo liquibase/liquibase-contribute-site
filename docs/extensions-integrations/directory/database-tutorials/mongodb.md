@@ -103,7 +103,7 @@ If you use Maven, you must also [include the driver JAR as a dependency](https:/
 
           <changeSet id="1" author="your_name" labels="createCollectionLabel" context="createCollectionContext">
             <comment>create_collection_comment</comment>
-            <mongodb:createCollection collectionName="towns_xml"/>;
+            <mongodb:createCollection collectionName="towns_xml"/>
           </changeSet>
         </databaseChangeLog>
         ```
