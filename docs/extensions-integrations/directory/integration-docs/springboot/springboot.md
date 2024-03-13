@@ -40,7 +40,7 @@ To create the project, use [Spring Initializer](https://start.spring.io):
 
     After selecting your options, the project window needs to look similar to the screenshot:
 
-    ![](../springboot.png)
+    ![springboot project page](springboot.png)
 
 6. Click **GENERATE** to download your project template as a `zip` file. Extract it and open in your IDE.
 
