@@ -81,10 +81,10 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
     === "Cypher (SQL) example"
 
         ```
-        -- liquibase formatted cypher
-    
-        -- changeset liquibase:1
-        CREATE (:TestNode {test_property: "Value"});
+        --liquibase formatted cypher
+        
+        --changeset fbiville:my-movie-init
+        CREATE (:Movie {title: 'My Life'})
         ```
 
         !!! Tip
@@ -101,17 +101,13 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
 
         ```
         <?xml version="1.0" encoding="UTF-8"?>
-        <databaseChangeLog
-            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-            xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-            xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-                http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-                http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-            <changeSet id="1" author="Liquibase">
-                <neo4j:cypher>CREATE (:TestNode {test_property: "Value"});</neo4j:cypher>
+        <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                           xmlns:neo4j="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                           xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+            <changeSet id="my-movie-init" author="fbiville">
+                <neo4j:cypher>CREATE (:Movie {title: 'My Life'})</neo4j:cypher>
             </changeSet>
         </databaseChangeLog>
         ```
@@ -120,34 +116,25 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
 
         ```
         databaseChangeLog:
-           - changeSet:
-               id: 1
-               author: Liquibase
-               changes:
-               - neo4j:cypher:
-                   sql: CREATE (:TestNode {test_property: "Value"});
+        - changeSet:
+          id: my-movie-init
+          author: fbiville
+          changes:
+          - cypher: 'CREATE (:Movie {title: ''My Life'', genre: ''Comedy''})'
         ```
 
     === "JSON example"
 
         ```
-        {
-          "databaseChangeLog": [
-            {
-              "changeSet": {
-                "id": "1",
-                "author": "Liquibase",
+        {"databaseChangeLog": [
+            {"changeSet": {
+                "id": "my-movie-init",
+                "author": "fbiville",
                 "changes": [
-                  {
-                    "neo4j:cypher": {
-                      "sql": CREATE (:TestNode {test_property: "Value"});
-                    }
-                  }
+                    {"cypher": "CREATE (:Movie {title: 'My Life', genre: 'Comedy'})"}
                 ]
-              }
-            }
-          ]
-        }
+            }}
+        ]}
         ```
 
 4.  Navigate to your project folder in the CLI and run the Liquibase [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
@@ -177,3 +164,4 @@ If you use Maven, you must [include the driver JAR as a dependency](https://doc
 *   [Neo4j documentation: Neo4j Plugin for Liquibase](https://neo4j.com/labs/liquibase/docs/)
 *   [Neo4j documentation: Welcome to Neo4j](https://neo4j.com/docs/getting-started/current/)
 *   [Neo4j documentation: Graph database concepts](https://neo4j.com/docs/getting-started/current/appendix/graphdb-concepts/)
+
