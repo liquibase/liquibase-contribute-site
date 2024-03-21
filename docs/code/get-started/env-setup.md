@@ -48,18 +48,13 @@ Any version or distribution of Java will work, but the current LTS version is us
 
 [Adoptium](https://adoptium.net/) is a good choice
 
-### 2. Install Maven
+### 2. Check Setup
 
-[Download Maven](https://maven.apache.org/download.cgi) and unzip the archive to a directory on your system. This provides the `mvn` CLI.
-
-This is technically an optional step if you'll eventually use an IDE since most have Maven support built in.
-But installing it separately allows you to better duplicate the minimal build process if troubleshooting your IDE setup.
-
-### 3. Check Setup
+Liquibase includes a built-in wrapper for the [Maven](https://maven.apache.org/index.html) CLI, so you don't have to install it manually.
  
-Run `mvn clean install` which compiles Liquibase, runs the tests, and creates the jar/tar.gz packages.
+To check your setup, run `mvn clean install`. This compiles Liquibase, runs the tests, and creates the jar/tar.gz packages.
 
-You can tell the build worked successfully if you see something like:
+You can tell the build worked successfully if you see something like this at the end of the output:
 
 ```
 [INFO] ------------------------------------------------------------------------
@@ -69,8 +64,6 @@ You can tell the build worked successfully if you see something like:
 [INFO] Finished at: 2023-01-18T14:37:24-06:00
 [INFO] ------------------------------------------------------------------------
 ```
-
-at the end of the output.
 
 It's always good to ensure you can successfully run the CLI from the current master branch before making changes locally.
 
