@@ -52,7 +52,7 @@ Any version or distribution of Java will work, but the current LTS version is us
 
 Liquibase includes a built-in wrapper for the [Maven](https://maven.apache.org/index.html) CLI, so you don't have to install it manually.
  
-To check your setup, run `mvn clean install`. This compiles Liquibase, runs the tests, and creates the jar/tar.gz packages.
+Run `mvn clean install`. This compiles Liquibase, runs the tests, and creates the jar/tar.gz packages.
 
 You can tell the build worked successfully if you see something like this at the end of the output:
 
