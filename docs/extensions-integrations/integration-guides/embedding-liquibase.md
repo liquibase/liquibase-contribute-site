@@ -12,7 +12,7 @@ This can be particularly helpful in environments where you have less control ove
 - For web applications that use continuous delivery and have an automated release process from code check-in through live production which gets executed multiple times per day
 - In packaged applications that are shipped to make the database management portion transparent
 
-Depending on how your application is written, you can use existing integrations such as [Spring Boot](../directory/integration-docs/springboot/springboot.md)
+Depending on how your application is written, you can use existing integrations such as [Spring Boot](../directory/integration-docs/springboot/index.md)
 or the [Servlet Listener](../directory/integration-docs/servlet-listener.md). However, you can also create a custom integration using the Liquibase APIs directly. 
 
 This guide covers running an "update" operation against a changelog packaged in your application, but the same approach can be
