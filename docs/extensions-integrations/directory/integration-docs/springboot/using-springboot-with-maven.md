@@ -2,25 +2,31 @@
 title: With Maven
 ---
 
-# Using Liquibase with Spring Boot and Maven Project
+# Application startup deployments with Liquibase, Spring Boot, and Maven
 
-Use Liquibase with [Spring Boot](https://spring.io/projects/spring-boot#overview) to create and configure standalone Spring applications and automate your database updates. Spring Boot with build systems like Maven allows you to create Java applications started by running `java -jar` or `war` deployments.
+Use [Spring Boot](https://spring.io/projects/spring-boot#overview) with Liquibase to create and configure standalone Spring applications and automate your database updates. Spring Boot with Maven allows you to create Java applications started by running `java -jar` or `war` deployments.
 
-The Liquibase Spring Boot integration ensures the application database is updated along with the application code by using Spring Boot auto-configuration and features.
+The Liquibase Spring Boot integration ensures the application's database is updated along with the application code using Spring Boot auto-configuration.
 
-Tip: To use the `liquibase-maven-plugin` and Spring Boot, see [Using Liquibase Maven Plugin with Spring Boot](https://docs.liquibase.com/tools-integrations/maven/workflows/using-liquibase-maven-plugin-and-springboot.html).
+Using the Liquibase Maven Plugin with Spring Boot has two main features:
 
-To use Liquibase and Spring Boot:
+*   It collects all the `.jar` files in the classpath and builds a single `uber-jar`, which helps to execute your service in more convenient way.
+*   It searches for the `public static void main()` method to flag any classes with that method signature as a runnable class.
+
+## Install Maven
 
 1.  [Install Maven](https://maven.apache.org/download.cgi) and [add it to your path](https://maven.apache.org/install.html).
 2.  Ensure you have [Java Development Kit](https://www.oracle.com/java/technologies/java-se-glance.html) (JDK 8, 11, or 16).
-3.  Create a project by using the Spring Boot application:
+
+## Create a Spring Boot project
+
+1.  Create a project by using the Spring Boot application:
 
     *   If you have an existing Spring Boot project, add the `liquibase-core` dependency to your project `pom.xml`.
     *   To manually create a new Spring Boot project, follow the [Spring Boot Getting Started](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/getting-started.html#getting-started.installing) documentation.
     *   To create a basic Spring Boot project, use a web-based service called [Spring Initializr](https://start.spring.io/).
 
-4. Enter the following information in Spring Initializr:
+1. Enter the following information in Spring Initializr:
 
     *   Project: Maven
     *   Language: Java
@@ -35,11 +41,11 @@ To use Liquibase and Spring Boot:
         *   Java: 8, 11, or 16
     *   Dependencies: Spring Data JPA and Liquibase Migration. The service lets you add your database driver dependency and any developer tool.
 
-5.  Select **GENERATE** to download your project template as a `.zip` file.
-6.  Extract the files and open `pom.xml` in your IDE or text editor. By default, the Liquibase dependency will find the latest `liquibase-core` version. You can edit the Liquibase dependency to include the exact version of Liquibase you want to use.
-7.  Follow the instructions depending on your project.
+1.  Select **GENERATE** to download your project template as a `.zip` file.
+1.  Extract the files and open `pom.xml` in your IDE or text editor. By default, the Liquibase dependency will find the latest `liquibase-core` version. You can edit the Liquibase dependency to include the exact version of Liquibase you want to use.
+1.  Follow the instructions depending on your project.
 
-## Running Liquibase with Spring Boot and the Maven project
+## Configure the database properties
 
 1.  Open the existing Spring Boot `application.properties` file. To find the file, navigate to `src/main/resources/application.properties`.
     
@@ -113,9 +119,11 @@ To use Liquibase and Spring Boot:
     </project>
     ```
 
-5.  Create a text file called `changelog.sql` or use the changelog file from the `examples` directory. Liquibase also supports the `.xml`, `.yaml`, or `.json` changelog formats.
+## Configure the changelog location
 
-6.  Specify the location of the changelog file
+1.  Create a text file called `changelog.sql` or use the changelog file from the `examples` directory. Liquibase also supports the `.xml`, `.yaml`, or `.json` changelog formats.
+
+1.  Specify the location of the changelog file
 
     === "application.properties file"
     
@@ -141,6 +149,7 @@ To use Liquibase and Spring Boot:
         changelog-file: ../path/to/changelog.sql
         ```
 
+## Add changes to the changelog
 7.  Add changesets to your changelog file. Use the following examples depending on the format of the changelog you created:
 
     === "XML example"
@@ -231,7 +240,9 @@ To use Liquibase and Spring Boot:
         }
         ```
 
-8.  Run your first migration with the following command:
+## Deploy the changes
+
+1.  Run your first migration with the following command:
 
     ```
     mvn compile package

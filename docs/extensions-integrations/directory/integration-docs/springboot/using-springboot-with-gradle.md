@@ -1,26 +1,8 @@
 ---
-title: Getting Started
+title: With Gradle
 ---
 
-# Using Liquibase with Spring Boot
-
-The purpose of this tutorial is to guide you through the process of using Liquibase as part of your [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/) workflow. Spring Boot makes it easy to create standalone, production grade Spring-based applications.
-
-## Uses
-
-
-Spring Boot allows you to create Java applications that can be started by using `java -jar` or `war` deployments.
-
-With Spring Boot, some of the heavy lifting of configuring beans to set up things like messaging, database connection, migration, and others are already done for you. You only need to add the correct jar file on the classpath to be picked up by the framework for auto-configuration.
-
-Some Spring Boot features include Profiles, Logging, Security, Caching, Spring Integration, Testing, and more.
-
-## Prerequisites
-
-
-Ensure you have Java Development Kit [(JDK 14+](https://www.oracle.com/java/technologies/javase-downloads.html))
-
-## Tutorial: Liquibase with Spring Boot and Gradle
+# Liquibase with Spring Boot and Gradle
 
 
 The tutorial describes the use of Spring Boot with the Gradle project. To install Gradle and add it to your path, follow [Gradle releases](https://gradle.org/releases/).
@@ -28,7 +10,7 @@ The tutorial describes the use of Spring Boot with the Gradle project. To instal
 !!! Note
     To use Spring Boot and Maven, see [Using Liquibase with Spring Boot and Maven Project](../using-springboot-with-maven).
 
-### Create the project
+## Create the project
 
 To create the project, use [Spring Initializer](https://start.spring.io):
 
@@ -66,7 +48,7 @@ Spring Boot offers a subset of the Liquibase configuration options. In the table
 | `spring.liquibase.url` | `url` | JDBC URL of the database to migrate. If not set, the primary configured data source is used |
 | `spring.liquibase.user` | `username` | Login user of the database to migrate |
 
-### Configure and run Liquibase
+## Configure Liquibase
 
 To start using Liquibase and Spring Boot with Gradle:
 
@@ -123,6 +105,8 @@ To start using Liquibase and Spring Boot with Gradle:
     </databaseChangeLog>
     ```
 
+## Run Liquibase
+
 5.  Run your migration with the following command:
 
     ```
@@ -140,9 +124,3 @@ To start using Liquibase and Spring Boot with Gradle:
 6. From a database UI tool, ensure that your database contains the `house` and `item` tables you added along with the [DATABASECHANGELOG table](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [DATABASECHANGELOGLOCK table](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html).
 
 Source code is available at [https://github.com/juliuskrah/spring-boot-liquibase](https://github.com/juliuskrah/spring-boot-liquibase).
-
-
-## Related links
-
-*   [Database Migration with Liquibase, HikariCP, Hibernate and JPA](https://juliuskrah.com/tutorial/2017/02/26/database-migration-with-liquibase-hikaricp-hibernate-and-jpa/)
-*   [Gradle](https://gradle.org/install/)
