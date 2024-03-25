@@ -16,7 +16,7 @@ Some Spring Boot features include Profiles, Logging, Security, Caching, Spring I
 
 ## Prerequisites
 
-Ensure you have Java Development Kit [(JDK 14+](https://www.oracle.com/java/technologies/javase-downloads.html))
+Ensure you have Java Development Kit [(JDK 17+](https://www.oracle.com/java/technologies/javase-downloads.html))
 
 ## Tutorials
 * [Liquibase with Spring Boot and Gradle](using-springboot-with-gradle.md)

@@ -16,7 +16,7 @@ Using the Liquibase Maven Plugin with Spring Boot has two main features:
 ## Install Maven
 
 1.  [Install Maven](https://maven.apache.org/download.cgi) and [add it to your path](https://maven.apache.org/install.html).
-2.  Ensure you have [Java Development Kit](https://www.oracle.com/java/technologies/java-se-glance.html) (JDK 8, 11, or 16).
+2.  Ensure you have [Java Development Kit](https://www.oracle.com/java/technologies/java-se-glance.html) (JDK 17+).
 
 ## Create a Spring Boot project
 
@@ -38,7 +38,7 @@ Using the Liquibase Maven Plugin with Spring Boot has two main features:
         *   Description: Liquibase Project for Spring Boot
         *   Package name: com.example.liquibase.springbootProject
         *   Packaging: Jar
-        *   Java: 8, 11, or 16
+        *   Java: 17 or later
     *   Dependencies: Spring Data JPA and Liquibase Migration. The service lets you add your database driver dependency and any developer tool.
 
 1.  Select **GENERATE** to download your project template as a `.zip` file.
@@ -82,7 +82,7 @@ Using the Liquibase Maven Plugin with Spring Boot has two main features:
     <name>springbootProject</name>
     <description>Liquibase Project for Spring Boot</description>
     <properties>
-            <java.version>1.8</java.version>
+            <java.version>17</java.version>
     </properties>
     <dependencies>
            <dependency>

@@ -18,7 +18,7 @@ To create the project, use [Spring Initializer](https://start.spring.io):
 2.  Select Java as your **Language**.
 3.  Under **Spring Boot**, select 2.3.4.
 4.  For **Packaging**, select **Jar**.
-5.  Use version 11 for Java.
+5.  Use version 17 or later for Java.
 
     After selecting your options, the project window needs to look similar to the screenshot:
 
