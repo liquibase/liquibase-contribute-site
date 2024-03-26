@@ -1,10 +1,12 @@
 ---
-title: "Milestone 2: Run Tests"
+title: "Milestone 2: Advanced Tests"
 ---
 
 # Configure and Run Test Harness
 
 ## Overview
+
+As you move beyond [foundational support](milestone1-step1.md), the testing requirements become more complex.
 
 Ensuring snapshot and change types work requires going through each specific change type and through each specific object type, then ensuring they execute correctly for all the different argument permutations that are valid for your database.
 

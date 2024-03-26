@@ -12,7 +12,7 @@ The functionality you [tested for milestone 1](milestone1-step2.md) relies on:
 - Create and populate `databasechangelog` table
 - Execute user-specified SQL
 
-## Improving Your Database Class
+## Improving Your Database Support
 
 The standard [liquibase.changelog.ChangeLogHistoryService](https://javadocs.liquibase.com/liquibase-core/liquibase/changelog/ChangeLogHistoryService.html){:target="_blank"},
 [liquibase.lockservice.LockService](https://javadocs.liquibase.com/liquibase-core/liquibase/lockservice/LockService.html){:target="_blank"}, and [liquibase.executor.Executor](https://javadocs.liquibase.com/liquibase-core/liquibase/executor/Executor.html){:target="_blank"}
@@ -22,6 +22,8 @@ If you run into any problems with those standard services, the most likely fix i
 describe how your database works.  
 
 For example, if the `databasechangeloglock` table isn't being created correctly because your database quotes object names in a special way, override the `escapeObjectName` function.
+
+The full list of methods you can override can be found in [liquibase.database.Database API](https://javadocs.liquibase.com/liquibase-core/liquibase/database/Database.html){:target="_blank"}.
 
 !!! tip
 
@@ -51,4 +53,4 @@ After you have made a potential fix to the problem you found, re-run your test a
 
 With Liquibase working against your database, now is a great time to release the first version of your extension and get feedback.
 
-When you are ready to build advanced support, you can move on to [milestone 2](milestone2-step2.md)
+When you are ready to build advanced support, you can move on to [milestone 2](milestone2-step1.md)
