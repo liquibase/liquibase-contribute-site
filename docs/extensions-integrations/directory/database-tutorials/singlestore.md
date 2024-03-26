@@ -62,7 +62,7 @@ If you already created a changelog using the [init project](https://docs.liquiba
                 <column name="test_id" type="int">
                     <constraints primaryKey="true"/>
                 </column>
-                <column name="test_column" type="varchar"/>
+                <column name="test_column" type="INT"/>
             </createTable>
         </changeSet>
     
@@ -72,7 +72,7 @@ If you already created a changelog using the [init project](https://docs.liquiba
     -- liquibase formatted sql
     
     -- changeset liquibase:1
-    CREATE TABLE test_table (test_id INT, test_column VARCHAR(255), PRIMARY KEY (test_id))
+    CREATE TABLE test_table (test_id INT, test_column INT, PRIMARY KEY (test_id))
 
 **Tip**: Formatted SQL changelogs generated from Liquibase versions before 4.2 might cause issues because of the lack of space after a double dash ( `--` ). To fix this, add a space after the double dash. For example: `-- liquibase formatted sql` instead of `--liquibase formatted sql` and `-- changeset myname:create-table` instead of `--changeset myname:create-table`.
 

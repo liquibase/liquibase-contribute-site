@@ -1,4 +1,4 @@
-### Test connection
+
 1. Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.sql`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.htmlhttps://docs.liquibase.com/concepts/changelogs/changeset.html).
 
     If you already created a changelog using the [`init project`](https://docs.liquibase.com/commands/init/project.html) command, you can use that instead of creating a new file. When adding onto an existing changelog, be sure to only add the changeset and to not duplicate the changelog header.
@@ -11,7 +11,7 @@
           CREATE TABLE test_table 
           (
             test_id INT, 
-            test_column VARCHAR(255), 
+            test_column INT, 
             PRIMARY KEY (test_id)
           )
           ```
@@ -35,7 +35,7 @@
                 <column name="test_id" type="int">
                   <constraints primaryKey="true"/>
                 </column>
-                <column name="test_column" type="varchar"/>
+                <column name="test_column" type="INT"/>
               </createTable>
             </changeSet>
 
@@ -103,7 +103,7 @@
     ```
 
     !!! note
-        You can specify arguments in the CLI or keep them in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">Liquibase properties file.
+        You can specify arguments in the CLI or keep them in the [Liquibase properties file](https://docs.liquibase.com/concepts/connections/creating-config-properties.html).
   
     If your connection is successful, you'll see a message like this:
 

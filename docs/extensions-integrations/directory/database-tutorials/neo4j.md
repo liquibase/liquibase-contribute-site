@@ -1,108 +1,167 @@
-<h1>Using Liquibase with Neo4j</h1>
-<p><a href="https://neo4j.com/">Neo4j</a> is a property graph database management system with native graph storage and processing. It uses a graph query language called <a href="https://neo4j.com/docs/getting-started/cypher-intro/">Cypher</a>. For more information, see <a href="https://neo4j.com/docs/">Neo4j Documentation</a>.</p>
-<h2>Supported database versions</h2>
-<ul>
-    <li>3.5+</li>
-</ul>
-<h2>Prerequisites</h2>
-<ol>
-    <li value="1"><a href="https://docs.liquibase.com/concepts/introduction-to-liquibase.html" class="MCXref xref">Introduction to Liquibase</a> – Dive into Liquibase concepts.</li>
-    <li value="2"><a href="https://docs.liquibase.com/start/install/home.html" class="MCXref xref">Install Liquibase</a> – Download Liquibase on your machine.</li>
-    <li value="3"><a href="https://docs.liquibase.com/start/home.html" class="MCXref xref">Get Started with Liquibase</a> – Learn how to use Liquibase with an example database.</li>
-    <li value="4"><a href="https://docs.liquibase.com/start/design-liquibase-project.html" class="MCXref xref">Design Your Liquibase Project</a> – Create a new <span class="mc-variable General.Liquibase variable">Liquibase</span> project folder and organize your changelogs</li>
-    <li value="5"><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html" class="MCXref xref">How to Apply Your Liquibase Pro License Key</a> – If you use <span class="mc-variable General.LBPro variable">Liquibase Pro</span>, activate your license.</li>
-</ol>
-<p>To access Neo4j, do one of the following:</p>
-<ul>
-    <li><a href="https://neo4j.com/download/">Download Neo4j Desktop locally</a>
-    </li>
-    <li><a href="https://hub.docker.com/_/neo4j">Configure Neo4j locally with Docker</a>
-    </li>
-    <li><a href="https://neo4j.com/cloud/platform/aura-graph-database/">Create a Neo4j AuraDB&#160;cloud instance</a>
-    </li>
-    <li><a href="https://neo4j.com/sandbox/">Launch a Neo4j Aura&#160;sandbox instance</a>
-    </li>
-</ul>
-<h2>Install drivers</h2>
-<p>To use Liquibase and Neo4j, you need the latest JAR from the <a href="https://mvnrepository.com/artifact/org.liquibase.ext/liquibase-neo4j">Liquibase extension for Neo4j</a> (<a href="https://github.com/liquibase/liquibase-neo4j/releases">GitHub link</a>).</p>
-<p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p><p>If you use Maven, you must <a href="https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html">include the driver JAR&#160;as a dependency</a> in your <code>pom.xml</code> file.</p><pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
-    &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
-    &lt;artifactId&gt;liquibase-neo4j&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-<p>The Neo4j extension has native JDBC connectivity support in version 4.19.0+. If you're using an earlier version, you must also install a third-party <a href="https://github.com/neo4j-contrib/neo4j-jdbc">JDBC driver</a> to connect to Liquibase. For driver configuration information, see <a href="https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-configuration.md">Neo4j Configuration</a>. For additional JARs to integrate Neo4j with your preferred programming language, see <a href="https://neo4j.com/docs/getting-started/current/languages-guides/">Connecting to Neo4j</a>.</p>
-<h2 id="test-your-connection">Test your connection</h2>
-<ol>
-    <li value="1">Ensure your Neo4j database is configured. See <a href="https://neo4j.com/docs/operations-manual/current/">Neo4j Operations Manual</a> and <a href="https://neo4j.com/docs/aura/auradb/getting-started/create-database/">Neo4j AuraDB: Creating an instance</a> for more information.</li>
-    <li value="2">Specify the database URL in the <code><a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html"><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></a></code> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format: </li><pre xml:space="preserve"><code class="language-text">url: jdbc:neo4j:bolt://&lt;host&gt;:&lt;port&gt;/?username=foo,password=bar</code></pre>
-    <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span> The Liquibase extension for Neo4j only supports connections through the Bolt protocol, not HTTP.</p>
-    <p>For more information about the JDBC connection, see <a href="http://neo4j-contrib.github.io/neo4j-jdbc/">Neo4j JDBC Driver Documentation § Technical Reference</a>.</p>
-    <p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>To apply a <span class="mc-variable General.LBPro variable">Liquibase Pro</span> key to your project, add the following property to the Liquibase properties file: <code>licenseKey: &lt;paste code here&gt;</code></p>
-</ol>
-<ol start="3">
-    <li value="3">Create a text file called <a href="https://docs.liquibase.com/concepts/changelogs/home.html">changelog</a> (<code>.xml</code>, <code>.cypher</code>, <code>.json</code>, or <code>.yaml</code>) in your project directory and add a <a href="https://docs.liquibase.com/concepts/changelogs/changeset.html">changeset</a>. The <code>&lt;neo4j:cypher&gt;</code>&#160;<span class="mc-variable General.changetypes variable">Change Type</span> has the same behavior as the <code>&lt;<a href="https://docs.liquibase.com/change-types/sql.html" class="MCXref xref">sql</a>&gt;</code>&#160;<span class="mc-variable General.changetypes variable">Change Type</span>. For more information about Cypher syntax, see the <a href="https://neo4j.com/docs/cypher-manual/current/introduction/">Neo4j Cypher Manual</a> (general syntax) the <a href="https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-features.md">Neo4j Extension Cypher Manual</a> (Liquibase syntax).</li>
-    <a style="font-size: 18pt;"> XML example</a>
-        <pre xml:space="preserve"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<code>&lt;databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd"&gt;</code>
-    &lt;changeSet id="1" author="Liquibase"&gt;
-        &lt;neo4j:cypher&gt;CREATE (:TestNode {test_property: "Value"});&lt;/neo4j:cypher&gt;
-    &lt;/changeSet&gt;
-&lt;/databaseChangeLog&gt;</code></pre>
-<a style="font-size: 18pt;"> Cypher (SQL) example</a>
-    <pre xml:space="preserve"><code class="language-sql">-- liquibase formatted cypher
+---
+title: Neo4j
+---
 
--- changeset liquibase:1
-CREATE (:TestNode {test_property: "Value"});</code></pre>
-<p class="tip" data-mc-autonum="&lt;b&gt;Tip: &lt;/b&gt;"><span class="autonumber"><span><b>Tip: </b></span></span>Formatted SQL/Cypher <span class="mc-variable General.changelog variable">changelog</span>s generated from Liquibase versions before 4.2 might cause issues because of the lack of space after a double dash ( <code>--</code> ). To fix this, add a space after the double dash. For example: <code>--&#160;liquibase formatted cypher</code> instead of <code>--liquibase formatted cypher</code> and <code>--&#160;changeset myname:create</code> instead of <code>--changeset myname:create</code>.</p>
-<a style="font-size: 18pt;"> YAML example</a>
-<pre xml:space="preserve"><code class="language-yaml">databaseChangeLog:
-   - changeSet:
-       id: 1
-       author: Liquibase
-       changes:
-       - neo4j:cypher:
-           sql: CREATE (:TestNode {test_property: "Value"});</code></pre>
-                                            <a style="font-size: 18pt;"> JSON example</a>
-                                                <pre><code class="language-json">{
-  "databaseChangeLog": [
-    {
-      "changeSet": {
-        "id": "1",
-        "author": "Liquibase",
-        "changes": [
-          {
-            "neo4j:cypher": {
-              "sql": CREATE (:TestNode {test_property: "Value"});
-            }
-          }
-        ]
-      }
-    }
-  ]
-}</code></pre>
-    <li value="4">Navigate to your project folder in the CLI and run the Liquibase&#160;<a href="https://docs.liquibase.com/commands/change-tracking/status.html" class="MCXref xref">status</a> command to see whether the connection is successful:</li><pre xml:space="preserve"><code class="language-text">liquibase status --username=test --password=test --changelog-file=&lt;changelog.xml&gt;</code></pre>
-    <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>You can pass arguments in the CLI or keep them in the Liquibase properties file.</p>
-    <li value="5">Inspect the SQL with  the <a href="https://docs.liquibase.com/commands/update/update-sql.html" class="MCXref xref">update-sql</a> command. Then make changes to your database with the <a href="https://docs.liquibase.com/commands/update/update.html" class="MCXref xref">update</a> command.</li><pre xml:space="preserve"><code class="language-text">liquibase update-sql --changelog-file=&lt;changelog.xml&gt;
-liquibase update --changelog-file=&lt;changelog.xml&gt;</code></pre>
-    <li value="6">
-        <p>From the Neo4j browser, ensure that your database contains the <span class="mc-variable General.changelog variable">changelog</span> node by running <code>MATCH (c:__LiquibaseChangeLog) RETURN c</code>.</p>
-        <p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>The <code>__LiquibaseChangeLogLock</code> node is only present during an active Liquibase execution, not after, so it isn't normally visible.</p>
-    </li>
-</ol>
-<h2>Related links</h2>
-<ul>
-    <li><a href="https://neo4j.com/labs/liquibase/docs/">Neo4j documentation: Neo4j Plugin for Liquibase</a>
-    </li>
-    <li><a href="https://neo4j.com/docs/getting-started/current/">Neo4j documentation: Welcome to Neo4j</a>
-    </li>
-    <li><a href="https://neo4j.com/docs/getting-started/current/appendix/graphdb-concepts/">Neo4j documentation: Graph database concepts</a>
-    </li>
-</ul>
+# Using Liquibase with Neo4j
+
+[Neo4j](https://neo4j.com/) is a property graph database management system with native graph storage and processing. It uses a graph query language called [Cypher](https://neo4j.com/docs/getting-started/cypher-intro/). For more information, see [Neo4j Documentation](https://neo4j.com/docs/).
+
+## Supported database versions
+
+*   3.5+
+
+## Prerequisites
+
+* [Introduction to Liquibase](https://docs.liquibase.com/concepts/introduction-to-liquibase.html) – Dive into Liquibase concepts.
+* [Install Liquibase](https://docs.liquibase.com/start/install/home.html) – Download Liquibase on your machine.
+
+To access Neo4j, do one of the following:
+
+*   [Download Neo4j Desktop locally](https://neo4j.com/download/)
+*   [Configure Neo4j locally with Docker](https://hub.docker.com/_/neo4j)
+*   [Create a Neo4j AuraDB cloud instance](https://neo4j.com/cloud/platform/aura-graph-database/)
+*   [Launch a Neo4j Aura sandbox instance](https://neo4j.com/sandbox/)
+
+## Install drivers
+
+### All Users
+
+1. Download the following JAR files:
+    * [Liquibase extension for Neo4j](https://github.com/liquibase/liquibase-neo4j/releases) ([Maven Link](https://mvnrepository.com/artifact/org.liquibase.ext/liquibase-neo4j))
+    
+    !!! Warning
+        **Liquibase 4.23.0 is not compatible with the Neo4j Extension**
+        
+        Upgrade both core and the extension to 4.23.1 (or later).
+        
+        Or, use Liquibase core 4.21.1 and the Neo4j extension at version 4.21.1.2.
+
+1. [Place the JAR file(s)](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) in the `liquibase/lib` directory.
+
+!!! Note
+    The Neo4j extension has native JDBC connectivity support in version 4.19.0+.
+    
+    If you're using an earlier version, you must also install a third-party [JDBC driver](https://github.com/neo4j-contrib/neo4j-jdbc) 
+    to connect to Liquibase. 
+    
+    For driver configuration information, see [Neo4j Configuration](https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-configuration.md). 
+    For additional JARs to integrate Neo4j with your preferred programming language, see [Connecting to Neo4j](https://neo4j.com/docs/getting-started/current/languages-guides/).
+    
+### Maven Users (additional step)
+
+If you use Maven, you must [include the driver JAR as a dependency](https://docs.liquibase.com/tools-integrations/maven/maven-pom-file.html) in your `pom.xml` file.
+
+```
+<dependency>
+    <groupId>org.liquibase.ext</groupId>
+    <artifactId>liquibase-neo4j</artifactId>
+    <version>[4.26.0.1,)</version>
+</dependency>
+```
+
+## Test your connection
+
+1.  Ensure your Neo4j database is configured. See [Neo4j Operations Manual](https://neo4j.com/docs/operations-manual/current/) and [Neo4j AuraDB: Creating an instance](https://neo4j.com/docs/aura/auradb/getting-started/create-database/) for more information.
+2.  Specify the database URL in the [`liquibase.properties`](https://docs.liquibase.com/concepts/connections/creating-config-properties.html) file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can either specify the full database connection string or specify the URL using your database's standard JDBC format:
+
+    ```
+    url: jdbc:neo4j:bolt://<host>:<port>
+    ```
+      
+    !!! Note
+        The Liquibase extension for Neo4j only supports connections through the Bolt protocol, not HTTP.
+
+        For more information about the JDBC connection, see [Neo4j JDBC Driver Documentation § Technical Reference](http://neo4j-contrib.github.io/neo4j-jdbc/).
+
+    !!! Tip
+         To apply a Liquibase Pro key to your project, add the following property to the Liquibase properties file: `licenseKey: <paste code here>`
+
+3.  Create a text file called [changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (`.xml`, `.cypher`, `.json`, or `.yaml`) in your project directory and add a [changeset](https://docs.liquibase.com/concepts/changelogs/changeset.html). The `<neo4j:cypher>` change type has the same behavior as the <[`sql`](https://docs.liquibase.com/change-types/sql.html)> change type. For more information about Cypher syntax, see the [Neo4j Cypher Manual](https://neo4j.com/docs/cypher-manual/current/introduction/) (general syntax) the [Neo4j Extension Cypher Manual](https://github.com/liquibase/liquibase-neo4j/blob/main/docs/reference-features.md) (Liquibase syntax).
+
+    === "Cypher (SQL) example"
+
+        ```
+        --liquibase formatted cypher
+        
+        --changeset fbiville:my-movie-init
+        CREATE (:Movie {title: 'My Life'})
+        ```
+
+        !!! Tip
+            Formatted SQL/Cypher changelogs generated from Liquibase versions before 4.2 might cause issues because of the lack of 
+            space after a double dash ( `--` ). To fix this, add a space after the double dash. 
+            
+            For example: 
+            
+            `-- liquibase formatted cypher` instead of `--liquibase formatted cypher` and 
+           
+            `-- changeset myname:create` instead of `--changeset myname:create`.
+
+    === "XML example"
+
+        ```
+        <?xml version="1.0" encoding="UTF-8"?>
+        <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                           xmlns:neo4j="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                           xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+            <changeSet id="my-movie-init" author="fbiville">
+                <neo4j:cypher>CREATE (:Movie {title: 'My Life'})</neo4j:cypher>
+            </changeSet>
+        </databaseChangeLog>
+        ```
+
+    === "YAML example"
+
+        ```
+        databaseChangeLog:
+        - changeSet:
+          id: my-movie-init
+          author: fbiville
+          changes:
+          - cypher: 'CREATE (:Movie {title: ''My Life'', genre: ''Comedy''})'
+        ```
+
+    === "JSON example"
+
+        ```
+        {"databaseChangeLog": [
+            {"changeSet": {
+                "id": "my-movie-init",
+                "author": "fbiville",
+                "changes": [
+                    {"cypher": "CREATE (:Movie {title: 'My Life', genre: 'Comedy'})"}
+                ]
+            }}
+        ]}
+        ```
+
+4.  Navigate to your project folder in the CLI and run the Liquibase [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see whether the connection is successful:
+
+    ```
+    liquibase status --username=test --password=test --changelog-file=<changelog.xml>
+    ```
+
+    !!! Note
+        You can pass arguments in the CLI or keep them in the Liquibase properties file.
+
+5.  Inspect the SQL with the [update-sql](https://docs.liquibase.com/commands/update/update-sql.html) command. Then make changes to your database with the [update](https://docs.liquibase.com/commands/update/update.html) command.
+
+    ```
+    liquibase update-sql --changelog-file=<changelog.xml>
+    liquibase update --changelog-file=<changelog.xml>
+    ```
+
+6.  From the Neo4j browser, ensure that your database contains the changelog node by running `MATCH (c:__LiquibaseChangeLog) RETURN c`.
+    
+    !!! Note
+        The `__LiquibaseChangeLogLock` node is only present during an active Liquibase execution, not after, so it isn't normally visible.
+    
+
+## Related links
+
+*   [Neo4j documentation: Neo4j Plugin for Liquibase](https://neo4j.com/labs/liquibase/docs/)
+*   [Neo4j documentation: Welcome to Neo4j](https://neo4j.com/docs/getting-started/current/)
+*   [Neo4j documentation: Graph database concepts](https://neo4j.com/docs/getting-started/current/appendix/graphdb-concepts/)
+
