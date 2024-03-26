@@ -46,9 +46,26 @@ For tests that are failing because how Liquibase interacts with the database nee
 
 The general pattern for both is to create a new class that returns a higher priority **_if and only if_** Liquibase is using the `Database` class you defined in [milestone 1](milestone1-step1.md).
 
-## Next Step
+!!! tip
 
-Once all the Test Harness tests are passing, you will be able to use change types in XML/YAML/JSON changelogs as well as any snapshot-based functionality.
+    What method you implement to specify the Database implementation your new generator classes are for will depend on the specific class you are implementing.
+
+    See the corresponding documentation pages for more information and examples. 
+
+## Iterate
+
+The first time you run the tests, you will likely get many failures, but don't be discouraged. Often times the first few fixes you make will resolve many of the failures.
+
+After you have made a potential fix, re-run the tests to ensure it solved the problem and then move on to the next failure. 
+You should quickly pick up the general code patterns, and most of the effort is finding the correct SQL syntax for your database.
+
+!!! tip
+    
+    If your database does not support a particular feature, make sure you are handling that in `validate()` or `supports()` methods as appropriate.   
+
+## Complete
+
+Once all the Test Harness tests are passing, you will be able to use any of the standard change types in XML/YAML/JSON changelogs as well as any snapshot-based functionality.
 For example, all of this should now work:
 
 - `liquibase update` with `<createTable...` in the changelog
@@ -58,3 +75,14 @@ For example, all of this should now work:
 - `liquibase diff-changelog`
 - `liquibase generate-changelog`
 
+Now is a great time to release a new version of your extension :material-party-popper:
+
+## Next Steps
+
+If you are looking to move beyond standard functionality into custom change types or more advanced features, see the [Extension Guides](../index.md) 
+for more information, including:
+
+- [Add a Change Type](../add-a-change-type.md)
+- [Add a Precondition](../add-a-precondition.md)
+- [Add a Snapshot Generator](../add-a-snapshot-generator.md)
+- [Add a Native Database Executor](../add-a-native-executor.md)

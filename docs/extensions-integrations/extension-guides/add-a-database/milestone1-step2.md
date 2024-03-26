@@ -38,11 +38,12 @@ Once `update` works, any Liquibase functionality that doesn't rely on modeled ch
 
 ## Next Steps
 
-If you run into problems when testing, [see step 3](milestone1-step3.md).
+If/when you run into problems when testing, [go to step 3](milestone1-step3.md).
 
-If everything seems to work, Congratulations!! :material-party-popper: Now is a great time to release the first version of your extension
+If everything seems to work, Congratulations!! :material-party-popper: Now is a great time to release the first version of your extension.
+After releasing, you can move on to [Milestone 2](milestone2-step1.md) to add advanced support.
 
 !!! tip
 
-    If you'd like your database extension to be included in the main Liquibase documentation and be a more official part of Liquibase, contact the Liquibase team and we can work
+    If you'd like your database extension to be included in the main Liquibase documentation and be a more official part of Liquibase, [contact the Liquibase team](mailto:kevin@liquibase.com) and we can work
     with you to bring it more officially into the fold.

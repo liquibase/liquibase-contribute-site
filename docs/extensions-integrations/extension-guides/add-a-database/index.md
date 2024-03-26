@@ -4,8 +4,10 @@ title: Overview
 
 # Adding Support for Additional Databases
 
-Liquibase is designed to be cross-database and therefore separates the database-specific logic from the overall database-agnostic code.
-Therefore, the overall process of adding support for a new database is finding and fixing the specific places where the default database interaction logic
+Liquibase is designed to be cross-database and separates the database-specific logic from the overall database-agnostic code.
+
+In general, Liquibase works against standard SQL and JDBC calls so most functionality works out of the box.
+Therefore, the overall process of adding support for a new database is finding and fixing the specific places where the default logic
 doesn't work with your database.
 
 This work is broken up into two milestones:
@@ -13,7 +15,16 @@ This work is broken up into two milestones:
 1. [Foundational Support](#foundational) which enables Liquibase to understand your database and get basic update/rollback logic working
 2. [Advanced Support](#advanced) which enables "change type" and snapshot-based functionality
 
-In each milestone, you have an end goal of working functionality and have a specific subset of interfaces to implement. 
+In each milestone, there is an end goal of working functionality and have a specific subset of interfaces to implement. 
+
+!!! note
+
+    This guide assumes you are adding support for a SQL-based relational database. 
+    
+    NoSQL and non-relational databases use the same process, but there there is less default behavior to rely on 
+    and so there will be more changes to make.
+
+    If you are interested in adding support for a NoSQL database, contact [the Liquibase team](mailto:kevin@liquibase.com) for more information.
 
 ## Prerequisites
 
@@ -22,10 +33,6 @@ You will be creating classes, overriding methods, and working with inheritance h
 
 You will also need to understand how to work with the new database.
 As you hit places where Liquibase incorrectly assumes particular SQL will work against your database, you will need to know what the correct SQL is.
-
-Finally, this section assumes you are adding support for a SQL-based database. 
-NoSQL and non-relational databases use this exact same process, but there will be more changes to make and you will need to re-implement more complex interfaces.
-Therefore, to keep this information more streamlined it is only focusing on what needs to be done for relational databases. 
 
 ## Project Setup
 
@@ -58,15 +65,4 @@ The steps in this phase are:
 
 ## Next Steps
 
-Congratulations! You can certainly stop here and use all the standard Liquibase functionality against your database. 
-
-However, if there is new and unique functionality your database supports, you can always expand beyond Liquibase's standard logic to 
-work with it.
-
-Perhaps your database supports different object types? Add new `DatabaseObject` classes to your extension and snapshot to see them in diff operations.
-
-Does your database have statements or operations which you would like to wrap in custom Change functions? Add new `Change` classes to your extension and the `SqlGenerator` for it.
-
-Any other new functionality can be bundled into your extension, but also think about the scope of the functionality you are adding. 
-If it is truly unique to this database you can certainly add it to this extension, but if it is something that can be used beyond your database it is likely best packaged as an independent exception.  
-
+The first step in foundational support is to [create your new `liquibase.database.Database` implementation](milestone1-step1.md).
