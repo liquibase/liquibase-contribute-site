@@ -6,16 +6,16 @@ title: Overview
 
 Liquibase is designed to be cross-database and separates the database-specific logic from the overall database-agnostic code.
 
-In general, Liquibase works against standard SQL and JDBC calls so most functionality works out of the box.
-Therefore, the overall process of adding support for a new database is finding and fixing the specific places where the default logic
-doesn't work with your database.
+Liquibase works with standard SQL and JDBC calls so most new database extension functionality works out of the box.
 
-This work is broken up into two milestones:
+The overall process of adding support for a new database is focused on finding and fixing the specific places where the default logic doesn't work for your database.
 
-1. [Foundational Support](#foundational) which enables Liquibase to understand your database and get basic update/rollback logic working
-2. [Advanced Support](#advanced) which enables "change type" and snapshot-based functionality
+This extension guide is broken up into two milestones:
 
-In each milestone, there is an end goal of working functionality and have a specific subset of interfaces to implement. 
+1. [Foundational Support](#foundational-support) which enables Liquibase to understand your database and get basic update/rollback logic working
+2. [Advanced Support](#advanced-support) which enables "change type" and snapshot-based functionality
+
+Each milestone has a goal of working functionality using a specific subset of interfaces. 
 
 !!! note
 
@@ -24,27 +24,26 @@ In each milestone, there is an end goal of working functionality and have a spec
     NoSQL and non-relational databases use the same process, but there there is less default behavior to rely on 
     and so there will be more changes to make.
 
-    If you are interested in adding support for a NoSQL database, contact [the Liquibase team](mailto:kevin@liquibase.com) for more information.
+    If you are interested in adding support for a NoSQL database, contact [the Liquibase team](mailto:community@liquibase.com) for more information.
 
 ## Prerequisites
 
 Implementing support for additional databases requires an understanding of Java. 
 You will be creating classes, overriding methods, and working with inheritance hierarchies.
 
-You will also need to understand how to work with the new database.
-As you hit places where Liquibase incorrectly assumes particular SQL will work against your database, you will need to know what the correct SQL is.
+You will also need to understand how to work with the new database. As you find situations where Liquibase incorrectly assumes particular SQL will work for your database, you will need to know what the correct SQL needs to be.
 
 ## Project Setup
 
 If you have not already created a repository to hold your code, see [Your First Extension](../../extensions-overview/your-first-extension.md) in the Getting Started guide. 
 
-## <a name="foundational"></a>Foundational Support
+## Foundational Support
 
-The first milestone is to have Liquibase understand how your database works and be able to run any functionality that depends on user-specified SQL.
+The first milestone is to have Liquibase understand how your database works and to be able to run any functionality that depends on user-specified SQL.
 
-Basically "you can run update and rollback using [Formatted SQL](https://docs.liquibase.com/concepts/changelogs/sql-format.html){:target="_blank"} or 
-the [sql change type](https://docs.liquibase.com/change-types/sql.html){:target="_blank"} in xml/yaml/json. 
-You will not be able to use more complex change types like `createTable` or use `snapshot` or `generateChangelog` functionality until you have finished [milestone 2](#advanced)
+You will be able to run update and rollback commands using a [Formatted SQL](https://docs.liquibase.com/concepts/changelogs/sql-format.html){:target="_blank"} changelog or you can use the [`sql`](https://docs.liquibase.com/change-types/sql.html){:target="_blank"} change type in a xml/yaml/json changelog. 
+
+You will not be able to use more complex change types like `createTable`. You will also not be able to use `snapshot` or `generateChangelog` commands until you have finished [milestone 2](#advanced-support)
 
 There are three steps in this milestone:
 
@@ -52,11 +51,11 @@ There are three steps in this milestone:
 2. [Test that Liquibase works with sql-based changelog files](milestone1-step2.md)
 3. [(If step 2 fails) Test and fix failures until there are no more](milestone1-step3.md)
 
-## <a name="advanced"></a>Advanced Support
+## Advanced Support
 
-At the end of this second milestone, Liquibase works against your database in a large variety of use cases, but it does not support everything Liquibase can do. 
+At the end of this second milestone, Liquibase will work with your database in a large number of use cases, but it does not support everything Liquibase can do. 
 
-By default, the change and snapshot logic uses standard SQL and/or JDBC calls so **_many_** will work out of the box, but not enough to advertise support for them until you have ensured they work.
+By default, the change and snapshot logic uses standard SQL and/or JDBC calls so **_many_** will work out of the box, but not enough to advertise support for them until you have validated they work.
 
 The steps in this phase are:
 

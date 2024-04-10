@@ -8,9 +8,9 @@ title: "Milestone 2: Advanced Tests"
 
 As you move beyond [foundational support](milestone1-step1.md), the testing requirements become more complex.
 
-Ensuring snapshot and change types work requires going through each specific change type and through each specific object type, then ensuring they execute correctly for all the different argument permutations that are valid for your database.
+Ensuring the `snapshot` command and change types work requires testing each change type and object type to verify that they execute correctly for the different argument permutations that are valid for your database.
 
-To automate this process, Liquibase provides a [Test Harness](https://github.com/liquibase/liquibase-test-harness){:target="_blank"} to help you find everywhere the default logic isn't compatible with your database.
+To automate this process, Liquibase provides a [Test Harness](https://github.com/liquibase/liquibase-test-harness){:target="_blank"} to help you find situations where the default logic isn't compatible with your database.
 
 ## Test Harness Configuration
 
@@ -22,7 +22,7 @@ When completed, you should have a `harness-config.yml` file that specifies how t
 
 The [Test Harness 'Framework' documentation](https://github.com/liquibase/liquibase-test-harness#framework){:target="_blank"} describes how the tests work and how to run them.
 
-At the most basic level, you can run the tests using `mvn test` using the configuration options defined in the test-harness framework documentation such as `-DchangeObjects`. 
+At the most basic level, you can run the tests using `mvn test` with the configuration options defined in the test-harness framework documentation such as `-DchangeObjects`. 
 If you are using an IDE, you can run your `ExtensionHarnessTest` class directly and pass along the same settings as system properties.
 
 ## Next Step

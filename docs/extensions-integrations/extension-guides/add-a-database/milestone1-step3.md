@@ -8,18 +8,17 @@ title: "Milestone 1: Fix & Retest"
 
 The functionality you [tested for milestone 1](milestone1-step2.md) relies on:
 
-- Create and populate `databasechangeloglock` table
-- Create and populate `databasechangelog` table
+- Create and populate the `databasechangeloglock` table
+- Create and populate the `databasechangelog` table
 - Execute user-specified SQL
 
 ## Improving Your Database Support
 
 The standard [liquibase.changelog.ChangeLogHistoryService](https://javadocs.liquibase.com/liquibase-core/liquibase/changelog/ChangeLogHistoryService.html){:target="_blank"},
 [liquibase.lockservice.LockService](https://javadocs.liquibase.com/liquibase-core/liquibase/lockservice/LockService.html){:target="_blank"}, and [liquibase.executor.Executor](https://javadocs.liquibase.com/liquibase-core/liquibase/executor/Executor.html){:target="_blank"}
-implementations which drive that rely on SQL and/or JDBC standards guided by dialect info from your `Database` class.
+implementations rely on SQL and/or JDBC standards guided by dialect information from your `Database` class.
 
-If you run into any problems with those standard services, the most likely fix is overriding additional `liquibase.database.Database` methods to more correctly
-describe how your database works.  
+If you run into any problems with those standard services, the most likely fix is to override additional `liquibase.database.Database` methods to more correctly describe how your database works.  
 
 For example, if the `databasechangeloglock` table isn't being created correctly because your database quotes object names in a special way, override the `escapeObjectName` function.
 
@@ -27,7 +26,9 @@ The full list of methods you can override can be found in [liquibase.database.Da
 
 !!! tip
 
-    Exactly what you need to override will depend on the actual problems you hit. If you have questions on what it takes to fix your problem, ask [on the forum](https://forum.liquibase.org){:target="_blank"}.
+    Exactly what you need to override will depend on the actual problems you hit. If you have questions on what 
+    it takes to fix your problem, ask [on the forum](https://forum.liquibase.org){:target="_blank"} or 
+    [contact the Liquibase team](mailto:community@liquibase.com).
 
 ## Advanced Fixes
 
@@ -43,7 +44,7 @@ Instead, you may need to [override one or more](../add-a-sql-generator.md) of th
 
 ## Iterate
 
-After you have made a potential fix to the problem you found, re-run your test and see if Liquibase is working better.
+After you make a potential fix to the problem you found, re-run your test and see if Liquibase is working better.
 
 - Sometimes your fix didn't work as well as you hoped. Try a new one
 - Sometimes your fix resolved one issue, but now you have hit another. Fix that up
@@ -51,6 +52,6 @@ After you have made a potential fix to the problem you found, re-run your test a
 
 ## Next Steps
 
-With Liquibase working against your database, now is a great time to release the first version of your extension and get feedback.
+With Liquibase working for your database, now is a great time to release the first version of your extension and get feedback.
 
-When you are ready to build advanced support, you can move on to [milestone 2](milestone2-step1.md)
+When you are ready to build advanced support, you can start working on [milestone 2](milestone2-step1.md)

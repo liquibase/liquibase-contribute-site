@@ -6,7 +6,7 @@ title: "Milestone 1: Test"
 
 ## Overview
 
-With your [new Database class defined](milestone1-step1.md), Liquibase should be able to run user-defined SQL statements against the database. Give it a try!
+With your [new Database class defined](milestone1-step1.md), Liquibase should be able to run user-defined SQL statements on the database. Give it a try!
 
 ## Testing
 
@@ -24,7 +24,7 @@ create table company (id int not null primary key, name varchar(255))
 --rollback drop table company
 ```
 
-and run `liquibase update` against your database using that changelog file.
+and run `liquibase update` on your database using that changelog file.
 
 If there are any failures with creating the databasechangelog table, managing the lock, marking the change sets ran, or anything else. [GOTO step 3](milestone1-step3.md).
 
@@ -38,12 +38,13 @@ Once `update` works, any Liquibase functionality that doesn't rely on modeled ch
 
 ## Next Steps
 
-If/when you run into problems when testing, [go to step 3](milestone1-step3.md).
+If/when you run into problems during testing, [go to step 3](milestone1-step3.md).
 
 If everything seems to work, Congratulations!! :material-party-popper: Now is a great time to release the first version of your extension.
-After releasing, you can move on to [Milestone 2](milestone2-step1.md) to add advanced support.
+After releasing, you can proceed to [Milestone 2](milestone2-step1.md) to add advanced support.
 
 !!! tip
 
-    If you'd like your database extension to be included in the main Liquibase documentation and be a more official part of Liquibase, [contact the Liquibase team](mailto:kevin@liquibase.com) and we can work
-    with you to bring it more officially into the fold.
+    If you'd like your database extension to be included in the main Liquibase documentation and be a more official part of Liquibase, 
+    [contact the Liquibase team](mailto:community@liquibase.com) and we will work with you to make it more visible in documentation 
+    and in the supported databases list.

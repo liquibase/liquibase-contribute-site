@@ -23,11 +23,12 @@ When searching for a file such as `file.ext`, Test Harness checks for the follow
 
 where it uses the contents of file it finds. 
 
-This means that when defining "expectedSql" or changelogs or expectedSnapshots or any other file test harness expects, you can override the default expectations by creating new files higher up in the pattern.
+This means that when defining "expectedSql", changelogs, expectedSnapshots or any other file test harness expects, you can override the default by creating new files higher up in the pattern.
 
 !!! tip
 
-    Keep your files as generic as possible. If the expectedSql file works for all versions of your database, create the file in ${base directory}/${db name}/file.ext`. 
+    Keep your files as generic as possible. If the expectedSql file works for all versions of your database, 
+    create the file in ${base directory}/${db name}/file.ext`. 
 
     Only use major and minor versions when it actually depends on the specific versions.  
 
@@ -35,11 +36,11 @@ This means that when defining "expectedSql" or changelogs or expectedSnapshots o
 
 Many of the tests use "expected" files and will either auto-create them if they do not exist or fail until the file is created.
 
-These files let you manually inspect the SQL being run by a particular change setup to ensure it is doing what you expect now, and will be checked into Git so that it is easy to detect any changes to this known good behavior down the road.
+These files let you manually inspect the SQL being run by a particular change type to ensure it is doing what you expect. The completed files should be checked into Git so it is easy to detect any changes to this known good behavior in the future.
 
 ## Fixing Logic
 
-For tests that are failing because how Liquibase interacts with the database needs to be customized for your database, you will create one of two types of classes:
+For tests that are failing because of Liquibase interactions that need to be customized for your database, you will create one of two types of classes:
 
 - [New SqlGenerator implementations](../add-a-sql-generator.md) for Change -> SQL mappings that are wrong
 - [New SnapshotGenerator implementations](../add-a-snapshot-generator.md) for snapshot logic that is wrong
@@ -48,15 +49,15 @@ The general pattern for both is to create a new class that returns a higher prio
 
 !!! tip
 
-    What method you implement to specify the Database implementation your new generator classes are for will depend on the specific class you are implementing.
+    The Database method you will need to implement for your new generator classes will depend on the specific class you are implementing.
 
     See the corresponding documentation pages for more information and examples. 
 
 ## Iterate
 
-The first time you run the tests, you will likely get many failures, but don't be discouraged. Often times the first few fixes you make will resolve many of the failures.
+The first time you run the tests, you will likely get many failures, but don't be discouraged. Often, the first few fixes you make will resolve many of the failures.
 
-After you have made a potential fix, re-run the tests to ensure it solved the problem and then move on to the next failure. 
+After making a potential fix, re-run the tests to ensure it solved the problem and then move on to the next failure. 
 You should quickly pick up the general code patterns, and most of the effort is finding the correct SQL syntax for your database.
 
 !!! tip
@@ -66,6 +67,7 @@ You should quickly pick up the general code patterns, and most of the effort is 
 ## Complete
 
 Once all the Test Harness tests are passing, you will be able to use any of the standard change types in XML/YAML/JSON changelogs as well as any snapshot-based functionality.
+
 For example, all of this should now work:
 
 - `liquibase update` with `<createTable...` in the changelog
