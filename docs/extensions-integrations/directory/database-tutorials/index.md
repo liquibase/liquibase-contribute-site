@@ -3,23 +3,20 @@ title: Overview
 ---
 
 # Liquibase Database Tutorials: Community-Maintained
-Learn more about using Liquibase with your favorite databases with our in-depth tutorials. These tutorials explain how to install and configure your database with Liquibase Community and Liquibase Pro.
-## Verification levels
-Liquibase works with 59 databases including relational, NoSQL, and graph databases. A database's verification level refers to the levels of automated and real-world professional testing and certification it has passed. The levels are:
+Learn how to use Liquibase for your favorite databases with our in-depth tutorials. These tutorials explain how to install and configure your database with Liquibase.
 
-* Advanced (highest verification)
-* Foundational
-* Contributed
-* Research (lowest verification)
+## Verification levels
+Liquibase works with 60+ databases including relational, NoSQL, and graph databases.
+
+A database's verification level refers to the levels of automated and real-world professional testing and certification it has passed. The levels in order of most to least validation are: Advanced, Foundational, Contributed, and Research.
 
 For more information, see [Database Verification Levels](https://www.liquibase.com/supported-databases/verification-levels){:target="_blank"}.
+
 ## Community-maintained databases
-For the full list of supported databases, see [Supported Databases](https://www.liquibase.com/supported-databases){:target="_blank"}.
+For the full list of supported databases, see [Supported Databases](https://www.liquibase.com/supported-databases){:target="_blank"}. Liquibase supports English language databases only. Other languages with special characters may have issues.
 
-* See the Liquibase-maintained databases here: [Liquibase-maintained databases](https://docs.liquibase.com/start/tutorials/home.html){:target="_blank"}.
-* **See the Community-maintained databases in the following table.** 
-
-Note: Liquibase supports English language databases only. Other languages with special characters may have issues.
+!!! Note
+    Liquibase-maintained databases can be found here: [Liquibase-maintained databases](https://docs.liquibase.com/start/tutorials/home.html){:target="_blank"}.
 
 <table id="dbtutorials">
   <thead>
