@@ -94,7 +94,7 @@
                     &lt;diffChangeLogFile&gt;
                         ${project.basedir}/src/main/resources/db/migrations/${maven.build.timestamp}_changelog.xml
                     &lt;/diffChangeLogFile&gt;
-                    &lt;propertyFile&gt;src/main/resources/spring.properties&lt;/propertyFile&gt;
+                    &lt;propertyFile&gt;src/main/resources/liquibase.properties&lt;/propertyFile&gt;
                     &lt;logging&gt;debug&lt;/logging&gt;
                 &lt;/configuration&gt;
                 &lt;dependencies&gt;
@@ -239,7 +239,7 @@ This is a simple example of an Entity, with a generated Id value. This class wil
 	<li value="6">Install the application using the <code>mvnw install</code> command, or <code>mvnw.cmd install</code> for Windows.</li>
 	<li value="7">The generated JAR is what is referenced in the <code><span class="mc-variable General.liquiPropFile variable">liquibase.properties</span></code> file: <code class="language-text">classpath=target\\hibernate-liquibase-0.0.1-SNAPSHOT.jar</code></li>
 	<li value="8">Next, generate a <code>dbchangelog.xml</code> file from Hibernate in your project folder:</li><pre xml:space="preserve"><code class="language-text">mvn liquibase:diff</code></pre>
-	<li value="9">A file will be generated at <code>src/main/resources/db/migrations/20221208174852_changelog.xml</code>.
+	<li value="9">A file will be generated at <code>src/main/resources/db/migrations/&lt;DATETIME&gt;_changelog.xml</code>.
 You can move and rename it to <code>src/main/resources/dbchangelog.xml</code>, then run <code>mvn install</code> again. </li>
 	<li value="10">Verify the project configuration by running the Liquibase <code>status</code> command. Open a command prompt and go to the project folder. Run the following command:</li><pre xml:space="preserve"><code class="language-text">mvn liquibase:status</code></pre><pre xml:space="preserve"><code class="language-text">Example output:</code></pre><pre xml:space="preserve"><code class="language-text">5 changesets have not been applied to DBUSER@jdbc:h2:file:~/test</code></pre>
 	<li value="11">Now apply the changeset using the command</li><pre xml:space="preserve"><code class="language-text">mvn liquibase:update</code></pre>
