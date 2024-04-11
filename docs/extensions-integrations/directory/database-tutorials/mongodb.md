@@ -112,14 +112,14 @@ If you use Maven, you must also [include the driver JAR as a dependency](https:/
         ```
         databaseChangeLog:
           - changeSet:
-            id: 2
-            author: your_name
-            labels: createCollectionLabel
-            context: createCollectionContext
-            comment: create_collection_comment
-            changes:
-              - createCollection:
-                collectionName: towns_yaml
+              id: 2
+              author: your_name
+              labels: createCollectionLabel
+              context: createCollectionContext
+              comment: create_collection_comment
+              changes:
+                - createCollection:
+                  collectionName: towns_yaml
         ```
 
     === "JSON example"
