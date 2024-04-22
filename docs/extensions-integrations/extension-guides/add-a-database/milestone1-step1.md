@@ -28,7 +28,7 @@ and only override what is special about the new database.
     - getShortName()
     - getDatabaseProductName()
 
-NATHAN - please give guidance on what values to use for the above 3 methods.
+    See [the liquibase.database.Database API documentation](../../../code/api/database-database.md) for more information.
 
 ### Example Code
 
@@ -39,11 +39,9 @@ NATHAN - please give guidance on what values to use for the above 3 methods.
 ## Extending AbstractJdbcDatabase
 
 If your database is more unique, you will likely want to extend from [liquibase.database.AbstractJdbcDatabase](https://javadocs.liquibase.com/liquibase-core/liquibase/database/AbstractJdbcDatabase.html){:target="_blank"}
-which provides default logic that follows SQL standards.
+rather than `PostgresDatabase` or one of the other implementations which derive from it.
 
-Depending on your base class you will have more or less abstract methods which must be implemented.
-
-NATHAN - could you clarify the above sentence? The statement "you will have more or less abstract methods" is unclear.
+How many methods you need to implement or override will depending on how much your database varies from the logic your superclass includes.
 
 ### Example Code
 

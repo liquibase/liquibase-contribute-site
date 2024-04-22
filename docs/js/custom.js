@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// ??? - ask Nathan
 document.addEventListener("DOMContentLoaded", function(){
     var headerNavBody = document.querySelector('.md-header__nav');
     var navWrapper = document.querySelector('nav.md-tabs');
