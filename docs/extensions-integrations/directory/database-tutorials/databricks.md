@@ -142,9 +142,9 @@ Review the libaries listing output for the two newly installed jar files: `Datab
 
     === "SQL example"
           ``` sql
-          -- liquibase formatted sql
+          --liquibase formatted sql
 
-          -- changeset my_name:1
+          --changeset my_name:1
           CREATE TABLE test_table 
           (
             test_id INT, 

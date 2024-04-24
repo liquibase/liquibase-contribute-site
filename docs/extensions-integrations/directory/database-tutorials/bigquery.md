@@ -12,6 +12,11 @@ Read more about [Database DevOps with Liquibase and BigQuery](https://www.liquib
 ## Supported database versions
 * 2.13.6+
 
+!!! Warning
+    Liquibase versions 4.24.0, 4.25.0, and 4.25.1 transformed table names to lowercase which caused Liquibase to not be able to read its own DATABASECHANGELOG table so it would create a new one and redeploy all previously deployed changesets.
+    
+    This issue is fixed in Liquibase 4.26.0 and later releases.
+
 ## Prerequisites
 1. [Introduction to Liquibase](https://docs.liquibase.com/concepts/introduction-to-liquibase.html) – Dive into Liquibase concepts.
 1. [Install Liquibase](https://docs.liquibase.com/start/install/home.html) – Download Liquibase on your machine.
