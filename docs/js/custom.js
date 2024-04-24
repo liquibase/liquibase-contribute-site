@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// This DOMContentLoaded listener moves the Home/Answer/Write/Advocate/Code/Extensions&Integrations nav from 
+// where it goes by default in the mkdocs theme to where we wanted it in order to fit our liquibase.com layout style. 
+// Varun came up with using JS to move it around rather than CSS or changing the theme somehow.
 document.addEventListener("DOMContentLoaded", function(){
     var headerNavBody = document.querySelector('.md-header__nav');
     var navWrapper = document.querySelector('nav.md-tabs');

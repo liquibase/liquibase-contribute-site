@@ -41,7 +41,7 @@ and only override what is special about the new database.
 If your database is more unique, you will likely want to extend from [liquibase.database.AbstractJdbcDatabase](https://javadocs.liquibase.com/liquibase-core/liquibase/database/AbstractJdbcDatabase.html){:target="_blank"}
 rather than `PostgresDatabase` or one of the other implementations which derive from it.
 
-How many methods you need to implement or override will depending on how much your database varies from the logic your superclass includes.
+How many methods you need to implement or override will depend on how much your database varies from the included superclass logic.
 
 ### Example Code
 
