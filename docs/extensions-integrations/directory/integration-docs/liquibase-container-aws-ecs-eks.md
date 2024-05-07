@@ -52,28 +52,29 @@ This allows you to provide the following Liquibase files to the container.
 * [Liquibase changelog](https://docs.liquibase.com/concepts/changelogs/home.html)
 * [Properties file](https://docs.liquibase.com/concepts/connections/creating-config-properties.html)
 * [Database drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html)
+* [Get a Liquibase Pro License](https://www.liquibase.com/trial) and the [Liquibase Pro License](https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html#sql_example) for your container.
 
 Here’s a basic example of how to run a Liquibase Docker container with a mounted volume:
 
-1. **Prepare your local directory:** Ensure you have a local directory with all necessary files such as the [Liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html), [properties file](https://docs.liquibase.com/concepts/connections/creating-config-properties.html), and any [JDBC drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) required for your database.
+1. **Prepare your local directory:** Ensure you have a local directory with all necessary files such as the [Liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html), [properties file](https://docs.liquibase.com/concepts/connections/creating-config-properties.html), any [JDBC drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) required for your database, and apply the [Liquibase Pro License](https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html#sql_example)] to your container.
 
 2. **Run the Docker container with mounted volumes:**
 
-   ```bash
-   docker run --rm \
-     -v /path/to/local/directory:/liquibase/changelog \
-     liquibase/liquibase \
-     --defaultsFile=/liquibase/changelog/liquibase.properties \
-     --changeLogFile=/liquibase/changelog/changelog.xml \
-     update
-   ```
+     ```bash
+     docker run --rm \
+       -v /path/to/local/directory:/liquibase/changelog \
+       liquibase/liquibase \
+       --defaultsFile=/liquibase/changelog/liquibase.properties \
+       --changeLogFile=/liquibase/changelog/changelog.xml \
+       update
+     ```
 
-   Replace `/path/to/local/directory` with the path to your local directory containing the Liquibase files.
+     Replace `/path/to/local/directory` with the path to your local directory containing the Liquibase files.
 
-   - `--rm`: Automatically remove the container when it exits.
-   - `-v /path/to/local/directory:/liquibase/changelog`: Mounts the local directory to `/liquibase/changelog` inside the container.
-   - `liquibase/liquibase`: The Docker image name.
-   - `--defaultsFile`, `--changeLogFile`, and other options are used to specify paths inside the container and Liquibase commands.
+     - `--rm`: Automatically remove the container when it exits.
+     - `-v /path/to/local/directory:/liquibase/changelog`: Mounts the local directory to `/liquibase/changelog` inside the container.
+     - `liquibase/liquibase`: The Docker image name.
+     - `--defaultsFile`, `--changeLogFile`, and other options are used to specify paths inside the container and Liquibase commands.
 
 
 ## Run Liquibase Commands
