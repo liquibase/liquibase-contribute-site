@@ -15,7 +15,7 @@ The following is the list of potentially sensitive information encountered when 
 * Configuration files
 * SQL scripts
 
-Database credentials and connection encryption keys are typically stored in an AWS-managed credential store and can be passed to Liquibase with [environment variables](https://docs.liquibase.com/concepts/connections/liquibase-environment-variables.html).
+Database credentials and connection encryption keys are typically stored in an AWS-managed credential store and can be passed to [Liquibase using environment variables](https://docs.liquibase.com/concepts/connections/liquibase-environment-variables.html).
 
 User-created configuration files and SQL scripts are secured in user-owned, mounted volumes configured at container runtime.
 
