@@ -26,16 +26,16 @@ the [Spring Initializer](https://start.spring.io):
 5. Use version 17 or later for Java.
 6. Under **Dependencies**, select **Liquibase Migration** and whatever database you plan to use, such as **H2**.
 
-   After selecting your options, the project window needs to look similar to the screenshot:
+       After selecting your options, the project window needs to look similar to the screenshot:
 
-   ![springboot project page](springboot.png)
+       ![springboot project page](springboot.png)
 
 7. Click **GENERATE** to download your project template as a `zip` file. Extract it and open in your IDE.
 
 ## Add Liquibase
 
 If you did not already add the Liquibase dependency when creating your project, you can add it manually by adding
-org.liquibase:liquibase-core as a dependency to your project.
+`org.liquibase:liquibase-core` as a dependency to your project.
 
 === "Maven pom.xml"
 
@@ -58,7 +58,7 @@ org.liquibase:liquibase-core as a dependency to your project.
 
 ## Add a Changelog File
 
-Create a changelog file in your project. By default, Liquibase looks for a file named `db.changelog-master.xml` in the `src/main/resources/db/changelog` directory.
+Create a changelog file in your project. By default, The Spring Boot Liquibase integration looks for a file named `db.changelog-master.xml` in the `src/main/resources/db/changelog` directory.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -81,7 +81,7 @@ Create a changelog file in your project. By default, Liquibase looks for a file 
 
 ## Start your Application
 
-When you start your application with mvn spring-boot:run or gradle bootRun, Liquibase will automatically run the changelog file and update your database.
+When you start your application with `mvn spring-boot:run` or `gradle bootRun`, Liquibase will automatically run the changelog file and update your database.
 
 Try it now, and you should see the table `test_table` created in your database.
 
