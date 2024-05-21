@@ -159,6 +159,19 @@ If you use Maven, you must [include the driver JAR as a dependency](https://docs
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
 
+## Troubleshooting
+In version 4.27.0.1 and earlier of the Liquibase BigQuery extension, Liquibase automatically makes a JDBC connection to the US region if you don't specify another location in the JDBC URL. This behavior may be unexpected.
+
+For example, if you have a multi-region dataset in the EU and a primary replica in the US, you may expect Liquibase to use EU as your region. However, if you don't specify that in the Liquibase `url` parameter, you may receive this error message:
+
+`The dataset replica of the cross region dataset '<dataset_id>' in region 'US' is read-only because it's not the primary replica.`
+
+To specify your intended region, add `;Location=<value>` to your URL:
+
+`url: jdbc:bigquery://...;OAuthType=0;Timeout=10000;Location=<value>`
+
+In version 4.27.0.2 and later of the Liquibase BigQuery extension, Liquibase does not use the US region as a default. When you have multiple datasets in different regions, the BigQuery JDBC driver automatically chooses the correct region based on your datasets. Liquibase uses the region the driver auto-routes to. Optionally, you can still manually specify the region in the Liquibase `url` parameter.
+
 ## Related links
 * [Change Types](https://docs.liquibase.com/change-types/home.html)
 * [Liquibase Commands](https://docs.liquibase.com/commands/home.html)
