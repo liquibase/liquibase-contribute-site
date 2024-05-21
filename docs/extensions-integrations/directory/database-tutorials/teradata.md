@@ -29,7 +29,7 @@
 &lt;dependency&gt;
     &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
     &lt;artifactId&gt;liquibase-teradata&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">{{liquibase.current_version}}</span>&lt;/version&gt;
+    &lt;version&gt;{{liquibase.current_version}}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
