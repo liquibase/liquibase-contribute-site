@@ -2,8 +2,9 @@
 <p><a href="https://www.teradata.com/Resources/Datasheets/Teradata-Database">Teradata</a> Vantage Advanced SQL Engine is an analytic database engine. For more information, see <a href="https://docs.teradata.com/">Teradata Documentation</a>.</p>
 <h2>Supported database versions</h2>
 <ul>
-    <li>17.20</li>
-    <li>17.10</li>
+    <li>20.0.X</li>
+    <li>17.20.X</li>
+    <li>17.10.X</li>
 </ul>
 <h2>Prerequisites</h2>
 <ol>
@@ -14,20 +15,21 @@
     <li value="5"><a href="https://docs.liquibase.com/workflows/liquibase-pro/how-to-apply-your-liquibase-pro-license-key.html" class="MCXref xref">How to Apply Your Liquibase Pro License Key</a> – If you use <span class="mc-variable General.LBPro variable">Liquibase Pro</span>, activate your license.</li>
 </ol>
 <h2>Install drivers</h2>
-<p>To use Liquibase and Teradata, you need two JAR&#160;files:</p>
+<p>To use Liquibase and Teradata, you need two JAR files:</p>
 <ul>
-    <li>The <a href="https://downloads.teradata.com/download/connectivity/jdbc-driver">Teradata JDBC&#160;driver</a></li>
+    <li>The <a href="https://downloads.teradata.com/download/connectivity/jdbc-driver">Teradata JDBC driver</a> (<a href="https://mvnrepository.com/artifact/com.teradata.jdbc/terajdbc">Maven download</a>)</li>
     <li>The <a href="https://github.com/liquibase/liquibase-teradata/releases">Liquibase extension for Teradata</a></li>
 </ul>
-<p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p><p>If you use Maven,  note that this database does not provide its driver JAR&#160;on a public Maven repository, so you must install a local copy and <a href="https://docs.liquibase.com/tools-integrations/maven/using-liquibase-and-maven-pom-file.html">add it as a dependency</a> to your <code>pom.xml</code> file.</p><pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
+<p> <a href="https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html">Place your JAR file(s)</a> in the <code>liquibase/lib</code> directory.</p>
+<p>To use Liquibase with Maven, you must instead <a href="https://docs.liquibase.com/tools-integrations/maven/maven-properties.html">include the driver JAR as a dependency</a> in your <code>pom.xml</code> file. Using this information, Maven automatically downloads the driver JAR from Maven Central when you build your project.</p><pre xml:space="preserve"><code class="language-text">&lt;dependency&gt;
     &lt;groupId&gt;com.teradata.jdbc&lt;/groupId&gt;
     &lt;artifactId&gt;terajdbc4&lt;/artifactId&gt;
-    &lt;version&gt;17.10.00.27&lt;/version&gt;
+    &lt;version&gt;20.00.00.22&lt;/version&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
     &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
     &lt;artifactId&gt;liquibase-teradata&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.20.0</span>&lt;/version&gt;
+    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.27.0</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
