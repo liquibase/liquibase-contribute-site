@@ -2,9 +2,9 @@
 <p><a href="https://www.teradata.com/Resources/Datasheets/Teradata-Database">Teradata</a> Vantage Advanced SQL Engine is an analytic database engine. For more information, see <a href="https://docs.teradata.com/">Teradata Documentation</a>.</p>
 <h2>Supported database versions</h2>
 <ul>
-    <li>20.0.X</li>
-    <li>17.20.X</li>
-    <li>17.10.X</li>
+    <li>20.0.x</li>
+    <li>17.20.x</li>
+    <li>17.10.x</li>
 </ul>
 <h2>Prerequisites</h2>
 <ol>
@@ -29,7 +29,7 @@
 &lt;dependency&gt;
     &lt;groupId&gt;org.liquibase.ext&lt;/groupId&gt;
     &lt;artifactId&gt;liquibase-teradata&lt;/artifactId&gt;
-    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">4.27.0</span>&lt;/version&gt;
+    &lt;version&gt;<span class="mc-variable General.CurrentLiquibaseVersion variable">{{liquibase.current_version}}</span>&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 <h2 id="test-your-connection">Test your connection</h2>
 <ol>
