@@ -142,6 +142,19 @@ If you use Maven, you must [include the driver JAR as a dependency](https://docs
         ```
         ---
 
+    === "OAuthType=4"
+
+        **Workload or Workforce identity federation**
+
+        For example:
+        ```
+        jdbc:bigquery://https://googleapis.com/bigquery/v2:443;
+        ProjectId=myProject;
+        OAuthType=4;
+        OAuthPvtKeyPath=/__w/liquibase-repo/gha-creds-80d532a88cc2f6d6.json;
+        ```
+        ---
+
 ### Test connection
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
