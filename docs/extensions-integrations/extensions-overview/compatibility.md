@@ -1,8 +1,8 @@
 ---
-title: Compatibility
+title: Backward Compatibility
 ---
 
-# Extension Compatibility
+# Creating Extensions that Maintain Backward Compatibility
 
 ## Functional Compatibility
 
