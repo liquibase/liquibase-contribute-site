@@ -3,6 +3,8 @@ nav:
     - gitlab-ci-cd.md
     - gradle.md
     - jee-cdi.md
+    - liquibase-container-aws-ecs-eks.md
     - servlet-listener.md
+    - Spinnaker
     - "Spring Boot": springboot
     - ...
