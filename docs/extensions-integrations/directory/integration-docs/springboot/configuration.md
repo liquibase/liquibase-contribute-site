@@ -7,8 +7,7 @@ title: Configuration
 ## Application Properties
 
 Spring Boot includes
-a [powerful configuration system](https://docs.spring.io/spring-boot/reference/features/external-config.html){:target="_
-blank"}
+a [powerful configuration system](https://docs.spring.io/spring-boot/reference/features/external-config.html){:target=_blank}
 that allows you to configure your application using a variety of methods.
 
 When just starting out, however, you begin with a `application.properties` or `application.yml` file in
