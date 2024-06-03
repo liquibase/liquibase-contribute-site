@@ -68,6 +68,9 @@ To use Apache Cassandra with Liquibase, you need to install two additional JAR f
 
 !!! note
     These instructions assume Liquibase Cassandra extension v4.25.0.1 or newer. This extension was updated to replace the previous Simba JDBC driver with the new Cassandra JDBC wrapper.
+    
+    If you get the error `java.sql.SQLTransientException: com.datastax.oss.driver.api.core.NoNodeAvailableException: No node was available to execute the query`,
+    you will need to upgrade to Liquibase Cassandra extension v4.25.0.1 or newer.
 
 
 1. Download the jar files

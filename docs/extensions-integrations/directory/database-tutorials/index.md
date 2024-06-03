@@ -3,20 +3,18 @@ title: Overview
 ---
 
 # Liquibase Database Tutorials: Community-Maintained
-Learn how to use Liquibase for your favorite databases with our in-depth tutorials. These tutorials explain how to install and configure your database with Liquibase.
-
-## Verification levels
 Liquibase works with 60+ databases including relational, NoSQL, and graph databases.
 
-A database's verification level refers to the levels of automated and real-world professional testing and certification it has passed. The levels in order of most to least validation are: Advanced, Foundational, Contributed, and Research.
+Learn how to use Liquibase for your favorite databases with our in-depth tutorials. These tutorials explain how to install and configure your database with Liquibase.
 
-For more information, see [Database Verification Levels](https://www.liquibase.com/supported-databases/verification-levels){:target="_blank"}.
-
-## Community-maintained databases
-For the full list of supported databases, see [Supported Databases](https://www.liquibase.com/supported-databases){:target="_blank"}. Liquibase supports English language databases only. Other languages with special characters may have issues.
+* The full list of supported databases: [Supported Databases](https://www.liquibase.com/supported-databases){:target="_blank"}.
+    * Liquibase-maintained databases: [Liquibase-maintained databases](https://docs.liquibase.com/start/tutorials/home.html){:target="_blank"}.
+    * Community-maintained databases ([see below](http://localhost:8080/extensions-integrations/directory/database-tutorials/#community-maintained-database-support))
 
 !!! Note
-    Liquibase-maintained databases can be found here: [Liquibase-maintained databases](https://docs.liquibase.com/start/tutorials/home.html){:target="_blank"}.
+    Liquibase supports English language databases only. Other languages with special characters may have issues.
+
+## Community-maintained Database Support
 
 <table id="dbtutorials">
   <thead>
@@ -744,3 +742,9 @@ For the full list of supported databases, see [Supported Databases](https://www.
     </tr>
   </tbody>
 </table>
+
+## Verification levels
+A database's verification level refers to the levels of automated and real-world professional testing and certification it has passed. The levels in order of most to least validation are: Advanced, Foundational, Contributed, and Research.
+
+For more information, see [Database Verification Levels](https://www.liquibase.com/supported-databases/verification-levels){:target="_blank"}.
+

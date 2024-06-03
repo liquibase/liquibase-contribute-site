@@ -8,6 +8,10 @@ Liquibase is built with extensibility in mind. From generic changelog file handl
 almost every part of Liquibase can be customized and enhanced through the extension system. 
 In fact, all standard functionality that ships as part of Liquibase is built using the same extension system.
 
+## What extensions are there?
+
+You can find a list of available extensions in the [Extension Directory](../directory/index.md). 
+
 ## What can extensions do?
 
 Here are some examples of what you can achieve through extensions:
@@ -22,10 +26,6 @@ refer to the [Extension Guides](../extension-guides/index.md) for code samples a
 !!! note
 
     If you are looking to build Liquibase **_into_** something rather than building **_onto_** Liquibase, see [the integrations documentation](../integrations-overview/index.md) 
-
-## What extensions are there?
-
-You can find a list of available extensions in the [Extension Directory](../directory/index.md). 
 
 ## How to build extensions?
 
