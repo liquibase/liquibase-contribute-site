@@ -287,6 +287,22 @@ Review the libaries listing output for the two newly installed jar files: `Datab
 
 Now you're ready to start making deployments with Liquibase!
 
+## Troubleshooting
+
+If you use v1.1.3 of the Liquibase Databricks extension, you may receive this error running Liquibase:
+
+```
+Unexpected error running Liquibase: 
+Error executing SQL SELECT MD5SUM FROM main.default.DATABASECHANGELOG WHERE MD5SUM IS NOT NULL: [Databricks][JDBCDriver](500540) Error caught in BackgroundFetcher. Foreground thread ID: 1. Background thread ID: 20. 
+Error caught: Could not initialize class com.databricks.client.jdbc42.internal.apache.arrow.memory.util.MemoryUtil.
+```
+
+To resolve this, append `;UserAgentEntry=Liquibase;EnableArrow=0;` to your JDBC URL. For example:
+
+```
+jdbc:databricks://<host>:<port>/<schema>;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/<warehouse>;ConnCatalog=<catalog>;UserAgentEntry=Liquibase;EnableArrow=0;
+```
+
 ## Related links
 
 * [Read the Data Warehousing Blog on Databricks](https://medium.com/dbsql-sme-engineering)
