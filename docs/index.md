@@ -22,6 +22,7 @@ For over a decade, we’ve had people from around the world participate and cont
 * [Servlet Listener](extensions-integrations/directory/integration-docs/servlet-listener/)
 * [Spring Boot](extensions-integrations/directory/integration-docs/springboot/)
 * [Spinnaker](extensions-integrations/directory/integration-docs/Spinnaker/overview.md)
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=fc4516b5-fc01-40ce-849b-f97dd7be2a34" />
 
 ## Help with Support
 ![Support Logo](images/support-logo.png){ align="left" width="72" }
