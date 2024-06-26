@@ -37,3 +37,23 @@ document.addEventListener("DOMContentLoaded", function(){
     navWrapper.remove();
     headerNavBody.appendChild(navClone);
 });
+
+// CommonRoom Integration
+(function() {
+  if (typeof window === 'undefined') return;
+  if (typeof window.signals !== 'undefined') return;
+  var script = document.createElement('script');
+  script.src = 'https://cdn.cr-relay.com/v1/site/e1a23843-37bf-4fbc-aabd-3d76832c0198/signals.js';
+  script.async = true;
+  window.signals = Object.assign(
+    [],
+    ['page', 'identify', 'form'].reduce(function (acc, method){
+      acc[method] = function () {
+        signals.push([method, arguments]);
+        return signals;
+      };
+     return acc;
+    }, {})
+  );
+  document.head.appendChild(script);
+})();
