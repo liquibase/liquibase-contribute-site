@@ -37,7 +37,7 @@ In making the decision to add a dependency, we use the following guidelines:
 
 Apache's commons-lang.jar is a popular library containing simple, helper functions. It would be used throughout the entire codebase, so a missing dependency would cause Liquibase to fail.
 
-**Verdict:** We did not add it as a dependency because the individual functions as we needed them were simple enough to re-implement. Over time, the number of "copied" functions has grown and perhaps it's worth switching to using the dependency now given how stable it is. But nothing has pushed us to make that switch yet.
+**Verdict:** Included Apache Commons Lang as a dependency in Liquibase 4.27.0+. Over time, the number of its helper functions we've re-implemented has increased, so it became worthwhile to include it outright.
 
 ### OpenCSV
 
