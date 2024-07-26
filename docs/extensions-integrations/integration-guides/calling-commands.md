@@ -137,7 +137,7 @@ In this example, the files are defined in the parent scope and are available to 
 ```java
 Map<String, Object> scopedSettings = new LinkedHashMap<>();
 scopedSettings.put(Scope.Attr.resourceAccessor.name(), resourceAccessor);
-Scope.child(scopeSettings, () {
+Scope.child(scopedSettings, () -> {
   CommandScope commandScope = new CommandScope(UpdateCommandStep.COMMAND_NAME);
   commandScope.addArgumentValue(DbUrlConnectionCommandStep.URL_ARG, db.getConnectionUrl());
   commandScope.addArgumentValue(DbUrlConnectionCommandStep.USERNAME_ARG, db.getUsername());
