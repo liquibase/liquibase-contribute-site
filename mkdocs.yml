@@ -89,11 +89,11 @@ extra:
     provider: google
     property: G-SJKPP1K4KR
   liquibase:
-    current_version: 4.25.0
+    current_version: 4.29.1
   extension_version:
-    cassandra: 4.25.0.1
+    cassandra: 4.29.1
   jdbc_driver_version:
-    cassandra: 4.11.0
+    cassandra: 4.13.0
 
 extra_css:
   - css/shared.css
