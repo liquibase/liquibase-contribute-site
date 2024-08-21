@@ -70,6 +70,9 @@ If you use Maven, note that this database does not provide its driver JAR on a 
     
     Replace `<keyspace>` with your own keyspace name and `<aws-region>` by the AWS region where your Keyspaces instance is deployed (for example `us-east-1`, `eu-west-1`, ...).
 
+    !!! note
+        Be careful to always specify the `compliancemode` parameter with the value `Liquibase` to avoid any unexpected behaviour when running the changelog.
+
 2.  Add the following property in the `liquibase.properties` file to activate the compatibility mode with Amazon Keyspaces:
 
     ```
