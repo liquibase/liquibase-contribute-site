@@ -50,6 +50,46 @@ It is up to this method to open and manage the file stream, and should **_not_**
 For example, the XML parser does not read the existing changelog into a DOM and append the new changeset into the DOM before
 re-serializing the entire DOM because that will lose any existing formatting the user wants such as spacing between particular elements, groupings of attributes, etc.
 
+## Precondition syntax
+
+If you're calling on the Liquibase API programmatically using the [YamlChangeLogSerilizer](https://javadocs.liquibase.com/liquibase-core/liquibase/serializer/core/yaml/YamlChangeLogSerializer.html) or [JsonChangeLogSerializer](https://javadocs.liquibase.com/liquibase-core/liquibase/serializer/core/json/JsonChangeLogSerializer.html) classes, YAML and JSON preconditions have slightly different syntax than they do in changelogs:
+
+===+ "YAML/JSON API syntax"
+
+     ```
+     preconditions:
+           preConditions:
+             nestedPreconditions:
+             - or:
+                 nestedPreconditions:
+                 - sqlCheck:
+                     expectedResult: '0'
+                     sql: select count(*) from team
+                 - not:
+                     nestedPreconditions:
+                     - sqlCheck:
+                         expectedResult: '0'
+                         sql: select count(*) from referenced_table
+     ```
+
+---
+
+=== "YAML/JSON changelog syntax"
+
+     ```
+     preConditions:
+         - or:
+           - sqlCheck:
+               expectedResult: 0
+               sql: select count(*) from team
+           - not:
+             - sqlCheck:
+                 expectedResult: 0
+                 sql: select count(*) from referenced_table
+     ```
+
+However, SQL and XML preconditions have the same structure in the API as they do in changelogs.
+
 ## API Details
 
 The complete javadocs for `liquibase.serializer.ChangeLogSerializer` [is available at https://javadocs.liquibase.com](https://javadocs.liquibase.com/liquibase-core/liquibase/serializer/ChangeLogSerializer.html){:target="_blank"}
