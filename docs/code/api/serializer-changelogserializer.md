@@ -52,7 +52,7 @@ re-serializing the entire DOM because that will lose any existing formatting the
 
 ## Precondition syntax
 
-In Liquibase 4.30.0 and later, if you're calling on the Liquibase API programmatically using the [YamlChangeLogSerilizer](https://javadocs.liquibase.com/liquibase-core/liquibase/serializer/core/yaml/YamlChangeLogSerializer.html) or [JsonChangeLogSerializer](https://javadocs.liquibase.com/liquibase-core/liquibase/serializer/core/json/JsonChangeLogSerializer.html) classes, YAML and JSON preconditions have slightly different syntax than they do in changelogs:
+In Liquibase 4.29.2 and later, if you're calling on the Liquibase API programmatically using the [YamlChangeLogSerilizer](https://javadocs.liquibase.com/liquibase-core/liquibase/serializer/core/yaml/YamlChangeLogSerializer.html) or [JsonChangeLogSerializer](https://javadocs.liquibase.com/liquibase-core/liquibase/serializer/core/json/JsonChangeLogSerializer.html) classes, YAML and JSON preconditions have slightly different syntax than they do in changelogs:
 
 ===+ "YAML/JSON API syntax"
 
