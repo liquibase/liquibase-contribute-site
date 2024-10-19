@@ -50,7 +50,7 @@ If your application is using Maven, Gradle or some other build system that manag
             </dependency>
     ```
 
-### 4. Check Setup
+### 3. Check Setup
  
 With the dependency added you can add a simple reference to a Liquibase class and build your project to ensure everything is configured correctly.
 
