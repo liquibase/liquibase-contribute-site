@@ -356,7 +356,7 @@ If you use Maven, you must <a href="https://docs.liquibase.com/tools-integration
 
 1. Ensure your Cosmos DB database is configured. See <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/sql/create-sql-api-java">Quickstart: Build a Java app to manage Azure Cosmos DB SQL API data</a> for more information.
 
-1. Specify the database URL in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">`liquibase.properties`</a> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:
+2. Specify the database URL in the <a href="https://docs.liquibase.com/concepts/connections/creating-config-properties.html">`liquibase.properties`</a> file (defaults file), along with other properties you want to set a default value for. Liquibase does not parse the URL. You can  either specify the full database connection string or specify the URL using your database's standard JDBC format:
 
     Connection String Examples
 
@@ -400,7 +400,10 @@ If you use Maven, you must <a href="https://docs.liquibase.com/tools-integration
 
     For more information, see <a href="https://github.com/liquibase/liquibase-cosmosdb#adjust-connection-string">GitHub: liquibase-cosmosdb § Adjust connection string</a>.
 
-1. (optional) Enable Liquibase Pro capabilities
+   !!! note
+       If you use the connection pooling manager PG Bouncer, you must specify the connection port **5432**.
+
+4. (optional) Enable Liquibase Pro capabilities
 
     To apply a [Liquibase Pro key](https://www.liquibase.com/trial) to your project, add the following property to the Liquibase properties file:
     
@@ -411,6 +414,16 @@ If you use Maven, you must <a href="https://docs.liquibase.com/tools-integration
 ### Test connection
 
 --8<-- "database-tutorial-relational-test-connection-example.md"
+
+## Troubleshooting
+
+If you use Azure Database with PostgreSQL and the connection pooling manager [PG Bouncer](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/concepts-connection-pool#managed-pgbouncer), you may receive this error when you try to use Liquibase:
+
+```prepared statement ... does not exist```
+
+If you receive this error, it is because you are using the connection port 6432, which is typical for PG Bouncer. However, for Liquibase's prepared statements to work, the `connection pooling mode` must be set to `session`. However, using Azure with PostgreSQL does not support the `session` value. Therefore, Liquibase's prepared statements may fail, causing the execution to fail.
+
+To resolve this error, set your connection port to **5432**.
 
 ## Related links
 
