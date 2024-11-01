@@ -24,7 +24,7 @@ the [Spring Initializer](https://start.spring.io):
 3. Under **Spring Boot**, select the version you would like to use.
 4. For **Packaging**, select **Jar**.
 5. Use version 17 or later for Java.
-6. Under **Dependencies**, select **Liquibase Migration** and whatever database you plan to use, such as **H2**.
+6. Under **Dependencies**, select **Liquibase Migration**, **Spring Data JPA** and whatever database you plan to use, such as **H2**.
 
        After selecting your options, the project window needs to look similar to the screenshot:
 
