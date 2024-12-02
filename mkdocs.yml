@@ -48,6 +48,7 @@ plugins:
   - redirects:
       redirect_maps:
         'code/api/api-usage.md' : 'extensions-integrations/integration-guides/embedding-liquibase.md'
+        'extensions-integrations/directory/database-tutorials/databricks.md': 'https://docs.liquibase.com/start/tutorials/databricks/home.html'
         'extensions-integrations/directory/integration-docs/springboot/springboot.md' : 'extensions-integrations/directory/integration-docs/springboot/index.md'
         'extensions-integrations/directory/tutorials/apache-derby.md': 'extensions-integrations/directory/database-tutorials/apache-derby.md'
         'extensions-integrations/directory/tutorials/bigquery.md': 'extensions-integrations/directory/database-tutorials/bigquery.md'
@@ -56,7 +57,6 @@ plugins:
         'extensions-integrations/directory/tutorials/cloud-spanner.md': 'extensions-integrations/directory/database-tutorials/cloud-spanner.md'
         'extensions-integrations/directory/tutorials/cockroachdb.md': 'extensions-integrations/directory/database-tutorials/cockroachdb.md'
         'extensions-integrations/directory/tutorials/cosmosdb.md': 'extensions-integrations/directory/database-tutorials/cosmosdb.md'
-        'extensions-integrations/directory/database-tutorials/databricks.md': 'https://docs.liquibase.com/start/tutorials/databricks/home.html'
         'extensions-integrations/directory/tutorials/db2onz.md': 'extensions-integrations/directory/database-tutorials/db2onz.md'
         'extensions-integrations/directory/tutorials/db2onzdeploy-sql.md': 'extensions-integrations/directory/database-tutorials/db2onzdeploy-sql.md'
         'extensions-integrations/directory/tutorials/firebird.md': 'extensions-integrations/directory/database-tutorials/firebird.md'
