@@ -47,6 +47,9 @@ plugins:
   - macros
   - redirects:
       redirect_maps:
+        'code/api/api-usage.md' : 'extensions-integrations/integration-guides/embedding-liquibase.md'
+        'extensions-integrations/directory/database-tutorials/databricks.md': 'https://docs.liquibase.com/start/tutorials/databricks/home.html'
+        'extensions-integrations/directory/integration-docs/springboot/springboot.md' : 'extensions-integrations/directory/integration-docs/springboot/index.md'
         'extensions-integrations/directory/tutorials/apache-derby.md': 'extensions-integrations/directory/database-tutorials/apache-derby.md'
         'extensions-integrations/directory/tutorials/bigquery.md': 'extensions-integrations/directory/database-tutorials/bigquery.md'
         'extensions-integrations/directory/tutorials/cassandra.md': 'extensions-integrations/directory/database-tutorials/cassandra/apache-cassandra.md'
@@ -81,8 +84,6 @@ plugins:
         'extensions-integrations/directory/tutorials/springboot.md' : 'extensions-integrations/directory/integration-docs/springboot/index.md'
         'extensions-integrations/directory/tutorials/servlet-listener.md' : 'extensions-integrations/directory/integration-docs/servlet-listener.md'
         'extensions-integrations/directory/tutorials/gradle.md' : 'extensions-integrations/directory/integration-docs/gradle.md'
-        'code/api/api-usage.md' : 'extensions-integrations/integration-guides/embedding-liquibase.md'
-        'extensions-integrations/directory/integration-docs/springboot/springboot.md' : 'extensions-integrations/directory/integration-docs/springboot/index.md'
 
 extra:
   analytics:
