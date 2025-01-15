@@ -1,5 +1,5 @@
 ---
-title: GitLab CD/CD
+title: GitLab CI/CD
 ---
 
 # Using Liquibase with GitLab CI/CD
