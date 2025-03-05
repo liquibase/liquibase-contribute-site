@@ -108,20 +108,20 @@ The `LiquibaseFlowCustomizer` example above:
 
 To use the Flow feature shown in the example, include the Liquibase Pro dependency:
 
-=== "Maven pom.xml
-"
-```xml
-<dependency>
-    <groupId>com.datical.liquibase</groupId>
-    <artifactId>liquibase-commercial</artifactId>
-    <version>4.x.x</version>
-</dependency>
-```
+=== "Maven pom.xml"
 
-=== "Gradle build.gradle
-"
-```groovy
-dependencies {
-    implementation 'com.datical.liquibase:liquibase-commercial:4.x.x'
-}
-```
+    ```xml
+    <dependency>
+        <groupId>com.datical.liquibase</groupId>
+        <artifactId>liquibase-commercial</artifactId>
+        <version>4.x.x</version>
+    </dependency>
+    ```
+
+=== "Gradle build.gradle"
+
+    ```groovy
+    dependencies {
+        implementation 'com.datical.liquibase:liquibase-commercial:4.x.x'
+    }
+    ```
