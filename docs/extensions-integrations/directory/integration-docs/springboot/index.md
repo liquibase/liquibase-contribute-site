@@ -89,3 +89,4 @@ Try it now, and you should see the table `test_table` created in your database.
 
 - Looking to learn what you can do in your changelog file? Learn more in the [Liquibase documentation](https://docs.liquibase.com/concepts/changelogs/home.html){:target="_blank"}.
 - [Customize Liquibase within Spring Boot](configuration.md). 
+- [Use Liquibase Advanced and Pro features with Spring Boot customizers ](customizers.md).
