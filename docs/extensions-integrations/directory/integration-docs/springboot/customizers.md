@@ -112,7 +112,7 @@ To use the Flow feature shown in the example, include the Liquibase Pro dependen
 
     ```xml
     <dependency>
-        <groupId>com.datical.liquibase</groupId>
+        <groupId>org.liquibase</groupId>
         <artifactId>liquibase-commercial</artifactId>
         <version>4.x.x</version>
     </dependency>
@@ -122,6 +122,6 @@ To use the Flow feature shown in the example, include the Liquibase Pro dependen
 
     ```groovy
     dependencies {
-        implementation 'com.datical.liquibase:liquibase-commercial:4.x.x'
+        implementation 'org.liquibase:liquibase-commercial:4.x.x'
     }
     ```
