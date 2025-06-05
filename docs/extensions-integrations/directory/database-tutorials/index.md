@@ -746,5 +746,4 @@ Learn how to use Liquibase for your favorite databases with our in-depth tutoria
 ## Verification levels
 A database's verification level refers to the levels of automated and real-world professional testing and certification it has passed. The levels in order of most to least validation are: Advanced, Foundational, Contributed, and Research.
 
-For more information, see [Database Verification Levels](https://www.liquibase.com/supported-databases/verification-levels){:target="_blank"}.
 

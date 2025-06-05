@@ -3,7 +3,7 @@ title: SAP ASE
 ---
 
 <h1>Using Liquibase with SAP Adaptive Server Enterprise (SAP ASE)</h1>
-<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
+<p class="note" data-mc-autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the <span class="mc-variable General.CompanyName variable">Liquibase</span> support team. Best-effort support is provided through our community forums.<br /><br />If you have an update to these instructions, submit feedback so we can improve the page.</p>
 <p><a href="https://www.sap.com/products/sybase-ase.html">SAP Adaptive Server Enterprise (SAP ASE)</a> (formerly Sybase SQL Server, Sybase ASE) is a relational model database server. See <a href="https://help.sap.com/docs/SAP ASE">SAP Adaptive Server Enterprise Documentation</a> for more information.</p>
 <h2>Supported database versions</h2>
 <ul>
