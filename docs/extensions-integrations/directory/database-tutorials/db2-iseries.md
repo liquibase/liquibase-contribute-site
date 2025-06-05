@@ -8,8 +8,6 @@ This is a Liquibase DB2 extension for iSeries support. [DB2 for iSeries](https:/
 !!! note
     This database is supported **at or below the Contributed level**. Functionality may be limited. Databases at the Contributed level are not supported by the Liquibase support team. Best-effort support is provided through our community forums.  
   
-    For more information about the verification levels, see [Database Verification and Support](https://www.liquibase.com/supported-databases/verification-levels).  
-  
 If you have an update to these instructions, submit feedback so we can improve the page.
 
 ## Supported database versions

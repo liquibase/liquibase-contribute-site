@@ -8,7 +8,6 @@ title: CosmosDB
 !!! note
     This database is supported <b>at or below the Contributed level</b>. Functionality may be limited. Databases at the Contributed level are not supported by the Liquibase support team. Best-effort support is provided through our community forums.
 
-    For more information about the verification levels, see <a href="https://www.liquibase.com/supported-databases/verification-levels">Database Verification and Support</a>
 
 ## Supported database versions
 - 4.35.1
