@@ -44,6 +44,7 @@ If you did not already add the Liquibase dependency when creating your project, 
          <dependency>
              <groupId>org.liquibase</groupId>
              <artifactId>liquibase-core</artifactId>
+             <version>4.31.1</version>
          </dependency>
       </dependencies>
     ```
