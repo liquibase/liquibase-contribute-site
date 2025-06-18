@@ -44,6 +44,8 @@ If you did not already add the Liquibase dependency when creating your project, 
          <dependency>
              <groupId>org.liquibase</groupId>
              <artifactId>liquibase-core</artifactId>
+             <!-- Springboot already provides a tested Liquibase version, but you can override it to use your preffered version --> 
+             <version>4.31.1</version>
          </dependency>
       </dependencies>
     ```
