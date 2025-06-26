@@ -168,20 +168,7 @@ To use Liquibase and Gradle:
           ```
           ---
 
-6.  Set the following Liquibase properties in your `build.gradle` file:
-
-    ```
-    liquibase {
-        activities {
-            main {
-              changelogFile "../changelog.sql"
-              url "mysql://localhost:3306/testdatabase"
-              username "username"
-              password "password"
-            }
-        }
-    }
-    ```
+6.  Set the following Liquibase properties in your `build.gradle` file, and do your first update by adding the task section.
 
     !!! Note
         Replace the values from the example with your values.
@@ -200,7 +187,6 @@ To use Liquibase and Gradle:
     
         For more information, see [Create and Configure a liquibase.properties File](https://docs.liquibase.com/concepts/connections/creating-config-properties.html).
 
-7.  Do your first update by adding the task section to the `build.gradle` file:
 
     ```
     task('deploy changeLog') {
@@ -209,6 +195,9 @@ To use Liquibase and Gradle:
                 activities {
                     main {
                         changeLogFile System.properties.liquibaseChangeLogFile
+                        url "mysql://localhost:3306/testdatabase"
+                        username "username"
+                        password "password"
                         contexts System.properties.liquibaseContexts
                     }
                 }
@@ -218,7 +207,7 @@ To use Liquibase and Gradle:
     update.dependsOn('deploy changeLog')
     ```
 
-8.  Run the `gradle build` command, and then run the following:
+7.  Run the `gradle build` command, and then run the following:
 
     ```
     gradle update
@@ -245,7 +234,7 @@ To use Liquibase and Gradle:
         Total change sets:           27
         ```
 
-9.  \[Optional\] Do your first rollback by using the `rollback-count` command:
+8.  \[Optional\] Do your first rollback by using the `rollback-count` command:
 
     ```
     gradle build
@@ -264,7 +253,7 @@ To use Liquibase and Gradle:
     -- rollback drop table test_table;
     ```
 
-10.  Check the changes by inspecting your database or running the [status](https://docs.liquibase.com/commands/change-tracking/status.htm) command.
+9.  Check the changes by inspecting your database or running the [status](https://docs.liquibase.com/commands/change-tracking/status.htm) command.
 
 # Related links
 
