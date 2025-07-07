@@ -511,7 +511,7 @@ Learn how to use Liquibase for your favorite databases with our in-depth tutoria
     </tr>
     <tr>
       <td>
-        <a href="/extensions-integrations/directory/database-tutorials/percona-xtradb-cluster/">Percona XtraDB Cluster</a>
+        <a href="/extensions-integrations/directory/database-tutorials/percona/percona-xtradb-cluster/">Percona XtraDB Cluster</a>
       </td>
       <td>
         5.7, 8.0
