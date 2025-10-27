@@ -2,4 +2,5 @@ order_by: title
 
 nav:
     - "Apache Cassandra" : apache-cassandra.md
+    - "ScyllaDB" : scylladb.md
     - ...
