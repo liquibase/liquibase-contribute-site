@@ -18,7 +18,7 @@ ScyllaDB works seamlessly with the Liquibase Cassandra extension as a drop-in re
 - Distributed locking
 - Rollback functionality
 
-For detailed compatibility information and test results, see the [ScyllaDB Compatibility Report](https://github.com/liquibase/liquibase-cassandra/blob/main/SCYLLADB_COMPATIBILITY.md) in the extension repository.
+For detailed compatibility information and test results, see the [ScyllaDB Compatibility section](https://github.com/liquibase/liquibase-cassandra/blob/main/README.md#scylladb-compatibility) in the extension repository.
 
 ## Prerequisites
 
@@ -119,7 +119,7 @@ ScyllaDB uses the **same JDBC connection format** as Apache Cassandra.
 ## Additional resources
 
 - [ScyllaDB Documentation](https://docs.scylladb.com/)
-- [ScyllaDB Compatibility Report](https://github.com/liquibase/liquibase-cassandra/blob/main/SCYLLADB_COMPATIBILITY.md) - Detailed test results and technical information
+- [ScyllaDB Compatibility](https://github.com/liquibase/liquibase-cassandra/blob/main/README.md#scylladb-compatibility) - Detailed compatibility information in the extension README
 - [Apache Cassandra tutorial](apache-cassandra.md) - Complete reference for driver installation and configuration
 - [Liquibase Cassandra Extension Repository](https://github.com/liquibase/liquibase-cassandra)
 
