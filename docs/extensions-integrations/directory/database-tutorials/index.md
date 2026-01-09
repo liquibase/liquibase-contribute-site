@@ -618,6 +618,26 @@ Learn how to use Liquibase for your favorite databases with our in-depth tutoria
       </td>
     </tr>
     <tr>
+      <td>
+        <a href="/extensions-integrations/directory/database-tutorials/cassandra/scylladb/">ScyllaDB</a>
+      </td>
+      <td>
+        2025.3
+      </td>
+      <td>
+        Contributed
+      </td>
+      <td>
+        <b>DBMS/shortname:</b> <code>cassandra</code><br>
+        <br>
+        <b>File:</b> <code>cassandra-jdbc-wrapper-&lt;version&gt;-bundle.jar</code><br>
+        <b>Class:</b> <code>com.ing.data.cassandra.jdbc.CassandraDriver</code><br>
+        <b>JDBC URL:</b> <code>jdbc:cassandra://localhost:9042/myKeyspace?compliancemode=Liquibase&localdatacenter=datacenter1</code><br>
+        <b>Download:</b> <a href="https://github.com/ing-bank/cassandra-jdbc-wrapper/releases">Cassandra JDBC wrapper</a><br>
+        <p><b>Notes:</b> ScyllaDB is a Cassandra-compatible database that works as a drop-in replacement using the same drivers and extension. See <a href="https://github.com/liquibase/liquibase-cassandra/blob/main/README.md#scylladb-compatibility">ScyllaDB Compatibility</a> for details.</p>
+      </td>
+    </tr>
+    <tr>
       <td><a href="/extensions-integrations/directory/database-tutorials/singlestore/">SingleStoreDB</a></td>
       <td>Cloud</td>
       <td>Foundational</td>
