@@ -10,6 +10,9 @@ To use Liquibase and Gradle:
 
 1.  Create a text file called `build.gradle` in your project folder or use the existing `build.gradle` file.
 2.  Add the following section to your `build.gradle` file to include the `liquibase` plugin into Gradle builds:
+
+**Note:** This example code is written in Groovy.
+
     ```
     plugins {
         id 'org.liquibase.gradle' version '2.2.0'
