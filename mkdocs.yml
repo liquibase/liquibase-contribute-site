@@ -85,9 +85,6 @@ plugins:
         'extensions-integrations/directory/tutorials/gradle.md' : 'extensions-integrations/directory/integration-docs/gradle.md'
 
 extra:
-  analytics:
-    provider: google
-    property: G-SJKPP1K4KR
   liquibase:
     current_version: 4.29.1
   extension_version:
