@@ -7,7 +7,7 @@ title: Test Environments
 ## Overview
 
 To make it easy to spin up standardized test environments for testing, Liquibase has an abstraction around [testcontainers.org](https://testcontainers.org){:target="_blank"}
-at [liquibase/extension/testing/testsystem](https://github.com/liquibase/liquibase/tree/master/liquibase-extension-testing/src/main/java/liquibase/extension/testing/testsystem){:target="_blank"}.
+at [liquibase/extension/testing/testsystem](https://github.com/liquibase/liquibase/tree/main/liquibase-extension-testing/src/main/java/liquibase/extension/testing/testsystem){:target="_blank"}.
 
 The wrapper around Test Containers allows us to provide a simple configuration system, plus support testing databases that do not have Docker containers such as in-memory and cloud databases.
 
@@ -17,7 +17,7 @@ The wrapper around Test Containers allows us to provide a simple configuration s
 
 ## Configuration
 
-The default test environments and settings are configured in [liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml](https://github.com/liquibase/liquibase/tree/master/liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml){:target="_blank"}.
+The default test environments and settings are configured in [liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml](https://github.com/liquibase/liquibase/tree/main/liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml){:target="_blank"}.
 
 That file configures the various databases including docker image settings and users to create. Generally, each test system will be created with:
 
@@ -47,7 +47,7 @@ For example, by default the MysqlIntegrationTest will skip all tests because `li
 
 ### Configuration Structure
 
-All settings for the test environments use the `liquibase.sdk.testSystem` prefix. The overall structure can be seen in the [liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml](https://github.com/liquibase/liquibase/tree/master/liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml){:target="_blank"} file.
+All settings for the test environments use the `liquibase.sdk.testSystem` prefix. The overall structure can be seen in the [liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml](https://github.com/liquibase/liquibase/tree/main/liquibase-extension-testing/src/main/resources/liquibase.sdk.yaml){:target="_blank"} file.
 
 For each test environment, there is a top-level "key" for it. For example, `liquibase.sdk.testSystem.mysql`. There is also a `liquibase.sdk.testSystem.default` section which contains default/standard settings.
 

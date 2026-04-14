@@ -6,7 +6,7 @@ title: Create a Pull Request
 
 ## Contributing Etiquette
 
-Please see our [Contributor Code of Conduct](https://github.com/liquibase/liquibase/blob/master/CODE_OF_CONDUCT.md){:target="_blank"} for information on our rules of conduct.
+Please see our [Contributor Code of Conduct](https://github.com/liquibase/liquibase/blob/main/CODE_OF_CONDUCT.md){:target="_blank"} for information on our rules of conduct.
 
 ## Requirements
 
@@ -63,8 +63,8 @@ The normal flow through this board is:
         - "Test" as manual testing is done (if required)
     - If there are any questions or concerns found during this process, the team will comment on the PR so please watch your notifications
     - When everything passes, the PR will be moved to "Ready to Merge"
-4. After the PR has moved to the "Ready to Merge" column, it will be merged to "master"
-    - The master branch is always kept in an "always releasable" state, regardless of when the next release will be
+4. After the PR has moved to the "Ready to Merge" column, it will be merged to "main"
+    - The main branch is always kept in an "always releasable" state, regardless of when the next release will be
     - As release dates approach, the team may keep some PRs in "Ready to Merge" until the next release depending on the code freeze status
 5. Once the PR is merged, it moves to "Done"
     - Merged PRs will go out in the next release

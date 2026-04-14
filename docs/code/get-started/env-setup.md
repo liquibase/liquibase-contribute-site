@@ -65,7 +65,7 @@ You can tell the build worked successfully if you see something like this at the
 [INFO] ------------------------------------------------------------------------
 ```
 
-It's always good to ensure you can successfully run the CLI from the current master branch before making changes locally.
+It's always good to ensure you can successfully run the CLI from the current main branch before making changes locally.
 
 
 ## Running Builds
