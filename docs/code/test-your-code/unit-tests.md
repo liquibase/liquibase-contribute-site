@@ -40,7 +40,7 @@ is empty, then return null.
 ### The Java class to test
 
 See the actual Java class in
-GitHub [StringUtil.java](https://github.com/liquibase/liquibase/blob/master/liquibase-core/src/main/java/liquibase/util/StringUtil.java)
+GitHub [StringUtil.java](https://github.com/liquibase/liquibase/blob/main/liquibase-core/src/main/java/liquibase/util/StringUtil.java)
 {target="_blank"}
 or the edited example below:
 
@@ -81,7 +81,7 @@ public class StringUtil { // ...
 ### The unit test
 
 See the actual Unit Test class in
-GitHub [StringUtilTest.groovy](https://github.com/liquibase/liquibase/blob/master/liquibase-core/src/test/groovy/liquibase/util/StringUtilTest.groovy)
+GitHub [StringUtilTest.groovy](https://github.com/liquibase/liquibase/blob/main/liquibase-core/src/test/groovy/liquibase/util/StringUtilTest.groovy)
 {target="_blank"}
 or the edited example below:
 
