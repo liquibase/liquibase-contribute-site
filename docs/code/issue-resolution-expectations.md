@@ -30,9 +30,16 @@ The difference between an issue that gets resolved quickly and one that sits for
 
 ### Provide a Detailed Analysis
 
-Rather than just reporting a bug, investigate and document where in the codebase the problem might be. This dramatically reduces the time anyone needs to implement a fix.
+Rather than just reporting a bug, investigate and document what is happening as precisely as you can. Even without a development background, a well-written analysis dramatically reduces the time needed to diagnose and fix an issue.
 
-A useful analysis might include:
+**For everyone:** Document the behavior in as much detail as possible:
+
+- The exact inputs you provided (changelog, command, configuration)
+- The exact output or error you received
+- What you expected to happen instead
+- Whether the behavior changes with different Liquibase versions, databases, or environments
+
+**If you are familiar with the Liquibase codebase or Java development**, you can go deeper:
 
 - **Which class, method, or module** is likely involved
 - **What is happening vs. what should happen** at the code level
@@ -55,44 +62,59 @@ sequenceDiagram
     RollbackCommand-->>CLI: result
 ```
 
-You do not need to be a core contributor to produce a useful diagram. Documenting the flow and highlighting where things go wrong is a valuable contribution on its own.
+You do not need to be a developer to produce a useful diagram — even a hand-drawn flow of "I did X, then Y happened, but I expected Z" communicates valuable information. Documenting the flow and highlighting where things go wrong is a contribution on its own.
 
 ### Clarify the Scope of the Issue
 
-When a bug is reported, it is often unclear whether it affects one database, several, or all of them. Clarifying the scope helps everyone understand the real impact and prioritize accordingly.
+When a bug is reported, it is often unclear whether it affects one database, several, or all of them. Sharing what you know — even if it is just your own experience — helps everyone understand how widespread the problem is and how urgently it should be addressed.
 
-Consider investigating and documenting:
+Here are some things worth sharing in an issue comment, based on whatever you happen to know or have access to:
 
-- **Which databases are affected?** If the issue was reported for PostgreSQL, does it also occur on Oracle, MySQL, H2, or SQL Server?
-- **Which Liquibase versions are affected?** Is this a long-standing bug or a regression? If a regression, when did it first appear?
-- **Which execution environments are affected?** CLI only, Maven plugin, Gradle, Spring Boot, or all of them?
-- **How widespread is the impact?** Is this a narrow edge case or something many users are likely to encounter?
+- **If you have access to multiple database types**, try reproducing the issue on them and share what you find. For example: "I confirmed this also happens on MySQL — it is not just PostgreSQL."
+- **If you have tried multiple Liquibase versions**, note whether the problem exists in all of them or only in a specific version. If it worked before and broke recently, that is a very useful signal.
+- **If you use Liquibase in more than one way** (for example, both from the command line and via a Maven build), share whether the problem shows up in all of them or just one.
+- **If you can describe how common the scenario is**, that helps too — for example, "this is a pattern many teams use" or "this is a very specific edge case in our setup."
 
-Even a brief comment like "Confirmed on PostgreSQL 15 and MySQL 8, not reproducible on H2" is extremely helpful for anyone working on the fix.
+None of these require a technical background — you are simply sharing your own experience. Even a brief comment like "I can only reproduce this with the CLI, not with Maven" is exactly the kind of information that shapes how a fix is approached.
 
 ### Perform a Risk Assessment
 
-Understanding what could break when a fix is applied is just as important as understanding the bug itself. A risk assessment helps contributors implement safer fixes and helps reviewers approve them with confidence.
+Before a fix is implemented, it helps to think about what else might be affected. This kind of reflection — often called a risk assessment — helps contributors make safer changes and helps reviewers approve them with more confidence. You do not need an engineering background to contribute here; some of the most useful input comes from people who simply know the product well.
 
-A useful risk assessment considers:
+**For everyone:** Think about and share what else in your workflow might be affected by a change. For example:
+
+- Are there other commands or operations that do something similar and might be impacted?
+- Have you seen related behavior elsewhere in Liquibase that a fix might accidentally change?
+- Is this something many teams are likely to rely on, or a rare edge case?
+
+Sharing those observations as a comment on the issue — even informally — is genuinely useful.
+
+**If you are a Java developer**, you can extend the assessment to the code level:
 
 - **Affected areas of code** — which classes, modules, or components would a fix need to touch?
 - **Regression risk** — could changing this behavior break other scenarios? Which tests or use cases might be affected?
-- **Database compatibility** — if the fix changes SQL generation or snapshot behavior, could it have unintended effects on other databases?
 - **Changelog compatibility** — could the fix change how existing changelogs are interpreted or cause checksum differences?
 - **Extension and API impact** — does the fix touch any public APIs or extension points that downstream projects depend on?
 
-A risk assessment does not need to be exhaustive. Even a brief note like "this change is isolated to `PostgresDatabaseSnapshotGenerator` and should not affect other databases" gives meaningful guidance to anyone planning to implement or review the fix.
+A risk assessment does not need to be exhaustive. Even a short note like "this seems to only affect snapshot generation for PostgreSQL and should not change behavior for other databases" gives meaningful guidance to anyone planning to implement or review the fix.
 
 ### Contribute Tests
 
-One of the highest-value contributions you can make is writing tests — even if you never touch the production code. Tests:
+One of the highest-value contributions you can make is helping ensure that a fix is well covered by tests — even if you never write a single line of code. Tests:
 
-- **Document the bug** — a failing test is clear, reproducible proof of the problem
-- **Prevent regressions** — once the fix is in, passing tests ensure the problem does not come back
-- **Accelerate review** — PRs with good test coverage are easier to evaluate and merge
+- **Document the bug** — a clear, reproducible case is proof the problem exists
+- **Prevent regressions** — once a fix is in, tests ensure the problem does not silently come back
+- **Accelerate review** — well-covered changes are easier to evaluate and merge with confidence
 
-Liquibase uses the [Spock testing framework](https://spockframework.org/){:target="_blank"} for both unit and integration tests. See our guides for:
+**For everyone:** Think about the scenarios that triggered the bug and describe them in the issue. What were you doing when it happened? What inputs, configurations, or sequences of steps were involved? Are there related scenarios that a fix should also handle correctly?
+
+Sharing these use cases — even in plain language — is genuinely useful. A developer writing tests can use your scenarios directly as a checklist to make sure the fix is fully covered. For example:
+
+> "This happens when `createTable` runs on a schema that already exists. It would also be worth checking: what happens if the table exists but with different columns? What if the schema name contains special characters?"
+
+That kind of input shapes the test coverage even if you never open a code editor.
+
+**If you are a Java developer**, consider writing the tests directly. Liquibase uses the [Spock testing framework](https://spockframework.org/){:target="_blank"} for both unit and integration tests. See our guides for:
 
 - [Writing unit tests](test-your-code/unit-tests.md)
 - [Writing integration tests](test-your-code/integration-tests.md)
