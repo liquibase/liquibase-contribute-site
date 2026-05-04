@@ -43,7 +43,7 @@ Write classic integration tests when:
 
 ## Classic Integration Tests
 
-The [liquibase-integration-tests](https://github.com/liquibase/liquibase/tree/master/liquibase-integration-tests){:target="_blank"} submodule in the Liquibase repository contains
+The [liquibase-integration-tests](https://github.com/liquibase/liquibase/tree/main/liquibase-integration-tests){:target="_blank"} submodule in the Liquibase repository contains
 the original and still often-used set of "classic" integration tests.
 
 The goal of these integration tests is to ensure common functionality works across all database types that ship with Liquibase Core as well as test database-specific functionality.
