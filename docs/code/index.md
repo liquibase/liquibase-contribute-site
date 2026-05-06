@@ -16,6 +16,7 @@ For over a decade, we’ve had people from around the world help out in so many 
 Spotted a bug? Follow our process on logging it in GitHub Issues.
 
 [Submit an Issue](report-an-issue.md){ .md-button }
+[Issue Resolution Expectations](issue-resolution-expectations.md){ .md-button }
 
 ## Contribute code
 
