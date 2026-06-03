@@ -1,28 +1,24 @@
 ---
 title: Overview
 ---
-# Contribute Code to Liquibase
+# Contribute to Liquibase Community
 
-Join other developers in making Liquibase better for yourself and the larger community.
+Our contributors are what make Liquibase Community a community. It's easy to contribute and you don't need to be a developer to report an issue. We want to hear about how Liquibase works (or isn't working) for you. Thank you for helping us shape our product and being a part of our team.
 
-Fix a bug, enhance existing features, or build something completely new. Join other developers in making Liquibase better for yourself and the larger community. 
-
-For over a decade, we’ve had people from around the world help out in so many ways. Thank you! Here’s how you can keep it going and make the community even better.
-
-## Submit a bug
+## Report a bug
 
 ![Image title](images/github-logo.png){ align="left" width="72" }
 
-Spotted a bug? Follow our process on logging it in GitHub Issues.
+Found a bug? We'd love to squash it. Follow our process for reporting it in GitHub Issues, and learn what you can expect from the resolution process.
 
-[Submit an Issue](report-an-issue.md){ .md-button }
+[Report an Issue](report-an-issue.md){ .md-button }
 [Issue Resolution Expectations](issue-resolution-expectations.md){ .md-button }
 
 ## Contribute code
 
 ![Image title](images/code-logo.png){ align="left" width="72" }
 
-Add code to Liquibase to fix a bug or make an enhancement.
+We want to make it easy for you to contribute code to our project. The following articles give you step-by-step instructions on how to do so.
 
 - [Setup your development environment](get-started/env-setup.md)
 - [Find a good first issue](get-started/first-issues.md)
@@ -34,6 +30,6 @@ Add code to Liquibase to fix a bug or make an enhancement.
 
 ![Image title](images/extension-logo.png){ align="left" width="72" }
 
-Modify an existing extension, or create a new one from scratch.
+You can modify an existing extension or build a new one from hello world.
 
 [Create an Extension](../extensions-integrations/extensions-overview/index.md){ .md-button }
